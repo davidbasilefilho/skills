@@ -1,79 +1,39 @@
 # shadcn MCP Server
 
-The CLI includes an MCP server that lets AI assistants search, browse, view, and install components from registries.
-
----
+The CLI includes an MCP server for registry search, browsing, and install flows.
 
 ## Setup
 
 ```bash
-shadcn mcp        # start the MCP server (stdio)
-shadcn mcp init   # write config for your editor
+shadcn mcp
+shadcn mcp init
 ```
 
-Editor config files:
+Editor configs:
 
 | Editor | Config file |
-|--------|------------|
+| --- | --- |
 | Claude Code | `.mcp.json` |
 | Cursor | `.cursor/mcp.json` |
 | VS Code | `.vscode/mcp.json` |
 | OpenCode | `opencode.json` |
-| Codex | `~/.codex/config.toml` (manual) |
-
----
+| Codex | `~/.codex/config.toml` |
 
 ## Tools
 
-> **Tip:** MCP tools handle registry operations (search, view, install). For project configuration (aliases, framework, Tailwind version), use `npx shadcn@latest info` — there is no MCP equivalent.
+> **Tip:** MCP tools handle registry operations. For project config like aliases, framework, and Tailwind version, use `npx shadcn@latest info`.
 
-### `shadcn:get_project_registries`
-
-Returns registry names from `components.json`. Errors if no `components.json` exists.
-
-**Input:** none
-
-### `shadcn:list_items_in_registries`
-
-Lists all items from one or more registries.
-
-**Input:** `registries` (string[]), `limit` (number, optional), `offset` (number, optional)
-
-### `shadcn:search_items_in_registries`
-
-Fuzzy search across registries.
-
-**Input:** `registries` (string[]), `query` (string), `limit` (number, optional), `offset` (number, optional)
-
-### `shadcn:view_items_in_registries`
-
-View item details including full file contents.
-
-**Input:** `items` (string[]) — e.g. `["@shadcn/button", "@shadcn/card"]`
-
-### `shadcn:get_item_examples_from_registries`
-
-Find usage examples and demos with source code.
-
-**Input:** `registries` (string[]), `query` (string) — e.g. `"accordion-demo"`, `"button example"`
-
-### `shadcn:get_add_command_for_items`
-
-Returns the CLI install command.
-
-**Input:** `items` (string[]) — e.g. `["@shadcn/button"]`
-
-### `shadcn:get_audit_checklist`
-
-Returns a checklist for verifying components (imports, deps, lint, TypeScript).
-
-**Input:** none
-
----
+- `shadcn:get_project_registries` - registry names from `components.json`
+- `shadcn:list_items_in_registries` - list items in registries
+- `shadcn:search_items_in_registries` - fuzzy search
+- `shadcn:view_items_in_registries` - view item details and file contents
+- `shadcn:get_item_examples_from_registries` - usage examples and demos
+- `shadcn:get_add_command_for_items` - install command
+- `shadcn:get_audit_checklist` - import, dependency, lint, TypeScript checklist
 
 ## Configuring Registries
 
-Registries are set in `components.json`. The `@shadcn` registry is always built-in.
+Registries live in `components.json`. `@shadcn` is built in.
 
 ```json
 {
@@ -89,6 +49,6 @@ Registries are set in `components.json`. The `@shadcn` registry is always built-
 
 - Names must start with `@`.
 - URLs must contain `{name}`.
-- `${VAR}` references are resolved from environment variables.
+- `${VAR}` comes from environment variables.
 
 Community registry index: `https://ui.shadcn.com/r/registries.json`
