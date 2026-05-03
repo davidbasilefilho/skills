@@ -1,8 +1,9 @@
 # Dependencies
 node_modules/
 
-# OpenClaude
+# Agents
 .openclaude-profile.json
+.agents
 
 # OS files
 .DS_Store
