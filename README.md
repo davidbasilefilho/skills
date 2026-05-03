@@ -1,10 +1,10 @@
 # Basile Skills
 
-A curated collection of agent skills for design and frontend work.
+A curated collection of agent skills for design, frontend work, and cave tooling.
 
 ## What is in this repo
 
-Each directory under `skills/` contains a standalone `SKILL.md` file that defines one skill. Skills are designed to help agents perform focused tasks such as improving layout, tightening copy, adding motion, or auditing interfaces.
+Each directory under `skills/` contains a standalone skill definition. Skills are designed to help agents perform focused tasks such as improving layout, tightening copy, adding motion, auditing interfaces, or coordinating cave workflows.
 
 ## Included skills
 
@@ -13,8 +13,16 @@ Each directory under `skills/` contains a standalone `SKILL.md` file that define
 - `arrange` - Improve layout, spacing, and visual rhythm
 - `audit` - Run technical quality checks across accessibility and performance
 - `bolder` - Make safe designs more visually assertive
+- `cavecrew` - Coordinate a crew-oriented workflow for cave tools
+- `caveman` - Main entry point for the caveman toolset
+- `caveman-commit` - Create commits with caveman workflows
+- `caveman-compress` - Compress work and context for cave tools
+- `caveman-help` - Show help for the caveman toolset
+- `caveman-review` - Review work with caveman workflows
+- `caveman-stats` - Report caveman usage and stats
 - `clarify` - Improve UX copy, labels, and instructions
 - `colorize` - Add strategic color and visual warmth
+- `compress` - Reduce output and context for cave workflows
 - `critique` - Review a design from a UX perspective
 - `delight` - Add moments of joy and personality
 - `distill` - Simplify designs by removing unnecessary complexity
