@@ -9,7 +9,7 @@ Identify opportunities to add moments of joy, personality, and unexpected polish
 
 ## MANDATORY PREPARATION
 
-Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. Additionally gather: what is appropriate for the domain (playful vs professional vs quirky vs elegant).
+Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. gather: what is appropriate for the domain (playful vs professional vs quirky vs elegant).
 
 ---
 
@@ -27,9 +27,9 @@ Identify where delight would enhance (not distract from) the experience.
 - **Easter eggs**: Hidden discoveries for curious users
 
 ### 2. Understand the context
-- What is the brand personality? (Playful? Professional? Quirky? Elegant?)
-- Who is the audience? (Tech-savvy? Creative? Corporate?)
-- What is the emotional context? (Accomplishment? Exploration? Frustration?)
+- What is brand personality? (Playful? Professional? Quirky? Elegant?)
+- Who is audience? (Tech-savvy? Creative? Corporate?)
+- What is emotional context? (Accomplishment? Exploration? Frustration?)
 - What is appropriate? (Banking app does not equal gaming app)
 
 ### 3. Define delight strategy
@@ -60,7 +60,7 @@ Follow these guidelines.
 
 ### Appropriate to Context
 - Match delight to emotional moment (celebrate success, empathize with errors)
-- Respect the user state (do not be playful during critical errors)
+- Respect user state (do not be playful during critical errors)
 - Match brand personality and audience expectations
 - Cultural sensitivity (what is delightful varies by culture)
 
@@ -96,7 +96,7 @@ Add personality and joy through these methods.
 ```
 
 **Loading delight**:
-- Playful loading animations (not just spinners)
+- Playful loading animations (not spinners)
 - Personality in loading messages (write product-specific ones, not generic AI filler)
 - Progress indication with encouraging messages
 - Skeleton screens with subtle animations
@@ -183,11 +183,11 @@ Add personality and joy through these methods.
 - Streak counters with celebratory milestones
 - Progress bars that "celebrate" at 100%
 - Badge unlocks with animation
-- Playful stats ("You are on fire! 5 days in a row")
+- Playful stats ("You are on fire! 5 days in row")
 
 **Form interactions**:
 - Input fields that animate on focus
-- Checkboxes with a satisfying scale pulse when checked
+- Checkboxes with satisfying scale pulse when checked
 - Success state that celebrates valid input
 - Auto-grow textareas
 
@@ -244,7 +244,7 @@ Loading messages: write ones specific to your product, not generic AI filler:
 - "Checking for updates since yesterday..."
 ```
 
-**WARNING**: Avoid cliched loading messages like "Herding pixels", "Teaching robots to dance", "Consulting the magic 8-ball", "Counting backwards from infinity". These are AI-slop copy: instantly recognizable as machine-generated. Write messages that are specific to what your product actually does.
+**WARNING**: Avoid cliched loading messages like "Herding pixels", "Teaching robots to dance", "Consulting the magic 8-ball", "Counting backwards from infinity". These are AI-slop copy: instantly recognizable as machine-generated. Write messages that are specific to what your product does.
 
 ### Celebration Moments
 
@@ -287,11 +287,11 @@ Loading messages: write ones specific to your product, not generic AI filler:
 - Ignore accessibility (animate responsibly, provide alternatives)
 - Make every interaction delightful (special moments should be special)
 - Sacrifice performance for delight
-- Be inappropriate for context (read the room)
+- Be inappropriate for context (read room)
 
 ## Verify Delight Quality
 
-Test that delight actually delights.
+Test that delight delights.
 
 - **User reactions**: Do users smile? Share screenshots?
 - **Does not annoy**: Still pleasant after 100th time?

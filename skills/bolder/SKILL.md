@@ -26,10 +26,10 @@ Analyze what makes the design feel too safe or boring.
 - **Flat hierarchy**: Nothing stands out or commands attention
 
 ### 2. Understand the context
-- What is the brand personality? (How far can we push?)
-- What is the purpose? (Marketing can be bolder than financial dashboards)
-- Who is the audience? (What will resonate?)
-- What are the constraints? (Brand guidelines, accessibility, performance)
+- What is brand personality? (How far can we push?)
+- What is purpose? (Marketing can be bolder than financial dashboards)
+- Who is audience? (What will resonate?)
+- What are constraints? (Brand guidelines, accessibility, performance)
 
 If any of these are unclear from the codebase, {{ask_instruction}}
 
@@ -41,12 +41,12 @@ If any of these are unclear from the codebase, {{ask_instruction}}
 
 Create a strategy to increase impact while maintaining coherence.
 
-- **Focal point**: What should be the hero moment? (Pick ONE, make it amazing)
-- **Personality direction**: Maximalist chaos? Elegant drama? Playful energy? Dark moody? Choose a lane.
+- **Focal point**: What should be hero moment? (Pick ONE, make it amazing)
+- **Personality direction**: Maximalist chaos? Elegant drama? Playful energy? Dark moody? Choose lane.
 - **Risk budget**: How experimental can we be? Push boundaries within constraints.
 - **Hierarchy amplification**: Make big things BIGGER, small things smaller (increase contrast)
 
-**IMPORTANT**: Bold design must still be usable. Impact without function is just decoration.
+**IMPORTANT**: Bold design must still be usable. Impact without function is decoration.
 
 ## Amplify the Design
 
@@ -60,15 +60,15 @@ Systematically increase impact across these dimensions.
 
 ### Color Intensification
 - **Increase saturation**: Shift to more vibrant, energetic colors (but not neon)
-- **Bold palette**: Introduce unexpected color combinations. Avoid the purple-blue gradient AI slop.
-- **Dominant color strategy**: Let one bold color own 60% of the design
+- **Bold palette**: Introduce unexpected color combinations. Avoid purple-blue gradient AI slop.
+- **Dominant color strategy**: Let one bold color own 60% of design
 - **Sharp accents**: High-contrast accent colors that pop
 - **Tinted neutrals**: Replace pure grays with tinted grays that harmonize with your palette
 - **Rich gradients**: Intentional multi-stop gradients (not generic purple-to-blue)
 
 ### Spatial Drama
 - **Extreme scale jumps**: Make important elements 3-5x larger than surroundings
-- **Break the grid**: Let hero elements escape containers and cross boundaries
+- **Break grid**: Let hero elements escape containers and cross boundaries
 - **Asymmetric layouts**: Replace centered, balanced layouts with tension-filled asymmetry
 - **Generous space**: Use white space dramatically (100-200px gaps, not 20-40px)
 - **Overlap**: Layer elements intentionally for depth
@@ -84,7 +84,7 @@ Systematically increase impact across these dimensions.
 - **Entrance choreography**: Staggered, dramatic page load animations with 50-100ms delays
 - **Scroll effects**: Parallax, reveal animations, scroll-triggered sequences
 - **Micro-interactions**: Satisfying hover effects, click feedback, state changes
-- **Transitions**: Smooth, noticeable transitions using ease-out-quart, quint, or expo (not bounce or elastic. They cheapen the effect.)
+- **Transitions**: Smooth, noticeable transitions using ease-out-quart, quint, or expo (not bounce or elastic. They cheapen effect.)
 
 ### Composition Boldness
 - **Hero moments**: Create clear focal points with dramatic treatment
@@ -113,4 +113,4 @@ Ensure amplification maintains usability and coherence.
 
 **The test**: If you showed this to someone and said "AI made this bolder," would they believe you immediately? If yes, you have failed. Bold means distinctive, not "more AI effects."
 
-Remember: Bold design is confident design. It takes risks, makes statements, and creates memorable experiences. But bold without strategy is just loud. Be intentional, be dramatic, be unforgettable.
+Remember: Bold design is confident design. It takes risks, makes statements, and creates memorable experiences. But bold without strategy is loud. Be intentional, be dramatic, be unforgettable.

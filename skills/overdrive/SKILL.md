@@ -12,7 +12,7 @@ Start your response with:
 》》》 Entering overdrive mode...
 ```
 
-Push an interface past conventional limits. This is not just about visual effects. It is about using the full power of the browser to make any part of an interface feel extraordinary: a table that handles a million rows, a dialog that morphs from its trigger, a form that validates in real-time with streaming feedback, a page transition that feels cinematic.
+Push an interface past conventional limits. This is not about visual effects. It is about using the full power of the browser to make any part of an interface feel extraordinary: a table that handles a million rows, a dialog that morphs from its trigger, a form that validates in real-time with streaming feedback, a page transition that feels cinematic.
 
 ## MANDATORY PREPARATION
 
@@ -47,7 +47,7 @@ Pages, hero sections, landing pages, portfolios. The "wow" is often sensory: a s
 Tables, forms, dialogs, navigation. The "wow" is in how it FEELS: a dialog that morphs from the button that triggered it via View Transitions, a data table that renders 100k rows at 60fps via virtual scrolling, a form with streaming validation that feels instant, drag-and-drop with spring physics.
 
 ### For performance-critical UI
-The "wow" is invisible but felt: a search that filters 50k items without a flicker, a complex form that never blocks the main thread, an image editor that processes in near-real-time. The interface just never hesitates.
+The "wow" is invisible but felt: a search that filters 50k items without a flicker, a complex form that never blocks the main thread, an image editor that processes in near-real-time. The interface never hesitates.
 
 ### For data-heavy interfaces
 Charts and dashboards. The "wow" is in fluidity: GPU-accelerated rendering via Canvas or WebGL for massive datasets, animated transitions between data states, force-directed graph layouts that settle naturally.
@@ -59,17 +59,17 @@ Charts and dashboards. The "wow" is in fluidity: GPU-accelerated rendering via C
 Organized by what you are trying to achieve, not by technology name.
 
 ### Make transitions feel cinematic
-- **View Transitions API** (same-document: all browsers; cross-document: no Firefox). Shared element morphing between states. A list item expanding into a detail page. A button morphing into a dialog. This is the closest thing to native FLIP animations.
+- **View Transitions API** (same-document: all browsers; cross-document: no Firefox). Shared element morphing between states. list item expanding into detail page. button morphing into dialog. This is closest thing to native FLIP animations.
 - **@starting-style** (all browsers). Animate elements from display: none to visible with CSS only, including entry keyframes.
 - **Spring physics**. Natural motion with mass, tension, and damping instead of cubic-bezier. Libraries: motion (formerly Framer Motion), GSAP, or roll your own spring solver.
 
 ### Tie animation to scroll position
-- **Scroll-driven animations** (animation-timeline: scroll()). CSS-only, no JS. Parallax, progress bars, reveal sequences all driven by scroll position. (Chrome, Edge, Safari; Firefox: flag only. Always provide a static fallback)
+- **Scroll-driven animations** (animation-timeline: scroll()). CSS-only, no JS. Parallax, progress bars, reveal sequences all driven by scroll position. (Chrome, Edge, Safari; Firefox: flag only. Always provide static fallback)
 
 ### Render beyond CSS
 - **WebGL** (all browsers). Shader effects, post-processing, particle systems. Libraries: Three.js, OGL (lightweight), regl. Use for effects CSS cannot express.
 - **WebGPU** (Chrome, Edge; Safari partial; Firefox: flag only). Next-gen GPU compute. More powerful than WebGL but limited browser support. Always fall back to WebGL2.
-- **Canvas 2D or OffscreenCanvas**. Custom rendering, pixel manipulation, or moving heavy rendering off the main thread entirely via Web Workers and OffscreenCanvas.
+- **Canvas 2D or OffscreenCanvas**. Custom rendering, pixel manipulation, or moving heavy rendering off main thread entirely via Web Workers and OffscreenCanvas.
 - **SVG filter chains**. Displacement maps, turbulence, morphology for organic distortion effects. CSS-animatable.
 
 ### Make data feel alive
@@ -79,11 +79,11 @@ Organized by what you are trying to achieve, not by technology name.
 
 ### Animate complex properties
 - **@property** (all browsers). Register custom CSS properties with types, enabling animation of gradients, colors, and complex values that CSS cannot normally interpolate.
-- **Web Animations API** (all browsers). JavaScript-driven animations with the performance of CSS. Composable, cancellable, reversible. The foundation for complex choreography.
+- **Web Animations API** (all browsers). JavaScript-driven animations with performance of CSS. Composable, cancellable, reversible. foundation for complex choreography.
 
 ### Push performance boundaries
-- **Web Workers**. Move computation off the main thread. Heavy data processing, image manipulation, search indexing. Anything that would cause jank.
-- **OffscreenCanvas**. Render in a Worker thread. The main thread stays free while complex visuals render in the background.
+- **Web Workers**. Move computation off main thread. Heavy data processing, image manipulation, search indexing. Anything that would cause jank.
+- **OffscreenCanvas**. Render in Worker thread. main thread stays free while complex visuals render in background.
 - **WASM**. Near-native performance for computation-heavy features. Image processing, physics simulations, codecs.
 
 ### Interact with the device
@@ -113,29 +113,29 @@ else if (canvas.getContext('webgl2')) { /* WebGL2 fallback */ }
 ### Performance rules
 
 - Target 60fps. If dropping below 50, simplify.
-- Respect prefers-reduced-motion. Always. Provide a beautiful static alternative.
+- Respect prefers-reduced-motion. Always. Provide beautiful static alternative.
 - Lazy-initialize heavy resources (WebGL contexts, WASM modules) only when near viewport.
 - Pause off-screen rendering. Kill what you cannot see.
-- Test on real mid-range devices, not just your development machine.
+- Test on real mid-range devices, not your development machine.
 
 ### Polish is the difference
 
 The gap between "cool" and "extraordinary" is in the last 20% of refinement: the easing curve on a spring animation, the timing offset in a staggered reveal, the subtle secondary motion that makes a transition feel physical. Do not ship the first version that works. Ship the version that feels inevitable.
 
 **NEVER**:
-- Ignore prefers-reduced-motion. This is an accessibility requirement, not a suggestion
+- Ignore prefers-reduced-motion. This is accessibility requirement, not suggestion
 - Ship effects that cause jank on mid-range devices
-- Use bleeding-edge APIs without a functional fallback
+- Use bleeding-edge APIs without functional fallback
 - Add sound without explicit user opt-in
 - Use technical ambition to mask weak design fundamentals. Fix those first with other skills.
 - Layer multiple competing extraordinary moments. Focus creates impact, excess creates noise.
 
 ## Verify the Result
 
-- **The wow test**: Show it to someone who has not seen it. Do they react?
-- **The removal test**: Take it away. Does the experience feel diminished, or does nobody notice?
-- **The device test**: Run it on a phone, a tablet, a Chromebook. Still smooth?
-- **The accessibility test**: Enable reduced motion. Still beautiful?
-- **The context test**: Does this make sense for THIS brand and audience?
+- ** wow test**: Show it to someone who has not seen it. Do they react?
+- ** removal test**: Take it away. Does experience feel diminished, or does nobody notice?
+- ** device test**: Run it on phone, tablet, Chromebook. Still smooth?
+- ** accessibility test**: Enable reduced motion. Still beautiful?
+- ** context test**: Does this make sense for THIS brand and audience?
 
 Remember: "Technically extraordinary" is not about using the newest API. It is about making an interface do something users did not think a website could do.

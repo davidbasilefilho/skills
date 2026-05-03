@@ -19,27 +19,27 @@ Analyze what's weak or generic about the current type.
 
 ### 1. Font choices
 - Using invisible defaults? (Inter, Roboto, Arial, Open Sans, system defaults)
-- Does the font match the brand personality? (A playful brand should not use a corporate typeface)
-- Too many font families? (More than 2-3 is almost always a mess)
+- Does font match brand personality? ( playful brand should not use corporate typeface)
+- Too many font families? (More than 2-3 is almost always mess)
 
 ### 2. Hierarchy
-- Can you tell headings from body from captions at a glance?
+- Can you tell headings from body from captions at glance?
 - Are font sizes too close together? (14px, 15px, 16px = muddy hierarchy)
 - Are weight contrasts strong enough? (Medium vs Regular is barely visible)
 
 ### 3. Sizing and scale
-- Is there a consistent type scale, or are sizes arbitrary?
+- Is there consistent type scale, or are sizes arbitrary?
 - Does body text meet minimum readability? (16px+)
-- Is the sizing strategy appropriate for the context? (Fixed rem scales for app UIs; fluid clamp() for marketing page headings)
+- Is sizing strategy appropriate for context? (Fixed rem scales for app UIs; fluid clamp() for marketing page headings)
 
 ### 4. Readability
 - Are line lengths comfortable? (45-75 characters ideal)
-- Is line-height appropriate for the font and context?
+- Is line-height appropriate for font and context?
 - Is there enough contrast between text and background?
 
 ### 5. Consistency
-- Are the same elements styled the same way throughout?
-- Are font weights used consistently? (Not bold in one section, semibold in another for the same role)
+- Are same elements styled same way throughout?
+- Are font weights used consistently? (Not bold in one section, semibold in another for same role)
 - Is letter-spacing intentional or default everywhere?
 
 **CRITICAL**: The goal is not to make text "fancier". It is to make it clearer, more readable, and more intentional. Good typography is invisible. Bad typography is distracting.
@@ -50,8 +50,8 @@ Consult the [typography reference](reference/typography.md) from the frontend-de
 
 Create a systematic plan.
 
-- **Font selection**: Do fonts need replacing? What fits the brand and context?
-- **Type scale**: Establish a modular scale (1.25 ratio) with clear hierarchy
+- **Font selection**: Do fonts need replacing? What fits brand and context?
+- **Type scale**: Establish modular scale (1.25 ratio) with clear hierarchy
 - **Weight strategy**: Which weights serve which roles? (Regular for body, Semibold for labels, Bold for headings)
 - **Spacing**: Line-heights, letter-spacing, and margins between typographic elements
 
@@ -60,17 +60,17 @@ Create a systematic plan.
 ### Font Selection
 
 If fonts need replacing:
-- Choose fonts that reflect the brand personality
-- Pair with genuine contrast (serif + sans, geometric + humanist) or use a single family in multiple weights
+- Choose fonts that reflect brand personality
+- Pair with genuine contrast (serif + sans, geometric + humanist) or use single family in multiple weights
 - Ensure web font loading does not cause layout shift (font-display: swap, metric-matched fallbacks)
 
 ### Establish Hierarchy
 
 Build a clear type scale.
 - **5 sizes cover most needs**: caption, secondary, body, subheading, heading
-- **Use a consistent ratio** between levels (1.25, 1.333, or 1.5)
+- **Use consistent ratio** between levels (1.25, 1.333, or 1.5)
 - **Combine dimensions**: Size + weight + color + space for strong hierarchy. Do not rely on size alone.
-- **App UIs**: Use a fixed rem-based type scale, optionally adjusted at 1-2 breakpoints. Fluid sizing undermines the spatial predictability that dense, container-based layouts need.
+- **App UIs**: Use fixed rem-based type scale, optionally adjusted at 1-2 breakpoints. Fluid sizing undermines spatial predictability that dense, container-based layouts need.
 - **Marketing and content pages**: Use fluid sizing via clamp(min, preferred, max) for headings and display text. Keep body text fixed.
 
 ### Fix Readability
@@ -88,11 +88,11 @@ Build a clear type scale.
 ### Weight Consistency
 - Define clear roles for each weight and stick to them
 - Do not use more than 3-4 weights (Regular, Medium, Semibold, Bold is plenty)
-- Load only the weights you actually use (each weight adds to page load)
+- Load only weights you use (each weight adds to page load)
 
 **NEVER**:
 - Use more than 2-3 font families
-- Pick sizes arbitrarily. Commit to a scale.
+- Pick sizes arbitrarily. Commit to scale.
 - Set body text below 16px
 - Use decorative or display fonts for body text
 - Disable browser zoom (user-scalable=no)
@@ -104,7 +104,7 @@ Build a clear type scale.
 - **Hierarchy**: Can you identify heading vs body vs caption instantly?
 - **Readability**: Is body text comfortable to read in long passages?
 - **Consistency**: Are same-role elements styled identically throughout?
-- **Personality**: Does the typography reflect the brand?
+- **Personality**: Does typography reflect brand?
 - **Performance**: Are web fonts loading efficiently without layout shift?
 - **Accessibility**: Does text meet WCAG contrast ratios? Is it zoomable to 200%?
 

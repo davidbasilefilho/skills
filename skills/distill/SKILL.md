@@ -26,10 +26,10 @@ Analyze what makes the design feel complex or cluttered.
 - **Feature creep**: Too many options, actions, or paths forward
 
 ### 2. Find the essence
-- What is the primary user goal? (There should be ONE)
-- What is actually necessary vs nice-to-have?
+- What is primary user goal? (There should be ONE)
+- What is necessary vs nice-to-have?
 - What can be removed, hidden, or combined?
-- What is the 20% that delivers 80% of value?
+- What is 20% that delivers 80% of value?
 
 If any of these are unclear from the codebase, {{ask_instruction}}
 
@@ -39,7 +39,7 @@ If any of these are unclear from the codebase, {{ask_instruction}}
 
 Create a ruthless editing strategy.
 
-- **Core purpose**: What is the ONE thing this should accomplish?
+- **Core purpose**: What is ONE thing this should accomplish?
 - **Essential elements**: What is truly necessary to achieve that purpose?
 - **Progressive disclosure**: What can be hidden until needed?
 - **Consolidation opportunities**: What can be combined or integrated?

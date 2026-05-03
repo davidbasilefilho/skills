@@ -135,7 +135,7 @@ After presenting the summary, tell the user:
 >
 > Re-run {{command_prefix}}audit after fixes to see your score improve.
 
-**IMPORTANT**: Be thorough but actionable. Too many P3 issues creates noise. Focus on what actually matters.
+**IMPORTANT**: Be thorough but actionable. Too many P3 issues creates noise. Focus on what matters.
 
 **NEVER**:
 - Report issues without explaining impact (why does this matter?)

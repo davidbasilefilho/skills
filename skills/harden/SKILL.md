@@ -171,12 +171,12 @@ t('items', { count }) // Handles complex plural rules
 
 **API errors**:
 - Handle each status code appropriately:
-  - 400: Show validation errors
-  - 401: Redirect to login
-  - 403: Show permission error
-  - 404: Show not found state
-  - 429: Show rate limit message
-  - 500: Show generic error, offer support
+- 400: Show validation errors
+- 401: Redirect to login
+- 403: Show permission error
+- 404: Show not found state
+- 429: Show rate limit message
+- 500: Show generic error, offer support
 
 **Graceful degradation**:
 - Core functionality works without JavaScript

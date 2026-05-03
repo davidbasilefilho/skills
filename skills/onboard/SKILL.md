@@ -7,7 +7,7 @@ user-invocable: true
 
 ## MANDATORY PREPARATION
 
-Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. Additionally gather: the "aha moment" you want users to reach, and users experience level.
+Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. gather: the "aha moment" you want users to reach, and users experience level.
 
 ---
 
@@ -21,7 +21,7 @@ Understand what users need to learn and why.
 - What are users trying to accomplish?
 - What is confusing or unclear about current experience?
 - Where do users get stuck or drop off?
-- What is the "aha moment" we want users to reach?
+- What is "aha moment" we want users to reach?
 
 ### 2. Understand the users
 - What is their experience level? (Beginners, power users, mixed?)
@@ -30,8 +30,8 @@ Understand what users need to learn and why.
 - What alternatives do they know? (Coming from competitor? New to category?)
 
 ### 3. Define success
-- What is the minimum users need to learn to be successful?
-- What is the key action we want them to take? (First project? First invite?)
+- What is minimum users need to learn to be successful?
+- What is key action we want them to take? (First project? First invite?)
 - How do we know onboarding worked? (Completion rate? Time to value?)
 
 **CRITICAL**: Onboarding should get users to value as quickly as possible, not teach everything possible.
@@ -41,9 +41,9 @@ Understand what users need to learn and why.
 Follow these core principles.
 
 ### Show, Do Not Tell
-- Demonstrate with working examples, not just descriptions
+- Demonstrate with working examples, not descriptions
 - Provide real functionality in onboarding, not separate tutorial mode
-- Use progressive disclosure. Teach one thing at a time.
+- Use progressive disclosure. Teach one thing at time.
 
 ### Make It Optional (When Possible)
 - Let experienced users skip onboarding
@@ -87,7 +87,7 @@ Create appropriate onboarding for the context.
 **Core Concept Introduction**:
 - Introduce 1-3 core concepts (not everything)
 - Use simple language and examples
-- Interactive when possible (do, do not just read)
+- Interactive when possible (do, do not read)
 - Progress indication (step 1 of 3)
 
 **First Success**:
@@ -146,7 +146,7 @@ Projects help you organize your work and collaborate with your team.
 
 **Best practices**:
 - Interactive is greater than passive (let users click real buttons)
-- Focus on workflow, not features ("Create a project" not "This is the project button")
+- Focus on workflow, not features ("Create project" not "This is project button")
 - Provide sample data so actions work
 
 ### Interactive Tutorials
@@ -158,7 +158,7 @@ Projects help you organize your work and collaborate with your team.
 
 **How to design**:
 - Sandbox environment with sample data
-- Clear objectives ("Create a chart showing sales by region")
+- Clear objectives ("Create chart showing sales by region")
 - Step-by-step guidance
 - Validation (confirm they did it right)
 - Graduation moment (you are ready!)
@@ -183,14 +183,14 @@ Every empty state needs:
 ### What Will Be Here
 "Your recent projects will appear here"
 
-### Why It Matters  
+### Why It Matters
 "Projects help you organize your work and collaborate with your team"
 
 ### How to Get Started
 [Create project] or [Import from template]
 
 ### Visual Interest
-Illustration or icon (not just text on blank page)
+Illustration or icon (not text on blank page)
 
 ### Contextual Help
 "Need help getting started? [Watch 2-min tutorial]"

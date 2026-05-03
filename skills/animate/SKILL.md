@@ -9,7 +9,7 @@ Analyze a feature and strategically add animations and micro-interactions that e
 
 ## MANDATORY PREPARATION
 
-Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. Additionally gather: performance constraints.
+Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. gather: performance constraints.
 
 ---
 
@@ -25,9 +25,9 @@ Analyze where motion would improve the experience.
 - **Missed guidance**: Opportunities to direct attention or explain behavior
 
 ### 2. Understand the context
-- What is the personality? (Playful vs serious, energetic vs calm)
-- What is the performance budget? (Mobile-first? Complex page?)
-- Who is the audience? (Motion-sensitive users? Power users who want speed?)
+- What is personality? (Playful vs serious, energetic vs calm)
+- What is performance budget? (Mobile-first? Complex page?)
+- Who is audience? (Motion-sensitive users? Power users who want speed?)
 - What matters most? (One hero animation vs many micro-interactions?)
 
 If any of these are unclear from the codebase, {{ask_instruction}}
@@ -38,7 +38,7 @@ If any of these are unclear from the codebase, {{ask_instruction}}
 
 Create a purposeful animation plan.
 
-- **Hero moment**: What is the ONE signature animation? (Page load? Hero section? Key interaction?)
+- **Hero moment**: What is ONE signature animation? (Page load? Hero section? Key interaction?)
 - **Feedback layer**: Which interactions need acknowledgment?
 - **Transition layer**: Which state changes need smoothing?
 - **Delight layer**: Where can we surprise and delight?
@@ -57,12 +57,12 @@ Add motion systematically across these categories.
 
 ### Micro-interactions
 - **Button feedback**:
-  - Hover: Subtle scale (1.02-1.05), color shift, shadow increase
-  - Click: Quick scale down then up (0.95 to 1), ripple effect
-  - Loading: Spinner or pulse state
+- Hover: Subtle scale (1.02-1.05), color shift, shadow increase
+- Click: Quick scale down then up (0.95 to 1), ripple effect
+- Loading: Spinner or pulse state
 - **Form interactions**:
-  - Input focus: Border color transition, slight scale or glow
-  - Validation: Shake on error, check mark on success, smooth color transitions
+- Input focus: Border color transition, slight scale or glow
+- Validation: Shake on error, check mark on success, smooth color transitions
 - **Toggle switches**: Smooth slide and color transition (200-300ms)
 - **Checkboxes or radio**: Check mark animation, ripple effect
 - **Like or favorite**: Scale and rotation, particle effects, color transition
@@ -152,11 +152,11 @@ Use appropriate techniques for each animation.
 ```
 
 **NEVER**:
-- Use bounce or elastic easing curves. They feel dated and draw attention to the animation itself.
+- Use bounce or elastic easing curves. They feel dated and draw attention to animation itself.
 - Animate layout properties (width, height, top, left). Use transform instead.
 - Use durations over 500ms for feedback. It feels laggy.
-- Animate without purpose. Every animation needs a reason.
-- Ignore prefers-reduced-motion. This is an accessibility violation.
+- Animate without purpose. Every animation needs reason.
+- Ignore prefers-reduced-motion. This is accessibility violation.
 - Animate everything. Animation fatigue makes interfaces feel exhausting.
 - Block interaction during animations unless intentional.
 
@@ -171,4 +171,4 @@ Test animations thoroughly.
 - **Does not block**: Users can interact during or after animations
 - **Adds value**: Makes interface clearer or more delightful
 
-Remember: Motion should enhance understanding and provide feedback, not just add decoration. Animate with purpose, respect performance constraints, and always consider accessibility. Great animation is invisible. It just makes everything feel right.
+Remember: Motion should enhance understanding and provide feedback, not add decoration. Animate with purpose, respect performance constraints, and always consider accessibility. Great animation is invisible. It makes everything feel right.

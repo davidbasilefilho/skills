@@ -30,7 +30,7 @@ Search for design system documentation, UI guidelines, component libraries, or s
 Assess what works and what does not:
 - Where does it deviate from design system patterns?
 - Which inconsistencies are cosmetic vs functional?
-- What is the root cause: missing tokens, one-off implementations, or conceptual misalignment?
+- What is root cause: missing tokens, one-off implementations, or conceptual misalignment?
 
 ### 3. Create a normalization plan
 Define specific changes that will align the feature with the design system:
@@ -45,7 +45,7 @@ Define specific changes that will align the feature with the design system:
 Systematically address all inconsistencies across these dimensions.
 
 - **Typography**: Use design system fonts, sizes, weights, and line heights. Replace hard-coded values with typographic tokens or classes.
-- **Color and Theme**: Apply design system color tokens. Remove one-off color choices that break the palette.
+- **Color and Theme**: Apply design system color tokens. Remove one-off color choices that break palette.
 - **Spacing and Layout**: Use spacing tokens (margins, padding, gaps). Align with grid systems and layout patterns used elsewhere.
 - **Components**: Replace custom implementations with design system components. Ensure props and variants match established patterns.
 - **Motion and Interaction**: Match animation timing, easing, and interaction patterns to other features.
@@ -56,7 +56,7 @@ Systematically address all inconsistencies across these dimensions.
 **NEVER**:
 - Create new one-off components when design system equivalents exist
 - Hard-code values that should use design tokens
-- Introduce new patterns that diverge from the design system
+- Introduce new patterns that diverge from design system
 - Compromise accessibility for visual consistency
 
 This is not an exhaustive list. Apply judgment to identify all areas needing normalization.
@@ -65,7 +65,7 @@ This is not an exhaustive list. Apply judgment to identify all areas needing nor
 
 After normalization, ensure code quality.
 
-- **Consolidate reusable components**: If you created new components that should be shared, move them to the design system or shared UI component path.
+- **Consolidate reusable components**: If you created new components that should be shared, move them to design system or shared UI component path.
 - **Remove orphaned code**: Delete unused implementations, styles, or files made obsolete by normalization.
 - **Verify quality**: Lint, type-check, and test according to repository guidelines. Ensure normalization did not introduce regressions.
 - **Ensure DRYness**: Look for duplication introduced during refactoring and consolidate.

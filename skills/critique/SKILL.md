@@ -7,11 +7,11 @@ user-invocable: true
 
 ## MANDATORY PREPARATION
 
-Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. Additionally gather: what the interface is trying to accomplish.
+Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. gather: what the interface is trying to accomplish.
 
 ---
 
-Conduct a holistic design critique, evaluating whether the interface actually works: not just technically, but as a designed experience. Think like a design director giving feedback.
+Conduct a holistic design critique, evaluating whether the interface works: not technically, but as a designed experience. Think like a design director giving feedback.
 
 ## Phase 1: Design Critique
 
@@ -26,64 +26,64 @@ Review the design against ALL the DO NOT guidelines in the frontend-design skill
 **The test**: If you showed this to someone and said "AI made this," would they believe you immediately? If yes, that is the problem.
 
 ### 2. Visual Hierarchy
-- Does the eye flow to the most important element first?
-- Is there a clear primary action? Can you spot it in 2 seconds?
+- Does eye flow to most important element first?
+- Is there clear primary action? Can you spot it in 2 seconds?
 - Do size, color, and position communicate importance correctly?
 - Is there visual competition between elements that should have different weights?
 
 ### 3. Information Architecture and Cognitive Load
 > *Consult [cognitive-load](reference/cognitive-load.md) for the working memory rule and 8-item checklist*
-- Is the structure intuitive? Would a new user understand the organization?
+- Is structure intuitive? Would new user understand organization?
 - Is related content grouped logically?
 - Are there too many choices at once? Count visible options at each decision point. If more than 4, flag it.
-- Is the navigation clear and predictable?
-- **Progressive disclosure**: Is complexity revealed only when needed, or dumped on the user upfront?
-- **Run the 8-item cognitive load checklist** from the reference. Report failure count: 0-1 equals low (good), 2-3 equals moderate, 4+ equals critical.
+- Is navigation clear and predictable?
+- **Progressive disclosure**: Is complexity revealed only when needed, or dumped on user upfront?
+- **Run 8-item cognitive load checklist** from reference. Report failure count: 0-1 equals low (good), 2-3 equals moderate, 4+ equals critical.
 
 ### 4. Emotional Journey
 - What emotion does this interface evoke? Is that intentional?
-- Does it match the brand personality?
+- Does it match brand personality?
 - Does it feel trustworthy, approachable, premium, playful: whatever it should feel?
-- Would the target user feel "this is for me"?
-- **Peak-end rule**: Is the most intense moment positive? Does the experience end well (confirmation, celebration, clear next step)?
+- Would target user feel "this is for me"?
+- **Peak-end rule**: Is most intense moment positive? Does experience end well (confirmation, celebration, clear next step)?
 - **Emotional valleys**: Check for onboarding frustration, error cliffs, feature discovery gaps, or anxiety spikes at high-stakes moments (payment, delete, commit)
 - **Interventions at negative moments**: Are there design interventions where users are likely to feel frustrated or anxious? (progress indicators, reassurance copy, undo options, social proof)
 
 ### 5. Discoverability and Affordance
 - Are interactive elements obviously interactive?
-- Would a user know what to do without instructions?
+- Would user know what to do without instructions?
 - Are hover and focus states providing useful feedback?
 - Are there hidden features that should be more visible?
 
 ### 6. Composition and Balance
-- Does the layout feel balanced or uncomfortably weighted?
-- Is whitespace used intentionally or just leftover?
+- Does layout feel balanced or uncomfortably weighted?
+- Is whitespace used intentionally or leftover?
 - Is there visual rhythm in spacing and repetition?
 - Does asymmetry feel designed or accidental?
 
 ### 7. Typography as Communication
-- Does the type hierarchy clearly signal what to read first, second, third?
+- Does type hierarchy clearly signal what to read first, second, third?
 - Is body text comfortable to read? (line length, spacing, size)
-- Do font choices reinforce the brand or tone?
+- Do font choices reinforce brand or tone?
 - Is there enough contrast between heading levels?
 
 ### 8. Color with Purpose
-- Is color used to communicate, not just decorate?
-- Does the palette feel cohesive?
-- Are accent colors drawing attention to the right things?
-- Does it work for colorblind users? (not just technically: does meaning still come through?)
+- Is color used to communicate, not decorate?
+- Does palette feel cohesive?
+- Are accent colors drawing attention to right things?
+- Does it work for colorblind users? (not technically: does meaning still come through?)
 
 ### 9. States and Edge Cases
-- Empty states: Do they guide users toward action, or just say "nothing here"?
+- Empty states: Do they guide users toward action, or say "nothing here"?
 - Loading states: Do they reduce perceived wait time?
 - Error states: Are they helpful and non-blaming?
 - Success states: Do they confirm and guide next steps?
 
 ### 10. Microcopy and Voice
-- Is the writing clear and concise?
-- Does it sound like a human (the right human for this brand)?
+- Is writing clear and concise?
+- Does it sound like human ( right human for this brand)?
 - Are labels and buttons unambiguous?
-- Does error copy help users fix the problem?
+- Does error copy help users fix problem?
 
 ## Phase 2: Present Findings
 
@@ -123,7 +123,7 @@ Highlight 2-3 things done well. Be specific about why they work.
 The 3-5 most impactful design problems, ordered by importance.
 
 For each issue, tag with P0-P3 severity (consult [heuristics-scoring](reference/heuristics-scoring.md) for severity definitions):
-- **[P?] What**: Name the problem clearly
+- **[P?] What**: Name problem clearly
 - **Why it matters**: How this hurts users or undermines goals
 - **Fix**: What to do about it (be concrete)
 - **Suggested command**: Which command could address this (from: {{available_commands}})
@@ -146,15 +146,15 @@ Quick notes on smaller issues worth addressing.
 
 **Remember**:
 - Be direct. Vague feedback wastes everyone time.
-- Be specific. "the submit button" not "some elements"
+- Be specific. " submit button" not "some elements"
 - Say what is wrong AND why it matters to users
-- Give concrete suggestions, not just "consider exploring..."
+- Give concrete suggestions, not "consider exploring..."
 - Prioritize ruthlessly. If everything is important, nothing is.
 - Do not soften criticism. Developers need honest feedback to ship great design.
 
 ## Phase 3: Ask the User
 
-**After presenting findings**, use targeted questions based on what was actually found. {{ask_instruction}} These answers will shape the action plan.
+**After presenting findings**, use targeted questions based on what was found. {{ask_instruction}} These answers will shape the action plan.
 
 Ask questions along these lines (adapt to the specific findings: do NOT ask generic questions):
 
@@ -168,7 +168,7 @@ Ask questions along these lines (adapt to the specific findings: do NOT ask gene
 
 **Rules for questions**:
 - Every question must reference specific findings from Phase 2. Never ask generic "who is your audience?" questions
-- Keep it to 2-4 questions maximum. Respect the user time.
+- Keep it to 2-4 questions maximum. Respect user time.
 - Offer concrete options, not open-ended prompts.
 - If findings are straightforward (e.g., only 1-2 clear issues), skip questions and go directly to Phase 4
 
@@ -186,13 +186,13 @@ List recommended commands in priority order, based on the user answers:
 
 **Rules for recommendations**:
 - Only recommend commands from: {{available_commands}}
-- Order by the user stated priorities first, then by impact
-- Each item description should carry enough context that the command knows what to focus on
-- Map each Priority Issue to the appropriate command
+- Order by user stated priorities first, then by impact
+- Each item description should carry enough context that command knows what to focus on
+- Map each Priority Issue to appropriate command
 - Skip commands that would address zero issues
-- If the user chose a limited scope, only include items within that scope
-- If the user marked areas as off-limits, exclude commands that would touch those areas
-- End with {{command_prefix}}polish as the final step if any fixes were recommended
+- If user chose limited scope, only include items within that scope
+- If user marked areas as off-limits, exclude commands that would touch those areas
+- End with {{command_prefix}}polish as final step if any fixes were recommended
 
 After presenting the summary, tell the user:
 

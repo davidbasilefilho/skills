@@ -9,7 +9,7 @@ Adapt existing designs to work effectively across different contexts: different 
 
 ## MANDATORY PREPARATION
 
-Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. Additionally gather: target platforms or devices and usage contexts.
+Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. gather: target platforms or devices and usage contexts.
 
 ---
 
@@ -27,7 +27,7 @@ Understand what needs adaptation and why.
 - **Input method**: Touch, mouse, keyboard, voice, gamepad?
 - **Screen constraints**: Size, resolution, orientation?
 - **Connection**: Fast wifi, slow 3G, offline?
-- **Usage context**: On-the-go vs desk, quick glance vs focused reading?
+- **Usage context**: On--go vs desk, quick glance vs focused reading?
 - **User expectations**: What do users expect on this platform?
 
 ### 3. Identify adaptation challenges
@@ -35,7 +35,7 @@ Understand what needs adaptation and why.
 - What will not work? (Hover states on touch, tiny touch targets)
 - What is inappropriate? (Desktop patterns on mobile, mobile patterns on desktop)
 
-**CRITICAL**: Adaptation is not just scaling. It is rethinking the experience for the new context.
+**CRITICAL**: Adaptation is not scaling. It is rethinking the experience for the new context.
 
 ## Plan Adaptation Strategy
 
@@ -172,7 +172,7 @@ Choose appropriate breakpoints:
 - Persistent side navigation on desktop
 - Breadcrumbs on smaller screens for context
 
-**IMPORTANT**: Test on real devices, not just browser DevTools. Device emulation is helpful but not perfect.
+**IMPORTANT**: Test on real devices, not browser DevTools. Device emulation is helpful but not perfect.
 
 **NEVER**:
 - Hide core functionality on mobile (if it matters, make it work)

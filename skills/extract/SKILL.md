@@ -24,15 +24,15 @@ Locate your design system, component library, or shared UI directory (grep for "
 Look for:
 - **Repeated components**: Similar UI patterns used multiple times (buttons, cards, inputs, etc.)
 - **Hard-coded values**: Colors, spacing, typography, shadows that should be tokens
-- **Inconsistent variations**: Multiple implementations of the same concept (3 different button styles)
+- **Inconsistent variations**: Multiple implementations of same concept (3 different button styles)
 - **Reusable patterns**: Layout patterns, composition patterns, interaction patterns worth systematizing
 
 ### 3. Assess value
 Not everything should be extracted. Consider:
 - Is this used 3+ times, or likely to be reused?
 - Would systematizing this improve consistency?
-- Is this a general pattern or context-specific?
-- What is the maintenance cost vs benefit?
+- Is this general pattern or context-specific?
+- What is maintenance cost vs benefit?
 
 ## Plan Extraction
 
@@ -42,7 +42,7 @@ Create a systematic extraction plan.
 - **Tokens to create**: Which hard-coded values become design tokens?
 - **Variants to support**: What variations does each component need?
 - **Naming conventions**: Component names, token names, prop names that match existing patterns
-- **Migration path**: How to refactor existing uses to consume the new shared versions
+- **Migration path**: How to refactor existing uses to consume new shared versions
 
 **IMPORTANT**: Design systems grow incrementally. Extract what is clearly reusable now, not everything that might someday be reusable.
 
@@ -51,20 +51,20 @@ Create a systematic extraction plan.
 Build improved, reusable versions.
 
 - **Components**: Create well-designed components with:
-  - Clear props API with sensible defaults
-  - Proper variants for different use cases
-  - Accessibility built in (ARIA, keyboard navigation, focus management)
-  - Documentation and usage examples
+- Clear props API with sensible defaults
+- Proper variants for different use cases
+- Accessibility built in (ARIA, keyboard navigation, focus management)
+- Documentation and usage examples
 
 - **Design tokens**: Create tokens with:
-  - Clear naming (primitive vs semantic)
-  - Proper hierarchy and organization
-  - Documentation of when to use each token
+- Clear naming (primitive vs semantic)
+- Proper hierarchy and organization
+- Documentation of when to use each token
 
 - **Patterns**: Document patterns with:
-  - When to use this pattern
-  - Code examples
-  - Variations and combinations
+- When to use this pattern
+- Code examples
+- Variations and combinations
 
 **NEVER**:
 - Extract one-off, context-specific implementations without generalization
@@ -77,16 +77,16 @@ Build improved, reusable versions.
 
 Replace existing uses with the new shared versions.
 
-- **Find all instances**: Search for the patterns you have extracted
-- **Replace systematically**: Update each use to consume the shared version
+- **Find all instances**: Search for patterns you have extracted
+- **Replace systematically**: Update each use consume shared version
 - **Test thoroughly**: Ensure visual and functional parity
-- **Delete dead code**: Remove the old implementations
+- **Delete dead code**: Remove old implementations
 
 ## Document
 
 Update design system documentation.
 
-- Add new components to the component library
+- Add new components to component library
 - Document token usage and values
 - Add examples and guidelines
 - Update any Storybook or component catalog

@@ -24,7 +24,7 @@ Understand current performance and identify problems.
 - How bad is it? (Perceivable? Annoying? Blocking?)
 - Who is affected? (All users? Mobile only? Slow connections?)
 
-**CRITICAL**: Measure before and after. Premature optimization wastes time. Optimize what actually matters.
+**CRITICAL**: Measure before and after. Premature optimization wastes time. Optimize what matters.
 
 ## Optimization Strategy
 
@@ -248,7 +248,7 @@ const observer = new IntersectionObserver((entries) => {
 - Break functionality while optimizing
 - Use will-change everywhere (creates new layers, uses memory)
 - Lazy load above-fold content
-- Optimize micro-optimizations while ignoring major issues (optimize the biggest bottleneck first)
+- Optimize micro-optimizations while ignoring major issues (optimize biggest bottleneck first)
 - Forget about mobile performance (often slower devices, slower connections)
 
 ## Verify Improvements
@@ -257,7 +257,7 @@ Test that optimizations worked.
 
 - **Before and after metrics**: Compare Lighthouse scores
 - **Real user monitoring**: Track improvements for real users
-- **Different devices**: Test on low-end Android, not just flagship iPhone
+- **Different devices**: Test on low-end Android, not flagship iPhone
 - **Slow connections**: Throttle to 3G, test experience
 - **No regressions**: Ensure functionality still works
 - **User perception**: Does it feel faster?

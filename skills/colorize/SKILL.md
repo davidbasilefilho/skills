@@ -9,7 +9,7 @@ Strategically introduce color to designs that are too monochromatic, gray, or la
 
 ## MANDATORY PREPARATION
 
-Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. Additionally gather: existing brand colors.
+Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. gather: existing brand colors.
 
 ---
 
@@ -39,7 +39,7 @@ If any of these are unclear from the codebase, {{ask_instruction}}
 
 Create a purposeful color introduction plan.
 
-- **Color palette**: What colors match the brand or context? (Choose 2-4 colors max beyond neutrals)
+- **Color palette**: What colors match brand or context? (Choose 2-4 colors max beyond neutrals)
 - **Dominant color**: Which color owns 60% of colored elements?
 - **Accent colors**: Which colors provide contrast and highlights? (30% and 10%)
 - **Application strategy**: Where does each color appear and why?
@@ -52,17 +52,17 @@ Add color systematically across these dimensions.
 
 ### Semantic Color
 - **State indicators**:
-  - Success: Green tones (emerald, forest, mint)
-  - Error: Red or pink tones (rose, crimson, coral)
-  - Warning: Orange or amber tones
-  - Info: Blue tones (sky, ocean, indigo)
-  - Neutral: Gray or slate for inactive states
+- Success: Green tones (emerald, forest, mint)
+- Error: Red or pink tones (rose, crimson, coral)
+- Warning: Orange or amber tones
+- Info: Blue tones (sky, ocean, indigo)
+- Neutral: Gray or slate for inactive states
 
 - **Status badges**: Colored backgrounds or borders for states (active, pending, completed, etc.)
 - **Progress indicators**: Colored bars, rings, or charts showing completion or health
 
 ### Accent Color Application
-- **Primary actions**: Color the most important buttons or CTAs
+- **Primary actions**: Color most important buttons or CTAs
 - **Links**: Add color to clickable text (maintain accessibility)
 - **Icons**: Colorize key icons for recognition and personality
 - **Headers or titles**: Add color to section headers or key labels
@@ -119,14 +119,14 @@ Ensure color addition improves rather than overwhelms.
 - **Temperature consistency**: Warm palette stays warm, cool stays cool
 
 **NEVER**:
-- Use every color in the rainbow (choose 2-4 colors beyond neutrals)
+- Use every color in rainbow (choose 2-4 colors beyond neutrals)
 - Apply color randomly without semantic meaning
-- Put gray text on colored backgrounds. It looks washed out. Use a darker shade of the background color or transparency instead.
+- Put gray text on colored backgrounds. It looks washed out. Use darker shade of background color or transparency instead.
 - Use pure gray for neutrals. Add subtle color tint (warm or cool) for sophistication.
 - Use pure black (#000) or pure white (#fff) for large areas.
 - Violate WCAG contrast requirements
-- Use color as the only indicator (accessibility issue)
-- Make everything colorful (defeats the purpose)
+- Use color as only indicator (accessibility issue)
+- Make everything colorful (defeats purpose)
 - Default to purple-blue gradients (AI slop aesthetic)
 
 ## Verify Color Addition
@@ -135,7 +135,7 @@ Test that colorization improves the experience.
 
 - **Better hierarchy**: Does color guide attention appropriately?
 - **Clearer meaning**: Does color help users understand states or categories?
-- **More engaging**: Does the interface feel warmer and more inviting?
+- **More engaging**: Does interface feel warmer and more inviting?
 - **Still accessible**: Do all color combinations meet WCAG standards?
 - **Not overwhelming**: Is color balanced and purposeful?
 

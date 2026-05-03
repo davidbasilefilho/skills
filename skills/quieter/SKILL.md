@@ -26,10 +26,10 @@ Analyze what makes the design feel too intense.
 - **Scale**: Everything is large and loud with no hierarchy
 
 ### 2. Understand the context
-- What is the purpose? (Marketing vs tool vs reading experience)
-- Who is the audience? (Some contexts need energy)
+- What is purpose? (Marketing vs tool vs reading experience)
+- Who is audience? (Some contexts need energy)
 - What is working? (Do not throw away good ideas)
-- What is the core message? (Preserve what matters)
+- What is core message? (Preserve what matters)
 
 If any of these are unclear from the codebase, {{ask_instruction}}
 
@@ -57,7 +57,7 @@ Systematically reduce intensity across these dimensions.
 - **Neutral dominance**: Let neutrals do more work, use color as accent (10% rule)
 - **Gentler contrasts**: High contrast only where it matters most
 - **Tinted grays**: Use warm or cool tinted grays instead of pure gray. Adds sophistication without loudness.
-- **Never gray on color**: If you have gray text on a colored background, use a darker shade of that color or transparency instead.
+- **Never gray on color**: If you have gray text on colored background, use darker shade of that color or transparency instead.
 
 ### Visual Weight Reduction
 - **Typography**: Reduce font weights (900 to 600, 700 to 500), decrease sizes where appropriate
@@ -76,7 +76,7 @@ Systematically reduce intensity across these dimensions.
 - **Remove decorative animations**: Keep functional motion, remove flourishes
 - **Subtle micro-interactions**: Replace dramatic effects with gentle feedback
 - **Refined easing**: Use ease-out-quart for smooth, understated motion. Never bounce or elastic.
-- **Remove animations entirely** if they are not serving a clear purpose.
+- **Remove animations entirely** if they are not serving clear purpose.
 
 ### Composition Refinement
 - **Reduce scale jumps**: Smaller contrast between sizes creates calmer feeling
@@ -84,7 +84,7 @@ Systematically reduce intensity across these dimensions.
 - **Even out spacing**: Replace extreme spacing variations with consistent rhythm
 
 **NEVER**:
-- Make everything the same size or weight (hierarchy still matters)
+- Make everything same size or weight (hierarchy still matters)
 - Remove all color (quiet equals grayscale)
 - Eliminate all personality (maintain character through refinement)
 - Sacrifice usability for aesthetics (functional elements still need clear affordances)

@@ -9,7 +9,7 @@ Identify and improve unclear, confusing, or poorly written interface text to mak
 
 ## MANDATORY PREPARATION
 
-Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. Additionally gather: audience technical level and users mental state in context.
+Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. gather: audience technical level and users mental state in context.
 
 ---
 
@@ -27,10 +27,10 @@ Identify what makes the text unclear or ineffective.
 - **Tone mismatch**: Too formal, too casual, or inappropriate for situation
 
 ### 2. Understand the context
-- Who is the audience? (Technical? General? First-time users?)
-- What is the user mental state? (Stressed during error? Confident during success?)
-- What is the action? (What do we want users to do?)
-- What is the constraint? (Character limits? Space limitations?)
+- Who is audience? (Technical? General? First-time users?)
+- What is user mental state? (Stressed during error? Confident during success?)
+- What is action? (What do we want users to do?)
+- What is constraint? (Character limits? Space limitations?)
 
 **CRITICAL**: Clear copy helps users succeed. Unclear copy creates frustration, errors, and support tickets.
 
@@ -38,7 +38,7 @@ Identify what makes the text unclear or ineffective.
 
 Create a strategy for clearer communication.
 
-- **Primary message**: What is the ONE thing users need to know?
+- **Primary message**: What is ONE thing users need to know?
 - **Action needed**: What should users do next (if anything)?
 - **Tone**: How should this feel? (Helpful? Apologetic? Encouraging?)
 - **Constraints**: Length limits, brand voice, localization considerations
@@ -59,7 +59,7 @@ Refine text across these common areas.
 **Principles**:
 - Explain what went wrong in plain language
 - Suggest how to fix it
-- Do not blame the user
+- Do not blame user
 - Include examples when helpful
 - Link to help or support if applicable
 
@@ -74,7 +74,7 @@ Refine text across these common areas.
 - Use clear, specific labels (not generic placeholders)
 - Show format expectations with examples
 - Explain why you are asking (when not obvious)
-- Put instructions before the field, not after
+- Put instructions before field, not after
 - Keep required field indicators clear
 
 ### Button and CTA Text
@@ -82,7 +82,7 @@ Refine text across these common areas.
 **Good**: "Create account" | "Save changes" | "Got it, thanks"
 
 **Principles**:
-- Describe the action specifically
+- Describe action specifically
 - Use active voice (verb plus noun)
 - Match user mental model
 - Be specific ("Save" is better than "OK")
@@ -92,8 +92,8 @@ Refine text across these common areas.
 **Good**: "Choose a username. You can change this later in Settings."
 
 **Principles**:
-- Add value (do not just repeat the label)
-- Answer the implicit question ("What is this?" or "Why do you need this?")
+- Add value (do not repeat label)
+- Answer implicit question ("What is this?" or "Why do you need this?")
 - Keep it brief but complete
 - Link to detailed docs if needed
 
@@ -131,7 +131,7 @@ Refine text across these common areas.
 **Good**: "Delete 'Project Alpha'? This cannot be undone."
 
 **Principles**:
-- State the specific action
+- State specific action
 - Explain consequences (especially for destructive actions)
 - Use clear button labels ("Delete project" not "Yes")
 - Do not overuse confirmations (only for risky actions)
@@ -154,12 +154,12 @@ Every piece of copy should follow these rules:
 2. **Be concise**: Cut unnecessary words (but do not sacrifice clarity)
 3. **Be active**: "Save changes" not "Changes will be saved"
 4. **Be human**: "Oops, something went wrong" not "System error encountered"
-5. **Be helpful**: Tell users what to do, not just what happened
+5. **Be helpful**: Tell users what to do, not what happened
 6. **Be consistent**: Use same terms throughout (do not vary for variety)
 
 **NEVER**:
 - Use jargon without explanation
-- Blame users ("You made an error" becomes "This field is required")
+- Blame users ("You made error" becomes "This field is required")
 - Be vague ("Something went wrong" without explanation)
 - Use passive voice unnecessarily
 - Write overly long explanations (be concise)
@@ -167,7 +167,7 @@ Every piece of copy should follow these rules:
 - Assume technical knowledge
 - Vary terminology (pick one term and stick with it)
 - Repeat information (headers restating intros, redundant explanations)
-- Use placeholders as the only labels (they disappear when users type)
+- Use placeholders as only labels (they disappear when users type)
 
 ## Verify Improvements
 
@@ -177,6 +177,6 @@ Test that copy improvements work.
 - **Actionability**: Do users know what to do next?
 - **Brevity**: Is it as short as possible while remaining clear?
 - **Consistency**: Does it match terminology elsewhere?
-- **Tone**: Is it appropriate for the situation?
+- **Tone**: Is it appropriate for situation?
 
 Remember: You are a clarity expert with excellent communication skills. Write like you are explaining to a smart friend who is unfamiliar with the product. Be clear, be helpful, be human.

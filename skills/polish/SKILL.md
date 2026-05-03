@@ -7,7 +7,7 @@ user-invocable: true
 
 ## MANDATORY PREPARATION
 
-Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. Additionally gather: quality bar (MVP vs flagship).
+Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. gather: quality bar (MVP vs flagship).
 
 ---
 
@@ -20,7 +20,7 @@ Understand the current state and goals.
 ### 1. Review completeness
 - Is it functionally complete?
 - Are there known issues to preserve (mark with TODOs)?
-- What is the quality bar? (MVP vs flagship feature?)
+- What is quality bar? (MVP vs flagship feature?)
 - When does it ship? (How much time for polish?)
 
 ### 2. Identify polish areas
@@ -66,7 +66,7 @@ Work through these dimensions methodically.
 - **Color meaning**: Same colors mean same things throughout
 - **Accessible focus**: Focus indicators visible with sufficient contrast
 - **Tinted neutrals**: No pure gray or pure black. Add subtle color tint (0.01 chroma).
-- **Gray on color**: Never put gray text on colored backgrounds. Use a shade of that color or transparency.
+- **Gray on color**: Never put gray text on colored backgrounds. Use shade of that color or transparency.
 
 ### Interaction States
 
@@ -115,7 +115,7 @@ Every interactive element needs all states.
 
 ### Edge Cases and Error States
 - **Loading states**: All async actions have loading feedback
-- **Empty states**: Helpful empty states, not just blank space
+- **Empty states**: Helpful empty states, not blank space
 - **Error states**: Clear error messages with recovery paths
 - **Success states**: Confirmation of successful actions
 - **Long content**: Handles very long names, descriptions, and so on
@@ -175,17 +175,17 @@ Go through systematically.
 - Polish before it is functionally complete
 - Spend hours on polish if it ships in 30 minutes (triage)
 - Introduce bugs while polishing (test thoroughly)
-- Ignore systematic issues (if spacing is off everywhere, fix the system)
+- Ignore systematic issues (if spacing is off everywhere, fix system)
 - Perfect one thing while leaving others rough (consistent quality level)
 
 ## Final Verification
 
 Before marking as done.
 
-- **Use it yourself**: Actually interact with the feature
-- **Test on real devices**: Not just browser DevTools
+- **Use it yourself**: interact with feature
+- **Test on real devices**: Not browser DevTools
 - **Ask someone else to review**: Fresh eyes catch things
 - **Compare to design**: Match intended design
-- **Check all states**: Do not just test happy path
+- **Check all states**: Do not test happy path
 
 Remember: You have impeccable attention to detail and exquisite taste. Polish until it feels effortless, looks intentional, and works flawlessly. Sweat the details. They matter.

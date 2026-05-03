@@ -13,7 +13,7 @@ Design skills produce generic output without project context. You MUST have conf
 **Required context** — every design skill needs at minimum:
 - **Target audience**: Who uses this product and in what context?
 - **Use cases**: What jobs are they trying to get done?
-- **Brand personality or tone**: How should the interface feel?
+- **Brand personality or tone**: How should interface feel?
 
 Individual skills may require additional context. Check the skill preparation section for specifics.
 
@@ -21,7 +21,7 @@ Individual skills may require additional context. Check the skill preparation se
 
 **Gathering order:**
 1. **Check current instructions (instant)**: If your loaded instructions already contains a Design Context section, proceed immediately.
-2. **Check .impeccable.md (fast)**: If not in instructions, read `.impeccable.md` from the project root. If it exists and contains the required context, proceed.
+2. **Check.impeccable.md (fast)**: If not in instructions, read `.impeccable.md` from the project root. If it exists and contains the required context, proceed.
 3. **Run teach-impeccable (REQUIRED)**: If neither source has context, you MUST run {{command_prefix}}teach-impeccable NOW before doing anything else. Do NOT skip this step. Do NOT attempt to infer context from the codebase instead.
 
 ---
@@ -30,16 +30,16 @@ Individual skills may require additional context. Check the skill preparation se
 
 Commit to a BOLD aesthetic direction:
 - **Purpose**: What problem does this interface solve? Who uses it?
-- **Tone**: Pick an extreme: brutally minimal, maximalist chaos, retro-futuristic, organic or natural, luxury or refined, playful or toy-like, editorial or magazine, brutalist or raw, art deco or geometric, soft or pastel, industrial or utilitarian, etc. There are so many flavors to choose from. Use these for inspiration but design one that is true to the aesthetic direction.
+- **Tone**: Pick extreme: brutally minimal, maximalist chaos, retro-futuristic, organic or natural, luxury or refined, playful or toy-like, editorial or magazine, brutalist or raw, art deco or geometric, soft or pastel, industrial or utilitarian, etc. There are so many flavors to choose from. Use these for inspiration but design one that is true to aesthetic direction.
 - **Constraints**: Technical requirements (framework, performance, accessibility).
-- **Differentiation**: What makes this UNFORGETTABLE? What is the one thing someone will remember?
+- **Differentiation**: What makes this UNFORGETTABLE? What is one thing someone will remember?
 
 **CRITICAL**: Choose a clear conceptual direction and execute it with precision. Bold maximalism and refined minimalism both work. The key is intentionality, not intensity.
 
 Then implement working code that is:
 - Production-grade and functional
 - Visually striking and memorable
-- Cohesive with a clear aesthetic point of view
+- Cohesive with clear aesthetic point of view
 - Meticulously refined in every detail
 
 ## Frontend Aesthetics Guidelines
@@ -108,7 +108,7 @@ Focus on high-impact moments. One well-orchestrated page load with staggered rev
 Make interactions feel fast. Use optimistic UI: update immediately, sync later.
 
 **DO**: Use progressive disclosure. Start simple, reveal sophistication through interaction (basic options first, advanced behind expandable sections; hover states that reveal secondary actions).
-**DO**: Design empty states that teach the interface, not just say "nothing here"
+**DO**: Design empty states that teach the interface, not say "nothing here"
 **DO**: Make every interactive surface feel intentional and responsive.
 **DON'T**: Repeat the same information. Redundant headers, intros that restate the heading.
 **DON'T**: Make every button primary. Use ghost buttons, text links, secondary styles. Hierarchy matters.
@@ -117,7 +117,7 @@ Make interactions feel fast. Use optimistic UI: update immediately, sync later.
 > *Consult [responsive reference](reference/responsive-design.md) for mobile-first, fluid design, and container queries.*
 
 **DO**: Use container queries (@container) for component-level responsiveness
-**DO**: Adapt the interface for different contexts. Do not just shrink it.
+**DO**: Adapt the interface for different contexts. Do not shrink it.
 **DON'T**: Hide critical functionality on mobile. Adapt the interface, do not amputate it.
 
 ### UX Writing

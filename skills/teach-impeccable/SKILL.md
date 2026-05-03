@@ -26,11 +26,11 @@ Note what you have learned and what remains unclear.
 ### Users and Purpose
 - Who uses this? What is their context when using it?
 - What job are they trying to get done?
-- What emotions should the interface evoke? (confidence, delight, calm, urgency, etc.)
+- What emotions should interface evoke? (confidence, delight, calm, urgency, etc.)
 
 ### Brand and Personality
-- How would you describe the brand personality in 3 words?
-- Any reference sites or apps that capture the right feel? What specifically about them?
+- How would you describe brand personality in 3 words?
+- Any reference sites or apps that capture right feel? What specifically about them?
 - What should this explicitly NOT look like? Any anti-references?
 
 ### Aesthetic Preferences
