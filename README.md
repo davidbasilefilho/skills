@@ -6,12 +6,14 @@ A curated collection of agent skills for design, frontend work, and cave tooling
 
 <details>
 <summary>Bun</summary>
+
 ```bash
 bunx --bun skills add davidbasilefilho/skills
 ```
 </details>
 <details>
 <summary>npm</summary>
+
 ```bash
 npx -y skills add davidbasilefilho/skills
 ```
