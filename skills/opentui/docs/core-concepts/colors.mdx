@@ -6,9 +6,9 @@ order: 8
 
 # Colors
 
-OpenTUI uses the `RGBA` class for color representation. The class stores 8-bit RGBA channel values plus packed metadata internally, but provides methods for working with different color formats.
+OpenTUI uses `RGBA` class for color representation. class stores 8-bit RGBA channel values plus packed metadata internally, but provides methods for working with different color formats.
 
-Every color also carries **color intent** inside the packed value: an RGB snapshot, an indexed ANSI slot, or the terminal default. The renderer uses this intent to keep palette-relative colors stable when the terminal palette changes.
+Every color also carries **color intent** inside packed value: RGB snapshot, indexed ANSI slot, or terminal default. renderer uses this intent to keep palette-relative colors stable when terminal palette changes.
 
 ## Creating colors
 
@@ -60,7 +60,7 @@ Box({ backgroundColor: "transparent" })
 
 ## The parseColor utility
 
-The `parseColor()` function converts various color formats to RGBA:
+ `parseColor()` function converts various color formats to RGBA:
 
 ```typescript
 import { parseColor } from "@opentui/core"
@@ -73,13 +73,13 @@ const color4 = parseColor(RGBA.fromInts(255, 0, 0, 255)) // Pass-through
 
 ## Color intent
 
-Every `RGBA` value stores intent in packed metadata next to the RGBA snapshot. The renderer reads this intent to decide which ANSI sequence to emit:
+Every `RGBA` value stores intent in packed metadata next to RGBA snapshot. renderer reads this intent to decide which ANSI sequence to emit:
 
-- `rgb`: a literal RGB color. The renderer emits `38;2;r;g;b` / `48;2;r;g;b`.
-- `default`: the terminal's default foreground or background. The renderer emits `39` / `49` (SGR default) so the terminal picks the right side of its palette.
-- `indexed`: an indexed ANSI color. The renderer emits `38;5;n` / `48;5;n` so the user's theme overrides for that palette slot keep working when the palette changes.
+- `rgb`: literal RGB color. renderer emits `38;2;r;g;b` / `48;2;r;g;b`.
+- `default`: terminal's default foreground or background. renderer emits `39` / `49` (SGR default) so terminal picks right side of its palette.
+- `indexed`: indexed ANSI color. renderer emits `38;5;n` / `48;5;n` so user's theme overrides for that palette slot keep working when palette changes.
 
-Each color still carries its RGBA values so alpha blending and non-ANSI renderers work. The intent flows end-to-end through TypeScript, the FFI, the buffer, and the native renderer.
+Each color still carries its RGBA values so alpha blending and non-ANSI renderers work. intent flows end-to-end through TypeScript, FFI, buffer, and native renderer.
 
 ### Default foreground and background
 
@@ -91,7 +91,7 @@ const fg = RGBA.defaultForeground()
 const bg = RGBA.defaultBackground()
 ```
 
-You can pass an optional snapshot color to override the RGBA fallback. The renderer uses the snapshot for early frames, before it detects the terminal palette:
+ pass optional snapshot color to override RGBA fallback. renderer uses snapshot for early frames, before it detects terminal palette:
 
 ```typescript
 const fg = RGBA.defaultForeground("#E6EDF3")
@@ -142,7 +142,7 @@ literal.intent // => "rgb"
 
 ## Packed transport
 
-`RGBA.buffer` is a `Uint16Array(4)`. The low byte of each component stores `r`, `g`, `b`, and `a`; the high bytes together store 32 bits of metadata.
+`RGBA.buffer` is `Uint16Array(4)`. low byte of each component stores `r`, `g`, `b`, and `a`; high bytes together store 32 bits of metadata.
 
 ```typescript
 const color = RGBA.fromIndex(6)
@@ -152,11 +152,11 @@ color.intent // "indexed"
 color.slot // 6
 ```
 
-This lets native buffers compare current and next frame colors with exact integer equality. It also keeps palette intent attached to the color as it crosses the TypeScript/native boundary.
+This lets native buffers compare current and next frame colors with exact integer equality. It also keeps palette intent attached to color as it crosses TypeScript/native boundary.
 
 ## Terminal palette detection
 
-When the terminal supports it, the renderer queries the active palette (OSC 4 for palette slots, OSC 10/11 for default fg/bg, plus other special colors where supported). Indexed colors stay mapped to the terminal's user-configured slots, default colors stay linked to the terminal defaults, and non-truecolor renderers can re-resolve RGB fallbacks against the detected palette.
+When terminal supports it, renderer queries active palette (OSC 4 for palette slots, OSC 10/11 for default fg/bg, plus other special colors where supported). Indexed colors stay mapped to terminal's user-configured slots, default colors stay linked to terminal defaults, and non-truecolor renderers can re-resolve RGB fallbacks against detected palette.
 
 ```typescript
 const colors = await renderer.getPalette({ size: 256 })
@@ -167,16 +167,16 @@ console.log(colors.defaultForeground, colors.defaultBackground)
 
 Useful members:
 
-- `renderer.getPalette(options?)` — returns a `TerminalColors` snapshot. Cached by requested size (`16` or `256`).
+- `renderer.getPalette(options?)` — returns `TerminalColors` snapshot. Cached by requested size (`16` or `256`).
 - `renderer.paletteDetectionStatus` — `"idle" | "detecting" | "cached"`.
-- `renderer.clearPaletteCache()` — drop cached palettes (for example, after the user changes their theme).
-- `renderer.on("palette", handler)` — subscribe to refreshed palette snapshots when the detected palette changes.
+- `renderer.clearPaletteCache()` — drop cached palettes (for example, after user changes their theme).
+- `renderer.on("palette", handler)` — subscribe to refreshed palette snapshots when detected palette changes.
 
-`getPalette` throws if the renderer is suspended. Startup palette detection runs automatically only when native ANSI-256 fallback rendering needs palette data (`ansi256` without truecolor `rgb`). Truecolor terminals query the palette only when you call `getPalette()` or when a palette listener exists and the terminal reports a theme change.
+`getPalette` throws if renderer is suspended. Startup palette detection runs automatically only when native ANSI-256 fallback rendering needs palette data (`ansi256` without truecolor `rgb`). Truecolor terminals query palette only when you call `getPalette()` or when palette listener exists and terminal reports theme change.
 
 ## Alpha blending
 
-You can use transparent cells and alpha blending for layered effects:
+ use transparent cells and alpha blending for layered effects:
 
 ```typescript
 import { FrameBufferRenderable, RGBA } from "@opentui/core"
@@ -193,7 +193,7 @@ const transparent = RGBA.fromInts(0, 0, 0, 0)
 canvas.frameBuffer.setCellWithAlphaBlending(10, 5, " ", transparent, semiTransparent)
 ```
 
-Blended colors become literal RGB colors internally. This is intentional: once colors are blended, the result no longer represents a specific ANSI slot or terminal default.
+Blended colors become literal RGB colors internally. This is intentional: once colors are blended, result no longer represents specific ANSI slot or terminal default.
 
 ## Text attributes with colors
 

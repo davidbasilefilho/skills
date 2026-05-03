@@ -1,15 +1,15 @@
 ---
 name: extract
-description: "Extract and consolidate reusable components, design tokens, and patterns into your design system. Identifies opportunities for systematic reuse and enriches your component library. Use when the user asks to create components, refactor repeated UI patterns, build a design system, or extract tokens."
+description: "Extract and consolidate reusable components, design tokens, and patterns into your design system. Identifies opportunities for systematic reuse and enriches your component library. Use when user asks to create components, refactor repeated UI patterns, build design system, or extract tokens."
 argument-hint: "[target]"
 user-invocable: true
 ---
 
-Identify reusable patterns, components, and design tokens, then extract and consolidate them into the design system for systematic reuse.
+Identify reusable patterns, components, and design tokens, then extract and consolidate them into design system for systematic reuse.
 
 ## Discover
 
-Analyze the target area to identify extraction opportunities.
+Analyze target area to identify extraction opportunities.
 
 ### 1. Find the design system
 Locate your design system, component library, or shared UI directory (grep for "design system", "ui", "components", etc.). Understand its structure:
@@ -18,7 +18,7 @@ Locate your design system, component library, or shared UI directory (grep for "
 - Documentation patterns
 - Import and export conventions
 
-**CRITICAL**: If no design system exists, ask before creating one. Understand the preferred location and structure first.
+**CRITICAL**: If no design system exists, ask before creating one. Understand preferred location and structure first.
 
 ### 2. Identify patterns
 Look for:
@@ -36,7 +36,7 @@ Not everything should be extracted. Consider:
 
 ## Plan Extraction
 
-Create a systematic extraction plan.
+Create systematic extraction plan.
 
 - **Components to extract**: Which UI elements become reusable components?
 - **Tokens to create**: Which hard-coded values become design tokens?
@@ -75,7 +75,7 @@ Build improved, reusable versions.
 
 ## Migrate
 
-Replace existing uses with the new shared versions.
+Replace existing uses with new shared versions.
 
 - **Find all instances**: Search for patterns you have extracted
 - **Replace systematically**: Update each use consume shared version
@@ -91,4 +91,4 @@ Update design system documentation.
 - Add examples and guidelines
 - Update any Storybook or component catalog
 
-Remember: A good design system is a living system. Extract patterns as they emerge, enrich them thoughtfully, and maintain them consistently.
+Remember: good design system is living system. Extract patterns as they emerge, enrich them thoughtfully, and maintain them consistently.

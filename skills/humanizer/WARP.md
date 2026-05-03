@@ -3,11 +3,11 @@
 This file provides guidance to WARP (warp.dev) when working with code in this repository.
 
 ## What this repo is
-This repository is a **Claude Code skill** implemented entirely as Markdown.
+This repository is **Claude Code skill** implemented entirely as Markdown.
 
-The “runtime” artifact is `SKILL.md`: Claude Code reads the YAML frontmatter (metadata + allowed tools) and the prompt/instructions that follow.
+ “runtime” artifact is `SKILL.md`: Claude Code reads YAML frontmatter (metadata + allowed tools) and prompt/instructions that follow.
 
-`README.md` is for humans: installation, usage, and a compact overview of the patterns.
+`README.md` is for humans: installation, usage, and compact overview of patterns.
 
 ## Key files (and how they relate)
 - `SKILL.md`
@@ -16,9 +16,9 @@ The “runtime” artifact is `SKILL.md`: Claude Code reads the YAML frontmatter
 - After frontmatter is editor prompt: canonical, detailed pattern list with examples.
 - `README.md`
 - Installation and usage instructions.
-- Contains summarized “25 patterns” table and short version history.
+- Contains summarized “29 patterns” table and short version history.
 
-When changing behavior/content, treat `SKILL.md` as the source of truth, and update `README.md` to stay consistent.
+When changing behavior/content, treat `SKILL.md` as source of truth, and update `README.md` to stay consistent.
 
 ## Common commands
 ### Install the skill into Claude Code
@@ -28,14 +28,14 @@ mkdir -p ~/.claude/skills
 git clone https://github.com/blader/humanizer.git ~/.claude/skills/humanizer
 ```
 
-Manual install/update (only the skill file):
+Manual install/update (only skill file):
 ```bash
 mkdir -p ~/.claude/skills/humanizer
 cp SKILL.md ~/.claude/skills/humanizer/
 ```
 
 ## How to “run” it (Claude Code)
-Invoke the skill:
+Invoke skill:
 - `/humanizer` then paste text
 
 ## Making changes safely
@@ -43,11 +43,11 @@ Invoke the skill:
 - `SKILL.md` has `version:` field in its YAML frontmatter.
 - `README.md` has “Version History” section.
 
-If you bump the version, update both.
+If you bump version, update both.
 
 ### Editing `SKILL.md`
 - Preserve valid YAML frontmatter formatting and indentation.
 - Keep pattern numbering stable unless you’re intentionally re-numbering (since README table and examples reference same numbering).
 
 ### Documenting non-obvious fixes
-If you change the prompt to handle a tricky failure mode (e.g., a repeated mis-edit or an unexpected tone shift), add a short note to `README.md`’s version history describing what was fixed and why.
+If you change prompt to handle tricky failure mode (e.g., repeated mis-edit or unexpected tone shift), add short note to `README.md`’s version history describing what was fixed and why.

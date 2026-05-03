@@ -3,8 +3,8 @@ title: React
 description: Build terminal UIs with React and OpenTUI
 order: 2
 skill:
-  entry: true
-  intents: [react, jsx, hooks, keyboard, animation, testing]
+ entry: true
+ intents: [react, jsx, hooks, keyboard, animation, testing]
 ---
 
 # React bindings
@@ -60,7 +60,7 @@ Configure your `tsconfig.json`:
 
 ## Runtime-loaded plugin support (if needed)
 
-If your app loads external TS/TSX modules at runtime (for example a file-based plugin system), import this once in your app entry before dynamic imports:
+If your app loads external TS/TSX modules at runtime (for example file-based plugin system), import this once in your app entry before dynamic imports:
 
 ```ts
 import "@opentui/react/runtime-plugin-support"
@@ -108,7 +108,7 @@ Use inside `<text>` components:
 
 ### `createRoot(renderer)`
 
-Creates a React root for rendering into the terminal.
+Creates React root for rendering into terminal.
 
 ```tsx
 import { createCliRenderer } from "@opentui/core"
@@ -124,7 +124,7 @@ For plugin slots, see [Plugin Slots overview](/docs/plugins/slots) and [React sl
 
 ### `useRenderer()`
 
-Access the OpenTUI renderer instance.
+Access OpenTUI renderer instance.
 
 ```tsx
 import { useRenderer } from "@opentui/react"
@@ -255,7 +255,7 @@ function App() {
 
 ## Styling
 
-Style components with props or the `style` prop:
+Style components with props or `style` prop:
 
 ```tsx
 // Direct props

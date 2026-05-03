@@ -7,7 +7,7 @@
 - Use `Empty` for empty states.
 - Use `sonner` for toasts.
 - Use `Dialog`, `Sheet`, `Drawer`, `HoverCard`, or `Popover` by intent.
-- `Dialog`, `Sheet`, and `Drawer` always need a title.
+- `Dialog`, `Sheet`, and `Drawer` always need title.
 - Use full `Card` composition.
 - `Button` has no `isPending` or `isLoading` prop.
 - `TabsTrigger` must stay inside `TabsList`.

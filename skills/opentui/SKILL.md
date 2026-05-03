@@ -1,13 +1,13 @@
 ---
 name: opentui
-description: Build terminal UIs with OpenTUI. Covers the core API, keymaps, React and Solid bindings, components, layout, keyboard input, plugins, and testing.
+description: Build terminal UIs with OpenTUI. Covers core API, keymaps, React and Solid bindings, components, layout, keyboard input, plugins, and testing.
 ---
 
 # OpenTUI Skill
 
 Canonical reference docs are authored once in sibling `docs/**/*.mdx` files.
 
-Inside the OpenTUI repo, this skill root lives at `packages/web/src/content/`, so the same files are also visible at `packages/web/src/content/docs/**/*.mdx`.
+Inside OpenTUI repo, this skill root lives at `packages/web/src/content/`, so same files are also visible at `packages/web/src/content/docs/**/*.mdx`.
 
 ## Path invariant
 
@@ -43,7 +43,7 @@ Inside the OpenTUI repo, this skill root lives at `packages/web/src/content/`, s
 | `input`, `form`, `editing`, `focus` | `docs/components/input.mdx` |
 | `env`, `environment`, `configuration`, `flags` | `docs/reference/env-vars.mdx` |
 
-For concrete component requests, jump straight to `docs/components/<name>.mdx` after the relevant entry page. For plugin implementation details, narrow from `docs/plugins/slots.mdx` into `docs/plugins/core.mdx`, `docs/plugins/react.mdx`, or `docs/plugins/solid.mdx`.
+For concrete component requests, jump straight to `docs/components/<name>.mdx` after relevant entry page. For plugin implementation details, narrow from `docs/plugins/slots.mdx` into `docs/plugins/core.mdx`, `docs/plugins/react.mdx`, or `docs/plugins/solid.mdx`.
 
 ## Current skill entry pages
 

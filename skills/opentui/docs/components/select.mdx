@@ -6,7 +6,7 @@ order: 5
 
 # Select
 
-A vertical list for choosing from multiple options. Focus the select to enable keyboard input.
+ vertical list for choosing from multiple options. Focus select to enable keyboard input.
 
 ## Basic usage
 
@@ -60,7 +60,7 @@ renderer.root.add(menu)
 
 ## Keyboard navigation
 
-When focused, the select responds to these keys:
+When focused, select responds to these keys:
 
 | Key                       | Action                |
 | ------------------------- | --------------------- |
@@ -73,7 +73,7 @@ When focused, the select responds to these keys:
 
 ### Item selected
 
-Fires when the user presses Enter on an option:
+Fires when user presses Enter on option:
 
 ```typescript
 import { SelectRenderableEvents } from "@opentui/core"
@@ -85,7 +85,7 @@ menu.on(SelectRenderableEvents.ITEM_SELECTED, (index: number, option: SelectOpti
 
 ### Selection changed
 
-Fires when the highlighted item changes:
+Fires when highlighted item changes:
 
 ```typescript
 menu.on(SelectRenderableEvents.SELECTION_CHANGED, (index: number, option: SelectOption) => {

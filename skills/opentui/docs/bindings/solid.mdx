@@ -3,8 +3,8 @@ title: Solid.js
 description: Build terminal UIs with Solid.js and OpenTUI
 order: 1
 skill:
-  entry: true
-  intents: [solid, jsx, signals, hooks, keyboard, animation, testing]
+ entry: true
+ intents: [solid, jsx, signals, hooks, keyboard, animation, testing]
 ---
 
 # Solid.js bindings
@@ -42,7 +42,7 @@ preload = ["@opentui/solid/preload"]
 
 ### 3. Enable runtime-loaded plugin support (if needed)
 
-If your app loads external TS/TSX modules at runtime (for example a file-based plugin system), import this once in your entry file before dynamic imports:
+If your app loads external TS/TSX modules at runtime (for example file-based plugin system), import this once in your entry file before dynamic imports:
 
 ```ts
 import "@opentui/solid/runtime-plugin-support"
@@ -102,7 +102,7 @@ Use inside `<text>` components:
 
 ### `render(node, rendererOrConfig?)`
 
-Render a Solid component tree into a CLI renderer.
+Render Solid component tree into CLI renderer.
 
 ```tsx
 import { render } from "@opentui/solid"
@@ -119,12 +119,12 @@ render(() => <App />, {
 
 **Parameters:**
 
-- `node` - Function returning a JSX element
+- `node` - Function returning JSX element
 - `rendererOrConfig` - Optional `CliRenderer` instance or `CliRendererConfig`
 
 ### `testRender(node, options?)`
 
-Create a test renderer for snapshots and interaction tests.
+Create test renderer for snapshots and interaction tests.
 
 ```tsx
 import { testRender } from "@opentui/solid"
@@ -144,17 +144,17 @@ extend({ custom_box: CustomBoxRenderable })
 
 ### `getComponentCatalogue()`
 
-Returns the current component catalogue that powers JSX tag lookup.
+Returns current component catalogue that powers JSX tag lookup.
 
 For plugin slots, see [Plugin Slots overview](/docs/plugins/slots) and [Solid slots](/docs/plugins/solid).
 
 ## Scrollback writers
 
-In [`split-footer`](/docs/core-concepts/renderer#split-footer) mode with `externalOutputMode: "capture-stdout"`, the Solid binding provides helpers that append JSX-rendered output above the footer. They wrap [`renderer.writeToScrollback`](/docs/core-concepts/renderer#writing-to-scrollback) so you can write scrollback content with signals and components.
+In [`split-footer`](/docs/core-concepts/renderer#split-footer) mode with `externalOutputMode: "capture-stdout"`, Solid binding provides helpers that append JSX-rendered output above footer. They wrap [`renderer.writeToScrollback`](/docs/core-concepts/renderer#writing-to-scrollback) so write scrollback content with signals and components.
 
 ### `writeSolidToScrollback(renderer, node, options?)`
 
-Render a JSX node once and append it as a scrollback commit.
+Render JSX node once and append it as scrollback commit.
 
 ```tsx
 import { writeSolidToScrollback } from "@opentui/solid"
@@ -164,7 +164,7 @@ writeSolidToScrollback(renderer, () => <text fg="#8BD5CA">api responded in 12ms<
 
 ### `createScrollbackWriter(node, options?)`
 
-If you need to pass the same JSX rendering to multiple `writeToScrollback` calls (or hold onto the writer inside your own code), use the lower-level factory:
+If need to pass same JSX rendering to multiple `writeToScrollback` calls (or hold onto writer inside your own code), use lower-level factory:
 
 ```tsx
 import { createScrollbackWriter } from "@opentui/solid"
@@ -184,13 +184,13 @@ renderer.writeToScrollback(writer)
 | `startOnNewLine`  | `boolean` | `true`         | Insert a newline before this commit if the previous commit ended mid-row |
 | `trailingNewline` | `boolean` | -              | Append a newline after the final row                                     |
 
-The writer returns a `ScrollbackSnapshot` whose teardown disposes the inner Solid subtree after the snapshot renders. Use the core [`ScrollbackSurface`](/docs/core-concepts/renderer#writing-to-scrollback) APIs directly if you need streaming commits that re-render the same tree over time.
+ writer returns `ScrollbackSnapshot` whose teardown disposes inner Solid subtree after snapshot renders. Use core [`ScrollbackSurface`](/docs/core-concepts/renderer#writing-to-scrollback) APIs directly if you need streaming commits that re-render same tree over time.
 
 ## Hooks
 
 ### `useRenderer()`
 
-Access the OpenTUI renderer instance.
+Access OpenTUI renderer instance.
 
 ```tsx
 import { useRenderer } from "@opentui/solid"
@@ -273,7 +273,7 @@ const App = () => {
 
 ### `onFocus(callback)`
 
-Run side effects when the terminal window gains focus.
+Run side effects when terminal window gains focus.
 
 ```tsx
 import { onFocus } from "@opentui/solid"
@@ -289,7 +289,7 @@ const App = () => {
 
 ### `onBlur(callback)`
 
-Run side effects when the terminal window loses focus.
+Run side effects when terminal window loses focus.
 
 ```tsx
 import { onBlur } from "@opentui/solid"
@@ -303,11 +303,11 @@ const App = () => {
 }
 ```
 
-These hooks listen for terminal focus-in/focus-out events when the terminal emulator supports them.
+These hooks listen for terminal focus-in/focus-out events when terminal emulator supports them.
 
 ### `useTerminalDimensions()`
 
-Get reactive terminal dimensions (returns a Solid signal).
+Get reactive terminal dimensions (returns Solid signal).
 
 ```tsx
 import { useTerminalDimensions } from "@opentui/solid"
@@ -395,7 +395,7 @@ const App = () => {
 
 ### `Portal`
 
-Render children into a different mount point (useful for modals and overlays).
+Render children into different mount point (useful for modals and overlays).
 
 ```tsx
 import { Portal, useRenderer } from "@opentui/solid"
@@ -431,7 +431,7 @@ const App = () => {
 
 ## Building for production
 
-Use [Bun.build](https://bun.sh/docs/bundler) with the Solid plugin:
+Use [Bun.build](https://bun.sh/docs/bundler) with Solid plugin:
 
 ```ts
 import solidPlugin from "@opentui/solid/bun-plugin"
@@ -444,7 +444,7 @@ await Bun.build({
 })
 ```
 
-To compile to a standalone executable:
+To compile to standalone executable:
 
 ```ts
 await Bun.build({

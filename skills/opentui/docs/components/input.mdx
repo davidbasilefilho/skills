@@ -3,13 +3,13 @@ title: Input
 description: Text input field with cursor and focus states
 order: 3
 skill:
-  entry: true
-  intents: [input, form, editing, focus]
+ entry: true
+ intents: [input, form, editing, focus]
 ---
 
 # Input
 
-Text input field with cursor, placeholder text, and focus states. Focus the input to receive keyboard input.
+Text input field with cursor, placeholder text, and focus states. Focus input to receive keyboard input.
 
 ## Basic usage
 
@@ -52,7 +52,7 @@ renderer.root.add(input)
 
 ## Focus states
 
-The input changes appearance when focused:
+ input changes appearance when focused:
 
 ```typescript
 const input = new InputRenderable(renderer, {
@@ -70,7 +70,7 @@ const input = new InputRenderable(renderer, {
 
 ### Input event
 
-Fires on every keystroke as the value changes:
+Fires on every keystroke as value changes:
 
 ```typescript
 import { InputRenderableEvents } from "@opentui/core"
@@ -82,7 +82,7 @@ input.on(InputRenderableEvents.INPUT, (value: string) => {
 
 ### Change event
 
-Fires when the input loses focus (blur) or when you press Enter, but only if the value changed since focus:
+Fires when input loses focus (blur) or when you press Enter, but only if value changed since focus:
 
 ```typescript
 input.on(InputRenderableEvents.CHANGE, (value: string) => {
@@ -92,7 +92,7 @@ input.on(InputRenderableEvents.CHANGE, (value: string) => {
 
 ### Enter event
 
-Fires when the user presses Enter/Return:
+Fires when user presses Enter/Return:
 
 ```typescript
 input.on(InputRenderableEvents.ENTER, (value: string) => {

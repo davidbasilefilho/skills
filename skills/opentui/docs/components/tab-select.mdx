@@ -6,7 +6,7 @@ order: 6
 
 # TabSelect
 
-Horizontal tab-based selection component with descriptions and scroll support. The component must be focused to receive keyboard input.
+Horizontal tab-based selection component with descriptions and scroll support. component must be focused to receive keyboard input.
 
 ## Basic Usage
 
@@ -59,7 +59,7 @@ renderer.root.add(tabs)
 
 ## Keyboard Navigation
 
-When focused, the tab select responds to these keys:
+When focused, tab select responds to these keys:
 
 | Key           | Action               |
 | ------------- | -------------------- |
@@ -71,7 +71,7 @@ When focused, the tab select responds to these keys:
 
 ### Item Selected
 
-Emitted when the user presses Enter on a tab:
+Emitted when user presses Enter on tab:
 
 ```typescript
 import { TabSelectRenderableEvents, type TabSelectOption } from "@opentui/core"
@@ -84,7 +84,7 @@ tabs.on(TabSelectRenderableEvents.ITEM_SELECTED, (index: number, option: TabSele
 
 ### Selection Changed
 
-Emitted when the highlighted tab changes:
+Emitted when highlighted tab changes:
 
 ```typescript
 import { TabSelectRenderableEvents, type TabSelectOption } from "@opentui/core"
@@ -200,4 +200,4 @@ tabs.setOptions([
 
 ## Scroll Behavior
 
-When there are more tabs than fit in the width, the component automatically handles horizontal scrolling as you navigate with the keyboard.
+When there're more tabs than fit in width, component automatically handles horizontal scrolling as you navigate with keyboard.

@@ -1,21 +1,21 @@
 ---
 name: normalize
-description: "Audits and realigns UI to match design system standards, spacing, tokens, and patterns. Use when the user mentions consistency, design drift, mismatched styles, tokens, or wants to bring a feature back in line with the system."
+description: "Audits and realigns UI to match design system standards, spacing, tokens, and patterns. Use when user mentions consistency, design drift, mismatched styles, tokens, or wants to bring feature back in line with system."
 argument-hint: "[feature (page, route, component...)]"
 user-invocable: true
 ---
 
-Analyze and redesign the feature to perfectly match our design system standards, aesthetics, and established patterns.
+Analyze and redesign feature to perfectly match our design system standards, aesthetics, and established patterns.
 
 ## MANDATORY PREPARATION
 
-Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first.
+Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and Context Gathering Protocol. Follow protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first.
 
 ---
 
 ## Plan
 
-Before making changes, deeply understand the context.
+Before making changes, deeply understand context.
 
 ### 1. Discover the design system
 Search for design system documentation, UI guidelines, component libraries, or style guides (grep for "design system", "ui guide", "style guide", etc.). Study it thoroughly until you understand:
@@ -33,12 +33,12 @@ Assess what works and what does not:
 - What is root cause: missing tokens, one-off implementations, or conceptual misalignment?
 
 ### 3. Create a normalization plan
-Define specific changes that will align the feature with the design system:
+Define specific changes that will align feature with design system:
 - Which components can be replaced with design system equivalents?
 - Which styles need to use design tokens instead of hard-coded values?
 - How can UX patterns match established user flows?
 
-**IMPORTANT**: Great design is effective design. Prioritize UX consistency and usability over visual polish alone. Think through the best possible experience for your use case and personas first.
+**IMPORTANT**: Great design is effective design. Prioritize UX consistency and usability over visual polish alone. Think through best possible experience for your use case and personas first.
 
 ## Execute
 
@@ -59,7 +59,7 @@ Systematically address all inconsistencies across these dimensions.
 - Introduce new patterns that diverge from design system
 - Compromise accessibility for visual consistency
 
-This is not an exhaustive list. Apply judgment to identify all areas needing normalization.
+This is not exhaustive list. Apply judgment to identify all areas needing normalization.
 
 ## Clean Up
 
@@ -70,4 +70,4 @@ After normalization, ensure code quality.
 - **Verify quality**: Lint, type-check, and test according to repository guidelines. Ensure normalization did not introduce regressions.
 - **Ensure DRYness**: Look for duplication introduced during refactoring and consolidate.
 
-Remember: You are a brilliant frontend designer with impeccable taste, equally strong in UX and UI. Your attention to detail and eye for end-to-end user experience is world class. Execute with precision and thoroughness.
+Remember: You are brilliant frontend designer with impeccable taste, equally strong in UX and UI. Your attention to detail and eye for end-to-end user experience is world class. Execute with precision and thoroughness.

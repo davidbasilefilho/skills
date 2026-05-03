@@ -1,6 +1,6 @@
 ---
 title: Solid
-description: Solid slot components backed by the shared plugin registry
+description: Solid slot components backed by shared plugin registry
 order: 4
 ---
 
@@ -8,9 +8,9 @@ order: 4
 
 This page shows Solid integration for plugin slots.
 
-Use slots when you want external modules to contribute `JSX.Element` UI in host-defined regions without forking your app. The host keeps ownership of layout and slot typing; plugins only see the context and props you expose.
+Use slots when you want external modules to contribute `JSX.Element` UI in host-defined regions without forking your app. host keeps ownership of layout and slot typing; plugins only see context and props you expose.
 
-If you have not read the shared model yet, start with [Plugin Slots](/docs/plugins/slots).
+If you have not read shared model yet, start with [Plugin Slots](/docs/plugins/slots).
 
 ## Runtime-loaded external plugins
 
@@ -20,7 +20,7 @@ If your app loads plugins from disk at runtime (for example `await import(fileUr
 import "@opentui/solid/runtime-plugin-support"
 ```
 
-This is a Bun drop-in that installs runtime transform support so external TS/TSX plugin modules use the same runtime instances as the host app (`@opentui/solid`, `@opentui/core`, `@opentui/core/testing`, `solid-js`, and `solid-js/store`). If a plugin imports another OpenTUI package, provide that package through `additional` runtime modules.
+This is Bun drop-in that installs runtime transform support so external TS/TSX plugin modules use same runtime instances as host app (`@opentui/solid`, `@opentui/core`, `@opentui/core/testing`, `solid-js`, and `solid-js/store`). If plugin imports another OpenTUI package, provide that package through `additional` runtime modules.
 
 Use this for plugin systems in both normal Bun runs and standalone compiled executables.
 
@@ -31,7 +31,7 @@ const mod = await import(pathToFileURL(pluginPath).href)
 registry.register(mod.loadExternalPlugin())
 ```
 
-If plugins need additional host-resolved modules, configure runtime support before the side-effect import is loaded:
+If plugins need additional host-resolved modules, configure runtime support before side-effect import is loaded:
 
 ```ts
 import { ensureRuntimePluginSupport } from "@opentui/solid/runtime-plugin-support/configure"
@@ -54,7 +54,7 @@ ensureRuntimePluginSupport({
 })
 ```
 
-For plugins that import `@opentui/three`, install `@opentui/three` in the host app and pass its runtime modules explicitly:
+For plugins that import `@opentui/three`, install `@opentui/three` in host app and pass its runtime modules explicitly:
 
 ```ts
 import { runtimeModules as threeRuntimeModules } from "@opentui/three/runtime-modules"
@@ -65,14 +65,14 @@ ensureRuntimePluginSupport({
 })
 ```
 
-The side-effect import and configurable entrypoint install the same runtime plugin. Late additions throw with a clear error instead of being ignored.
+ side-effect import and configurable entrypoint install same runtime plugin. Late additions throw with clear error instead of being ignored.
 
 ## What Solid adds
 
-- `createSolidSlotRegistry(renderer, context, options?)` — create a registry typed for `JSX.Element`. Accepts the same [`SlotRegistryOptions`](/docs/plugins/slots#registry-options) as `createSlotRegistry`.
-- `Slot<TSlots, TContext>` — generic slot component that takes `registry` as a required prop
-- `createSlot(registry, options?)` — optional convenience helper that returns a registry-bound `<Slot />` component
-- `SolidPlugin<TSlots, TContext>` — convenience type alias for a plugin that returns `JSX.Element`
+- `createSolidSlotRegistry(renderer, context, options?)` — create registry typed for `JSX.Element`. Accepts same [`SlotRegistryOptions`](/docs/plugins/slots#registry-options) as `createSlotRegistry`.
+- `Slot<TSlots, TContext>` — generic slot component that takes `registry` as required prop
+- `createSlot(registry, options?)` — optional convenience helper that returns registry-bound `<Slot />` component
+- `SolidPlugin<TSlots, TContext>` — convenience type alias for plugin that returns `JSX.Element`
 - `@opentui/solid/runtime-plugin-support` — one-line runtime support for external plugin/module loading
 - `@opentui/solid/runtime-plugin-support/configure` — configurable runtime support without import-time side effects
 
@@ -115,7 +115,7 @@ render(() => <App />, renderer)
 
 ## Optional convenience helper
 
-If you prefer not to pass `registry` each time, you can still bind one once:
+If you prefer not to pass `registry` each time, still bind one once:
 
 ```tsx
 const AppSlot = createSlot(registry)
@@ -148,9 +148,9 @@ const Slot = createSlot(registry, {
 })
 ```
 
-If a plugin throws, the slot renders the placeholder. If no placeholder is provided (or it returns `null`), the slot falls back to `children`.
+If plugin throws, slot renders placeholder. If no placeholder is provided (or it returns `null`), slot falls back to `children`.
 
-Plugins that throw during the initial render call are caught inline. Plugins that throw during a Solid re-render are caught by an internal `<ErrorBoundary>` that reports the error to the registry.
+Plugins that throw during initial render call are caught inline. Plugins that throw during Solid re-render are caught by internal `<ErrorBoundary>` that reports error to registry.
 
 ## Observability
 

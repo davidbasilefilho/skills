@@ -2,9 +2,25 @@
 
 A curated collection of agent skills for design, frontend work, and cave tooling.
 
+## Install
+
+<details>
+<summary>Bun</summary>
+```bash
+bunx --bun skills add davidbasilefilho/skills
+```
+</details>
+<details>
+<summary>npm</summary>
+```bash
+npx -y skills add davidbasilefilho/skills
+```
+</details>
+
+
 ## What is in this repo
 
-Each directory under `skills/` contains a standalone skill definition. Skills are designed to help agents perform focused tasks such as improving layout, tightening copy, adding motion, auditing interfaces, or coordinating cave workflows.
+Each directory under `skills/` contains standalone skill definition. Skills are designed to help agents perform focused tasks such as improving layout, tightening copy, adding motion, auditing interfaces, or coordinating cave workflows.
 
 ## Included skills
 
@@ -13,17 +29,17 @@ Each directory under `skills/` contains a standalone skill definition. Skills ar
 - `arrange` - Improve layout, spacing, and visual rhythm
 - `audit` - Run technical quality checks across accessibility and performance
 - `bolder` - Make safe designs more visually assertive
-- `cavecrew` - Coordinate a crew-oriented workflow for cave tools
-- `caveman` - Main entry point for the caveman toolset
+- `cavecrew` - Coordinate crew-oriented workflow for cave tools
+- `caveman` - Main entry point for caveman toolset
 - `caveman-commit` - Create commits with caveman workflows
 - `caveman-compress` - Compress work and context for cave tools
-- `caveman-help` - Show help for the caveman toolset
+- `caveman-help` - Show help for caveman toolset
 - `caveman-review` - Review work with caveman workflows
 - `caveman-stats` - Report caveman usage and stats
 - `clarify` - Improve UX copy, labels, and instructions
 - `colorize` - Add strategic color and visual warmth
 - `compress` - Reduce output and context for cave workflows
-- `critique` - Review a design from a UX perspective
+- `critique` - Review design from UX perspective
 - `delight` - Add moments of joy and personality
 - `distill` - Simplify designs by removing unnecessary complexity
 - `extract` - Consolidate reusable components and design tokens
@@ -37,13 +53,13 @@ Each directory under `skills/` contains a standalone skill definition. Skills ar
 - `overdrive` - Push designs further when they need stronger impact
 - `polish` - Refine interfaces with finishing touches
 - `quieter` - Reduce noise and visual clutter
-- `teach-impeccable` - Establish the design context required by frontend skills
+- `teach-impeccable` - Establish design context required by frontend skills
 - `typeset` - Improve typography and text presentation
 - `ulw` - Create ultra-lightweight experiences
 
 ## Usage
 
-How a skill is invoked depends on the agent harness or editor integration you are using. In general, select the relevant skill for the task and load its `SKILL.md` instructions before working.
+How skill is invoked depends on agent harness or editor integration you are using. In general, select relevant skill for task and load its `SKILL.md` instructions before working.
 
 ## Repository structure
 
@@ -55,7 +71,7 @@ skills/
 
 ## Contributing
 
-- Keep each skill focused on a single job
+- Keep each skill focused on single job
 - Prefer clear, direct instructions over duplicated guidance
 - Update this README when adding or renaming skills
 

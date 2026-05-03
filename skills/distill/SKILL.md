@@ -1,21 +1,21 @@
 ---
 name: distill
-description: "Strip designs to their essence by removing unnecessary complexity. Great design is simple, powerful, and clean. Use when the user asks to simplify, declutter, reduce noise, remove elements, or make a UI cleaner and more focused."
+description: "Strip designs to their essence by removing unnecessary complexity. Great design is simple, powerful, and clean. Use when user asks to simplify, declutter, reduce noise, remove elements, or make UI cleaner and more focused."
 argument-hint: "[target]"
 user-invocable: true
 ---
 
-Remove unnecessary complexity from designs, revealing the essential elements and creating clarity through ruthless simplification.
+Remove unnecessary complexity from designs, revealing essential elements and creating clarity through ruthless simplification.
 
 ## MANDATORY PREPARATION
 
-Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first.
+Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and Context Gathering Protocol. Follow protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first.
 
 ---
 
 ## Assess Current State
 
-Analyze what makes the design feel complex or cluttered.
+Analyze what makes design feel complex or cluttered.
 
 ### 1. Identify complexity sources
 - **Too many elements**: Competing buttons, redundant information, visual clutter
@@ -31,13 +31,13 @@ Analyze what makes the design feel complex or cluttered.
 - What can be removed, hidden, or combined?
 - What is 20% that delivers 80% of value?
 
-If any of these are unclear from the codebase, {{ask_instruction}}
+If any of these are unclear from codebase, {{ask_instruction}}
 
-**CRITICAL**: Simplicity is not about removing features. It is about removing obstacles between users and their goals. Every element should justify its existence.
+**CRITICAL**: Simplicity is not about removing features. it's about removing obstacles between users and their goals. Every element should justify its existence.
 
 ## Plan Simplification
 
-Create a ruthless editing strategy.
+Create ruthless editing strategy.
 
 - **Core purpose**: What is ONE thing this should accomplish?
 - **Essential elements**: What is truly necessary to achieve that purpose?
@@ -55,7 +55,7 @@ Systematically remove complexity across these dimensions.
 - **Progressive disclosure**: Hide complexity behind clear entry points (accordions, modals, step-through flows)
 - **Combine related actions**: Merge similar buttons, consolidate forms, group related content
 - **Clear hierarchy**: ONE primary action, few secondary actions, everything else tertiary or hidden
-- **Remove redundancy**: If it is said elsewhere, do not repeat it here
+- **Remove redundancy**: If it's said elsewhere, do not repeat it here
 
 ### Visual Simplification
 - **Reduce color palette**: Use 1-2 colors plus neutrals, not 5-7 colors
@@ -118,4 +118,4 @@ If you removed features or options:
 - Consider if they need alternative access points
 - Note any user feedback to monitor
 
-Remember: You have great taste and judgment. Simplification is an act of confidence: knowing what to keep and courage to remove the rest. As Antoine de Saint-Exupery said: "Perfection is achieved not when there is nothing more to add, but when there is nothing left to take away."
+Remember: You have great taste and judgment. Simplification is act of confidence: knowing what to keep and courage to remove rest. As Antoine de Saint-Exupery said: "Perfection is achieved not when there's nothing more to add, but when there's nothing left to take away."

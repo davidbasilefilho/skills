@@ -7,7 +7,7 @@
 - Use `InputGroup` + `InputGroupAddon` for buttons inside inputs.
 - Use `ToggleGroup` for 2 to 7 options.
 - Use `FieldSet` + `FieldLegend` for grouped checkboxes or radios.
-- Use `data-invalid` and `data-disabled` on the field. Use `aria-invalid` or `disabled` on the control.
+- Use `data-invalid` and `data-disabled` on field. Use `aria-invalid` or `disabled` on control.
 
 ## Examples
 

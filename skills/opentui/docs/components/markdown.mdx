@@ -43,7 +43,7 @@ Code fence info strings are normalized before Tree-sitter highlighting.
 - `TSX title=Button.tsx` -> `typescriptreact`
 - `Dockerfile` -> `dockerfile`
 
-Normalization uses `infoStringToFiletype()`. You can extend or override mappings at runtime:
+Normalization uses `infoStringToFiletype()`. extend or override mappings at runtime:
 
 ```typescript
 import { extensionToFiletype, basenameToFiletype } from "@opentui/core"
@@ -84,9 +84,9 @@ markdown.streaming = false
 
 ### Stable block prefix
 
-`parseMarkdownIncremental` reports how many parsed tokens at the head of the stream are stable — that is, unlikely to change if you append more content. The renderable surfaces this as a count of **top-level render blocks** you can safely commit elsewhere while the unstable tail keeps updating.
+`parseMarkdownIncremental` reports how many parsed tokens at head of stream are stable — that is, unlikely to change if you append more content. renderable surfaces this as count of **top-level render blocks** safely commit elsewhere while unstable tail keeps updating.
 
-To use it, render with `internalBlockMode: "top-level"`. The renderable keeps each top-level markdown block (heading, paragraph, list, table, fenced code) as its own child renderable, and exposes `markdown._stableBlockCount` — the number of blocks at the head of the tree that are stable right now. This matches the shape [`ScrollbackSurface`](/docs/core-concepts/renderer#writing-to-scrollback) expects when you commit streamed output row-by-row.
+To use it, render with `internalBlockMode: "top-level"`. renderable keeps each top-level markdown block (heading, paragraph, list, table, fenced code) as its own child renderable, and exposes `markdown._stableBlockCount` — number of blocks at head of tree that are stable right now. This matches shape [`ScrollbackSurface`](/docs/core-concepts/renderer#writing-to-scrollback) expects when you commit streamed output row-by-row.
 
 ```typescript
 import { MarkdownRenderable, RGBA, SyntaxStyle } from "@opentui/core"
@@ -109,7 +109,7 @@ md.content = "# Title\n\nPara 1\n\nPara 2"
 // md._stableBlockCount rises as earlier blocks are sealed by a blank line
 ```
 
-`internalBlockMode` is an experimental, opt-in flag that powers the built-in scrollback streaming demo. For non-streaming rendering, leave it at the default (`"coalesced"`), which folds sibling blocks together and matches the historical layout.
+`internalBlockMode` is experimental, opt-in flag that powers built-in scrollback streaming demo. For non-streaming rendering, leave it at default (`"coalesced"`), which folds sibling blocks together and matches historical layout.
 
 ## Markdown tables
 
@@ -151,16 +151,16 @@ const markdown = new MarkdownRenderable(renderer, {
 
 ### Table styles
 
-`tableOptions.style` picks a preset that tunes the defaults for `borders`, `outerBorder`, and `widthMode` together:
+`tableOptions.style` picks preset that tunes defaults for `borders`, `outerBorder`, and `widthMode` together:
 
-- **`"grid"`**: boxed table with visible borders. Defaults to `borders: true`, `widthMode: "full"`. This is the normal markdown-in-a-box rendering.
-- **`"columns"`**: borderless columns with a 2-column gap, defaults to `widthMode: "content"`. Useful for append-only output where a full-width grid feels heavy.
+- **`"grid"`**: boxed table with visible borders. Defaults to `borders: true`, `widthMode: "full"`. This is normal markdown-in--box rendering.
+- **`"columns"`**: borderless columns with 2-column gap, defaults to `widthMode: "content"`. Useful for append-only output where full-width grid feels heavy.
 
-If you do not pass `style`, it defaults to `"columns"` when `internalBlockMode` is `"top-level"`, and `"grid"` otherwise. You can still override individual fields (for example, `borders: true`) to pull toward a different look.
+If you do not pass `style`, it defaults to `"columns"` when `internalBlockMode` is `"top-level"`, and `"grid"` otherwise. still override individual fields (for example, `borders: true`) to pull toward different look.
 
 ## Custom node rendering
 
-Override rendering for a token and fall back to default rendering:
+Override rendering for token and fall back to default rendering:
 
 ```typescript
 const markdown = new MarkdownRenderable(renderer, {

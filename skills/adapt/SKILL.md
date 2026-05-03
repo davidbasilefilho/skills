@@ -1,6 +1,6 @@
 ---
 name: adapt
-description: "Adapt designs to work across different screen sizes, devices, contexts, or platforms. Implements breakpoints, fluid layouts, and touch targets. Use when the user mentions responsive design, mobile layouts, breakpoints, viewport adaptation, or cross-device compatibility."
+description: "Adapt designs to work across different screen sizes, devices, contexts, or platforms. Implements breakpoints, fluid layouts, and touch targets. Use when user mentions responsive design, mobile layouts, breakpoints, viewport adaptation, or cross-device compatibility."
 argument-hint: "[target] [context (mobile, tablet, print...)]"
 user-invocable: true
 ---
@@ -9,7 +9,7 @@ Adapt existing designs to work effectively across different contexts: different 
 
 ## MANDATORY PREPARATION
 
-Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. gather: target platforms or devices and usage contexts.
+Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and Context Gathering Protocol. Follow protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. gather: target platforms or devices and usage contexts.
 
 ---
 
@@ -35,7 +35,7 @@ Understand what needs adaptation and why.
 - What will not work? (Hover states on touch, tiny touch targets)
 - What is inappropriate? (Desktop patterns on mobile, mobile patterns on desktop)
 
-**CRITICAL**: Adaptation is not scaling. It is rethinking the experience for the new context.
+**CRITICAL**: Adaptation is not scaling. it's rethinking experience for new context.
 
 ## Plan Adaptation Strategy
 
@@ -195,4 +195,4 @@ Test thoroughly across contexts.
 - **Edge cases**: Very small screens (320px), very large screens (4K)
 - **Slow connections**: Test on throttled network
 
-Remember: You are a cross-platform design expert. Make experiences that feel native to each context while maintaining brand and functionality consistency. Adapt intentionally, test thoroughly.
+Remember: You are cross-platform design expert. Make experiences that feel native to each context while maintaining brand and functionality consistency. Adapt intentionally, test thoroughly.

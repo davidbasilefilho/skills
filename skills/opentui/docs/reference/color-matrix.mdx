@@ -9,8 +9,8 @@ order: 3
 `FrameBuffer` supports native 4x4 RGBA matrix transforms through two methods: `colorMatrix(...)` and
 `colorMatrixUniform(...)`.
 
-Use `colorMatrix(...)` when you want to transform specific cells with per-cell strengths. Use
-`colorMatrixUniform(...)` when you want to apply one transform to the entire buffer.
+Use `colorMatrix(...)` when want to transform specific cells with per-cell strengths. Use
+`colorMatrixUniform(...)` when want to apply one transform to entire buffer.
 
 Both methods work on normalized RGBA values (`0.0` to `1.0`) and can target foreground, background, or both channels.
 
@@ -57,7 +57,7 @@ This means `strength = 0.0` keeps original color, and `strength = 1.0` applies f
 
 ## Target channels
 
-Use the `TargetChannel` enum to choose which color buffers are affected:
+Use `TargetChannel` enum to choose which color buffers are affected:
 
 - `TargetChannel.FG` (`1`): foreground only
 - `TargetChannel.BG` (`2`): background only
@@ -73,18 +73,18 @@ Use the `TargetChannel` enum to choose which color buffers are affected:
 
 - `x` and `y` are cell coordinates
 - `perCellStrength` is multiplied by method `strength`
-- incomplete trailing values (not a multiple of 3) are ignored
+- incomplete trailing values (not multiple of 3) are ignored
 - out-of-bounds or non-finite coordinates are skipped
 - non-finite effective strengths are skipped
 
-This method is useful for effects that only affect part of the buffer, such as scanlines, vignettes, or localized color
+This method is useful for effects that only affect part of buffer, such as scanlines, vignettes, or localized color
 grading.
 
 ## `colorMatrixUniform` behavior
 
-`colorMatrixUniform` applies the same matrix to every pixel in the selected channel(s).
+`colorMatrixUniform` applies same matrix to every pixel in selected channel(s).
 
-- optimized path processes 4 pixels at a time with SIMD
+- optimized path processes 4 pixels at time with SIMD
 - scalar fallback handles any remaining pixels
 - `strength === 0` or non-finite `strength` returns early
 

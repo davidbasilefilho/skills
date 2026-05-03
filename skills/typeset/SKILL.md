@@ -1,6 +1,6 @@
 ---
 name: typeset
-description: "Improves typography by fixing font choices, hierarchy, sizing, weight, and readability so text feels intentional. Use when the user mentions fonts, type, readability, text hierarchy, sizing looks off, or wants more polished, intentional typography."
+description: "Improves typography by fixing font choices, hierarchy, sizing, weight, and readability so text feels intentional. Use when user mentions fonts, type, readability, text hierarchy, sizing looks off, or wants more polished, intentional typography."
 argument-hint: "[target]"
 user-invocable: true
 ---
@@ -9,13 +9,13 @@ Assess and improve typography that feels generic, inconsistent, or poorly struct
 
 ## MANDATORY PREPARATION
 
-Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first.
+Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and Context Gathering Protocol. Follow protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first.
 
 ---
 
 ## Assess Current Typography
 
-Analyze what's weak or generic about the current type.
+Analyze what's weak or generic about current type.
 
 ### 1. Font choices
 - Using invisible defaults? (Inter, Roboto, Arial, Open Sans, system defaults)
@@ -42,13 +42,13 @@ Analyze what's weak or generic about the current type.
 - Are font weights used consistently? (Not bold in one section, semibold in another for same role)
 - Is letter-spacing intentional or default everywhere?
 
-**CRITICAL**: The goal is not to make text "fancier". It is to make it clearer, more readable, and more intentional. Good typography is invisible. Bad typography is distracting.
+**CRITICAL**: goal is not to make text "fancier". it's to make it clearer, more readable, and more intentional. Good typography is invisible. Bad typography is distracting.
 
 ## Plan Typography Improvements
 
-Consult the [typography reference](reference/typography.md) from the frontend-design skill for detailed guidance on scales, pairing, and loading strategies.
+Consult [typography reference](reference/typography.md) from frontend-design skill for detailed guidance on scales, pairing, and loading strategies.
 
-Create a systematic plan.
+Create systematic plan.
 
 - **Font selection**: Do fonts need replacing? What fits brand and context?
 - **Type scale**: Establish modular scale (1.25 ratio) with clear hierarchy
@@ -66,7 +66,7 @@ If fonts need replacing:
 
 ### Establish Hierarchy
 
-Build a clear type scale.
+Build clear type scale.
 - **5 sizes cover most needs**: caption, secondary, body, subheading, heading
 - **Use consistent ratio** between levels (1.25, 1.333, or 1.5)
 - **Combine dimensions**: Size + weight + color + space for strong hierarchy. Do not rely on size alone.
@@ -108,4 +108,4 @@ Build a clear type scale.
 - **Performance**: Are web fonts loading efficiently without layout shift?
 - **Accessibility**: Does text meet WCAG contrast ratios? Is it zoomable to 200%?
 
-Remember: Typography is the foundation of interface design. It carries the majority of information. Getting it right is the highest-leverage improvement you can make.
+Remember: Typography is foundation of interface design. It carries majority of information. Getting it right is highest-leverage improvement make.

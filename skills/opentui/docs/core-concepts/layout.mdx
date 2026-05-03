@@ -3,17 +3,17 @@ title: Layout System
 description: Flexible positioning and sizing with Yoga/Flexbox
 order: 5
 skill:
-  entry: true
-  intents: [layout, flexbox, yoga, positioning]
+ entry: true
+ intents: [layout, flexbox, yoga, positioning]
 ---
 
 # Layout System
 
-OpenTUI uses the Yoga layout engine to provide CSS Flexbox-like capabilities for responsive terminal layouts. You can create complex, dynamic interfaces that adapt to terminal size changes.
+OpenTUI uses Yoga layout engine to provide CSS Flexbox-like capabilities for responsive terminal layouts. create complex, dynamic interfaces that adapt to terminal size changes.
 
 ## Flexbox Basics
 
-The layout system supports standard flexbox properties:
+ layout system supports standard flexbox properties:
 
 ```typescript
 import { BoxRenderable, createCliRenderer } from "@opentui/core"
@@ -50,7 +50,7 @@ renderer.root.add(container)
 
 ## Flex Direction
 
-Control the direction of child elements:
+Control direction of child elements:
 
 ```typescript
 // Vertical layout (default)
@@ -74,7 +74,7 @@ Control the direction of child elements:
 
 ## Justify Content
 
-Align children along the main axis:
+Align children along main axis:
 
 ```typescript
 {
@@ -99,7 +99,7 @@ Align children along the main axis:
 
 ## Align Items
 
-Align children along the cross axis:
+Align children along cross axis:
 
 ```typescript
 {
@@ -153,7 +153,7 @@ Align children along the cross axis:
 
 ### Relative (Default)
 
-Elements flow normally in the layout:
+Elements flow normally in layout:
 
 ```typescript
 {
@@ -205,7 +205,7 @@ Position elements relative to their parent:
 
 ## Using Constructs
 
-The same layout properties work with the declarative API:
+ same layout properties work with declarative API:
 
 ```typescript
 import { Box, Text } from "@opentui/core"

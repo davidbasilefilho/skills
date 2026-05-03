@@ -1,12 +1,12 @@
 ---
 title: ScrollBox
-description: A scrollable container component with customizable scrollbars
+description: scrollable container component with customizable scrollbars
 order: 7
 ---
 
 # ScrollBox
 
-A scrollable container that supports horizontal and vertical scrolling, sticky scroll behavior, viewport culling, and customizable scrollbars.
+ scrollable container that supports horizontal and vertical scrolling, sticky scroll behavior, viewport culling, and customizable scrollbars.
 
 ## Basic usage
 
@@ -63,7 +63,7 @@ renderer.root.add(
 
 ## Sticky scroll
 
-Enable sticky scroll to keep content pinned to an edge as new content arrives. Useful for log viewers or chat interfaces.
+Enable sticky scroll to keep content pinned to edge as new content arrives. Useful for log viewers or chat interfaces.
 
 ```typescript
 const scrollbox = new ScrollBoxRenderable(renderer, {
@@ -82,7 +82,7 @@ const scrollbox = new ScrollBoxRenderable(renderer, {
 - `"left"` - Stay scrolled to left
 - `"right"` - Stay scrolled to right
 
-When you scroll away from the sticky position, sticky behavior pauses until you scroll back to the sticky edge.
+When you scroll away from sticky position, sticky behavior pauses until you scroll back to sticky edge.
 
 ## Bidirectional scrolling
 
@@ -115,7 +115,7 @@ const scrollbox = new ScrollBoxRenderable(renderer, {
 
 ## Customizing scrollbars
 
-Style the scrollbars using nested options:
+Style scrollbars using nested options:
 
 ```typescript
 const scrollbox = new ScrollBoxRenderable(renderer, {
@@ -141,7 +141,7 @@ const scrollbox = new ScrollBoxRenderable(renderer, {
 
 ## Customizing sub-components
 
-ScrollBox contains several internal components that you can style individually:
+ScrollBox contains several internal components that style individually:
 
 ```typescript
 const scrollbox = new ScrollBoxRenderable(renderer, {
@@ -167,7 +167,7 @@ const scrollbox = new ScrollBoxRenderable(renderer, {
 
 ### scrollBy
 
-Scroll by a relative amount:
+Scroll by relative amount:
 
 ```typescript
 // Scroll down 5 lines
@@ -182,7 +182,7 @@ scrollbox.scrollBy(1, "viewport")
 
 ### scrollTo
 
-Scroll to an absolute position:
+Scroll to absolute position:
 
 ```typescript
 // Scroll to top
@@ -194,13 +194,13 @@ scrollbox.scrollTo({ x: 0, y: 100 })
 
 ### scrollChildIntoView
 
-Scroll the minimum distance needed to show a nested child in the viewport. The method uses DOM-style "nearest" behavior: if the child already fits, the call is a no-op; otherwise it scrolls to reveal the nearest edge.
+Scroll minimum distance needed to show nested child in viewport. method uses DOM-style "nearest" behavior: if child already fits, call is no-op; otherwise it scrolls to reveal nearest edge.
 
 ```typescript
 scrollbox.scrollChildIntoView("table-row-42")
 ```
 
-Use it when you focus an element offscreen (search results, a newly inserted form field, etc.) and want to bring it into view without moving the scroll position more than needed.
+Use it when you focus element offscreen (search results, newly inserted form field, etc.) and want to bring it into view without moving scroll position more than needed.
 
 ## Keyboard navigation
 

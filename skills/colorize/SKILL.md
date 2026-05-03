@@ -1,6 +1,6 @@
 ---
 name: colorize
-description: "Add strategic color to features that are too monochromatic or lack visual interest, making interfaces more engaging and expressive. Use when the user mentions the design looking gray, dull, lacking warmth, needing more color, or wanting a more vibrant or expressive palette."
+description: "Add strategic color to features that are too monochromatic or lack visual interest, making interfaces more engaging and expressive. Use when user mentions design looking gray, dull, lacking warmth, needing more color, or wanting more vibrant or expressive palette."
 argument-hint: "[target]"
 user-invocable: true
 ---
@@ -9,13 +9,13 @@ Strategically introduce color to designs that are too monochromatic, gray, or la
 
 ## MANDATORY PREPARATION
 
-Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. gather: existing brand colors.
+Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and Context Gathering Protocol. Follow protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. gather: existing brand colors.
 
 ---
 
 ## Assess Color Opportunity
 
-Analyze the current state and identify opportunities.
+Analyze current state and identify opportunities.
 
 ### 1. Understand current state
 - **Color absence**: Pure grayscale? Limited neutrals? One timid accent?
@@ -31,13 +31,13 @@ Analyze the current state and identify opportunities.
 - **Wayfinding**: Helping users navigate and understand structure
 - **Delight**: Moments of visual interest and personality
 
-If any of these are unclear from the codebase, {{ask_instruction}}
+If any of these are unclear from codebase, {{ask_instruction}}
 
-**CRITICAL**: More color does not equal better. Strategic color beats rainbow vomit every time. Every color should have a purpose.
+**CRITICAL**: More color does not equal better. Strategic color beats rainbow vomit every time. Every color should have purpose.
 
 ## Plan Color Strategy
 
-Create a purposeful color introduction plan.
+Create purposeful color introduction plan.
 
 - **Color palette**: What colors match brand or context? (Choose 2-4 colors max beyond neutrals)
 - **Dominant color**: Which color owns 60% of colored elements?
@@ -74,7 +74,7 @@ Add color systematically across these dimensions.
 - **Gradient backgrounds**: Add depth with subtle, intentional gradients (not generic purple-blue)
 - **Cards and surfaces**: Tint cards or surfaces slightly for warmth
 
-**Use OKLCH for color**: It is perceptually uniform, meaning equal steps in lightness look equal. Great for generating harmonious scales.
+**Use OKLCH for color**: it's perceptually uniform, meaning equal steps in lightness look equal. Great for generating harmonious scales.
 
 ### Data Visualization
 - **Charts and graphs**: Use color to encode categories or values
@@ -131,7 +131,7 @@ Ensure color addition improves rather than overwhelms.
 
 ## Verify Color Addition
 
-Test that colorization improves the experience.
+Test that colorization improves experience.
 
 - **Better hierarchy**: Does color guide attention appropriately?
 - **Clearer meaning**: Does color help users understand states or categories?

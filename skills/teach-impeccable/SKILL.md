@@ -8,7 +8,7 @@ Gather design context for this project, then persist it for all future sessions.
 
 ## Step 1: Explore the Codebase
 
-Before asking questions, thoroughly scan the project to discover what you can.
+Before asking questions, thoroughly scan project to discover what.
 
 - **README and docs**: Project purpose, target audience, any stated goals
 - **Package.json or config files**: Tech stack, dependencies, existing design libraries
@@ -21,7 +21,7 @@ Note what you have learned and what remains unclear.
 
 ## Step 2: Ask UX-Focused Questions
 
-{{ask_instruction}} Focus only on what you could not infer from the codebase.
+{{ask_instruction}} Focus only on what not infer from codebase.
 
 ### Users and Purpose
 - Who uses this? What is their context when using it?
@@ -42,11 +42,11 @@ Note what you have learned and what remains unclear.
 - Specific accessibility requirements? (WCAG level, known user needs)
 - Considerations for reduced motion, color blindness, or other accommodations?
 
-Skip questions where the answer is already clear from the codebase exploration.
+Skip questions where answer is already clear from codebase exploration.
 
 ## Step 3: Write Design Context
 
-Synthesize your findings and the user answers into a Design Context section.
+Synthesize your findings and user answers into Design Context section.
 
 ```markdown
 ## Design Context
@@ -64,8 +64,8 @@ Synthesize your findings and the user answers into a Design Context section.
 [3-5 principles derived from the conversation that should guide all design decisions]
 ```
 
-Write this section to `.impeccable.md` in the project root. If the file already exists, update the Design Context section in place.
+Write this section to `.impeccable.md` in project root. If file already exists, update Design Context section in place.
 
-Then {{ask_instruction}} whether they would also like the Design Context appended to {{config_file}}. If yes, append or update the section there as well.
+Then {{ask_instruction}} whether they would also like Design Context appended to {{config_file}}. If yes, append or update section there as well.
 
-Confirm completion and summarize the key design principles that will now guide all future work.
+Confirm completion and summarize key design principles that will now guide all future work.

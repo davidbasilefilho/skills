@@ -4,13 +4,13 @@ description: Install OpenTUI and create your first terminal UI
 order: 1
 navTitle: Introduction
 skill:
-  entry: true
-  intents: [getting-started, installation, quickstart, intro]
+ entry: true
+ intents: [getting-started, installation, quickstart, intro]
 ---
 
 # Getting started
 
-OpenTUI is a native terminal UI core written in Zig with TypeScript bindings. The native core exposes a C ABI and can be used from any language. OpenTUI powers OpenCode in production today and will also power terminal.shop. It is an extensible core with a focus on correctness, stability, and high performance. It provides a component-based architecture with flexible layout capabilities, allowing you to create complex terminal applications.
+OpenTUI is native terminal UI core written in Zig with TypeScript bindings. native core exposes C ABI and can be used from any language. OpenTUI powers OpenCode in production today and will also power terminal.shop. it's extensible core with focus on correctness, stability, and high performance. It provides component-based architecture with flexible layout capabilities, allowing you to create complex terminal applications.
 
 ## Installation
 
@@ -47,11 +47,11 @@ Run it:
 bun index.ts
 ```
 
-You should see green text. Press `Ctrl+C` to exit.
+ see green text. Press `Ctrl+C` to exit.
 
 ## Composing components
 
-Components nest naturally. Here's a bordered panel with content:
+Components nest naturally. Here's bordered panel with content:
 
 ```typescript
 import { createCliRenderer, Box, Text } from "@opentui/core"
@@ -69,15 +69,15 @@ renderer.root.add(
 )
 ```
 
-`Box` and `Text` are factory functions. The first argument is props; additional arguments are children.
+`Box` and `Text` are factory functions. first argument is props; additional arguments are children.
 
 ## What's next
 
 ### Core concepts
 
-- [Renderer](/docs/core-concepts/renderer) - The rendering engine
+- [Renderer](/docs/core-concepts/renderer) - rendering engine
 - [Layout](/docs/core-concepts/layout) - Flexbox positioning
-- [Constructs](/docs/core-concepts/constructs) - The declarative component API
+- [Constructs](/docs/core-concepts/constructs) - declarative component API
 
 ### Components
 

@@ -43,7 +43,7 @@ renderer.root.add(diff)
 
 ## Split view scroll sync
 
-When `view: "split"` is active, you can link the vertical scroll of both panes. Scrolling one pane then moves the other:
+When `view: "split"` is active, link vertical scroll of both panes. Scrolling one pane then moves other:
 
 ```typescript
 const diff = new DiffRenderable(renderer, {
@@ -58,7 +58,7 @@ const diff = new DiffRenderable(renderer, {
 diff.syncScroll = false
 ```
 
-Scroll sync is a no-op in the unified view.
+Scroll sync is no-op in unified view.
 
 ## Properties
 

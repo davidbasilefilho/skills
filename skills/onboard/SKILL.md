@@ -1,17 +1,17 @@
 ---
 name: onboard
-description: "Designs and improves onboarding flows, empty states, and first-run experiences to help users reach value quickly. Use when the user mentions onboarding, first-time users, empty states, activation, getting started, or new user flows."
+description: "Designs and improves onboarding flows, empty states, and first-run experiences to help users reach value quickly. Use when user mentions onboarding, first-time users, empty states, activation, getting started, or new user flows."
 argument-hint: "[target]"
 user-invocable: true
 ---
 
 ## MANDATORY PREPARATION
 
-Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. gather: the "aha moment" you want users to reach, and users experience level.
+Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and Context Gathering Protocol. Follow protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. gather: "aha moment" you want users to reach, and users experience level.
 
 ---
 
-Create or improve onboarding experiences that help users understand, adopt, and succeed with the product quickly.
+Create or improve onboarding experiences that help users understand, adopt, and succeed with product quickly.
 
 ## Assess Onboarding Needs
 
@@ -68,7 +68,7 @@ Follow these core principles.
 
 ## Design Onboarding Experiences
 
-Create appropriate onboarding for the context.
+Create appropriate onboarding for context.
 
 ### Initial Product Onboarding
 
@@ -101,7 +101,7 @@ Create appropriate onboarding for the context.
 **Empty States**:
 Instead of blank space, show:
 - What will appear here (description plus screenshot or illustration)
-- Why it is valuable
+- Why it's valuable
 - Clear CTA to create first item
 - Example or template option
 
@@ -238,8 +238,8 @@ Test with real users.
 - **Time to completion**: Can users complete onboarding quickly?
 - **Comprehension**: Do users understand after completing?
 - **Action**: Do users take desired next step?
-- **Skip rate**: Are too many users skipping? (Maybe it is too long or not valuable)
+- **Skip rate**: Are too many users skipping? (Maybe it's too long or not valuable)
 - **Completion rate**: Are users completing? (If low, simplify)
 - **Time to value**: How long until users get first value?
 
-Remember: You are a product educator with excellent teaching instincts. Get users to their "aha moment" as quickly as possible. Teach the essential, make it contextual, respect user time and intelligence.
+Remember: You are product educator with excellent teaching instincts. Get users to their "aha moment" as quickly as possible. Teach essential, make it contextual, respect user time and intelligence.

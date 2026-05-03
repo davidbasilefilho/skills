@@ -10,7 +10,7 @@ Components use semantic CSS variables. Change variables to change every componen
 
 ## Color Variables
 
-Use `name` and `name-foreground` pairs. Base var is the background. `-foreground` is text/icons on that background.
+Use `name` and `name-foreground` pairs. Base var is background. `-foreground` is text/icons on that background.
 
 | Variable | Purpose |
 | --- | --- |
@@ -32,7 +32,7 @@ Colors use OKLCH, for example `--primary: oklch(0.205 0 0)`.
 
 ## Dark Mode
 
-Use class-based dark mode with `.dark` on the root. In Next.js, use `next-themes`:
+Use class-based dark mode with `.dark` on root. In Next.js, use `next-themes`:
 
 ```tsx
 import { ThemeProvider } from "next-themes"
@@ -56,7 +56,7 @@ Or edit CSS variables directly in `globals.css`.
 
 ## Adding Custom Colors
 
-Add vars to `tailwindCssFile` from `npx shadcn@latest info`. Do not create a new CSS file.
+Add vars to `tailwindCssFile` from `npx shadcn@latest info`. Do not create new CSS file.
 
 ```css
 :root {
@@ -107,7 +107,7 @@ Use it in components:
 
 1. Built-in variants.
 2. `className` for layout.
-3. Add a new variant in the component source.
+3. Add new variant in component source.
 4. Wrapper components for higher-level composition.
 
 ## Checking for Updates

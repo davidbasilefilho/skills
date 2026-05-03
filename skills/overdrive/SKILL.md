@@ -1,6 +1,6 @@
 ---
 name: overdrive
-description: "Pushes interfaces past conventional limits with technically ambitious implementations — shaders, spring physics, scroll-driven reveals, 60fps animations. Use when the user wants to wow, impress, go all-out, or make something that feels extraordinary."
+description: "Pushes interfaces past conventional limits with technically ambitious implementations — shaders, spring physics, scroll-driven reveals, 60fps animations. Use when user wants to wow, impress, go all-out, or make something that feels extraordinary."
 argument-hint: "[target]"
 user-invocable: true
 ---
@@ -12,47 +12,47 @@ Start your response with:
 》》》 Entering overdrive mode...
 ```
 
-Push an interface past conventional limits. This is not about visual effects. It is about using the full power of the browser to make any part of an interface feel extraordinary: a table that handles a million rows, a dialog that morphs from its trigger, a form that validates in real-time with streaming feedback, a page transition that feels cinematic.
+Push interface past conventional limits. This is not about visual effects. it's about using full power of browser to make any part of interface feel extraordinary: table that handles million rows, dialog that morphs from its trigger, form that validates in real-time with streaming feedback, page transition that feels cinematic.
 
 ## MANDATORY PREPARATION
 
-Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first.
+Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and Context Gathering Protocol. Follow protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first.
 
-**EXTRA IMPORTANT FOR THIS SKILL**: Context determines what "extraordinary" means. A particle system on a creative portfolio is impressive. The same particle system on a settings page is embarrassing. But a settings page with instant optimistic saves and animated state transitions? That is extraordinary too. Understand the project personality and goals before deciding what is appropriate.
+**EXTRA IMPORTANT FOR THIS SKILL**: Context determines what "extraordinary" means. particle system on creative portfolio is impressive. same particle system on settings page is embarrassing. But settings page with instant optimistic saves and animated state transitions? That is extraordinary too. Understand project personality and goals before deciding what is appropriate.
 
 ### Propose Before Building
 
-This skill has the highest potential to misfire. Do NOT jump straight into implementation. You MUST:
+This skill has highest potential to misfire. Do NOT jump straight into implementation. You MUST:
 
-1. **Think through 2-3 different directions**. Consider different techniques, levels of ambition, and aesthetic approaches. For each direction, briefly describe what the result would look and feel like.
-2. **{{ask_instruction}}** to present these directions and get the user pick before writing any code. Explain trade-offs (browser support, performance cost, complexity).
-3. Only proceed with the direction the user confirms.
+1. **Think through 2-3 different directions**. Consider different techniques, levels of ambition, and aesthetic approaches. For each direction, briefly describe what result would look and feel like.
+2. **{{ask_instruction}}** to present these directions and get user pick before writing any code. Explain trade-offs (browser support, performance cost, complexity).
+3. Only proceed with direction user confirms.
 
 Skipping this step risks building something embarrassing that needs to be thrown away.
 
 ### Iterate with Browser Automation
 
-Technically ambitious effects almost never work on the first try. You MUST actively use browser automation tools to preview your work, visually verify the result, and iterate. Do not assume the effect looks right. Check it. Expect multiple rounds of refinement. The gap between "technically works" and "looks extraordinary" is closed through visual iteration, not code alone.
+Technically ambitious effects almost never work on first try. You MUST actively use browser automation tools to preview your work, visually verify result, and iterate. Do not assume effect looks right. Check it. Expect multiple rounds of refinement. gap between "technically works" and "looks extraordinary" is closed through visual iteration, not code alone.
 
 ---
 
 ## Assess What "Extraordinary" Means Here
 
-The right kind of technical ambition depends entirely on what you are working with. Before choosing a technique, ask: **what would make a user of THIS specific interface say "wow, that is nice"?**
+ right kind of technical ambition depends entirely on what you are working with. Before choosing technique, ask: **what would make user of THIS specific interface say "wow, that is nice"?**
 
 ### For visual or marketing surfaces
-Pages, hero sections, landing pages, portfolios. The "wow" is often sensory: a scroll-driven reveal, a shader background, a cinematic page transition, generative art that responds to the cursor.
+Pages, hero sections, landing pages, portfolios. "wow" is often sensory: scroll-driven reveal, shader background, cinematic page transition, generative art that responds to cursor.
 
 ### For functional UI
-Tables, forms, dialogs, navigation. The "wow" is in how it FEELS: a dialog that morphs from the button that triggered it via View Transitions, a data table that renders 100k rows at 60fps via virtual scrolling, a form with streaming validation that feels instant, drag-and-drop with spring physics.
+Tables, forms, dialogs, navigation. "wow" is in how it FEELS: dialog that morphs from button that triggered it via View Transitions, data table that renders 100k rows at 60fps via virtual scrolling, form with streaming validation that feels instant, drag-and-drop with spring physics.
 
 ### For performance-critical UI
-The "wow" is invisible but felt: a search that filters 50k items without a flicker, a complex form that never blocks the main thread, an image editor that processes in near-real-time. The interface never hesitates.
+ "wow" is invisible but felt: search that filters 50k items without flicker, complex form that never blocks main thread, image editor that processes in near-real-time. interface never hesitates.
 
 ### For data-heavy interfaces
-Charts and dashboards. The "wow" is in fluidity: GPU-accelerated rendering via Canvas or WebGL for massive datasets, animated transitions between data states, force-directed graph layouts that settle naturally.
+Charts and dashboards. "wow" is in fluidity: GPU-accelerated rendering via Canvas or WebGL for massive datasets, animated transitions between data states, force-directed graph layouts that settle naturally.
 
-**The common thread**: something about the implementation goes beyond what users expect from a web interface. The technique serves the experience, not the other way around.
+** common thread**: something about implementation goes beyond what users expect from web interface. technique serves experience, not other way around.
 
 ## The Toolkit
 
@@ -90,13 +90,13 @@ Organized by what you are trying to achieve, not by technology name.
 - **Web Audio API**. Spatial audio, audio-reactive visualizations, sonic feedback. Requires user gesture to start.
 - **Device APIs**. Orientation, ambient light, geolocation. Use sparingly and always with user permission.
 
-**NOTE**: This skill is about enhancing how an interface FEELS, not changing what a product DOES. Adding real-time collaboration, offline support, or new backend capabilities are product decisions, not UI enhancements. Focus on making existing features feel extraordinary.
+**NOTE**: This skill is about enhancing how interface FEELS, not changing what product DOES. Adding real-time collaboration, offline support, or new backend capabilities are product decisions, not UI enhancements. Focus on making existing features feel extraordinary.
 
 ## Implement with Discipline
 
 ### Progressive enhancement is non-negotiable
 
-Every technique must degrade gracefully. The experience without the enhancement must still be good.
+Every technique must degrade gracefully. experience without enhancement must still be good.
 
 ```css
 @supports (animation-timeline: scroll()) {
@@ -120,7 +120,7 @@ else if (canvas.getContext('webgl2')) { /* WebGL2 fallback */ }
 
 ### Polish is the difference
 
-The gap between "cool" and "extraordinary" is in the last 20% of refinement: the easing curve on a spring animation, the timing offset in a staggered reveal, the subtle secondary motion that makes a transition feel physical. Do not ship the first version that works. Ship the version that feels inevitable.
+ gap between "cool" and "extraordinary" is in last 20% of refinement: easing curve on spring animation, timing offset in staggered reveal, subtle secondary motion that makes transition feel physical. Do not ship first version that works. Ship version that feels inevitable.
 
 **NEVER**:
 - Ignore prefers-reduced-motion. This is accessibility requirement, not suggestion
@@ -138,4 +138,4 @@ The gap between "cool" and "extraordinary" is in the last 20% of refinement: the
 - ** accessibility test**: Enable reduced motion. Still beautiful?
 - ** context test**: Does this make sense for THIS brand and audience?
 
-Remember: "Technically extraordinary" is not about using the newest API. It is about making an interface do something users did not think a website could do.
+Remember: "Technically extraordinary" is not about using newest API. it's about making interface do something users did not think website could do.

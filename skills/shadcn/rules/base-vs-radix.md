@@ -5,10 +5,10 @@ Check `base` in `npx shadcn@latest info`.
 ## Key Differences
 
 - Radix uses `asChild`. Base uses `render`.
-- Base needs `nativeButton={false}` when `render` changes a button to a non-button element.
+- Base needs `nativeButton={false}` when `render` changes button to non-button element.
 - Select differs by `items`, placeholder handling, positioning, and object values.
 - ToggleGroup differs by `type` vs `multiple` and by `defaultValue` shape.
-- Slider uses a number for single thumb in base. Radix uses an array.
+- Slider uses number for single thumb in base. Radix uses array.
 - Accordion uses `multiple` in base. Radix uses `type="single"` or `type="multiple"`.
 
 ## Examples

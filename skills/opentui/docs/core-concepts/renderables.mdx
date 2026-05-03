@@ -1,16 +1,16 @@
 ---
 title: Renderables
-description: The building blocks of your terminal UI
+description: building blocks of your terminal UI
 order: 2
 ---
 
 # Renderables
 
-Renderables are the building blocks of your UI. You can position, style, and nest them within each other. Each renderable represents a visual element and uses the Yoga layout engine for flexible positioning and sizing.
+Renderables are building blocks of your UI. position, style, and nest them within each other. Each renderable represents visual element and uses Yoga layout engine for flexible positioning and sizing.
 
 ## Creating Renderables
 
-Create a renderable by instantiating a class with a render context (the renderer) and options:
+Create renderable by instantiating class with render context ( renderer) and options:
 
 ```typescript
 import { createCliRenderer, TextRenderable, BoxRenderable } from "@opentui/core"
@@ -50,7 +50,7 @@ OpenTUI provides these built-in renderables:
 
 ## The Renderable Tree
 
-Renderables form a tree structure. Use `add()` and `remove()` to manage children:
+Renderables form tree structure. Use `add()` and `remove()` to manage children:
 
 ```typescript
 const container = new BoxRenderable(renderer, {
@@ -73,7 +73,7 @@ container.remove("body")
 
 ## Finding Renderables
 
-Navigate the tree to find specific renderables:
+Navigate tree to find specific renderables:
 
 ```typescript
 // Get a direct child by ID
@@ -119,7 +119,7 @@ const panel = new BoxRenderable(renderer, {
 })
 ```
 
-See the [Layout](/docs/core-concepts/layout) page for complete details.
+See [Layout](/docs/core-concepts/layout) page for complete details.
 
 ## Focus Management
 
@@ -143,7 +143,7 @@ input.blur()
 console.log(input.focused) // true
 ```
 
-By default, left-clicking a renderable will auto-focus the closest focusable ancestor. Disable this globally with
+By default, left-clicking renderable will auto-focus closest focusable ancestor. Disable this globally with
 `createCliRenderer({ autoFocus: false })`, or stop it per interaction by calling `event.preventDefault()` in
 `onMouseDown`.
 
@@ -163,7 +163,7 @@ input.on(RenderableEvents.BLURRED, () => {
 
 ### Focused descendants
 
-A renderable can also react to focus living inside one of its descendants through the `hasFocusedDescendant` flag. When any child has focus, every ancestor's `hasFocusedDescendant` flips to `true` and OpenTUI marks them dirty so they repaint. `BoxRenderable` uses this to paint the `focusedBorderColor` whenever the box itself is focusable and any descendant currently owns focus:
+ renderable can also react to focus living inside one of its descendants through `hasFocusedDescendant` flag. When any child has focus, every ancestor's `hasFocusedDescendant` flips to `true` and OpenTUI marks them dirty so they repaint. `BoxRenderable` uses this to paint `focusedBorderColor` whenever box itself is focusable and any descendant currently owns focus:
 
 ```typescript
 const panel = new BoxRenderable(renderer, {
@@ -212,7 +212,7 @@ Available mouse events:
 - `onMouseScroll`
 - `onMouse` (catch-all)
 
-Mouse events bubble up through the tree. Stop propagation with `event.stopPropagation()`.
+Mouse events bubble up through tree. Stop propagation with `event.stopPropagation()`.
 
 ### Keyboard Events
 
@@ -236,7 +236,7 @@ const input = new InputRenderable(renderer, {
 
 ## Visibility
 
-Control visibility with the `visible` property:
+Control visibility with `visible` property:
 
 ```typescript
 // Hide (also removes from layout)
@@ -246,7 +246,7 @@ panel.visible = false
 panel.visible = true
 ```
 
-When `visible` is `false`, Yoga excludes the renderable from layout calculation (equivalent to CSS `display: none`).
+When `visible` is `false`, Yoga excludes renderable from layout calculation (equivalent to CSS `display: none`).
 
 ## Opacity
 
@@ -256,7 +256,7 @@ Set opacity for semi-transparent rendering:
 panel.opacity = 0.5 // 50% transparent
 ```
 
-Opacity affects the renderable and all its children.
+Opacity affects renderable and all its children.
 
 ## Z-Index
 
@@ -272,7 +272,7 @@ const overlay = new BoxRenderable(renderer, {
 
 ## Live Rendering
 
-For animations, extend the Renderable class and override `onUpdate`:
+For animations, extend Renderable class and override `onUpdate`:
 
 ```typescript
 class AnimatedBox extends BoxRenderable {
@@ -290,7 +290,7 @@ const box = new AnimatedBox(renderer, {
 
 ## Translation
 
-Offset a renderable from its layout position (useful for scrolling/animation):
+Offset renderable from its layout position (useful for scrolling/animation):
 
 ```typescript
 // Offset by pixels
@@ -298,11 +298,11 @@ renderable.translateX = 10
 renderable.translateY = -5
 ```
 
-This moves the renderable visually without affecting layout.
+This moves renderable visually without affecting layout.
 
 ## Buffered Rendering
 
-Enable offscreen rendering for complex content and use hooks to draw to the buffer:
+Enable offscreen rendering for complex content and use hooks to draw to buffer:
 
 ```typescript
 import { RGBA } from "@opentui/core"
@@ -347,7 +347,7 @@ class CustomRenderable extends Renderable {
 
 ## Destroying Renderables
 
-Clean up a renderable and remove it from the tree:
+Clean up renderable and remove it from tree:
 
 ```typescript
 // Remove from parent and free resources

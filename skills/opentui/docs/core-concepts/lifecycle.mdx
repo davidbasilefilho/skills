@@ -6,15 +6,15 @@ order: 9
 
 # Lifecycle and cleanup
 
-OpenTUI gives you control over terminal cleanup. Call `renderer.destroy()` when you shut down. It restores the terminal to its original state, and it frees resources.
+OpenTUI gives you control over terminal cleanup. Call `renderer.destroy()` when you shut down. It restores terminal to its original state, and it frees resources.
 
 ## Why you must handle cleanup
 
 OpenTUI does not automatically clean up on `process.exit` or unhandled errors. This design gives you more control over shutdown behavior:
 
-- You may want to handle errors and keep running
-- You may use effect systems, like Effect.ts, with their own shutdown handling
-- You may need custom cleanup order or additional shutdown logic
+- want to handle errors and keep running
+- use effect systems, like Effect.ts, with their own shutdown handling
+- need custom cleanup order or additional shutdown logic
 
 ## Use `renderer.destroy()`
 
@@ -31,7 +31,7 @@ const renderer = await createCliRenderer()
 renderer.destroy()
 ```
 
-For reliable cleanup, keep renderer teardown in the same control flow as your app startup:
+For reliable cleanup, keep renderer teardown in same control flow as your app startup:
 
 ```typescript
 import { createCliRenderer } from "@opentui/core"
@@ -67,7 +67,7 @@ OpenTUI listens for common exit signals and calls `destroy()` when it receives t
 | `SIGPIPE`  | Broken pipe              |
 | `SIGBUS`   | Bus error                |
 
-You can customize which signals trigger cleanup:
+ customize which signals trigger cleanup:
 
 ```typescript
 // Only handle SIGINT and SIGTERM
@@ -83,7 +83,7 @@ const renderer = await createCliRenderer({
 
 ## Ctrl+C behavior
 
-By default, Ctrl+C calls `destroy()`. If you want to handle Ctrl+C yourself, disable the internal handler and remove `SIGINT` from `exitSignals`:
+By default, Ctrl+C calls `destroy()`. If want to handle Ctrl+C yourself, disable internal handler and remove `SIGINT` from `exitSignals`:
 
 ```typescript
 const renderer = await createCliRenderer({
@@ -101,7 +101,7 @@ renderer.keyInput.on("keypress", (key) => {
 
 ## Destroy callback
 
-Run custom logic when the renderer is destroyed:
+Run custom logic when renderer is destroyed:
 
 ```typescript
 const renderer = await createCliRenderer({
@@ -113,18 +113,18 @@ const renderer = await createCliRenderer({
 
 ## What `destroy()` cleans up
 
-The `destroy()` method cleans up these resources:
+ `destroy()` method cleans up these resources:
 
-- Removes the signal and process listeners that OpenTUI adds
+- Removes signal and process listeners that OpenTUI adds
 - Clears timers and render loops
-- Destroys all renderables in the tree
+- Destroys all renderables in tree
 - Restores stdin raw mode
 - Resets terminal state (cursor, alternate screen, etc.)
 - Frees native resources
 
 ## Troubleshooting
 
-If your terminal stays in a broken state after a crash:
+If your terminal stays in broken state after crash:
 
 1. Run `reset` in your terminal to restore it
 2. Add `uncaughtException` and `unhandledRejection` handlers to your app

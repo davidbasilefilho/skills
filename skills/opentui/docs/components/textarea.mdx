@@ -34,7 +34,7 @@ textarea.focus()
 
 ## Submit handling
 
-Bind a submit action and listen for `onSubmit`:
+Bind submit action and listen for `onSubmit`:
 
 ```typescript
 import { TextareaRenderable } from "@opentui/core"
@@ -101,7 +101,7 @@ const textarea = new TextareaRenderable(renderer, {
 
 ## Cursor and selection control
 
-`TextareaRenderable` (and its base `EditBufferRenderable`) exposes a programmatic API. You can move the cursor, edit text, and drive selections from your own keybindings or commands. All selection-aware movement methods accept `{ select: true }` to extend the current selection instead of moving the cursor.
+`TextareaRenderable` (and its base `EditBufferRenderable`) exposes programmatic API. move cursor, edit text, and drive selections from your own keybindings or commands. All selection-aware movement methods accept `{ select: true }` to extend current selection instead of moving cursor.
 
 ### Cursor movement
 
@@ -153,11 +153,11 @@ textarea.undo()
 textarea.redo()
 ```
 
-These methods update the cursor, clear any active global selection, and call `requestRender()` for you.
+These methods update cursor, clear any active global selection, and call `requestRender()` for you.
 
 ## Traits
 
-The `traits` property lets an editor advertise intent to a host UI — which built-in keys it wants to capture, whether it wants the chrome to visually suspend, and a short status label for a footer or status bar. Assigning a new `EditorTraits` object emits the `traits-changed` event when the value differs from the previous one.
+ `traits` property lets editor advertise intent to host UI — which built-in keys it wants to capture, whether it wants chrome to visually suspend, and short status label for footer or status bar. Assigning new `EditorTraits` object emits `traits-changed` event when value differs from previous one.
 
 ```typescript
 import { EditBufferRenderableEvents, type EditorTraits } from "@opentui/core"
@@ -179,4 +179,4 @@ textarea.on(EditBufferRenderableEvents.TRAITS_CHANGED, (traits) => {
 | `suspend` | `boolean`         | Hint to the host to suspend ambient UI (dim borders, hide hints, etc.)          |
 | `status`  | `string`          | Optional short label surfacing editor mode in a status bar                      |
 
-Traits reset to an empty object when you destroy the renderable. Use `isEditBufferRenderable(renderable)` if you need to distinguish editor renderables from plain text renderables in a generic tree.
+Traits reset to empty object when you destroy renderable. Use `isEditBufferRenderable(renderable)` if need to distinguish editor renderables from plain text renderables in generic tree.

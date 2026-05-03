@@ -1,13 +1,13 @@
 ---
 name: impeccable
-description: Use when the user wants to design, redesign, shape, critique, audit, polish, clarify, distill, harden, optimize, adapt, animate, colorize, extract, or otherwise improve a frontend interface. Covers websites, landing pages, dashboards, product UI, app shells, components, forms, settings, onboarding, and empty states. Handles UX review, visual hierarchy, information architecture, cognitive load, accessibility, performance, responsive behavior, theming, anti-patterns, typography, fonts, spacing, layout, alignment, color, motion, micro-interactions, UX copy, error states, edge cases, i18n, and reusable design systems or tokens. Also use for bland designs that need to become bolder or more delightful, loud designs that should become quieter, live browser iteration on UI elements, or ambitious visual effects that should feel technically extraordinary. Not for backend-only or non-UI tasks.
+description: Use when user wants to design, redesign, shape, critique, audit, polish, clarify, distill, harden, optimize, adapt, animate, colorize, extract, or otherwise improve frontend interface. Covers websites, landing pages, dashboards, product UI, app shells, components, forms, settings, onboarding, and empty states. Handles UX review, visual hierarchy, information architecture, cognitive load, accessibility, performance, responsive behavior, theming, anti-patterns, typography, fonts, spacing, layout, alignment, color, motion, micro-interactions, UX copy, error states, edge cases, i18n, and reusable design systems or tokens. Also use for bland designs that need to become bolder or more delightful, loud designs that should become quieter, live browser iteration on UI elements, or ambitious visual effects that should feel technically extraordinary. Not for backend-only or non-UI tasks.
 ---
 
 Designs and iterates production-grade frontend interfaces. Real working code, committed design choices, exceptional craft.
 
 ## Setup (non-optional)
 
-Before any design work or file edits, pass these gates. Skipping them produces generic output that ignores the project.
+Before any design work or file edits, pass these gates. Skipping them produces generic output that ignores project.
 
 | Gate | Required check | If fail |
 |---|---|---|
@@ -24,13 +24,13 @@ Codex-style agents must state this before editing files:
 IMPECCABLE_PREFLIGHT: context=pass product=pass command_reference=pass shape=pass|not_required image_gate=pass|skipped:<reason> mutation=open
 ```
 
-For `$impeccable craft`, `shape=pass` is only valid after a separate user response approving the shape design brief, or when the user provided an already-confirmed brief in the request. Do not mark `shape=pass` after writing PRODUCT.md, summarizing assumptions, or drafting an unconfirmed brief yourself.
+For `$impeccable craft`, `shape=pass` is only valid after separate user response approving shape design brief, or when user provided already-confirmed brief in request. Do not mark `shape=pass` after writing PRODUCT.md, summarizing assumptions, or drafting unconfirmed brief yourself.
 
-Other harnesses should follow the same checklist when they can expose this state.
+Other harnesses should follow same checklist when they can expose this state.
 
 ### 1. Context gathering
 
-Two files, case-insensitive. The loader looks at the project root by default and falls back to `.agents/context/` and `docs/` if the root is clean. Override with `IMPECCABLE_CONTEXT_DIR=path/to/dir` (absolute or relative to cwd).
+Two files, case-insensitive. loader looks at project root by default and falls back to `.agents/context/` and `docs/` if root is clean. Override with `IMPECCABLE_CONTEXT_DIR=path/to/dir` (absolute or relative to cwd).
 
 - **PRODUCT.md** — required. Users, brand, tone, anti-references, strategic principles.
 - **DESIGN.md** — optional, strongly recommended. Colors, typography, elevation, components.
@@ -41,29 +41,29 @@ Load both in one call:
 node .agents/skills/impeccable/scripts/load-context.mjs
 ```
 
-Consume the full JSON output. Never pipe through `head`, `tail`, `grep`, or `jq`. The output's `contextDir` field tells you where the files were resolved from.
+Consume full JSON output. Never pipe through `head`, `tail`, `grep`, or `jq`. output's `contextDir` field tells you where files were resolved from.
 
-If the output is already in this session's conversation history, don't re-run. Exceptions requiring a fresh load: you ran `$impeccable teach` or `$impeccable document` (they rewrite the files), or the user manually edited one.
+If output is already in this session's conversation history, don't re-run. Exceptions requiring fresh load: you ran `$impeccable teach` or `$impeccable document` (they rewrite files), or user manually edited one.
 
 `$impeccable live` already warms context via `live.mjs` — if you've run `live.mjs`, don't also run `load-context.mjs` this session.
 
-If PRODUCT.md is missing, empty, or placeholder (`[TODO]` markers, <200 chars): run `$impeccable teach`, then resume the user's original task with the fresh context. If the original task was `$impeccable craft`, resume into `$impeccable shape` before any implementation work.
+If PRODUCT.md is missing, empty, or placeholder (`[TODO]` markers, <200 chars): run `$impeccable teach`, then resume user's original task with fresh context. If original task was `$impeccable craft`, resume into `$impeccable shape` before any implementation work.
 
 If DESIGN.md is missing: nudge once per session (*"Run `$impeccable document` for more on-brand output"*), then proceed.
 
 ### 2. Register
 
-Every design task is **brand** (marketing, landing, campaign, long-form content, portfolio — design IS the product) or **product** (app UI, admin, dashboard, tool — design SERVES the product).
+Every design task is **brand** (marketing, landing, campaign, long-form content, portfolio — design IS product) or **product** (app UI, admin, dashboard, tool — design SERVES product).
 
-Identify before designing. Priority: (1) cue in the task itself ("landing page" vs "dashboard"); (2) the surface in focus (the page, file, or route being worked on); (3) `register` field in PRODUCT.md. First match wins.
+Identify before designing. Priority: (1) cue in task itself ("landing page" vs "dashboard"); (2) surface in focus ( page, file, or route being worked on); (3) `register` field in PRODUCT.md. First match wins.
 
-If PRODUCT.md lacks the `register` field (legacy), infer it once from its "Users" and "Product Purpose" sections, then cache the inferred value for the session. Suggest the user run `$impeccable teach` to add the field explicitly.
+If PRODUCT.md lacks `register` field (legacy), infer it once from its "Users" and "Product Purpose" sections, then cache inferred value for session. Suggest user run `$impeccable teach` to add field explicitly.
 
-Load the matching reference: [reference/brand.md](reference/brand.md) or [reference/product.md](reference/product.md). The shared design laws below apply to both.
+Load matching reference: [reference/brand.md](reference/brand.md) or [reference/product.md](reference/product.md). shared design laws below apply to both.
 
 ## Shared design laws
 
-Apply to every design, both registers. Match implementation complexity to the aesthetic vision — maximalism needs elaborate code, minimalism needs precision. Interpret creatively. Vary across projects; never converge on the same choices. GPT is capable of extraordinary work — don't hold back.
+Apply to every design, both registers. Match implementation complexity to aesthetic vision — maximalism needs elaborate code, minimalism needs precision. Interpret creatively. Vary across projects; never converge on same choices. GPT is capable of extraordinary work — don't hold back.
 
 ### Color
 
@@ -78,11 +78,11 @@ Apply to every design, both registers. Match implementation complexity to the ae
 
 ### Theme
 
-Dark vs. light is never a default. Not dark "becauseols look cool dark." Not light "to be safe."
+Dark vs. light is never default. Not dark "becauseols look cool dark." Not light "to be safe."
 
-Before choosing, write one sentence of physical scene: who uses this, where, under what ambient light, in what mood. If the sentence doesn't force the answer, it's not concrete enough — add detail until it does.
+Before choosing, write one sentence of physical scene: who uses this, where, under what ambient light, in what mood. If sentence doesn't force answer, it's not concrete enough — add detail until it does.
 
-"Observability dashboard" does not force an answer. "SRE glancing at incident severity on a 27-inch monitor at 2am in a dim room" does. Run the sentence, not the category.
+"Observability dashboard" does not force answer. "SRE glancing at incident severity on 27-inch monitor at 2am in dim room" does. Run sentence, not category.
 
 ### Typography
 
@@ -102,7 +102,7 @@ Before choosing, write one sentence of physical scene: who uses this, where, und
 
 ### Absolute bans
 
-Match-and-refuse. If you're about to write any of these, rewrite the element with different structure.
+Match-and-refuse. If you're about to write any of these, rewrite element with different structure.
 
 - **Side-stripe borders.** `border-left` or `border-right` greater than 1px as colored accent on cards, list items, callouts, or alerts. Never intentional. Rewrite with full borders, background tints, leading numbers/icons, or nothing.
 - **Gradient text.** `background-clip: text` combined with gradient background. Decorative, never meaningful. Use single solid color. Emphasis via weight or size.
@@ -118,9 +118,9 @@ Match-and-refuse. If you're about to write any of these, rewrite the element wit
 
 ### The AI slop test
 
-If someone could look at this interface and say "AI made that" without doubt, it's failed. Cross-register failures are the absolute bans above. Register-specific failures live in each reference.
+If someone could look at this interface and say "AI made that" without doubt, it's failed. Cross-register failures are absolute bans above. Register-specific failures live in each reference.
 
-**Category-reflex check.** Run at two altitudes — the second one catches what the first one misses.
+**Category-reflex check.** Run at two altitudes — second one catches what first one misses.
 
 - **First-order:** if someone could guess theme + palette from category alone — "observability → dark blue", "healthcare → white + teal", "finance → navy + gold", "crypto → neon on black" — it's first training-data reflex. Rework scene sentence and color strategy until answer isn't obvious from domain.
 - **Second-order:** if someone could guess aesthetic family from category-plus-anti-references — "AI workflow tool that's not SaaS-cream → editorial-typographic", "fintech that's not navy-and-gold → terminal-native dark mode" — it's trap one tier deeper. first reflex was avoided; second wasn't. Rework until both answers are not obvious. brand register's [reflex-reject aesthetic lanes](reference/brand.md) list catches currently-saturated families.
@@ -157,20 +157,20 @@ Plus two management commands — `pin <command>` and `unpin <command>`, detailed
 
 ### Routing rules
 
-1. **No argument** — render the table above as the user-facing command menu, grouped by category. Ask what they'd like to do.
-2. **First word matches a command** — load its reference file and follow its instructions. Everything after the command name is the target.
-3. **First word doesn't match** — general design invocation. Apply the setup steps, shared design laws, and the loaded register reference, using the full argument as context.
+1. **No argument** — render table above as user-facing command menu, grouped by category. Ask what they'd like to do.
+2. **First word matches command** — load its reference file and follow its instructions. Everything after command name is target.
+3. **First word doesn't match** — general design invocation. Apply setup steps, shared design laws, and loaded register reference, using full argument as context.
 
 Setup (context gathering, register) is already loaded by then; sub-commands don't re-invoke `$impeccable`.
 
-If the first word is `craft`, setup still runs first, but [reference/craft.md](reference/craft.md) owns the rest of the flow. If setup invokes `teach` as a blocker, finish teach, refresh context, then resume the original command and target.
+If first word is `craft`, setup still runs first, but [reference/craft.md](reference/craft.md) owns rest of flow. If setup invokes `teach` as blocker, finish teach, refresh context, then resume original command and target.
 
 ## Pin / Unpin
 
-**Pin** creates a standalone shortcut so `$<command>` invokes `$impeccable <command>` directly. **Unpin** removes it. The script writes to every harness directory present in the project.
+**Pin** creates standalone shortcut so `$<command>` invokes `$impeccable <command>` directly. **Unpin** removes it. script writes to every harness directory present in project.
 
 ```bash
 node .agents/skills/impeccable/scripts/pin.mjs <pin|unpin> <command>
 ```
 
-Valid `<command>` is any command from the table above. Report the script's result concisely — confirm the new shortcut on success, relay stderr verbatim on error.
+Valid `<command>` is any command from table above. Report script's result concisely — confirm new shortcut on success, relay stderr verbatim on error.

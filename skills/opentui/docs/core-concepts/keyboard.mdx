@@ -3,13 +3,13 @@ title: Keyboard input
 description: Handling keyboard events in OpenTUI
 order: 6
 skill:
-  entry: true
-  intents: [keyboard, input, keybindings, paste, focus]
+ entry: true
+ intents: [keyboard, input, keybindings, paste, focus]
 ---
 
 # Keyboard input
 
-OpenTUI parses terminal input and provides structured key events. The `renderer.keyInput` EventEmitter emits `keypress` events plus raw `paste` events with optional metadata.
+OpenTUI parses terminal input and provides structured key events. `renderer.keyInput` EventEmitter emits `keypress` events plus raw `paste` events with optional metadata.
 
 ## Basic key handling
 
@@ -44,9 +44,9 @@ Each `KeyEvent` contains:
 
 ## Key aliases
 
-OpenTUI normalizes several key names so your keybindings work the same across layouts and input paths. OpenTUI applies aliases after the parser reports a key, before emitting `keypress`.
+OpenTUI normalizes several key names so your keybindings work same across layouts and input paths. OpenTUI applies aliases after parser reports key, before emitting `keypress`.
 
-The default aliases are:
+ default aliases are:
 
 ```ts
 // enter -> return
@@ -60,7 +60,7 @@ The default aliases are:
 // kpdecimal/kpdivide/kpmultiply/kpminus/kpplus/kpequal/kpseparator -> symbols
 ```
 
-Both `key.name === "enter"` and `key.name === "kpenter"` resolve to `"return"` when you match them with `matchesKeyBinding`. Editable components that accept a `keyAliasMap` option (`InputRenderable`, `TextareaRenderable`, `SelectRenderable`, etc.) merge these defaults with your own map:
+Both `key.name === "enter"` and `key.name === "kpenter"` resolve to `"return"` when you match them with `matchesKeyBinding`. Editable components that accept `keyAliasMap` option (`InputRenderable`, `TextareaRenderable`, `SelectRenderable`, etc.) merge these defaults with your own map:
 
 ```typescript
 import { InputRenderable } from "@opentui/core"
@@ -174,7 +174,7 @@ keyHandler.on("paste", (event: PasteEvent) => {
 
 ## Exit on Ctrl+C
 
-Configure the renderer to automatically exit on Ctrl+C:
+Configure renderer to automatically exit on Ctrl+C:
 
 ```typescript
 const renderer = await createCliRenderer({
@@ -197,7 +197,7 @@ renderer.keyInput.on("keypress", (key: KeyEvent) => {
 
 ## Kitty keyboard protocol
 
-OpenTUI opts into the [kitty keyboard protocol](https://sw.kovidgoyal.net/kitty/keyboard-protocol/) when the terminal supports it. The protocol gives more reliable key names and modifier state than legacy input encoding, including release events, disambiguated escape, alt+key sequences, and alternate keys for cross-layout shortcuts. Configure it with the `useKittyKeyboard` option:
+OpenTUI opts into [kitty keyboard protocol](https://sw.kovidgoyal.net/kitty/keyboard-protocol/) when terminal supports it. protocol gives more reliable key names and modifier state than legacy input encoding, including release events, disambiguated escape, alt+key sequences, and alternate keys for cross-layout shortcuts. Configure it with `useKittyKeyboard` option:
 
 ```typescript
 const renderer = await createCliRenderer({
@@ -222,13 +222,13 @@ await createCliRenderer({ useKittyKeyboard: null })
 | `allKeysAsEscapes` | `false` | `REPORT_ALL_KEYS_AS_ESCAPE_CODES` | Encode every key as an escape sequence                                         |
 | `reportText`       | `false` | `REPORT_ASSOCIATED_TEXT`          | Include the text a key press generates                                         |
 
-`events: true` enables the `keyrelease` event on `renderer.keyInput` as well as `eventType` on `KeyEvent`.
+`events: true` enables `keyrelease` event on `renderer.keyInput` as well as `eventType` on `KeyEvent`.
 
-`useKittyKeyboard: {}` applies the defaults (`disambiguate` + `alternateKeys`). Passing `null` disables the protocol entirely.
+`useKittyKeyboard: {}` applies defaults (`disambiguate` + `alternateKeys`). Passing `null` disables protocol entirely.
 
 ## Focus and key routing
 
-Focus components to receive keyboard input. OpenTUI routes events to the focused component:
+Focus components to receive keyboard input. OpenTUI routes events to focused component:
 
 ```typescript
 import { InputRenderable } from "@opentui/core"

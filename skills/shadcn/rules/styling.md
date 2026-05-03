@@ -9,7 +9,7 @@ See [customization.md](../customization.md) for theming, CSS variables, and cust
 - Use `className` for layout only, not to override component styling.
 - Avoid `space-x-*` and `space-y-*`. Use `gap-*`.
 - Use `size-*` when width and height match.
-- Use `truncate` instead of the long overflow combo.
+- Use `truncate` instead of long overflow combo.
 - Do not add manual `dark:` overrides. Use semantic tokens.
 - Use `cn()` for conditional classes.
 - Do not set `z-index` manually on overlay components.

@@ -1,6 +1,6 @@
 ---
 name: optimize
-description: "Diagnoses and fixes UI performance across loading speed, rendering, animations, images, and bundle size. Use when the user mentions slow, laggy, janky, performance, bundle size, load time, or wants a faster, smoother experience."
+description: "Diagnoses and fixes UI performance across loading speed, rendering, animations, images, and bundle size. Use when user mentions slow, laggy, janky, performance, bundle size, load time, or wants faster, smoother experience."
 argument-hint: "[target]"
 user-invocable: true
 ---
@@ -262,4 +262,4 @@ Test that optimizations worked.
 - **No regressions**: Ensure functionality still works
 - **User perception**: Does it feel faster?
 
-Remember: Performance is a feature. Fast experiences feel more responsive, more polished, more professional. Optimize systematically, measure ruthlessly, and prioritize user-perceived performance.
+Remember: Performance is feature. Fast experiences feel more responsive, more polished, more professional. Optimize systematically, measure ruthlessly, and prioritize user-perceived performance.

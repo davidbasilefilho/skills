@@ -1,6 +1,6 @@
 # shadcn MCP Server
 
-The CLI includes an MCP server for registry search, browsing, and install flows.
+ CLI includes MCP server for registry search, browsing, and install flows.
 
 ## Setup
 

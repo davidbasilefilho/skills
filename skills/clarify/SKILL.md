@@ -1,21 +1,21 @@
 ---
 name: clarify
-description: "Improve unclear UX copy, error messages, microcopy, labels, and instructions to make interfaces easier to understand. Use when the user mentions confusing text, unclear labels, bad error messages, hard-to-follow instructions, or wanting better UX writing."
+description: "Improve unclear UX copy, error messages, microcopy, labels, and instructions to make interfaces easier to understand. Use when user mentions confusing text, unclear labels, bad error messages, hard-to-follow instructions, or wanting better UX writing."
 argument-hint: "[target]"
 user-invocable: true
 ---
 
-Identify and improve unclear, confusing, or poorly written interface text to make the product easier to understand and use.
+Identify and improve unclear, confusing, or poorly written interface text to make product easier to understand and use.
 
 ## MANDATORY PREPARATION
 
-Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. gather: audience technical level and users mental state in context.
+Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and Context Gathering Protocol. Follow protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. gather: audience technical level and users mental state in context.
 
 ---
 
 ## Assess Current Copy
 
-Identify what makes the text unclear or ineffective.
+Identify what makes text unclear or ineffective.
 
 ### 1. Find clarity problems
 - **Jargon**: Technical terms users will not understand
@@ -36,14 +36,14 @@ Identify what makes the text unclear or ineffective.
 
 ## Plan Copy Improvements
 
-Create a strategy for clearer communication.
+Create strategy for clearer communication.
 
 - **Primary message**: What is ONE thing users need to know?
 - **Action needed**: What should users do next (if anything)?
 - **Tone**: How should this feel? (Helpful? Apologetic? Encouraging?)
 - **Constraints**: Length limits, brand voice, localization considerations
 
-**IMPORTANT**: Good UX writing is invisible. Users should understand immediately without noticing the words.
+**IMPORTANT**: Good UX writing is invisible. Users should understand immediately without noticing words.
 
 ## Improve Copy Systematically
 
@@ -54,7 +54,7 @@ Refine text across these common areas.
 **Good**: "You do not have permission to view this page. Contact your admin for access."
 
 **Bad**: "Invalid input"
-**Good**: "Email addresses need an @ symbol. Try: name@example.com"
+**Good**: "Email addresses need @ symbol. Try: name@example.com"
 
 **Principles**:
 - Explain what went wrong in plain language
@@ -88,8 +88,8 @@ Refine text across these common areas.
 - Be specific ("Save" is better than "OK")
 
 ### Help Text and Tooltips
-**Bad**: "This is the username field"
-**Good**: "Choose a username. You can change this later in Settings."
+**Bad**: "This is username field"
+**Good**: "Choose username. change this later in Settings."
 
 **Principles**:
 - Add value (do not repeat label)
@@ -102,7 +102,7 @@ Refine text across these common areas.
 **Good**: "No projects yet. Create your first project to get started."
 
 **Principles**:
-- Explain why it is empty (if not obvious)
+- Explain why it's empty (if not obvious)
 - Show next action clearly
 - Make it welcoming, not dead-end
 
@@ -122,7 +122,7 @@ Refine text across these common areas.
 
 **Principles**:
 - Set expectations (how long?)
-- Explain what is happening (when it is not obvious)
+- Explain what is happening (when it's not obvious)
 - Show progress when possible
 - Offer escape hatch if appropriate ("Cancel")
 
@@ -179,4 +179,4 @@ Test that copy improvements work.
 - **Consistency**: Does it match terminology elsewhere?
 - **Tone**: Is it appropriate for situation?
 
-Remember: You are a clarity expert with excellent communication skills. Write like you are explaining to a smart friend who is unfamiliar with the product. Be clear, be helpful, be human.
+Remember: You are clarity expert with excellent communication skills. Write like you are explaining to smart friend who is unfamiliar with product. Be clear, be helpful, be human.

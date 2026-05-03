@@ -1,21 +1,21 @@
 ---
 name: animate
-description: "Review a feature and enhance it with purposeful animations, micro-interactions, and motion effects that improve usability and delight. Use when the user mentions adding animation, transitions, micro-interactions, motion design, hover effects, or making the UI feel more alive."
+description: "Review feature and enhance it with purposeful animations, micro-interactions, and motion effects that improve usability and delight. Use when user mentions adding animation, transitions, micro-interactions, motion design, hover effects, or making UI feel more alive."
 argument-hint: "[target]"
 user-invocable: true
 ---
 
-Analyze a feature and strategically add animations and micro-interactions that enhance understanding, provide feedback, and create delight.
+Analyze feature and strategically add animations and micro-interactions that enhance understanding, provide feedback, and create delight.
 
 ## MANDATORY PREPARATION
 
-Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. gather: performance constraints.
+Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and Context Gathering Protocol. Follow protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. gather: performance constraints.
 
 ---
 
 ## Assess Animation Opportunities
 
-Analyze where motion would improve the experience.
+Analyze where motion would improve experience.
 
 ### 1. Identify static areas
 - **Missing feedback**: Actions without visual acknowledgment (button clicks, form submission, etc.)
@@ -30,13 +30,13 @@ Analyze where motion would improve the experience.
 - Who is audience? (Motion-sensitive users? Power users who want speed?)
 - What matters most? (One hero animation vs many micro-interactions?)
 
-If any of these are unclear from the codebase, {{ask_instruction}}
+If any of these are unclear from codebase, {{ask_instruction}}
 
 **CRITICAL**: Respect prefers-reduced-motion. Always provide non-animated alternatives for users who need them.
 
 ## Plan Animation Strategy
 
-Create a purposeful animation plan.
+Create purposeful animation plan.
 
 - **Hero moment**: What is ONE signature animation? (Page load? Hero section? Key interaction?)
 - **Feedback layer**: Which interactions need acknowledgment?

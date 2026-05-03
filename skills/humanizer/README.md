@@ -1,6 +1,6 @@
 # Humanizer
 
-A skill for Claude Code and OpenCode that removes signs of AI-generated writing from text, making it sound more natural and human.
+ skill for Claude Code and OpenCode that removes signs of AI-generated writing from text, making it sound more natural and human.
 
 ## Installation
 
@@ -13,7 +13,7 @@ mkdir -p ~/.claude/skills
 git clone https://github.com/blader/humanizer.git ~/.claude/skills/humanizer
 ```
 
-Or copy the skill file manually if you already have this repo cloned:
+Or copy skill file manually if you already have this repo cloned:
 
 ```bash
 mkdir -p ~/.claude/skills/humanizer
@@ -29,14 +29,14 @@ mkdir -p ~/.config/opencode/skills
 git clone https://github.com/blader/humanizer.git ~/.config/opencode/skills/humanizer
 ```
 
-Or copy the skill file manually if you already have this repo cloned:
+Or copy skill file manually if you already have this repo cloned:
 
 ```bash
 mkdir -p ~/.config/opencode/skills/humanizer
 cp SKILL.md ~/.config/opencode/skills/humanizer/
 ```
 
-> **Note:** OpenCode also scans `~/.claude/skills/` for compatibility, so a single clone into `~/.claude/skills/humanizer/` works for both tools.
+> **Note:** OpenCode also scans `~/.claude/skills/` for compatibility, so single clone into `~/.claude/skills/humanizer/` works for both tools.
 
 ## Usage
 
@@ -56,7 +56,7 @@ cp SKILL.md ~/.config/opencode/skills/humanizer/
 [paste your text here]
 ```
 
-Or ask the model to humanize text directly in either tool:
+Or ask model to humanize text directly in either tool:
 
 ```
 Please humanize this text: [your text]
@@ -64,7 +64,7 @@ Please humanize this text: [your text]
 
 ### Voice Calibration
 
-To match your personal writing style, provide a sample of your own writing:
+To match your personal writing style, provide sample of your own writing:
 
 ```
 /humanizer
@@ -76,17 +76,17 @@ Now humanize this text:
 [paste AI text to humanize]
 ```
 
-The skill will analyze your sentence rhythm, word choices, and quirks, then apply them to the rewrite instead of producing generic "clean" output.
+ skill will analyze your sentence rhythm, word choices, and quirks, then apply them to rewrite instead of producing generic "clean" output.
 
 ## Overview
 
 Based on [Wikipedia's "Signs of AI writing"](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) guide, maintained by WikiProject AI Cleanup. This comprehensive guide comes from observations of thousands of instances of AI-generated text.
 
-The skill also includes a final "obviously AI generated" audit pass and a second rewrite, to catch lingering AI-isms in the first draft.
+ skill also includes final "obviously AI generated" audit pass and second rewrite, to catch lingering AI-isms in first draft.
 
 ### Key Insight from Wikipedia
 
-> "LLMs use statistical algorithms to guess what should come next. The result tends toward the most statistically likely result that applies to the widest variety of cases."
+> "LLMs use statistical algorithms to guess what should come next. result tends toward most statistically likely result that applies to widest variety of cases."
 
 ## 29 Patterns Detected (with Before/After Examples)
 
@@ -147,30 +147,30 @@ The skill also includes a final "obviously AI generated" audit pass and a second
 ## Full Example
 
 **Before (AI-sounding):**
-> Great question! Here is an essay on this topic. I hope this helps!
+> Great question! Here is essay on this topic. I hope this helps!
 >
-> AI-assisted coding serves as an enduring testament to the transformative potential of large language models, marking a pivotal moment in the evolution of software development. In today's rapidly evolving technological landscape, these groundbreaking tools—nestled at the intersection of research and practice—are reshaping how engineers ideate, iterate, and deliver, underscoring their vital role in modern workflows.
+> AI-assisted coding serves as enduring testament to transformative potential of large language models, marking pivotal moment in evolution of software development. In today's rapidly evolving technological landscape, these groundbreaking tools—nestled at intersection of research and practice—are reshaping how engineers ideate, iterate, and deliver, underscoring their vital role in modern workflows.
 >
-> At its core, the value proposition is clear: streamlining processes, enhancing collaboration, and fostering alignment. It's not about autocomplete; it's about unlocking creativity at scale, ensuring that organizations can remain agile while delivering seamless, intuitive, and powerful experiences to users. The tool serves as a catalyst. The assistant functions as a partner. The system stands as a foundation for innovation.
+> At its core, value proposition is clear: streamlining processes, enhancing collaboration, and fostering alignment. It's not about autocomplete; it's about unlocking creativity at scale, ensuring that organizations can remain agile while delivering seamless, intuitive, and powerful experiences to users. tool serves as catalyst. assistant functions as partner. system stands as foundation for innovation.
 >
-> Industry observers have noted that adoption has accelerated from hobbyist experiments to enterprise-wide rollouts, from solo developers to cross-functional teams. The technology has been featured in The New York Times, Wired, and The Verge., the ability to generate documentation, tests, and refactors showcases how AI can contribute to better outcomes, highlighting the intricate interplay between automation and human judgment.
+> Industry observers have noted that adoption has accelerated from hobbyist experiments to enterprise-wide rollouts, from solo developers to cross-functional teams. technology has been featured in New York Times, Wired, and Verge., ability to generate documentation, tests, and refactors showcases how AI can contribute to better outcomes, highlighting intricate interplay between automation and human judgment.
 >
 > - 💡 **Speed:** Code generation is significantly faster, reducing friction and empowering developers.
 > - 🚀 **Quality:** Output quality has been enhanced through improved training, contributing to higher standards.
 > - ✅ **Adoption:** Usage continues to grow, reflecting broader industry trends.
 >
-> While specific details are limited based on available information, it could potentially be argued that these tools might have some positive effect. Despite challenges typical of emerging technologies—including hallucinations, bias, and accountability—the ecosystem continues to thrive. to fully realize this potential, teams must align with best practices.
+> While specific details are limited based on available information, it could potentially be argued that these tools might have some positive effect. Despite challenges typical of emerging technologies—including hallucinations, bias, and accountability— ecosystem continues to thrive. to fully realize this potential, teams must align with best practices.
 >
-> In conclusion, the future looks bright. Exciting times lie ahead as we continue this journey toward excellence. Let me know if you’d like me to expand on any section!
+> In conclusion, future looks bright. Exciting times lie ahead as we continue this journey toward excellence. Let me know if you’d like me to expand on any section!
 
 **After (Humanized):**
-> AI coding assistants can speed up the boring parts of the job. They're great at boilerplate: config files and the little glue code you don't want to write. They can also help you sketch a test, but you still have to read it.
+> AI coding assistants can speed up boring parts of job. They're great at boilerplate: config files and little glue code you don't want to write. They can also help you sketch test, but you still have to read it.
 >
-> The dangerous part is how confident the suggestions look. I've accepted code that compiled and passed lint, then discovered later it missed the point because I stopped paying attention.
+> dangerous part is how confident suggestions look. I've accepted code that compiled and passed lint, then discovered later it missed point because I stopped paying attention.
 >
 > If you treat it like autocomplete and review every line, it's useful. If you use it to avoid thinking, it will help you ship bugs faster.
 >
-> The only real backstop is tests. Without them, you're mostly judging vibes.
+> only real backstop is tests. Without them, you're mostly judging vibes.
 
 ## References
 

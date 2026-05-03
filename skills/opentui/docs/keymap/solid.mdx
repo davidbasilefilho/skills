@@ -1,6 +1,6 @@
 ---
 title: Solid (OpenTUI)
-description: Solid provider and hooks for a pre-created OpenTUI keymap
+description: Solid provider and hooks for pre-created OpenTUI keymap
 order: 5
 navTitle: Solid (OpenTUI)
 ---
@@ -9,17 +9,17 @@ navTitle: Solid (OpenTUI)
 
 This page covers `@opentui/keymap/solid`.
 
-These bindings are for OpenTUI Solid apps. They consume a pre-created `Keymap<Renderable, KeyEvent>` from `@opentui/keymap/opentui`; they do not wrap the DOM/HTML adapter used in browser Solid apps.
+These bindings are for OpenTUI Solid apps. They consume pre-created `Keymap<Renderable, KeyEvent>` from `@opentui/keymap/opentui`; they do not wrap DOM/HTML adapter used in browser Solid apps.
 
-If you have not read the shared model yet, start with [Keymap overview](/docs/keymap/overview). For keymap construction, see [Keymap hosts](/docs/keymap/hosts).
+If you have not read shared model yet, start with [Keymap overview](/docs/keymap/overview). For keymap construction, see [Keymap hosts](/docs/keymap/hosts).
 
 ## What Solid adds
 
-- `KeymapProvider` - Solid context provider for an existing OpenTUI keymap
-- `useKeymap()` - returns the current OpenTUI keymap from context
-- `useBindings(createLayer)` - registers a keymap layer for the current reactive scope
-- `useKeymapSelector(selector)` - reactively derives any value from the current keymap
-- `reactiveMatcherFromSignal(accessor, predicate?)` - adapts a Solid accessor to `ReactiveMatcher`
+- `KeymapProvider` - Solid context provider for existing OpenTUI keymap
+- `useKeymap()` - returns current OpenTUI keymap from context
+- `useBindings(createLayer)` - registers keymap layer for current reactive scope
+- `useKeymapSelector(selector)` - reactively derives any value from current keymap
+- `reactiveMatcherFromSignal(accessor, predicate?)` - adapts Solid accessor to `ReactiveMatcher`
 
 ## Basic usage
 
@@ -76,9 +76,9 @@ await render(
 
 ## `useBindings`
 
-`useBindings()` registers a full `LayerFields<Renderable, KeyEvent>` object. The returned layer can include `priority`, `enabled`, `bindings`, `commands` and any custom addon fields.
+`useBindings()` registers full `LayerFields<Renderable, KeyEvent>` object. returned layer can include `priority`, `enabled`, `bindings`, `commands` and any custom addon fields.
 
-Solid runs `createLayer()` inside a reactive `createEffect`. Any tracked signals or memos you read inside the factory become dependencies, so the hook will unregister and re-register the layer when those values change. If the factory does not read reactive values, the layer stays stable.
+Solid runs `createLayer()` inside reactive `createEffect`. Any tracked signals or memos you read inside factory become dependencies, so hook will unregister and re-register layer when those values change. If factory does not read reactive values, layer stays stable.
 
 Solid-specific layer shapes:
 
@@ -89,12 +89,12 @@ Solid-specific layer shapes:
 | Local exact-focus layer    | Set `target` accessor and `targetMode: "focus"` |
 
 - When `target` is present and `targetMode` is omitted, `focus-within` is used.
-- If the target accessor returns `undefined`, registration waits until it resolves.
-- Passing a local `targetMode` without `target` throws.
+- If target accessor returns `undefined`, registration waits until it resolves.
+- Passing local `targetMode` without `target` throws.
 
 ## `useKeymapSelector()`
 
-`useKeymapSelector()` is the general derived-read API for Solid. It returns an `Accessor<T>`, so you read the current value by calling it:
+`useKeymapSelector()` is general derived-read API for Solid. It returns `Accessor<T>`, so you read current value by calling it:
 
 ```tsx
 const activeKeys = useKeymapSelector((keymap) => keymap.getActiveKeys({ includeMetadata: true }))
@@ -106,11 +106,11 @@ pendingSequence()
 
 Use it for command palettes, key hint UIs, leader prompts, status bars, or any other derived keymap view.
 
-When the underlying host is destroyed mid-update, `useKeymapSelector()` returns the previous accessor value instead of throwing, so subscribers can render once more before their owner cleans up. The first read still throws if the host is already gone.
+When underlying host is destroyed mid-update, `useKeymapSelector()` returns previous accessor value instead of throwing, so subscribers can render once more before their owner cleans up. first read still throws if host is already gone.
 
 ## `reactiveMatcherFromSignal()`
 
-Use this when an addon field expects a `ReactiveMatcher`, for example the shipped `enabled` field:
+Use this when addon field expects `ReactiveMatcher`, for example shipped `enabled` field:
 
 ```tsx
 useBindings(() => ({

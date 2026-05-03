@@ -6,11 +6,11 @@ order: 4
 
 # Renderables vs Constructs
 
-OpenTUI provides two ways to build your UI: the imperative Renderable API and the declarative Construct API. Both approaches have different tradeoffs.
+OpenTUI provides two ways to build your UI: imperative Renderable API and declarative Construct API. Both approaches have different tradeoffs.
 
 ## Imperative (Renderables)
 
-You create `Renderable` instances with a `RenderContext` and compose them using `add()`. You mutate state and behavior directly on instances through setters and methods.
+You create `Renderable` instances with `RenderContext` and compose them using `add()`. You mutate state and behavior directly on instances through setters and methods.
 
 ```typescript
 import { BoxRenderable, TextRenderable, InputRenderable, createCliRenderer, type RenderContext } from "@opentui/core"
@@ -71,7 +71,7 @@ renderer.root.add(loginForm)
 
 ## Declarative (Constructs)
 
-Builds a lightweight VNode graph using functional constructs. Instances don't exist until you add the node to the tree. VNodes queue method calls and replay them when instantiated.
+Builds lightweight VNode graph using functional constructs. Instances don't exist until you add node to tree. VNodes queue method calls and replay them when instantiated.
 
 ```typescript
 import { Text, Input, Box, createCliRenderer, delegate } from "@opentui/core"
@@ -124,7 +124,7 @@ renderer.root.add(loginForm)
 
 ## The delegate() function
 
-The `delegate()` function makes constructs ergonomic by routing method calls from the parent to specific children:
+ `delegate()` function makes constructs ergonomic by routing method calls from parent to specific children:
 
 ```typescript
 function Button(props: { id: string; label: string; onClick: () => void }) {
@@ -153,8 +153,8 @@ button.focus() // Focuses the inner Box
 
 - You need fine-grained control over component lifecycle
 - You're building low-level custom components
-- You need to access renderable methods immediately
-- Performance is critical and you want to avoid VNode overhead
+- need to access renderable methods immediately
+- Performance is critical and want to avoid VNode overhead
 
 ### Use Constructs when
 
@@ -165,7 +165,7 @@ button.focus() // Focuses the inner Box
 
 ## Mixing both
 
-You can mix both approaches in the same application:
+ mix both approaches in same application:
 
 ```typescript
 import { BoxRenderable, Text, Input } from "@opentui/core"

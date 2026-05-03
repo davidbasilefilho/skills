@@ -1,6 +1,6 @@
 ---
 title: React
-description: React slot components backed by the shared plugin registry
+description: React slot components backed by shared plugin registry
 order: 3
 ---
 
@@ -8,9 +8,9 @@ order: 3
 
 This page shows React integration for plugin slots.
 
-Use slots when you want external modules to contribute `ReactNode` UI in host-defined regions without forking your app. The host keeps ownership of layout and slot typing; plugins only see the context and props you expose.
+Use slots when you want external modules to contribute `ReactNode` UI in host-defined regions without forking your app. host keeps ownership of layout and slot typing; plugins only see context and props you expose.
 
-If you have not read the shared model yet, start with [Plugin Slots](/docs/plugins/slots).
+If you have not read shared model yet, start with [Plugin Slots](/docs/plugins/slots).
 
 ## Runtime-loaded external plugins
 
@@ -20,7 +20,7 @@ If your app loads plugins from disk at runtime (for example `await import(fileUr
 import "@opentui/react/runtime-plugin-support"
 ```
 
-This installs Bun runtime support so external TS/TSX plugin modules resolve against the host runtime instances (`@opentui/react`, React JSX runtime modules, and core runtime modules).
+This installs Bun runtime support so external TS/TSX plugin modules resolve against host runtime instances (`@opentui/react`, React JSX runtime modules, and core runtime modules).
 
 Use this for plugin systems in both normal Bun runs and standalone compiled executables.
 
@@ -31,7 +31,7 @@ const mod = await import(pathToFileURL(pluginPath).href)
 registry.register(mod.loadExternalPlugin())
 ```
 
-If plugins need additional host-resolved modules, configure runtime support before the side-effect import is loaded:
+If plugins need additional host-resolved modules, configure runtime support before side-effect import is loaded:
 
 ```ts
 import { ensureRuntimePluginSupport } from "@opentui/react/runtime-plugin-support/configure"
@@ -43,7 +43,7 @@ ensureRuntimePluginSupport({
 })
 ```
 
-First-party packages expose side-effect-free runtime module maps. For plugins that import `@opentui/three`, install `@opentui/three` in the host app and pass its runtime modules explicitly:
+First-party packages expose side-effect-free runtime module maps. For plugins that import `@opentui/three`, install `@opentui/three` in host app and pass its runtime modules explicitly:
 
 ```ts
 import { runtimeModules as threeRuntimeModules } from "@opentui/three/runtime-modules"
@@ -54,14 +54,14 @@ ensureRuntimePluginSupport({
 })
 ```
 
-The side-effect import and configurable entrypoint install the same runtime plugin. Late additions throw with a clear error instead of being ignored.
+ side-effect import and configurable entrypoint install same runtime plugin. Late additions throw with clear error instead of being ignored.
 
 ## What React adds
 
-- `createReactSlotRegistry(renderer, context, options?)` — create a registry typed for `ReactNode`. Accepts the same [`SlotRegistryOptions`](/docs/plugins/slots#registry-options) as `createSlotRegistry`.
-- `Slot<TSlots, TContext>` — generic slot component that takes `registry` as a required prop
-- `createSlot(registry, options?)` — optional convenience helper that returns a registry-bound `<Slot />` component
-- `ReactPlugin<TSlots, TContext>` — convenience type alias for a plugin that returns `ReactNode`
+- `createReactSlotRegistry(renderer, context, options?)` — create registry typed for `ReactNode`. Accepts same [`SlotRegistryOptions`](/docs/plugins/slots#registry-options) as `createSlotRegistry`.
+- `Slot<TSlots, TContext>` — generic slot component that takes `registry` as required prop
+- `createSlot(registry, options?)` — optional convenience helper that returns registry-bound `<Slot />` component
+- `ReactPlugin<TSlots, TContext>` — convenience type alias for plugin that returns `ReactNode`
 - `@opentui/react/runtime-plugin-support` — one-line runtime support for external plugin/module loading
 - `@opentui/react/runtime-plugin-support/configure` — configurable runtime support without import-time side effects
 
@@ -106,7 +106,7 @@ createRoot(renderer).render(<App />)
 
 ## Optional convenience helper
 
-If you prefer not to pass `registry` each time, you can still bind one once:
+If you prefer not to pass `registry` each time, still bind one once:
 
 ```tsx
 const AppSlot = createSlot(registry)
@@ -139,9 +139,9 @@ const Slot = createSlot(registry, {
 })
 ```
 
-If a plugin throws, the slot renders the placeholder. If no placeholder is provided (or it returns `null`), the slot falls back to `children`.
+If plugin throws, slot renders placeholder. If no placeholder is provided (or it returns `null`), slot falls back to `children`.
 
-Plugins that throw during the initial render call are caught inline. Plugins that throw during a React re-render are caught by an internal error boundary that resets on registry changes.
+Plugins that throw during initial render call are caught inline. Plugins that throw during React re-render are caught by internal error boundary that resets on registry changes.
 
 ## Observability
 

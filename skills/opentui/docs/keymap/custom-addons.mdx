@@ -7,11 +7,11 @@ navTitle: Custom Addons
 
 # Custom keymap addons
 
-An addon is usually a function that accepts a `Keymap`, registers one or more behaviors, and returns a disposer.
+ addon is usually function that accepts `Keymap`, registers one or more behaviors, and returns disposer.
 
-The important constraint is that custom addons should stay on the public surface. The built-in addons are implemented that way too.
+ important constraint is that custom addons should stay on public surface. built-in addons are implemented that way too.
 
-If you want the shipped addon inventory instead, see [Built-in Addons](/docs/keymap/addons).
+If you want shipped addon inventory instead, see [Built-in Addons](/docs/keymap/addons).
 
 ## Addon shape
 
@@ -43,9 +43,9 @@ export function registerModeField<TTarget extends object, TEvent extends KeymapE
 
 Guidelines:
 
-- Return one disposer that tears down everything the addon registered.
-- Clean up in reverse order when the registrations depend on one another.
-- Prefer composing the public registration methods over reaching into internal services.
+- Return one disposer that tears down everything addon registered.
+- Clean up in reverse order when registrations depend on one another.
+- Prefer composing public registration methods over reaching into internal services.
 
 ## Public registration APIs
 
@@ -85,7 +85,7 @@ Guidelines:
 | `acquireResource(symbol, setup)`                                | Share ref-counted setup and teardown across multiple registrations |
 | `on("state" \| "pendingSequence" \| "warning" \| "error", ...)` | Subscribe to derived-state and diagnostic events                   |
 
-Every registration API above returns a disposer.
+Every registration API above returns disposer.
 
 ## Field compilers
 
@@ -100,11 +100,11 @@ Field compilers turn user-supplied layer, binding, or command fields into activa
 Important behavior:
 
 - `require(name, value)` ties activation to `keymap` runtime data.
-- `activeWhen(...)` accepts either a raw callback or a `ReactiveMatcher`.
+- `activeWhen(...)` accepts either raw callback or `ReactiveMatcher`.
 - `attr(name, value)` exposes compiled metadata through query surfaces.
-- Layer fields do not have `attr(...)` because there is no layer-level public attrs surface.
+- Layer fields do not have `attr(...)` because there's no layer-level public attrs surface.
 
-`ReactiveMatcher` is the cache-friendly form:
+`ReactiveMatcher` is cache-friendly form:
 
 ```ts
 interface ReactiveMatcher {
@@ -117,13 +117,13 @@ Raw callback matchers re-run on every read. Reactive matchers stay cached until 
 
 ## Binding pipeline callbacks
 
-String bindings go through an ordered pipeline.
+String bindings go through ordered pipeline.
 
-1. Expanders rewrite the input string.
+1. Expanders rewrite input string.
 2. Parsers turn strings into `KeySequencePart[]`.
 3. Transformers rewrite parsed bindings or add more.
 
-Layer-binding transformers run earlier than that pipeline and only once, when the layer is registered. Use them when an addon needs to replace or filter the whole `BindingInput[]` set before compilation.
+Layer-binding transformers run earlier than that pipeline and only once, when layer is registered. Use them when addon needs to replace or filter whole `BindingInput[]` set before compilation.
 
 Object-form keys such as `{ name: "return", ctrl: true }` skip string parsing and normalize directly.
 
@@ -168,9 +168,9 @@ Return `{ parts, nextIndex }` to claim input, or `undefined` to let later parser
 Ordering rules:
 
 - `prepend*` registrations run before `append*` registrations.
-- `clearBindingExpanders()`, `clearBindingParsers()` and `clearBindingTransformers()` remove the entire stage for that keymap.
+- `clearBindingExpanders()`, `clearBindingParsers()` and `clearBindingTransformers()` remove entire stage for that keymap.
 
-Use the `clear*()` methods only when your addon owns that whole stage. They are global to the keymap, not scoped to your addon.
+Use `clear*()` methods only when your addon owns that whole stage. They are global to keymap, not scoped to your addon.
 
 ## Command, event and disambiguation callbacks
 
@@ -196,9 +196,9 @@ Use the `clear*()` methods only when your addon owns that whole stage. They are 
 | `record`         | Custom `CommandRecord` metadata             |
 | `rejectedResult` | Override the default rejected result        |
 
-Resolver results used for static binding commands and command-view projections may be cached for the lifetime of that active or registered view.
-Programmatic `runCommand()` and `dispatchCommand()` resolve the supplied command string for each call.
-Put per-execution behavior in the returned `run(ctx)` handler.
+Resolver results used for static binding commands and command-view projections may be cached for lifetime of that active or registered view.
+Programmatic `runCommand()` and `dispatchCommand()` resolve supplied command string for each call.
+Put per-execution behavior in returned `run(ctx)` handler.
 
 ### `EventMatchResolver`
 
@@ -206,13 +206,13 @@ Put per-execution behavior in the returned `run(ctx)` handler.
 (event, ctx) => readonly KeyMatch[] | undefined
 ```
 
-`EventMatchResolverContext` exposes `resolveKey(key)`, which lets a resolver map a host event to the same internal match keys the parser uses.
+`EventMatchResolverContext` exposes `resolveKey(key)`, which lets resolver map host event to same internal match keys parser uses.
 
 ### `KeyDisambiguationResolver`
 
-Use this when the same sequence is both an exact command and a prefix, such as `g` and `gg`.
+Use this when same sequence is both exact command and prefix, such as `g` and `gg`.
 
-Register a disambiguation resolver before registering same-layer exact/prefix bindings. Without a resolver, the compiler rejects the ambiguous binding and keeps the valid earlier bindings.
+Register disambiguation resolver before registering same-layer exact/prefix bindings. Without resolver, compiler rejects ambiguous binding and keeps valid earlier bindings.
 
 `KeyDisambiguationContext` exposes:
 
@@ -229,7 +229,7 @@ Register a disambiguation resolver before registering same-layer exact/prefix bi
 | `clear()`                 | Clear the pending sequence                  |
 | `defer(handler)`          | Start cancellable async disambiguation work |
 
-Disambiguation resolvers themselves must return synchronously. If you need async behavior, use `ctx.defer(...)`. The handler receives a `KeyDeferredDisambiguationContext`:
+Disambiguation resolvers themselves must return synchronously. If you need async behavior, use `ctx.defer(...)`. handler receives `KeyDeferredDisambiguationContext`:
 
 | Member               | Purpose                                                                                                   |
 | -------------------- | --------------------------------------------------------------------------------------------------------- |
@@ -241,13 +241,13 @@ Disambiguation resolvers themselves must return synchronously. If you need async
 | `continueSequence()` | Decision: keep the prefix pending                                                                         |
 | `clear()`            | Decision: clear the pending sequence                                                                      |
 
-The handler may return a decision, a `Promise<decision>`, or nothing. Return nothing after `signal` aborts to drop the deferred work without dispatching.
+ handler may return decision, `Promise<decision>`, or nothing. Return nothing after `signal` aborts to drop deferred work without dispatching.
 
-Command handlers are different: they may return a promise, but only a synchronous `false` rejects the current candidate and lets lower-precedence handlers continue.
+Command handlers are different: they may return promise, but only synchronous `false` rejects current candidate and lets lower-precedence handlers continue.
 
 ### `LayerAnalyzer`
 
-Analyzers run while a layer compiles and receive a projected view of the compiled bindings.
+Analyzers run while layer compiles and receive projected view of compiled bindings.
 
 `LayerAnalysisContext` exposes:
 
@@ -260,7 +260,7 @@ Analyzers run while a layer compiles and receive a projected view of the compile
 | `checkCommandResolution(command)`            | Probe whether a string command resolves |
 | `warn(...)` / `warnOnce(...)` / `error(...)` | Emit diagnostics                        |
 
-`clearLayerAnalyzers()` removes all registered analyzers for the keymap.
+`clearLayerAnalyzers()` removes all registered analyzers for keymap.
 
 ## Hooks, intercepts and runtime helpers
 
@@ -299,17 +299,17 @@ Options:
 
 ## Shared resources with `acquireResource()`
 
-`acquireResource(symbol, setup)` is the public way to share setup and teardown across multiple addon registrations on the same keymap.
+`acquireResource(symbol, setup)` is public way to share setup and teardown across multiple addon registrations on same keymap.
 
 Behavior:
 
-- the first acquisition for a symbol runs `setup()`
-- later acquisitions for the same symbol reuse the existing resource
-- the resource disposer runs only when the last holder releases it
-- active resources are disposed when the host is destroyed
-- a failed `setup()` is not retained as a partially registered resource
+- first acquisition for symbol runs `setup()`
+- later acquisitions for same symbol reuse existing resource
+- resource disposer runs only when last holder releases it
+- active resources are disposed when host is destroyed
+- failed `setup()` is not retained as partially registered resource
 
-This is how the OpenTUI textarea helpers safely share command and suspension infrastructure.
+This is how OpenTUI textarea helpers safely share command and suspension infrastructure.
 
 ## Constraints and quirks
 
@@ -325,18 +325,18 @@ This is how the OpenTUI textarea helpers safely share command and suspension inf
 
 - Unknown custom layer and binding fields are ignored and emit warnings.
 - Unknown tokens inside binding strings are ignored and emit warnings.
-- Registering the missing token later recompiles affected layers.
+- Registering missing token later recompiles affected layers.
 
 ### Re-entry
 
 - Runtime/data-style re-entry is supported during dispatch. Commands, intercepts and pending-sequence listeners may read and write runtime data.
-- Structural re-entry is not supported during dispatch. Do not register or unregister layers, parsers, resolvers, tokens or similar environment-shaping state while a dispatch is in flight.
+- Structural re-entry is not supported during dispatch. Do not register or unregister layers, parsers, resolvers, tokens or similar environment-shaping state while dispatch is in flight.
 
 ### Host-dependent behavior
 
-- `intercept("raw", ...)` only works when the host implements `onRawInput()`.
-- Raw hosts must stop raw input propagation when an `onRawInput()` listener returns `true`.
-- After the host is destroyed, host-backed reads such as `getActiveKeys()` are unavailable, but metadata reads such as `getCommands()` and runtime data access remain usable.
+- `intercept("raw", ...)` only works when host implements `onRawInput()`.
+- Raw hosts must stop raw input propagation when `onRawInput()` listener returns `true`.
+- After host is destroyed, host-backed reads such as `getActiveKeys()` are unavailable, but metadata reads such as `getCommands()` and runtime data access remain usable.
 
 ## Reference implementations
 

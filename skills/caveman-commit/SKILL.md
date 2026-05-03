@@ -1,10 +1,10 @@
 ---
 name: caveman-commit
 description: >
-  Ultra-compressed commit message generator. Cuts noise from commit messages while preserving
-  intent and reasoning. Conventional Commits format. Subject ≤50 chars, body only when "why"
-  isn't obvious. Use when user says "write a commit", "commit message", "generate commit",
-  "/commit", or invokes /caveman-commit. Auto-triggers when staging changes.
+ Ultra-compressed commit message generator. Cuts noise from commit messages while preserving
+ intent and reasoning. Conventional Commits format. Subject ≤50 chars, body only when "why"
+ isn't obvious. Use when user says "write commit", "commit message", "generate commit",
+ "/commit", or invokes /caveman-commit. Auto-triggers when staging changes.
 ---
 
 Write commit messages terse and exact. Conventional Commits format. No fluff. Why over what.
@@ -17,7 +17,7 @@ Write commit messages terse and exact. Conventional Commits format. No fluff. Wh
 - Imperative mood: "add", "fix", "remove" — not "added", "adds", "adding"
 - ≤50 chars when possible, hard cap 72
 - No trailing period
-- Match project convention for capitalization after the colon
+- Match project convention for capitalization after colon
 
 **Body (only if needed):**
 - Skip entirely when subject is self-explanatory
@@ -27,16 +27,16 @@ Write commit messages terse and exact. Conventional Commits format. No fluff. Wh
 - Reference issues/PRs at end: `Closes #42`, `Refs #17`
 
 **What NEVER goes in:**
-- "This commit does X", "I", "we", "now", "currently" — the diff says what
+- "This commit does X", "I", "we", "now", "currently" — diff says what
 - "As requested by..." — use Co-authored-by trailer
 - "Generated with Claude Code" or any AI attribution
 - Emoji (unless project convention requires)
-- Restating the file name when scope already says it
+- Restating file name when scope already says it
 
 ## Examples
 
-Diff: new endpoint for user profile with body explaining the why
-- ❌ "feat: add a new endpoint to get user profile information from the database"
+Diff: new endpoint for user profile with body explaining why
+- ❌ "feat: add new endpoint to get user profile information from database"
 - ✅
   ```
   feat(api): add GET /users/:id/profile
@@ -58,8 +58,8 @@ Diff: breaking API change
 
 ## Auto-Clarity
 
-Always include body for: breaking changes, security fixes, data migrations, anything reverting a prior commit. Never compress these into subject-only — future debuggers need the context.
+Always include body for: breaking changes, security fixes, data migrations, anything reverting prior commit. Never compress these into subject-only — future debuggers need context.
 
 ## Boundaries
 
-Only generates the commit message. Does not run `git commit`, does not stage files, does not amend. Output the message as a code block ready to paste. "stop caveman-commit" or "normal mode": revert to verbose commit style.
+Only generates commit message. Does not run `git commit`, does not stage files, does not amend. Output message as code block ready to paste. "stop caveman-commit" or "normal mode": revert to verbose commit style.

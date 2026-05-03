@@ -4,38 +4,38 @@ description: Shared slot registry API used by core, React, and Solid
 order: 1
 navTitle: Overview
 skill:
-  entry: true
-  intents: [plugins, plugin, slots, registry, extensions]
+ entry: true
+ intents: [plugins, plugin, slots, registry, extensions]
 ---
 
 # Plugin slots
 
-Most TUI apps start as one codebase. As features and teams grow, you may want extension points without asking users to fork the app.
+Most TUI apps start as one codebase. As features and teams grow, want extension points without asking users to fork app.
 
-Plugin slots give you that. The host application defines named places in the layout (for example, a status bar, sidebar, or panel), and plugins contribute UI for those places at runtime.
+Plugin slots give you that. host application defines named places in layout (for example, status bar, sidebar, or panel), and plugins contribute UI for those places at runtime.
 
-The host stays in control of layout, rendering mode, and type contracts. Plugins only receive the context and slot props the host intentionally exposes.
+ host stays in control of layout, rendering mode, and type contracts. Plugins only receive context and slot props host intentionally exposes.
 
-This page describes the **shared registry API** that the core, React, and Solid bindings are built on. If you are building an app, start with the page for the binding you use:
+This page describes **shared registry API** that core, React, and Solid bindings are built on. If you are building app, start with page for binding you use:
 
 - [Core slots](/docs/plugins/core) — framework-free, `BaseRenderable` nodes
 - [React slots](/docs/plugins/react) — `ReactNode`
 - [Solid slots](/docs/plugins/solid) — `JSX.Element`
 
-If you load plugin modules from disk at runtime, see the runtime support notes on the [React slots page](/docs/plugins/react#runtime-loaded-external-plugins) and [Solid slots page](/docs/plugins/solid#runtime-loaded-external-plugins). For custom hosts, use `@opentui/core/runtime-plugin-support` or `createRuntimePlugin` from `@opentui/core/runtime-plugin`.
+If you load plugin modules from disk at runtime, see runtime support notes on [React slots page](/docs/plugins/react#runtime-loaded-external-plugins) and [Solid slots page](/docs/plugins/solid#runtime-loaded-external-plugins). For custom hosts, use `@opentui/core/runtime-plugin-support` or `createRuntimePlugin` from `@opentui/core/runtime-plugin`.
 
-Read on if you need to understand the underlying model, want to build a custom binding for another framework, or need direct access to the registry API.
+Read on if need to understand underlying model, want to build custom binding for another framework, or need direct access to registry API.
 
 ## Concepts
 
 - **Host**: defines slot names and slot prop types.
 - **Plugin**: contributes one or more slot renderer callbacks. May include lifecycle hooks.
-- **Registry**: registers plugins and resolves contributions for a slot.
+- **Registry**: registers plugins and resolves contributions for slot.
 - **Slot mode**: controls how plugin output and fallback UI combine (`append`, `replace`, or `single_winner`).
 
 ## Define slots and host context
 
-Slot names map to the props each slot receives. The host context is a shared object passed to every plugin renderer.
+Slot names map to props each slot receives. host context is shared object passed to every plugin renderer.
 
 ```typescript
 import type { PluginContext } from "@opentui/core"
@@ -51,7 +51,7 @@ interface AppContext extends PluginContext {
 }
 ```
 
-The context can be any object. `PluginContext` is a type alias for `object` — extending it is not required but gives your plugins a named type to reference.
+ context can be any object. `PluginContext` is type alias for `object` — extending it's not required but gives your plugins named type to reference.
 
 ## Create a registry
 
@@ -68,11 +68,11 @@ const context = { appName: "my-app", version: "1.0.0" }
 const registry = createSlotRegistry<string, AppSlots, typeof context>(renderer, "my-app:plugins", context)
 ```
 
-The first type parameter (`TNode`) is the node type your framework returns — `BaseRenderable` for core, `ReactNode` for React, `JSX.Element` for Solid. The framework-specific helpers fill this in for you.
+ first type parameter (`TNode`) is node type your framework returns — `BaseRenderable` for core, `ReactNode` for React, `JSX.Element` for Solid. framework-specific helpers fill this in for you.
 
-`createSlotRegistry` is renderer-scoped. For a given `(renderer, key)` pair, you always get the same registry instance. The `key` parameter namespaces registries within a renderer so multiple independent registries can coexist.
+`createSlotRegistry` is renderer-scoped. For given `(renderer, key)` pair, you always get same registry instance. `key` parameter namespaces registries within renderer so multiple independent registries can coexist.
 
-Calling `createSlotRegistry` again with the same `(renderer, key)` pair returns the existing registry and applies the new `options` via `configure()`. The `context` argument **must** be the same object reference — passing a different context object throws an error. This means you should create the context object once and reuse it:
+Calling `createSlotRegistry` again with same `(renderer, key)` pair returns existing registry and applies new `options` via `configure()`. `context` argument **must** be same object reference — passing different context object throws error. This means create context object once and reuse it:
 
 ```typescript
 // correct — same object reference
@@ -84,13 +84,13 @@ const reg2 = createSlotRegistry(renderer, "my-key", context) // returns reg1
 const reg3 = createSlotRegistry(renderer, "my-key", { appName: "my-app" })
 ```
 
-When the renderer is destroyed, all registries scoped to it are automatically cleared and disposed.
+When renderer is destroyed, all registries scoped to it are automatically cleared and disposed.
 
-The framework-specific helpers (`createCoreSlotRegistry`, `createReactSlotRegistry`, `createSolidSlotRegistry`) call `createSlotRegistry` internally with a fixed key. Use `createSlotRegistry` directly only if you need multiple independent registries per renderer.
+ framework-specific helpers (`createCoreSlotRegistry`, `createReactSlotRegistry`, `createSolidSlotRegistry`) call `createSlotRegistry` internally with fixed key. Use `createSlotRegistry` directly only if you need multiple independent registries per renderer.
 
 ### Registry options
 
-All `create*SlotRegistry` functions accept an optional `SlotRegistryOptions` object:
+All `create*SlotRegistry` functions accept optional `SlotRegistryOptions` object:
 
 | Option              | Type                                | Default | Description                                                 |
 | ------------------- | ----------------------------------- | ------- | ----------------------------------------------------------- |
@@ -121,7 +121,7 @@ const unregister = registry.register({
 unregister()
 ```
 
-`register()` returns an unregister function. Calling it removes the plugin and invokes its `dispose` hook.
+`register()` returns unregister function. Calling it removes plugin and invokes its `dispose` hook.
 
 ### Plugin interface
 
@@ -133,7 +133,7 @@ unregister()
 | `dispose` | `() => void`                            | no       | Called when the plugin is unregistered or the registry is cleared.               |
 | `slots`   | `{ [slotName]: (ctx, props) => TNode }` | yes      | Slot renderer callbacks. Each receives the host context and slot-specific props. |
 
-The core binding extends this with [managed slot objects](/docs/plugins/core#managed-slot-contributions) that add lifecycle hooks.
+ core binding extends this with [managed slot objects](/docs/plugins/core#managed-slot-contributions) that add lifecycle hooks.
 
 ### Ordering
 
@@ -145,7 +145,7 @@ Plugins are resolved in this order:
 
 ## Slot modes
 
-Every slot mount or `<Slot>` component accepts a `mode`. The mode controls how plugin output and fallback UI combine.
+Every slot mount or `<Slot>` component accepts `mode`. mode controls how plugin output and fallback UI combine.
 
 | Mode            | Behavior                                                                   |
 | --------------- | -------------------------------------------------------------------------- |
@@ -163,9 +163,9 @@ const slotRenderers = registry.resolve("statusbar")
 // Array<(ctx, props) => TNode>
 ```
 
-`renderer` here means the plugin's **slot renderer callback**, not the `CliRenderer` instance.
+`renderer` here means plugin's **slot renderer callback**, not `CliRenderer` instance.
 
-Use `resolveEntries` when you need plugin ids alongside the callbacks. Use `resolve` when you only need the callbacks.
+Use `resolveEntries` when you need plugin ids alongside callbacks. Use `resolve` when you only need callbacks.
 
 ## Registry methods
 
@@ -196,7 +196,7 @@ registry.onPluginError((event) => {
 })
 ```
 
-You can also read and clear buffered errors:
+ also read and clear buffered errors:
 
 ```typescript
 const history = registry.getPluginErrors()
@@ -205,7 +205,7 @@ registry.clearPluginErrors()
 
 ### PluginErrorReport
 
-The `reportPluginError` method accepts a `PluginErrorReport`:
+ `reportPluginError` method accepts `PluginErrorReport`:
 
 | Field      | Type                  | Required | Description                                                  |
 | ---------- | --------------------- | -------- | ------------------------------------------------------------ |
@@ -228,7 +228,7 @@ The `reportPluginError` method accepts a `PluginErrorReport`:
 
 ## Next: concrete host APIs
 
-Use the shared model above with one of these host integrations:
+Use shared model above with one of these host integrations:
 
 - [Core slots](/docs/plugins/core) — framework-free, returns `BaseRenderable` nodes
 - [React slots](/docs/plugins/react) — returns `ReactNode`

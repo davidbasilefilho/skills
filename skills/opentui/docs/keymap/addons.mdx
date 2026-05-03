@@ -7,11 +7,11 @@ navTitle: Built-in Addons
 
 # Built-in keymap addons
 
-`@opentui/keymap` keeps the engine bare. The built-in addon packages install parser stages, field compilers, diagnostics, disambiguation and host-specific helpers on top of the public registration APIs.
+`@opentui/keymap` keeps engine bare. built-in addon packages install parser stages, field compilers, diagnostics, disambiguation and host-specific helpers on top of public registration APIs.
 
-If you want to build your own addon, see [Custom Addons](/docs/keymap/custom-addons).
+If want to build your own addon, see [Custom Addons](/docs/keymap/custom-addons).
 
-Every addon returns a disposer.
+Every addon returns disposer.
 
 ```ts
 import * as addons from "@opentui/keymap/addons"
@@ -30,7 +30,7 @@ import * as opentuiAddons from "@opentui/keymap/addons/opentui"
 | `registerDefaultEventMatchResolver()` | Appends `defaultEventMatchResolver`                   |
 | `registerDefaultKeys()`               | Installs both default stages together                 |
 
-The shared default parser accepts single-stroke named keys, modifier chords, literal punctuation, `" "` for space, `"+"` as a literal plus key and `<token>` segments. It parses concatenated multi-stroke sequences such as `dd` or `<leader>s`.
+ shared default parser accepts single-stroke named keys, modifier chords, literal punctuation, `" "` for space, `"+"` as literal plus key and `<token>` segments. It parses concatenated multi-stroke sequences such as `dd` or `<leader>s`.
 
 Recognized modifier prefixes (case-insensitive, joined with `+`):
 
@@ -51,11 +51,11 @@ Recognized modifier prefixes (case-insensitive, joined with `+`):
 | `registerMetadataFields()`   | Binding `desc` / `group` and command `desc` / `title` / `category` attrs           |
 | `registerAliasesField()`     | Layer-local `aliases` field for remapping single-key binding names                 |
 
-`registerBindingOverrides()` expects `bindingOverrides` to already be a `BindingInput[]` array. It rewrites that layer's binding array once at registration time. Matching string commands are replaced by the override binding and unmatched bindings stay in place.
+`registerBindingOverrides()` expects `bindingOverrides` to already be `BindingInput[]` array. It rewrites that layer's binding array once at registration time. Matching string commands are replaced by override binding and unmatched bindings stay in place.
 
 `registerEnabledFields()` accepts `boolean`, `() => boolean`, or `ReactiveMatcher` values. It applies to layers and commands, not bindings.
 
-`registerAliasesField()` adds bindings instead of replacing the originals and aliases stay local to the layer that declared them.
+`registerAliasesField()` adds bindings instead of replacing originals and aliases stay local to layer that declared them.
 
 ### Syntax and sequence addons
 
@@ -90,7 +90,7 @@ Register disambiguation addons before registering same-layer exact/prefix bindin
 
 ## Ex commands
 
-`registerExCommands()` installs a command layer plus a command resolver for `:name ...args` strings.
+`registerExCommands()` installs command layer plus command resolver for `:name ...args` strings.
 
 ```ts
 import { registerExCommands } from "@opentui/keymap/addons"
@@ -122,15 +122,15 @@ registerExCommands(keymap, [
 - Registered ex commands default `namespace` to `excommands`.
 - Aliases produce additional registered commands, for example `:write` and `:w`.
 - Extra fields are preserved on `getCommands()` / `getCommandEntries()` results and compiled through command-field addons.
-- `runCommand(":write file.txt")` and `dispatchCommand(":write file.txt")` both go through the installed resolver.
+- `runCommand(":write file.txt")` and `dispatchCommand(":write file.txt")` both go through installed resolver.
 
 ## OpenTUI addons
 
-`@opentui/keymap/addons/opentui` re-exports every universal addon and adds the OpenTUI-specific helpers below.
+`@opentui/keymap/addons/opentui` re-exports every universal addon and adds OpenTUI-specific helpers below.
 
 ### `registerBaseLayoutFallback()`
 
-Adds an event match resolver that falls back to `KeyEvent.baseCode` so bindings can ignore active keyboard layout changes when Kitty base-layout reporting is available. Direct stroke matches still win ahead of the fallback.
+Adds event match resolver that falls back to `KeyEvent.baseCode` so bindings can ignore active keyboard layout changes when Kitty base-layout reporting is available. Direct stroke matches still win ahead of fallback.
 
 ### Edit buffer helpers
 
@@ -141,7 +141,7 @@ Adds an event match resolver that falls back to `KeyEvent.baseCode` so bindings 
 | `registerTextareaMappingSuspension()` | Suspends focused `TextareaRenderable` mapped shortcuts while keeping plain typing intact |
 | `registerManagedTextareaLayer()`      | High-level textarea integration: commands, suspension, default bindings and overrides    |
 
-`registerManagedTextareaLayer()` accepts a global `Layer` shape plus optional `bindings`, but it intentionally excludes `target` and `targetMode`. The helper is global and follows `renderer.currentFocusedEditor`.
+`registerManagedTextareaLayer()` accepts global `Layer` shape plus optional `bindings`, but it intentionally excludes `target` and `targetMode`. helper is global and follows `renderer.currentFocusedEditor`.
 
 `EditBufferCommandOptions`:
 
@@ -193,6 +193,6 @@ Adds an event match resolver that falls back to `KeyEvent.baseCode` so bindings 
 | `select-all`              | `input.select.all`              | Select all                  |
 | `submit`                  | `input.submit`                  | Submit                      |
 
-The generated textarea bindings come from the shared `defaultTextareaKeyBindings` in `@opentui/core`. `createTextareaBindings()` prepends overrides before those defaults so custom bindings win by order.
+ generated textarea bindings come from shared `defaultTextareaKeyBindings` in `@opentui/core`. `createTextareaBindings()` prepends overrides before those defaults so custom bindings win by order.
 
-See [Custom Addons](/docs/keymap/custom-addons) for the public addon-authoring APIs, lifecycle rules, callback contexts and extension-point quirks.
+See [Custom Addons](/docs/keymap/custom-addons) for public addon-authoring APIs, lifecycle rules, callback contexts and extension-point quirks.

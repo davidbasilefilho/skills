@@ -1,23 +1,23 @@
 ---
 name: audit
-description: "Run technical quality checks across accessibility, performance, theming, responsive design, and anti-patterns. Generates a scored report with P0-P3 severity ratings and actionable plan. Use when the user wants an accessibility check, performance audit, or technical quality review."
+description: "Run technical quality checks across accessibility, performance, theming, responsive design, and anti-patterns. Generates scored report with P0-P3 severity ratings and actionable plan. Use when user wants accessibility check, performance audit, or technical quality review."
 argument-hint: "[area (feature, page, component...)]"
 user-invocable: true
 ---
 
 ## MANDATORY PREPARATION
 
-Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first.
+Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and Context Gathering Protocol. Follow protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first.
 
 ---
 
-Run systematic technical quality checks and generate a comprehensive report. Do not fix issues. Document them for other commands to address.
+Run systematic technical quality checks and generate comprehensive report. Do not fix issues. Document them for other commands to address.
 
-This is a code-level audit, not a design critique. Check what is measurable and verifiable in the implementation.
+This is code-level audit, not design critique. Check what is measurable and verifiable in implementation.
 
 ## Diagnostic Scan
 
-Run comprehensive checks across 5 dimensions. Score each dimension 0-4 using the criteria below.
+Run comprehensive checks across 5 dimensions. Score each dimension 0-4 using criteria below.
 
 ### 1. Accessibility (A11y)
 
@@ -29,7 +29,7 @@ Run comprehensive checks across 5 dimensions. Score each dimension 0-4 using the
 - **Alt text**: Missing or poor image descriptions
 - **Form issues**: Inputs without labels, poor error messaging, missing required indicators
 
-**Score 0-4**: 0=Inaccessible (fails WCAG A), 1=Major gaps (few ARIA labels, no keyboard nav), 2=Partial (some a11y effort, significant gaps), 3=Good (WCAG AA mostly met, minor gaps), 4=Excellent (WCAG AA fully met, approaches AAA)
+**Score 0-4**: 0=Inaccessible (fails WCAG ), 1=Major gaps (few ARIA labels, no keyboard nav), 2=Partial (some a11y effort, significant gaps), 3=Good (WCAG AA mostly met, minor gaps), 4=Excellent (WCAG AA fully met, approaches AAA)
 
 ### 2. Performance
 
@@ -65,7 +65,7 @@ Run comprehensive checks across 5 dimensions. Score each dimension 0-4 using the
 
 ### 5. Anti-Patterns (CRITICAL)
 
-Check against ALL the DO NOT guidelines in the frontend-design skill. Look for AI slop tells (AI color palette, gradient text, glassmorphism, hero metrics, card grids, generic fonts) and general design anti-patterns (gray on color, nested cards, bounce easing, redundant copy).
+Check against ALL DO NOT guidelines in frontend-design skill. Look for AI slop tells (AI color palette, gradient text, glassmorphism, hero metrics, card grids, generic fonts) and general design anti-patterns (gray on color, nested cards, bounce easing, redundant copy).
 
 **Score 0-4**: 0=AI slop gallery (5+ tells), 1=Heavy AI aesthetic (3-4 tells), 2=Some tells (1-2 noticeable), 3=Mostly clean (subtle issues only), 4=No AI tells (distinctive, intentional design)
 
@@ -88,7 +88,7 @@ Check against ALL the DO NOT guidelines in the frontend-design skill. Look for A
 **Start here.** Pass or fail: Does this look AI-generated? List specific tells. Be brutally honest.
 
 ### Executive Summary
-- Audit Health Score: ??/20 (rating band)
+- Audit Health Score:??/20 (rating band)
 - Total issues found (count by severity: P0/P1/P2/P3)
 - Top 3-5 critical issues
 - Recommended next steps
@@ -127,11 +127,11 @@ List recommended commands in priority order (P0 first, then P1, then P2):
 1. **[P?] `{{command_prefix}}command-name`**: Brief description (specific context from audit findings)
 2. **[P?] `{{command_prefix}}command-name`**: Brief description (specific context)
 
-**Rules**: Only recommend commands from: {{available_commands}}. Map findings to the most appropriate command. End with {{command_prefix}}polish as the final step if any fixes were recommended.
+**Rules**: Only recommend commands from: {{available_commands}}. Map findings to most appropriate command. End with {{command_prefix}}polish as final step if any fixes were recommended.
 
-After presenting the summary, tell the user:
+After presenting summary, tell user:
 
-> You can ask me to run these one at a time, all at once, or in any order you prefer.
+> ask me to run these one at time, all at once, or in any order you prefer.
 >
 > Re-run {{command_prefix}}audit after fixes to see your score improve.
 
@@ -144,4 +144,4 @@ After presenting the summary, tell the user:
 - Forget to prioritize (everything cannot be P0)
 - Report false positives without verification
 
-Remember: You are a technical quality auditor. Document systematically, prioritize ruthlessly, cite specific code locations, and provide clear paths to improvement.
+Remember: You are technical quality auditor. Document systematically, prioritize ruthlessly, cite specific code locations, and provide clear paths to improvement.

@@ -2,8 +2,8 @@
 
 Configuration comes from `components.json`.
 
-> **IMPORTANT:** Run commands with the project's package runner: `npx shadcn@latest`, `pnpm dlx shadcn@latest`, or `bunx --bun shadcn@latest`. Use the runner that matches `packageManager`. Examples use `npx shadcn@latest`.
-> **IMPORTANT:** Only use documented flags. Do not invent flags. The CLI auto-detects package manager from the lockfile, so there is no `--package-manager` flag.
+> **IMPORTANT:** Run commands with project's package runner: `npx shadcn@latest`, `pnpm dlx shadcn@latest`, or `bunx --bun shadcn@latest`. Use runner that matches `packageManager`. Examples use `npx shadcn@latest`.
+> **IMPORTANT:** Only use documented flags. Do not invent flags. CLI auto-detects package manager from lockfile, so there's no `--package-manager` flag.
 
 ## Commands
 
@@ -13,7 +13,7 @@ Configuration comes from `components.json`.
 npx shadcn@latest init [components...] [options]
 ```
 
-Creates or initializes a shadcn/ui project. Can install components at the same time.
+Creates or initializes shadcn/ui project. Can install components at same time.
 
 | Flag | Short | Description | Default |
 | --- | --- | --- | --- |
@@ -38,7 +38,7 @@ Creates or initializes a shadcn/ui project. Can install components at the same t
 npx shadcn@latest apply [preset] [options]
 ```
 
-Applies a preset to an existing project and overwrites preset-driven config, fonts, CSS variables, and detected UI components.
+Applies preset to existing project and overwrites preset-driven config, fonts, CSS variables, and detected UI components.
 
 | Flag | Short | Description | Default |
 | --- | --- | --- | --- |
@@ -47,7 +47,7 @@ Applies a preset to an existing project and overwrites preset-driven config, fon
 | `--cwd <cwd>` | `-c` | Working directory | current |
 | `--silent` | `-s` | Mute output | `false` |
 
-`[preset]` is shorthand for `--preset <preset>`. If both exist, they must match. If no preset is given, the CLI opens the custom preset builder on `ui.shadcn.com/create`.
+`[preset]` is shorthand for `--preset <preset>`. If both exist, they must match. If no preset is given, CLI opens custom preset builder on `ui.shadcn.com/create`.
 
 ### `add` - Add components
 
@@ -112,7 +112,7 @@ Example:
 npx shadcn@latest docs input button
 ```
 
-Some components also include an `api` link for the underlying library.
+Some components also include `api` link for underlying library.
 
 ### `diff` - Check for updates
 
@@ -190,7 +190,7 @@ Builds `registry.json` into distributable JSON files. Default input `./registry.
 | `astro` | Astro | Yes |
 | `laravel` | Laravel | No |
 
-All templates support monorepo scaffolding via `--monorepo`. If neither `--monorepo` nor `--no-monorepo` is passed, the CLI prompts. Laravel does not support monorepo scaffolding.
+All templates support monorepo scaffolding via `--monorepo`. If neither `--monorepo` nor `--no-monorepo` is passed, CLI prompts. Laravel does not support monorepo scaffolding.
 
 ## Presets
 
@@ -200,8 +200,8 @@ Three preset forms:
 2. Code: `--preset a2r6bw`
 3. URL: `--preset "https://ui.shadcn.com/init?base=radix&style=nova&..."`
 
-> **IMPORTANT:** Preset codes are opaque. Do not decode, fetch, or resolve them manually. Pass them to `init --preset <code>` and let the CLI handle resolution.
-> Use `apply --preset <code>` when overwriting an existing preset.
+> **IMPORTANT:** Preset codes are opaque. Do not decode, fetch, or resolve them manually. Pass them to `init --preset <code>` and let CLI handle resolution.
+> Use `apply --preset <code>` when overwriting existing preset.
 
 ## Switching Presets
 
@@ -211,4 +211,4 @@ Ask first: **overwrite**, **merge**, or **skip** existing components?
 - **Merge** → `npx shadcn@latest init --preset <code> --force --no-reinstall`, then run `npx shadcn@latest info` and smart merge each component one by one.
 - **Skip** → `npx shadcn@latest init --preset <code> --force --no-reinstall`.
 
-Always run preset commands in the user's project directory. `apply` only works in an existing project with `components.json`. The CLI preserves the current base from `components.json`. If using a scratch dir, pass `--base <current-base>` explicitly because preset codes do not encode base.
+Always run preset commands in user's project directory. `apply` only works in existing project with `components.json`. CLI preserves current base from `components.json`. If using scratch dir, pass `--base <current-base>` explicitly because preset codes do not encode base.

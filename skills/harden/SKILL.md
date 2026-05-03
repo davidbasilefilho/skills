@@ -1,6 +1,6 @@
 ---
 name: harden
-description: "Improve interface resilience through better error handling, i18n support, text overflow handling, and edge case management. Makes interfaces robust and production-ready. Use when the user asks to harden, make production-ready, handle edge cases, add error states, or fix overflow and i18n issues."
+description: "Improve interface resilience through better error handling, i18n support, text overflow handling, and edge case management. Makes interfaces robust and production-ready. Use when user asks to harden, make production-ready, handle edge cases, add error states, or fix overflow and i18n issues."
 argument-hint: "[target]"
 user-invocable: true
 ---
@@ -325,7 +325,7 @@ const throttledScroll = throttle(handleScroll, 100);
 - Visual regression tests
 - Accessibility tests (axe, WAVE)
 
-**IMPORTANT**: Hardening is about expecting the unexpected. Real users will do things you never imagined.
+**IMPORTANT**: Hardening is about expecting unexpected. Real users will do things you never imagined.
 
 **NEVER**:
 - Assume perfect input (validate everything)

@@ -1,6 +1,6 @@
 ---
 name: arrange
-description: "Improve layout, spacing, and visual rhythm. Fixes monotonous grids, inconsistent spacing, and weak visual hierarchy. Use when the user mentions layout feeling off, spacing issues, visual hierarchy, crowded UI, alignment problems, or wanting better composition."
+description: "Improve layout, spacing, and visual rhythm. Fixes monotonous grids, inconsistent spacing, and weak visual hierarchy. Use when user mentions layout feeling off, spacing issues, visual hierarchy, crowded UI, alignment problems, or wanting better composition."
 argument-hint: "[target]"
 user-invocable: true
 ---
@@ -9,13 +9,13 @@ Assess and improve layout and spacing that feels monotonous, crowded, or structu
 
 ## MANDATORY PREPARATION
 
-Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first.
+Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and Context Gathering Protocol. Follow protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first.
 
 ---
 
 ## Assess Current Layout
 
-Analyze what is weak about the current spatial design.
+Analyze what is weak about current spatial design.
 
 ### 1. Spacing
 - Is spacing consistent or arbitrary? (Random padding or margin values)
@@ -42,13 +42,13 @@ Analyze what is weak about the current spatial design.
 - Is layout too sparse? (Excessive whitespace without purpose)
 - Does density match content type? (Data-dense UIs need tighter spacing; marketing pages need more air)
 
-**CRITICAL**: Layout problems are often the root cause of interfaces feeling "off" even when colors and fonts are fine. Space is a design material. Use it with intention.
+**CRITICAL**: Layout problems are often root cause of interfaces feeling "off" even when colors and fonts are fine. Space is design material. Use it with intention.
 
 ## Plan Layout Improvements
 
-Consult the [spatial design reference](reference/spatial-design.md) from the frontend-design skill for detailed guidance on grids, rhythm, and container queries.
+Consult [spatial design reference](reference/spatial-design.md) from frontend-design skill for detailed guidance on grids, rhythm, and container queries.
 
-Create a systematic plan.
+Create systematic plan.
 
 - **Spacing system**: Use consistent scale. Whether that is framework built-in scale (e.g., Tailwind), rem-based tokens, or custom system. specific values matter less than consistency.
 - **Hierarchy strategy**: How will space communicate importance?
@@ -121,4 +121,4 @@ Create a systematic plan.
 - **Consistency**: Is spacing system applied uniformly?
 - **Responsiveness**: Does layout adapt gracefully across screen sizes?
 
-Remember: Space is the most underused design tool. A layout with the right rhythm and hierarchy can make even simple content feel polished and intentional.
+Remember: Space is most underused design tool. layout with right rhythm and hierarchy can make even simple content feel polished and intentional.

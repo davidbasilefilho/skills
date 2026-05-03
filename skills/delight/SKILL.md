@@ -1,6 +1,6 @@
 ---
 name: delight
-description: "Add moments of joy, personality, and unexpected touches that make interfaces memorable and enjoyable to use. Elevates functional to delightful. Use when the user asks to add polish, personality, animations, micro-interactions, delight, or make an interface feel fun or memorable."
+description: "Add moments of joy, personality, and unexpected touches that make interfaces memorable and enjoyable to use. Elevates functional to delightful. Use when user asks to add polish, personality, animations, micro-interactions, delight, or make interface feel fun or memorable."
 argument-hint: "[target]"
 user-invocable: true
 ---
@@ -9,13 +9,13 @@ Identify opportunities to add moments of joy, personality, and unexpected polish
 
 ## MANDATORY PREPARATION
 
-Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. gather: what is appropriate for the domain (playful vs professional vs quirky vs elegant).
+Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and Context Gathering Protocol. Follow protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first. gather: what is appropriate for domain (playful vs professional vs quirky vs elegant).
 
 ---
 
 ## Assess Delight Opportunities
 
-Identify where delight would enhance (not distract from) the experience.
+Identify where delight would enhance (not distract from) experience.
 
 ### 1. Find natural delight moments
 - **Success states**: Completed actions (save, send, publish)
@@ -38,9 +38,9 @@ Identify where delight would enhance (not distract from) the experience.
 - **Helpful surprises**: Anticipating needs before users ask (productivity tools)
 - **Sensory richness**: Satisfying sounds, smooth animations (creative tools)
 
-If any of these are unclear from the codebase, {{ask_instruction}}
+If any of these are unclear from codebase, {{ask_instruction}}
 
-**CRITICAL**: Delight should enhance usability, never obscure it. If users notice the delight more than accomplishing their goal, you have gone too far.
+**CRITICAL**: Delight should enhance usability, never obscure it. If users notice delight more than accomplishing their goal, you have gone too far.
 
 ## Delight Principles
 
@@ -244,7 +244,7 @@ Loading messages: write ones specific to your product, not generic AI filler:
 - "Checking for updates since yesterday..."
 ```
 
-**WARNING**: Avoid cliched loading messages like "Herding pixels", "Teaching robots to dance", "Consulting the magic 8-ball", "Counting backwards from infinity". These are AI-slop copy: instantly recognizable as machine-generated. Write messages that are specific to what your product does.
+**WARNING**: Avoid cliched loading messages like "Herding pixels", "Teaching robots to dance", "Consulting magic 8-ball", "Counting backwards from infinity". These are AI-slop copy: instantly recognizable as machine-generated. Write messages that are specific to what your product does.
 
 ### Celebration Moments
 
@@ -300,4 +300,4 @@ Test that delight delights.
 - **Appropriate**: Matches brand and context
 - **Accessible**: Works with reduced motion, screen readers
 
-Remember: Delight is the difference between a tool and an experience. Add personality, surprise users positively, and create moments worth sharing. But always respect usability: delight should enhance, never obstruct.
+Remember: Delight is difference between tool and experience. Add personality, surprise users positively, and create moments worth sharing. But always respect usability: delight should enhance, never obstruct.

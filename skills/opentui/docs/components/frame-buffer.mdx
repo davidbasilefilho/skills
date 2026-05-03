@@ -6,7 +6,7 @@ order: 13
 
 # FrameBuffer
 
-A low-level rendering surface for custom graphics and complex visual effects. FrameBuffer provides a 2D array of cells with methods optimized for performance and memory.
+ low-level rendering surface for custom graphics and complex visual effects. FrameBuffer provides 2D array of cells with methods optimized for performance and memory.
 
 ## Basic usage
 
@@ -49,7 +49,7 @@ renderer.root.add(
 
 ### setCell
 
-Set a single cell's content and colors:
+Set single cell's content and colors:
 
 ```typescript
 canvas.frameBuffer.setCell(
@@ -67,7 +67,7 @@ canvas.frameBuffer.setCell(10, 5, "@", RGBA.fromHex("#FFFF00"), RGBA.fromHex("#0
 
 ### setCellWithAlphaBlending
 
-Set a cell with alpha blending for transparency effects:
+Set cell with alpha blending for transparency effects:
 
 ```typescript
 const semiTransparent = RGBA.fromValues(1.0, 0.0, 0.0, 0.5)
@@ -77,7 +77,7 @@ canvas.frameBuffer.setCellWithAlphaBlending(10, 5, " ", transparent, semiTranspa
 
 ### drawText
 
-Draw a string of text at a position:
+Draw string of text at position:
 
 ```typescript
 canvas.frameBuffer.drawText(
@@ -95,7 +95,7 @@ canvas.frameBuffer.drawText("Score: 100", 2, 1, RGBA.fromHex("#00FF00"))
 
 ### fillRect
 
-Fill a rectangular area with a color:
+Fill rectangular area with color:
 
 ```typescript
 canvas.frameBuffer.fillRect(
@@ -129,7 +129,7 @@ canvas.frameBuffer.drawFrameBuffer(
 ### colorMatrix / colorMatrixUniform
 
 Apply native 4x4 RGBA matrix transforms for post-processing effects. Use `colorMatrixUniform` for full-buffer
-transforms, and `colorMatrix` when you want to target specific cells.
+transforms, and `colorMatrix` when want to target specific cells.
 
 ```typescript
 import { INVERT_MATRIX, TargetChannel } from "@opentui/core"
@@ -246,7 +246,7 @@ drawProgressBar(canvas.frameBuffer, 5, 10, 30, 0.75, RGBA.fromHex("#00FF00"))
 
 ## Performance tips
 
-1. **Batch updates**: Make multiple changes to the frame buffer before the next render cycle
+1. **Batch updates**: Make multiple changes to frame buffer before next render cycle
 2. **Minimize fillRect calls**: Use individual setCell calls for complex shapes
 3. **Reuse RGBA objects**: Create color constants instead of calling `fromHex` repeatedly
 

@@ -1,6 +1,6 @@
 ---
 name: bolder
-description: "Amplify safe or boring designs to make them more visually interesting and stimulating. Increases impact while maintaining usability. Use when the user says the design looks bland, generic, too safe, lacks personality, or wants more visual impact and character."
+description: "Amplify safe or boring designs to make them more visually interesting and stimulating. Increases impact while maintaining usability. Use when user says design looks bland, generic, too safe, lacks personality, or wants more visual impact and character."
 argument-hint: "[target]"
 user-invocable: true
 ---
@@ -9,13 +9,13 @@ Increase visual impact and personality in designs that are too safe, generic, or
 
 ## MANDATORY PREPARATION
 
-Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first.
+Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and Context Gathering Protocol. Follow protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first.
 
 ---
 
 ## Assess Current State
 
-Analyze what makes the design feel too safe or boring.
+Analyze what makes design feel too safe or boring.
 
 ### 1. Identify weakness sources
 - **Generic choices**: System fonts, basic colors, standard layouts
@@ -31,15 +31,15 @@ Analyze what makes the design feel too safe or boring.
 - Who is audience? (What will resonate?)
 - What are constraints? (Brand guidelines, accessibility, performance)
 
-If any of these are unclear from the codebase, {{ask_instruction}}
+If any of these are unclear from codebase, {{ask_instruction}}
 
 **CRITICAL**: "Bolder" does not mean chaotic or garish. It means distinctive, memorable, and confident. Think intentional drama, not random chaos.
 
-**WARNING - AI SLOP TRAP**: When making things "bolder," AI defaults to the same tired tricks: cyan or purple gradients, glassmorphism, neon accents on dark backgrounds, gradient text on metrics. These are the OPPOSITE of bold. They are generic. Review ALL the DO NOT guidelines in the frontend-design skill before proceeding. Bold means distinctive, not "more effects."
+**WARNING - AI SLOP TRAP**: When making things "bolder," AI defaults to same tired tricks: cyan or purple gradients, glassmorphism, neon accents on dark backgrounds, gradient text on metrics. These are OPPOSITE of bold. They are generic. Review ALL DO NOT guidelines in frontend-design skill before proceeding. Bold means distinctive, not "more effects."
 
 ## Plan Amplification
 
-Create a strategy to increase impact while maintaining coherence.
+Create strategy to increase impact while maintaining coherence.
 
 - **Focal point**: What should be hero moment? (Pick ONE, make it amazing)
 - **Personality direction**: Maximalist chaos? Elegant drama? Playful energy? Dark moody? Choose lane.
@@ -76,7 +76,7 @@ Systematically increase impact across these dimensions.
 ### Visual Effects
 - **Dramatic shadows**: Large, soft shadows for elevation (but not generic drop shadows on rounded rectangles)
 - **Background treatments**: Mesh patterns, noise textures, geometric patterns, intentional gradients (not purple-to-blue)
-- **Texture and depth**: Grain, halftone, duotone, layered elements. NOT glassmorphism (it is overused AI slop).
+- **Texture and depth**: Grain, halftone, duotone, layered elements. NOT glassmorphism (it's overused AI slop).
 - **Borders and frames**: Thick borders, decorative frames, custom shapes (not rounded rectangles with colored border on one side)
 - **Custom elements**: Illustrative elements, custom icons, decorative details that reinforce brand
 
@@ -111,6 +111,6 @@ Ensure amplification maintains usability and coherence.
 - **Performant**: Do all these effects run smoothly?
 - **Accessible**: Does it still meet accessibility standards?
 
-**The test**: If you showed this to someone and said "AI made this bolder," would they believe you immediately? If yes, you have failed. Bold means distinctive, not "more AI effects."
+** test**: If you showed this to someone and said "AI made this bolder," would they believe you immediately? If yes, you have failed. Bold means distinctive, not "more AI effects."
 
 Remember: Bold design is confident design. It takes risks, makes statements, and creates memorable experiences. But bold without strategy is loud. Be intentional, be dramatic, be unforgettable.

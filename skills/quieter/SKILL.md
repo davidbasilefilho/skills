@@ -1,21 +1,21 @@
 ---
 name: quieter
-description: "Tones down visually aggressive or overstimulating designs, reducing intensity while preserving quality. Use when the user mentions too bold, too loud, overwhelming, aggressive, garish, or wants a calmer, more refined aesthetic."
+description: "Tones down visually aggressive or overstimulating designs, reducing intensity while preserving quality. Use when user mentions too bold, too loud, overwhelming, aggressive, garish, or wants calmer, more refined aesthetic."
 argument-hint: "[target]"
 user-invocable: true
 ---
 
-Reduce visual intensity in designs that are too bold, aggressive, or overstimulating, creating a more refined and approachable aesthetic without losing effectiveness.
+Reduce visual intensity in designs that are too bold, aggressive, or overstimulating, creating more refined and approachable aesthetic without losing effectiveness.
 
 ## MANDATORY PREPARATION
 
-Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and the Context Gathering Protocol. Follow the protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first.
+Invoke {{command_prefix}}frontend-design. It contains design principles, anti-patterns, and Context Gathering Protocol. Follow protocol before proceeding. If no design context exists yet, you MUST run {{command_prefix}}teach-impeccable first.
 
 ---
 
 ## Assess Current State
 
-Analyze what makes the design feel too intense.
+Analyze what makes design feel too intense.
 
 ### 1. Identify intensity sources
 - **Color saturation**: Overly bright or saturated colors
@@ -31,13 +31,13 @@ Analyze what makes the design feel too intense.
 - What is working? (Do not throw away good ideas)
 - What is core message? (Preserve what matters)
 
-If any of these are unclear from the codebase, {{ask_instruction}}
+If any of these are unclear from codebase, {{ask_instruction}}
 
-**CRITICAL**: "Quieter" does not mean boring or generic. It means refined, sophisticated, and easier on the eyes. Think luxury, not laziness.
+**CRITICAL**: "Quieter" does not mean boring or generic. It means refined, sophisticated, and easier on eyes. Think luxury, not laziness.
 
 ## Plan Refinement
 
-Create a strategy to reduce intensity while maintaining impact.
+Create strategy to reduce intensity while maintaining impact.
 
 - **Color approach**: Desaturate or shift to more sophisticated tones?
 - **Hierarchy approach**: Which elements should stay bold (very few), which should recede?

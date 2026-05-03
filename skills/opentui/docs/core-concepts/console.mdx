@@ -6,7 +6,7 @@ order: 7
 
 # Console overlay
 
-OpenTUI includes a built-in console overlay that captures all `console.log`, `console.info`, `console.warn`, `console.error`, and `console.debug` calls. You can position the console at any edge of the terminal. It supports scrolling and focus management.
+OpenTUI includes built-in console overlay that captures all `console.log`, `console.info`, `console.warn`, `console.error`, and `console.debug` calls. position console at any edge of terminal. It supports scrolling and focus management.
 
 ## Basic usage
 
@@ -54,7 +54,7 @@ ConsolePosition.RIGHT // Dock at right
 
 ## Toggling the console
 
-Toggle the console overlay in code:
+Toggle console overlay in code:
 
 ```typescript
 // Toggle visibility and focus
@@ -66,7 +66,7 @@ renderer.console.toggle()
 
 ## Console shortcuts
 
-When the console is focused:
+When console is focused:
 
 | Key        | Action                     |
 | ---------- | -------------------------- |
@@ -76,7 +76,7 @@ When the console is focused:
 
 ## Keybinding for toggle
 
-Add a keyboard shortcut to toggle the console:
+Add keyboard shortcut to toggle console:
 
 ```typescript
 renderer.keyInput.on("keypress", (key) => {
@@ -94,10 +94,10 @@ renderer.keyInput.on("keypress", (key) => {
 
 ## Why use the console?
 
-Terminal UI applications capture stdout for rendering. Regular `console.log` calls would interfere with your interface. The console overlay solves this problem:
+Terminal UI applications capture stdout for rendering. Regular `console.log` calls would interfere with your interface. console overlay solves this problem:
 
-- Captures all console output without disrupting the UI
-- Displays logs in a dedicated overlay area
+- Captures all console output without disrupting UI
+- Displays logs in dedicated overlay area
 - Color-codes different log levels for easy identification
 - Lets you scroll through history for debugging
 

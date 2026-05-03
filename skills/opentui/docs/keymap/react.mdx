@@ -1,6 +1,6 @@
 ---
 title: React (OpenTUI)
-description: React provider and hooks for a pre-created OpenTUI keymap
+description: React provider and hooks for pre-created OpenTUI keymap
 order: 4
 navTitle: React (OpenTUI)
 ---
@@ -9,18 +9,18 @@ navTitle: React (OpenTUI)
 
 This page covers `@opentui/keymap/react`.
 
-These bindings are for OpenTUI React apps. They consume a pre-created `Keymap<Renderable, KeyEvent>` from `@opentui/keymap/opentui`; they do not wrap the DOM/HTML adapter used in browser React apps.
+These bindings are for OpenTUI React apps. They consume pre-created `Keymap<Renderable, KeyEvent>` from `@opentui/keymap/opentui`; they do not wrap DOM/HTML adapter used in browser React apps.
 
-If you have not read the shared model yet, start with [Keymap overview](/docs/keymap/overview). For keymap construction, see [Keymap hosts](/docs/keymap/hosts).
+If you have not read shared model yet, start with [Keymap overview](/docs/keymap/overview). For keymap construction, see [Keymap hosts](/docs/keymap/hosts).
 
 ## What React adds
 
-- `KeymapProvider` - React context provider for an existing OpenTUI keymap
-- `useKeymap()` - returns the current OpenTUI keymap from context
-- `useBindings(createLayer, deps?)` - registers a keymap layer for the component lifecycle
+- `KeymapProvider` - React context provider for existing OpenTUI keymap
+- `useKeymap()` - returns current OpenTUI keymap from context
+- `useBindings(createLayer, deps?)` - registers keymap layer for component lifecycle
 - `useActiveKeys(options?)` - derived active key list
 - `usePendingSequence()` - derived pending sequence
-- `reactiveMatcherFromStore(subscribe, getSnapshot, predicate?)` - adapts an external store to `ReactiveMatcher`
+- `reactiveMatcherFromStore(subscribe, getSnapshot, predicate?)` - adapts external store to `ReactiveMatcher`
 
 ## Basic usage
 
@@ -80,9 +80,9 @@ createRoot(renderer).render(
 
 ## `useBindings`
 
-`useBindings()` registers a full `LayerFields<Renderable, KeyEvent>` object. The returned layer can include `priority`, `enabled`, `bindings`, `commands` and any custom addon fields.
+`useBindings()` registers full `LayerFields<Renderable, KeyEvent>` object. returned layer can include `priority`, `enabled`, `bindings`, `commands` and any custom addon fields.
 
-React memoizes `createLayer` with `useMemo(createLayer, deps)`. If you omit `deps`, the hook treats the layer factory as static after mount because the default is `[]`. If the layer shape depends on props or React state, include those values in `deps`.
+React memoizes `createLayer` with `useMemo(createLayer, deps)`. If you omit `deps`, hook treats layer factory as static after mount because default is `[]`. If layer shape depends on props or React state, include those values in `deps`.
 
 React-specific layer shapes:
 
@@ -93,10 +93,10 @@ React-specific layer shapes:
 | Local exact-focus layer    | Set `targetRef` and `targetMode: "focus"` |
 
 - When `targetRef` is present and `targetMode` is omitted, `focus-within` is used.
-- If `targetRef.current` is `null`, registration waits until the ref resolves.
-- Passing a local `targetMode` without `targetRef` throws.
-- `deps` controls when the layer factory is re-evaluated.
-- Local layers follow `targetRef.current`, so they can wait for a ref to mount and retarget if that ref later points at a different renderable.
+- If `targetRef.current` is `null`, registration waits until ref resolves.
+- Passing local `targetMode` without `targetRef` throws.
+- `deps` controls when layer factory is re-evaluated.
+- Local layers follow `targetRef.current`, so they can wait for ref to mount and retarget if that ref later points at different renderable.
 
 ## `useActiveKeys()` and `usePendingSequence()`
 
@@ -109,7 +109,7 @@ Use these hooks for command palettes, key hint UIs, leader prompts and status ba
 
 ## `reactiveMatcherFromStore()`
 
-Use this when an addon field expects a `ReactiveMatcher`, for example the shipped `enabled` field:
+Use this when addon field expects `ReactiveMatcher`, for example shipped `enabled` field:
 
 ```tsx
 const matcher = useMemo(
