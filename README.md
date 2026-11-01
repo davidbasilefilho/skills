@@ -1,6 +1,6 @@
 # Basile Skills
 
-A curated collection of agent skills for design, frontend work, and cave tooling.
+A collection of agent skills by David Basile Filho.
 
 ## Install
 
@@ -19,49 +19,13 @@ npx -y skills add davidbasilefilho/skills
 ```
 </details>
 
-
-## What is in this repo
-
-Each directory under `skills/` contains standalone skill definition. Skills are designed to help agents perform focused tasks such as improving layout, tightening copy, adding motion, auditing interfaces, or coordinating cave workflows.
-
 ## Included skills
 
-- `adapt` - Adapt designs for different devices, screen sizes, and contexts
-- `animate` - Add purposeful motion and micro-interactions
-- `arrange` - Improve layout, spacing, and visual rhythm
-- `audit` - Run technical quality checks across accessibility and performance
-- `bolder` - Make safe designs more visually assertive
-- `cavecrew` - Coordinate crew-oriented workflow for cave tools
-- `caveman` - Main entry point for caveman toolset
-- `caveman-commit` - Create commits with caveman workflows
-- `caveman-compress` - Compress work and context for cave tools
-- `caveman-help` - Show help for caveman toolset
-- `caveman-review` - Review work with caveman workflows
-- `caveman-stats` - Report caveman usage and stats
-- `clarify` - Improve UX copy, labels, and instructions
-- `colorize` - Add strategic color and visual warmth
-- `compress` - Reduce output and context for cave workflows
-- `critique` - Review design from UX perspective
-- `delight` - Add moments of joy and personality
-- `distill` - Simplify designs by removing unnecessary complexity
-- `extract` - Consolidate reusable components and design tokens
-- `frontend-design` - Core guidance for production-grade frontend design
-- `harden` - Improve resilience, error handling, and edge cases
-- `humanizer` - Make interfaces feel more human and approachable
-- `normalize` - Bring inconsistent interfaces into alignment
-- `onboard` - Create clearer onboarding and first-time experiences
-- `opentui` - Build interfaces that work well in terminal environments
-- `optimize` - Improve performance and efficiency
-- `overdrive` - Push designs further when they need stronger impact
-- `polish` - Refine interfaces with finishing touches
-- `quieter` - Reduce noise and visual clutter
-- `teach-impeccable` - Establish design context required by frontend skills
-- `typeset` - Improve typography and text presentation
-- `ulw` - Create ultra-lightweight experiences
+- `personality-test-suite` - Interactive battery of five tests (Harry Potter, Riordanverse, 16Personalities-style type, 12axes political values, astrology) with batched multiple-choice questions and one cross-referenced results report at the end, including the 6 most similar figures per test
 
 ## Usage
 
-How skill is invoked depends on agent harness or editor integration you are using. In general, select relevant skill for task and load its `SKILL.md` instructions before working.
+Skills follow the open Agent Skills format and work in any harness that supports it. The agent loads `SKILL.md` and reads files under `references/` as needed. Say something like "test my personality" or "run the personality test suite".
 
 ## Repository structure
 
@@ -69,11 +33,12 @@ How skill is invoked depends on agent harness or editor integration you are usin
 skills/
   <skill-name>/
     SKILL.md
+    references/
 ```
 
 ## Contributing
 
-- Keep each skill focused on single job
+- Keep each skill focused on a single job
 - Prefer clear, direct instructions over duplicated guidance
 - Update this README when adding or renaming skills
 
