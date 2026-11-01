@@ -13,7 +13,7 @@ Entertainment only: say so once in the results, briefly, then deliver it properl
 
 In quick mode, ask "how sure" inline with question 2 (e.g. options: exact time / roughly / unknown, plus a free-text field for the time).
 
-These are free-text items: with a question tool, use its free-text/"Other" field or a text-input form; in plain text, just number them and let the user type.
+These are free-text items: with a question tool, use its free-text/"Other" field or a text-input form; in plain text, just number them and let the user type. Validate each answer (a real date, a time of day, a findable place); if one doesn't fit, say why in one line and re-ask it.
 
 ## What to compute
 

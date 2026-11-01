@@ -18,7 +18,7 @@ Score all; the top 3 appear in the results with percentage-style fit.
 
 ## Question blueprint
 
-Scenario items with 4 options; each option maps to 1–3 parents (and secondarily to Roman/Norse/Egyptian equivalents). Spread items across these facets, each option pointing at different gods:
+Scenario items with 4 options; each option maps to 1–3 parents (and secondarily to Roman/Norse/Egyptian equivalents). Facets 1–6 and 8–10 are single-choice (one forced pick); facet 7 (free-time pull) is multi-select, 6 options, pick up to 3. Spread items across these facets, each option pointing at different gods, and keep options distinct per the skill's *Question quality* rules (e.g. don't pair "leader" with "strategist" if one implies the other; describe "dreams" or "the underworld" as experiences, not beliefs):
 
 1. Chosen weapon or tool in a fight
 2. Ideal quest role (leader, strategist, healer, scout, builder, trickster)
