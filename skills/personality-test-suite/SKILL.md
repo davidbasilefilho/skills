@@ -7,7 +7,29 @@ description: Run an interactive personality battery (Harry Potter, Riordanverse,
 
 An interactive battery of five tests. You ask every question first, reveal nothing along the way, then deliver one combined, cross-referenced, richly formatted results report.
 
-This skill is harness-agnostic (Claude, other agents, any chat UI). "Question tool", "visual tool", "memory tool", "task list tool" mean whatever your environment actually provides under any name. Where the environment provides nothing, the plain-text and markdown fallbacks below apply, and they are just as mandatory.
+This skill must work for anyone, anywhere, in any language, in any harness (chat apps, coding agents, terminals, plain chat UIs) and with any model, strong or small. "Question tool", "visual tool", "memory tool", "task list tool" mean whatever your environment actually provides under any name. Where the environment provides nothing, the plain-text and markdown fallbacks below apply, and they are just as mandatory.
+
+## At a glance
+
+For any model: if the rest of this file is too long to hold at once, follow these and look up details in the sections below.
+
+1. Check which tools you have (questions, visuals, memory, task list, code/web). Use every one that exists.
+2. Infer language, country and personal context from the conversation and memory. Don't ask for them or confirm them.
+3. Ask which tests to skip, then which to run in depth (each a multi-select with "None").
+4. Ask the questions, shortest test first, `min(10, tool limit)` per batch, labelled `TEST n/total`, revealing nothing.
+5. Check each question: distinct options, right kind (single or multi), no hidden beliefs, no hints.
+6. At the end, one report with visuals and 6 most similar figures per list (#1 featured), in the user's language. Then save to memory.
+
+## Environment fallbacks
+
+- No question tool: plain-text questions (see *Question format*).
+- No visual tool: markdown tables and Unicode bars.
+- Markdown not rendered (plain terminal, SMS-like UIs): same content as plain text; tables become aligned lines, bars stay as Unicode characters.
+- No memory: ask only what's missing (country only if a selected test needs it; birth data for astrology).
+- No web access: say so in one line where it matters (12axes national issues, astrology positions) and follow those sections' offline rules.
+- No task list tool: progress goes in one line of chat text per batch.
+- Unknown language: use the language of the user's latest message.
+- Unknown country and a test needs it: ask once, as the first item of the batch that needs it.
 
 ## Hard rules
 
@@ -73,7 +95,7 @@ The run is **localized and personalized by default**. Never ask what you can inf
 - **Book familiarity**: never asked; mix well-known characters with a few deeper cuts.
 - **Astrology birth data** already in memory: used directly, and those astro items are not asked (the run plan counts drop accordingly).
 
-Show the inferred defaults in **one line** with the run plan (e.g. "Em português, com o Brasil como referência; dá pra corrigir a qualquer momento"), then go straight to the questions. If nothing essential is missing, which is the usual case, this step asks nothing.
+Show the inferred defaults in **one line** with the run plan (e.g. "In English, with Canada as the reference country; tell me anytime to change it", written in the user's language), then go straight to the questions. If nothing essential is missing, which is the usual case, this step asks nothing.
 
 Never ask for results the user already got elsewhere (it biases the run), and never ask which figure types to include or exclude.
 
@@ -242,10 +264,10 @@ The results point out where tests agreed and where they pulled apart.
 
 ## Localization
 
-Everything the user sees is in the user's language (from Step 2b, memory, or the language they write in): greetings, question and option text, scale labels ("Concordo totalmente"…), the "None" option, per-test labels, task names, chat lines, results, charts, visual labels and disclaimers.
+Everything the user sees is in the user's language (from Step 2b, memory, or the language they write in): greetings, question and option text, scale labels ("Strongly agree" and its equivalent), the "None" option, per-test labels, task names, chat lines, results, charts, visual labels and disclaimers.
 
 - Translate generic labels (`HP 17/28` stays; "batch", "quick", "in depth", "None", dimension and axis names get translated).
-- Proper names stay in the form used in that language's official editions or common use (e.g. Portuguese: Grifinória, Corvinal, Lufa-Lufa, Sonserina; "Acampamento Meio-Sangue"); keep the original in parentheses the first time when it helps.
+- Proper names stay in the form used in that language's official editions or common use (e.g. Gryffindor is "Grifinória" in Portuguese and "Gryffondor" in French); keep the original in parentheses the first time when it helps.
 - Test and type codes (`INTJ-A`, `12axes`) stay as they are.
 - National-issue items use the terms people actually use for those debates in that country.
 
