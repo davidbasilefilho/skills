@@ -132,8 +132,8 @@ Before sending each batch, check every question against these rules and rewrite 
 
 - One call per batch, `min(10, Q)` questions (Hard rule 3).
 - Question and option text are **plain**: no markdown headers, progress bars, `batch x/y` counters, badges or emoji. That decoration belongs to the plain-text fallback only.
-- Each question shows its **number within its test**: `HP 17/28`, `16P 3/40`, `12ax 1/60`, `PJ 4/10`, `Astro 2/3`. Put it in the header/label field when one exists; otherwise at the start of the question text (`HP 17/28 · You find…`).
-- Overall progress lives in the task list, not in question text.
+- Each question shows its **number within its test**: `HP 17/28`, `16P 3/40`, `12ax 1/70`, `PJ 4/10`, `Astro 2/3`. Put it in the header/label field when one exists; otherwise at the start of the question text (`HP 17/28 · You find…`).
+- Overall progress (answered / total across all tests, e.g. `10/100` after the first batch of 10) lives in the task list, not in question text.
 - If an item needs more options than `O` (e.g. a 5-point agreement scale with `O = 4`), use a forced 4-point scale (Strongly agree / Agree / Disagree / Strongly disagree); the user can type "neutral" in the free-text field, scored as the midpoint.
 - Option descriptions, when the tool supports them, stay short and non-revealing.
 
@@ -203,14 +203,14 @@ Run before every message. Fix any failure before sending.
 - [ ] Task list updated (if the tool exists), with no result hints?
 - [ ] Every visual required for this message present?
 - [ ] Results: 6 figures per list with #1 featured; current + historical for 16p and 12ax; ideologies, current countries and historical states for 12ax?
-- [ ] User's language?
+- [ ] Every visible string localized (questions, options, labels, tasks, visuals)?
 
 ## Task list
 
 When a task list tool exists, using it is required and it is the progress tracker:
 
 - Right after Step 2, create one task per remaining step and per test, e.g. `Context questions`, `🔭 Astrology (0/3)`, `⚡ Riordanverse (0/10)`, `🪄 Harry Potter (0/14)`, `🧠 16P (0/15)`, `🏛️ 12axes (0/29)`, `Tie-breakers`, `Results report`, `Save to memory`. Mark Steps 1 and 2 done.
-- After each batch, update the answered count of each test it touched (`🪄 Harry Potter (9/14)`, in the title or notes, whichever the tool allows). Mark a test in progress at its first question and done at its last answer.
+- After each batch, update the answered count of each test it touched (`🪄 Harry Potter (9/14)`, in the title or notes, whichever the tool allows), and the overall count on a first task `All questions (10/100)`. Mark a test in progress at its first question and done at its last answer.
 - Task names and notes never reveal or hint at results (no "leaning Ravenclaw").
 - Drop `Tie-breakers` if not needed and `Save to memory` if no memory tool exists; finish with every task done.
 - No task list tool: give overall progress in the one line of chat text alongside each batch (plain words, e.g. "21 of 64 answered"), still never inside the questions.
@@ -219,9 +219,12 @@ When a task list tool exists, using it is required and it is the progress tracke
 
 When a memory tool exists, using it is required:
 
-- **Start** (Step 0): read birth date/time/place, country, language, occupation and interests. Pre-fill: present found facts for one-tap confirmation ("Born 14 March in Lisbon, is that right?") instead of asking from scratch, and drop context questions memory already answers. Remembered facts never substitute for the scored test items.
-- **Earlier runs** of this skill: don't look them up until scoring is done; then use them only for a short "Then vs. now" section.
-- **End** (after Step 4): save a compact summary (date, headline result per test, quick vs. in depth) and newly given durable facts such as birth data. Follow the memory system's own rules: some facts (political views, birth details) may be sensitive or need consent; respect that and skip what it won't store.
+- **Start** (Step 0): read birth date/time/place, country, language, occupation and interests, and any earlier runs of this skill (results, trait scores, notable answers). Pre-fill: present found facts for one-tap confirmation ("Born 14 March in Lisbon, is that right?") instead of asking from scratch, and drop context questions memory already answers.
+- **Earlier runs complement, they don't compare.** Treat stored results and answers as extra evidence alongside this run:
+  - Questions: don't repeat items memory already covers well; spend the batch on gaps, borderline traits and areas the earlier run didn't reach (question counts stay as planned).
+  - Results: merge earlier evidence with this run's answers into one result per test, as if it were a single longer test. No "then vs. now" section.
+  - Conflicts: when an earlier answer or result contradicts a newer one, the newer one wins. Mention a change only where it actually flipped a result (one line, e.g. "Hufflepuff in an earlier run; this run's answers now point to Ravenclaw").
+- **End** (after Step 4): save a compact summary (date, quick vs. in depth, headline result per test, per-dimension/axis/house scores, and answers that decided close calls) and newly given durable facts such as birth data, replacing anything this run superseded. Follow the memory system's own rules: some facts (political views, birth details) may be sensitive or need consent; respect that and skip what it won't store.
 
 ## Cross-test inference
 
@@ -234,9 +237,18 @@ All answers count wherever they're informative:
 
 The results point out where tests agreed and where they pulled apart.
 
+## Localization
+
+Everything the user sees is in the user's language (from Step 2b, memory, or the language they write in): greetings, question and option text, scale labels ("Concordo totalmente"…), the "None" option, per-test labels, task names, chat lines, results, charts, visual labels and disclaimers.
+
+- Translate generic labels (`HP 17/28` stays; "batch", "quick", "in depth", "None", dimension and axis names get translated).
+- Proper names stay in the form used in that language's official editions or common use (e.g. Portuguese: Grifinória, Corvinal, Lufa-Lufa, Sonserina; "Acampamento Meio-Sangue"); keep the original in parentheses the first time when it helps.
+- Test and type codes (`INTJ-A`, `12axes`) stay as they are.
+- National-issue items use the terms people actually use for those debates in that country.
+
 ## Ground rules
 
-- Respond in the user's language.
+- Respond in the user's language (see *Localization*).
 - Figures are public figures or published fictional characters, never private individuals. Real-person typings (16p) and political matches (12ax) are informed estimates from public record; say so once, without hedging every line.
 - 12axes results describe, they don't judge: matched figures, ideologies and countries are described neutrally and accurately, with no endorsement or condemnation.
 - One short disclaimer each, no more: astrology has no scientific support (included for fun); 16Personalities-style typing is a self-report model with limited validity.
