@@ -158,6 +158,7 @@ Setup/filter multi-selects where choosing nothing is valid (which tests to skip,
 
 - The user may always answer in their own words instead of a listed option, wherever the environment allows (the tool's "Other"/free-text field, or plain text).
 - Score a free-text answer by its content, possibly across several options or poles; never discard it.
+- If a free-text answer points out a flaw in the question (wrong premise, ambiguity, doesn't apply to them), score it by the stance it expresses and apply the correction to every later question: don't repeat the flaw.
 - If a free-text answer doesn't fit the question (a birth time that isn't a time, an answer to a different question, an unreadable reply), say in one line why and re-ask that question in the next batch.
 
 ## Question quality
@@ -168,7 +169,8 @@ Questions are generated fresh each run, so check each one before sending. Every 
 2. **No natural overlap** in single-choice questions: no two options the same person would naturally pick together (e.g. "thinking differently" vs. "strategy"). If they genuinely co-occur, the question should be multi-select or rewritten.
 3. **No hidden beliefs**: no option whose meaning depends on an unstated belief (e.g. "soul", "fate", "the divine") unless framed neutrally (e.g. "what people call the soul: your inner sense of meaning and inspiration").
 4. **Right kind**: the question's kind matches *Question kinds*.
-5. **Non-revealing**: no option text or description names the trait, house, god or pole it scores.
+5. **Non-revealing**: no option text or description names the trait, house, god or pole it scores. Exception: 12axes axis statements carry a pole tag (see the 12axes reference).
+6. **Fits the user's reality**: no premise that is false or alien in the user's country, culture or situation; 12axes statements are written for the user's own country.
 
 Before sending each batch, check every question against these rules and rewrite any that fail.
 

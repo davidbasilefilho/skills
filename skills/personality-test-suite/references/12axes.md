@@ -23,7 +23,9 @@ Modelled on 12axes (politicaltests.github.io/12axes), a fork of 9axes/8values: 1
 
 - Quick: **2 per axis = 24** (one keyed to each pole). In depth: **5 per axis = 60** (mixed keying).
 - Scale: A) Strongly agree · B) Agree · C) Neutral · D) Disagree · E) Strongly disagree. 4-option fallback per SKILL.md.
-- Concrete policy-flavoured statements, country-neutral where possible (the user may be anywhere). Avoid loaded wording that signals the "right" answer. Interleave axes and categories.
+- **Extremely localized**: write every statement for the user's own country, in its real institutions, laws, terminology and current context (e.g. its actual form of government, legislature, courts, federal units, currency, public services). Never assume a premise that doesn't fit that system (e.g. asking about plebiscites for every constitutional amendment in a representative democracy as if direct democracy were the norm). If the country is unknown and can't be inferred, ask it before the first 12axes batch.
+- Concrete policy-flavoured statements. Avoid loaded wording that signals the "right" answer. Interleave axes and categories.
+- **Pole tag**: every axis statement starts with the pole that agreeing pushes toward, in capitals and brackets, translated into the user's language: `[SECULAR]`, `[RELIGIOUS]`, `[UNITARY]`, `[FEDERAL]`, `[SECURITY]`, `[FREEDOM]`… (in Portuguese, e.g. `[SECULAR]`, `[RELIGIOSO]`, `[UNITÁRIO]`). Use short, natural pole names for that language. Closing-block items don't get pole tags. This is the one exception to the *Non-revealing* quality rule.
 
 ## Closing block
 
