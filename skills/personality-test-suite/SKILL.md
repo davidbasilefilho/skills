@@ -28,7 +28,7 @@ These are requirements, not suggestions. Breaking one is a failed run.
 7. **Free-text answers are always accepted and scored** (see *Free-text answers*).
 8. **Every message follows *Formatting*** and passes the *Pre-send checklist*.
 9. **Visuals are mandatory where listed** in *Required visuals*: use the visual tool when one exists, else the specified markdown fallback. A results section without its visual is incomplete.
-10. **Every test's results include its 6 most similar figures, #1 featured.** All figure types are always eligible; never ask the user to filter them.
+10. **Every test's results include its 6 most similar figures, #1 featured.** All figure types are always eligible; never ask the user to filter them. The only figure-scope question is the 12axes closing block's "include your own country's figures and parties?".
 11. **Memory is read at the start and written at the end** when a memory tool exists.
 12. **Progress is tracked in the task list tool** when one exists (see *Task list*).
 
@@ -40,7 +40,7 @@ These are requirements, not suggestions. Breaking one is a failed run.
 | `pj` | Riordanverse: godly parent / cabin + Roman, Norse, Egyptian | `references/percy-jackson.md` | 10 | 20 |
 | `hp` | Harry Potter: house, wand, patronus, Ilvermorny | `references/harry-potter.md` | 14 | 28 |
 | `16p` | 16Personalities-style type (5 dimensions) | `references/16personalities.md` | 15 | 40 |
-| `12ax` | 12axes political values (12 axes, 4 categories) | `references/12axes.md` | 24 | 60 |
+| `12ax` | 12axes political values (12 axes, 4 categories) + closing block | `references/12axes.md` | 29 (24 + 5) | 70 (60 + 10) |
 
 Read a test's reference file before writing its questions, and `references/results-format.md` before writing the final report.
 
@@ -68,7 +68,7 @@ Ask which remaining tests run **in depth** (more questions, finer results), as a
 Ask only what would sharpen the results for the selected tests, every item optional. Drop anything memory already answered (confirm it instead). Pick from:
 
 - Language for questions and report.
-- Country/region (12ax: country-neutral wording plus a "closest local parties/figures" note; astro: birth-place time zone).
+- Country/region (12ax: country-neutral axis wording, the closing block's national issues and a local-context note; astro: birth-place time zone).
 - Familiarity with the Harry Potter / Riordan books (better-known vs. deeper-cut characters as figures).
 - Anything about themselves to take into account (occupation, hobbies, values), used only as tie-break evidence.
 
@@ -82,6 +82,7 @@ Skip the step if nothing would change the outcome (e.g. only astrology selected)
 - Batches per Hard rule 3. A batch may span two tests when one ends mid-batch.
 - Between batches: acknowledge in at most one line, nothing else (Hard rule 4).
 - Keep a private running tally (internal notes, or a scratch file if the harness has one; never shown) of every answer and which trait/pole it feeds.
+- 12axes ends with its closing block (national issues looked up at run time, personal religion, other context); see `references/12axes.md`.
 - Write original questions, fresh each run, following each reference file's blueprint and *Question quality*. Never reproduce items verbatim from the official Wizarding World, 16Personalities, 12axes or Riordan quizzes.
 
 ### Step 3b: Tie-breakers (only if useful)
@@ -208,7 +209,7 @@ Run before every message. Fix any failure before sending.
 
 When a task list tool exists, using it is required and it is the progress tracker:
 
-- Right after Step 2, create one task per remaining step and per test, e.g. `Context questions`, `🔭 Astrology (0/3)`, `⚡ Riordanverse (0/10)`, `🪄 Harry Potter (0/14)`, `🧠 16P (0/15)`, `🏛️ 12axes (0/24)`, `Tie-breakers`, `Results report`, `Save to memory`. Mark Steps 1 and 2 done.
+- Right after Step 2, create one task per remaining step and per test, e.g. `Context questions`, `🔭 Astrology (0/3)`, `⚡ Riordanverse (0/10)`, `🪄 Harry Potter (0/14)`, `🧠 16P (0/15)`, `🏛️ 12axes (0/29)`, `Tie-breakers`, `Results report`, `Save to memory`. Mark Steps 1 and 2 done.
 - After each batch, update the answered count of each test it touched (`🪄 Harry Potter (9/14)`, in the title or notes, whichever the tool allows). Mark a test in progress at its first question and done at its last answer.
 - Task names and notes never reveal or hint at results (no "leaning Ravenclaw").
 - Drop `Tie-breakers` if not needed and `Save to memory` if no memory tool exists; finish with every task done.
