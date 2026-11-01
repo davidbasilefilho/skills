@@ -222,8 +222,9 @@ When a memory tool exists, using it is required:
 - **Start** (Step 0): read birth date/time/place, country, language, occupation and interests, and any earlier runs of this skill (results, trait scores, notable answers). Pre-fill: present found facts for one-tap confirmation ("Born 14 March in Lisbon, is that right?") instead of asking from scratch, and drop context questions memory already answers.
 - **Earlier runs complement, they don't compare.** Treat stored results and answers as extra evidence alongside this run:
   - Questions: don't repeat items memory already covers well; spend the batch on gaps, borderline traits and areas the earlier run didn't reach (question counts stay as planned).
-  - Results: merge earlier evidence with this run's answers into one result per test, as if it were a single longer test. No "then vs. now" section.
-  - Conflicts: when an earlier answer or result contradicts a newer one, the newer one wins. Mention a change only where it actually flipped a result (one line, e.g. "Hufflepuff in an earlier run; this run's answers now point to Ravenclaw").
+  - Results: merge earlier evidence with this run's answers into one result per test, as if it were a single longer test.
+  - Conflicts: when an earlier answer or result contradicts a newer one, the newer one wins, silently.
+  - Never compare runs: no "then vs. now" section, no "previously you were…", no mention of what changed.
 - **End** (after Step 4): save a compact summary (date, quick vs. in depth, headline result per test, per-dimension/axis/house scores, and answers that decided close calls) and newly given durable facts such as birth data, replacing anything this run superseded. Follow the memory system's own rules: some facts (political views, birth details) may be sensitive or need consent; respect that and skip what it won't store.
 
 ## Cross-test inference
