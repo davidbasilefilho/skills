@@ -1,13 +1,33 @@
 ---
 name: personality-test-suite
-description: Runs an interactive multi-test personality and worldview battery: Harry Potter (house, wand, patronus, Ilvermorny), Riordanverse (godly parent/cabin, Roman, Norse, Egyptian), 16Personalities-style type, 12axes political values, and astrology: asking batched multiple-choice questions and revealing all cross-referenced results, with the 6 most similar figures, only at the end. Use when the user asks to take personality tests, find their Hogwarts house, Percy Jackson cabin, MBTI/16personalities type, 12axes/political values, or astrology chart, or says "test my views/personality".
+description: Runs an interactive multi-test personality and worldview battery (Harry Potter house/wand/patronus/Ilvermorny, Riordanverse godly parent and cabin, 16Personalities-style type, 12axes political values, astrology), asking batched multiple-choice questions and revealing all cross-referenced results, with the 6 most similar figures, only at the end. Use when the user asks to take personality tests, find their Hogwarts house, Percy Jackson cabin, MBTI/16personalities type, 12axes/political values, or astrology chart, or says "test my views/personality".
 ---
 
 # Personality Test Suite
 
 An interactive battery of five tests. You ask every question first, reveal nothing along the way, then deliver one combined, cross-referenced, richly formatted results report.
 
-This skill is harness-agnostic (Claude, other agents, any chat UI). Wherever it says "question tool" or "visual tool", use whatever your environment actually provides, and fall back to the plain-text formats defined here when it provides nothing.
+This skill is harness-agnostic (Claude, other agents, any chat UI). "Question tool", "visual tool", "memory tool" mean whatever your environment actually provides under any name. Where the environment provides nothing, the plain-text and markdown fallbacks below apply, and they are just as mandatory.
+
+## Hard rules
+
+These are requirements, not suggestions. Breaking one is a failed run.
+
+1. **Capability check first.** Before the first message, inventory your tools and decide, once, for the whole run:
+   - **Question tool**: any tool that collects structured user input (`AskUserQuestion`, `ask_user`, `request_user_input`, forms, polls, choice cards…). Note its per-call question limit `Q` and per-question option limit `O`.
+   - **Visual tool**: any tool that renders charts, diagrams, widgets, canvases, artifacts or HTML inline.
+   - **Memory tool**: any persistent memory, profile, notes or past-conversation search.
+   - **Task list tool**: any todo/task/plan tool (`TodoWrite`, `TaskCreate`/`TaskUpdate`, `update_plan`, checklists…).
+   - **Compute/browse**: code execution or web access (needed for an accurate astrology chart).
+   Then use every capability that exists. Having a tool and not using it where this skill calls for it is a violation.
+2. **Questions go through the question tool when one exists**, every time, including Steps 1, 2 and 2b. Plain-text questions are allowed only when no question tool exists, or when the tool fails (then say so in one line and fall back).
+3. **Batch size**: with a question tool, `batch = min(10, Q)` questions, sent as **one** tool call, then wait for the answers. Never chain several tool calls to make up 10, never exceed `Q`. Without a tool, exactly **up to 10** questions per message.
+4. **Nothing is revealed before Step 4.** No scores, leanings, hints or result-telegraphing commentary between batches.
+5. **Every message follows *Formatting*** and passes the *Pre-send checklist*.
+6. **Visuals are mandatory where listed** in *Required visuals*: use the visual tool when one exists, else the specified markdown fallback. A results section without its visual is incomplete.
+7. **Every test's results include its 6 most similar figures, #1 featured.**
+8. **Memory is read at the start and written at the end** when a memory tool exists.
+9. **Progress is tracked in the task list tool** when one exists (see *Task list*).
 
 ## The tests
 
@@ -23,76 +43,72 @@ Read a test's reference file before writing its questions, and `references/resul
 
 ## Flow: follow exactly, in order
 
-### Step 1: Exclusions (right after the skill loads)
+### Step 0: Capabilities and memory (silent)
 
-Greet in one short, nicely formatted message (title, a table of the five tests with one-line descriptions and quick-mode question counts), then ask **which tests to exclude**. Nothing selected = run all five.
+Do the capability check (Hard rule 1). If a memory tool exists, read what's relevant (see *Memory*). Don't narrate this step.
 
-- **With a question tool**: one multi-select question. If the tool caps options (e.g. 4 per question), split into two multi-select questions sent in the same call:
+### Step 1: Exclusions
+
+Greet in one short formatted message (title, a table of the five tests with one-line descriptions and quick-mode counts), then ask **which tests to exclude**. Nothing selected = run all five.
+
+- **Question tool**: one multi-select question. If `O` is too small for five tests plus a "keep all" option, split into two multi-select questions in the same call:
   - "Fiction tests to skip?" → Harry Potter · Percy Jackson / Riordanverse · *Keep both*
   - "Other tests to skip?" → 16Personalities · 12axes · Astrology · *Keep all three*
-- **Without one**: plain text (see *Question format*), letting the user answer with letters, "none", or nothing.
+- **No tool**: plain text (see *Question format*); the user may answer with letters, "none", or nothing.
 
 ### Step 2: Depth
 
-Ask which of the remaining tests should run **in depth** (more questions, finer results). Nothing selected = all quick. Same tool/splitting rules; add a *None: quick mode for all* option. Then show a short plan: tests in the order they'll run, question count per test, total, number of batches.
+Ask which remaining tests run **in depth** (more questions, finer results). Nothing selected = all quick. Same rules; add a *None: quick mode for all* option. Then show the **run plan** (a required visual): tests in run order, question count each, total, number of batches given the batch size.
 
-### Step 2b: Helpful context (optional, one batch)
+### Step 2b: Helpful context (one batch, skippable)
 
-Ask only what would actually sharpen the results for the selected tests, as one batch (same format rules, max 10, every item skippable). Pick from:
+Ask only what would sharpen the results for the selected tests, every item optional. Drop anything memory already answered (confirm it instead). Pick from:
 
-- Language for the questions and report.
-- Country/region (12ax: country-neutral wording plus a "closest local parties/figures" note; astro: time zone of birth place).
-- How well they know the Harry Potter / Riordan books (pick better-known vs. deeper-cut characters as figures).
-- Any result they already got elsewhere (house, type, cabin), so the report can compare: but never let it bias scoring.
-- Preferred figure pools (e.g. include/exclude politicians, scientists, musicians, athletes, fictional characters).
-- Anything about themselves they'd like taken into account (occupation, hobbies, values), used only as tie-break evidence.
+- Language for questions and report.
+- Country/region (12ax: country-neutral wording plus a "closest local parties/figures" note; astro: birth-place time zone).
+- Familiarity with the Harry Potter / Riordan books (better-known vs. deeper-cut characters as figures).
+- Results they already got elsewhere (house, type, cabin), for comparison only, never to bias scoring.
+- Preferred figure pools (include/exclude politicians, scientists, musicians, athletes, fictional characters).
+- Anything about themselves to take into account (occupation, hobbies, values), used only as tie-break evidence.
 
-Skip this step entirely if nothing would change the outcome (e.g. only astrology selected).
+Skip the step if nothing would change the outcome (e.g. only astrology selected).
 
 ### Step 3: Questions (shortest test first)
 
-- Order tests by their actual question count for the chosen depth, ascending (default order: astro → pj → hp → 16p → 12ax). Ties: keep the table order.
-- Ask in batches of **at most 10 questions** per message/tool call. A batch may span two tests when one ends mid-batch; label each question with its test.
-- Number questions 1–10 within each batch so the user can reply `1) A  2) C …`. Show overall progress in the batch header.
-- **Reveal nothing** between batches: no scores, leanings, hints, or "interesting!" commentary that telegraphs a result. Just acknowledge, show progress, and send the next batch.
-- Keep a private running tally (internal notes or a scratch file if your harness has one; never shown) of every answer and which trait/pole it feeds.
-- Write questions yourself, fresh for each run, following the blueprint in each reference file. Do not reproduce questions verbatim from the official Wizarding World, 16Personalities, 12axes, or Riordan quizzes; write original items that probe the same traits.
+- Order tests by actual question count for the chosen depth, ascending (default: astro → pj → hp → 16p → 12ax). Ties keep table order.
+- Batches per Hard rule 3. A batch may span two tests when one ends mid-batch; label each question with its test.
+- Number questions 1…N within each batch so the user can reply `1) A  2) C …`. Every batch shows overall progress.
+- Between batches: acknowledge in one line, show progress, send the next batch. Nothing else (Hard rule 4).
+- Keep a private running tally (internal notes, or a scratch file if the harness has one; never shown) of every answer and which trait/pole it feeds.
+- Write original questions, fresh each run, following each reference file's blueprint. Never reproduce items verbatim from the official Wizarding World, 16Personalities, 12axes or Riordan quizzes.
 
 ### Step 3b: Tie-breakers (only if useful)
 
-Before the results, if any result is borderline (two houses/parents within ~10%, a 16p dimension within ±5%, a 12ax axis near 50% with contradictory answers, an ambiguous birth time), send one short extra batch of targeted tie-breaker questions. Phrase them neutrally: they must not reveal which results are in play. Also ask here about any earlier answers that were missing or contradictory.
+If any result is borderline (two houses/parents within ~10%, a 16p dimension within ±5%, a 12ax axis near 50% with contradictory answers, an ambiguous birth time), send one short batch of targeted, neutrally worded tie-breakers that don't reveal which results are in play. Also ask about any missing or contradictory earlier answers here.
 
 ### Step 4: Results (only at the very end)
 
-One final report, built from **all** answers across **all** tests: answers to one test inform the others (see *Cross-test inference*). Follow `references/results-format.md`. Every test gets its **6 most similar figures, the first one featured** in depth.
-
-## Memory
-
-If the environment provides any memory tools (persistent memory, user profile, notes, past-conversation search), use them:
-
-- **At the start** (before Step 1): read what's relevant: birth date/time/place, country, language, occupation and interests, previous results from this skill or from other tests. Use found facts to **pre-fill** questions: present them for one-tap confirmation ("Born 14 March in Lisbon, is that right?") instead of asking from scratch, and drop context questions memory already answers. Never treat remembered facts as answers to the scored test items themselves.
-- **At the end**: save a compact summary of the results (date taken, each headline result, quick vs. in-depth), plus newly given durable facts such as birth data, so a future run can compare ("last time: Ravenclaw, INTP"). Respect the memory system's own rules: some facts, e.g. political views or birth details, may be treated as sensitive or need consent; follow them, and skip what the system won't store.
-- If a previous run is found, add a small "Then vs. now" comparison to the results.
+One final report built from **all** answers across **all** tests (see *Cross-test inference*), following `references/results-format.md`, with every required visual. Then write to memory (see *Memory*).
 
 ## Question format
 
-### With a question / form tool (mandatory when one exists)
+### With a question tool
 
-If the environment exposes any tool for structured user input: `AskUserQuestion`, `ask_user`, `request_user_input`, a form or poll tool, or similar: you **must** use it for every question, including Steps 1–2.
+- One call per batch, `min(10, Q)` questions (Hard rule 3).
+- If an item needs more options than `O` (e.g. a 5-point agreement scale with `O = 4`), use a forced 4-point scale (Strongly agree / Agree / Disagree / Strongly disagree); the user can type "neutral" in the tool's free-text/"Other" field, scored as the midpoint.
+- Put the test badge in the header/label field when one exists (`🪄 HP`, `🏛️ 12ax`), within the field's length limit.
+- Put progress (`batch 3/9 · 21/64`) in the message text accompanying the call, or in the question text if the tool shows nothing else.
+- If a tool supports option descriptions, keep them short and non-revealing (never "Gryffindor-ish").
 
-- Pack as many questions per call as the tool allows, up to 10. If it allows fewer (e.g. 4), send consecutive calls for the batch or make each call its own batch; never exceed 10 before getting answers.
-- If the tool caps options per question below what an item needs (e.g. 4 options for a 5-point Likert scale), use a forced 4-point scale (Strongly agree / Agree / Disagree / Strongly disagree) and note that the user may type "neutral" via the tool's free-text/"Other" option, scoring it as the midpoint.
-- Put the test name in the tool's header/label field when one exists (e.g. `🪄 HP`, `🏛️ 12ax`).
+### Without a tool (plain text)
 
-### Without a tool (plain text fallback)
-
-Use exactly this shape, max 10 questions per message:
+Exactly this shape, up to 10 questions per message:
 
 ```
 ### 🪄 Harry Potter · batch 3/7 · ▓▓▓▓▓▓░░░░░░░░ 21/64
 
 **1.** You find a locked door in an empty corridor at night. You…
-A) Pick the lock: curiosity wins
+A) Pick the lock, curiosity wins
 B) Note it and come back with friends
 C) Leave it; rules exist for a reason
 D) Find out who has the key and why
@@ -100,7 +116,7 @@ D) Find out who has the key and why
 **2.** …
 ```
 
-Tell the user once (first batch) how to answer:
+In the first batch, show how to answer:
 
 ```
 1) A
@@ -108,33 +124,82 @@ Tell the user once (first batch) how to answer:
 3) B
 ```
 
-Accept loose variants (`1A 2C`, `1-a`, `a, c, b`, lowercase, extra words). If an answer is missing or ambiguous, ask only about those items in the next message: don't re-ask the whole batch. "?" / "skip" / "idk" = neutral or no data.
+Accept loose variants (`1A 2C`, `1-a`, `a, c, b`, lowercase, extra words). Missing or ambiguous answers: re-ask only those items, prepended to the next batch (still within the batch size). "?" / "skip" / "idk" = neutral or no data.
 
-## Formatting every message
+## Formatting
 
-Every message in the process must look polished:
+Applies to **every** message, tool or no tool.
 
-- Markdown throughout: headings, bold, tables, emoji test badges (🔭 astro · ⚡ pj · 🪄 hp · 🧠 16p · 🏛️ 12ax), a Unicode progress bar (`▓▓▓░░░`) in each batch header.
-- Use visualization tools whenever the environment has them (inline chart/diagram/widget tools, canvases, artifacts, HTML renders, Mermaid). Typical uses: a plan/timeline at Step 2; at results: bar charts for axis/dimension percentages, a radar/score chart for houses and parents, a chart wheel or element/modality chart for astrology.
-- Without visual tools: markdown tables with Unicode bars (`█████████░ 87%`) and, if Mermaid renders, Mermaid charts.
-- Keep question batches scannable: one blank line between questions, options on their own lines.
+| Message | Must contain |
+|---|---|
+| Greeting (Step 1) | `##` title, tests table with badges and counts |
+| Run plan (Step 2) | Plan table + the run-plan visual |
+| Every question batch | `###` header with badge(s), batch `x/y`, progress bar `▓▓▓░░░ n/total` |
+| Between-batch acknowledgment | One line + progress bar, nothing that hints at results |
+| Results | Everything in `references/results-format.md` |
+
+Conventions: test badges 🔭 astro · ⚡ pj · 🪄 hp · 🧠 16p · 🏛️ 12ax; bold for key terms; tables for anything comparative; one blank line between questions; options on their own lines.
+
+## Required visuals
+
+| Where | With a visual tool | Fallback (no visual tool) |
+|---|---|---|
+| Run plan (Step 2) | Timeline or bar of questions per test | Table + Unicode bars |
+| HP house, PJ parent scores | Bar or radar chart | Table with `█░` bars and % |
+| 16p dimensions | Diverging bars, 5 rows | Pole bars `I 62% ▕██████░░░░▏ 38% E` |
+| 12ax axes | 12 diverging bars grouped by category | 12 pole bars in 4 category tables |
+| Astrology | Chart wheel or element/modality bars | Placement table + element/modality bars |
+| Cross-test synthesis | Matrix/diagram linking results | Table "test X answer → effect on test Y" |
+
+If the visual tool renders interactive or rich output (HTML, artifacts, canvases), the whole results report may be one rich visual, but the headline results must also appear as text in the chat so they survive copy/paste.
+
+## Pre-send checklist
+
+Run before every message. If any item fails, fix it before sending.
+
+- [ ] Using the question tool if one exists (Hard rule 2)?
+- [ ] Batch within `min(10, Q)` (tool) or 10 (text)?
+- [ ] Header, badge, batch counter and progress bar present?
+- [ ] Nothing reveals or hints at a result (before Step 4)?
+- [ ] Every visual required for this message present, via tool or fallback?
+- [ ] Task list updated (if the tool exists), with no result hints?
+- [ ] Results: 6 figures per list with #1 featured; current + historical for 16p and 12ax; ideologies, current countries and historical states for 12ax?
+- [ ] User's language?
+
+## Task list
+
+When a task list tool exists, using it is required:
+
+- Right after Step 2 (once tests and depth are known), create one task per remaining step and per test, e.g. `Context questions`, `🔭 Astrology (3)`, `⚡ Riordanverse (10)`, `🪄 Harry Potter (14)`, `🧠 16P (15)`, `🏛️ 12axes (24)`, `Tie-breakers`, `Results report`, `Save to memory`. Mark Steps 1 and 2 done.
+- Mark a test in progress when its first question is sent and done when its last answer arrives; if the tool supports notes or descriptions, update the answered count (`9/14`) after each batch.
+- Task names and notes must never reveal or hint at results (no "leaning Ravenclaw").
+- Drop `Tie-breakers` if not needed and `Save to memory` if no memory tool exists; finish with every task done.
+- No task list tool: the batch header's progress bar is the tracker.
+
+## Memory
+
+When a memory tool exists, using it is required:
+
+- **Start** (Step 0): read birth date/time/place, country, language, occupation and interests, and earlier runs of this skill or results of other tests. Pre-fill: present found facts for one-tap confirmation ("Born 14 March in Lisbon, is that right?") instead of asking from scratch, and drop context questions memory already answers. Remembered facts never substitute for the scored test items themselves.
+- **End** (after Step 4): save a compact summary (date, headline result per test, quick vs. in depth) and newly given durable facts such as birth data, so a later run can compare. Follow the memory system's own rules: some facts (political views, birth details) may be sensitive or need consent; respect that and skip what it won't store.
+- If an earlier run is found, add a short "Then vs. now" section to the results.
 
 ## Cross-test inference
 
-All answers count everywhere they're informative. Examples:
+All answers count wherever they're informative:
 
 - 16p Feeling/Judging/Assertive items sharpen Hufflepuff vs. Slytherin vs. Gryffindor; Intuition/Thinking supports Ravenclaw, Athena, Thoth.
-- 12axes Security/Traditional/Militarist leanings inform Ares/Mars, Slytherin-ambition vs. Gryffindor-defiance, and the patronus temperament; Acceleration informs Hephaestus/Athena, wand cores; Pacifist informs Hufflepuff/Demeter/Hestia.
+- 12axes Security/Traditional/Militarist leanings inform Ares/Mars, Slytherin ambition vs. Gryffindor defiance, and patronus temperament; Acceleration informs Hephaestus/Athena and wand cores; Pacifist informs Hufflepuff/Demeter/Hestia.
 - HP/PJ scenario answers (risk, loyalty, rule-breaking, curiosity) are extra evidence for 16p dimensions.
-- Astrology is computed purely from birth data: **never** let it change any other result, and never let other answers change the computed chart. You may add a playful "vibe sign" line (the sign whose stereotype best fits their answers) clearly labelled as such.
+- Astrology is computed purely from birth data: it **never** changes another result, and other answers never change the computed chart. A playful "vibe sign" (the sign whose stereotype best fits the answers) is allowed if clearly labelled.
 
-In the results, briefly point out where tests agreed and where they pulled in different directions.
+The results point out where tests agreed and where they pulled apart.
 
 ## Ground rules
 
 - Respond in the user's language.
-- Figures must be public figures or published fictional characters: never private individuals. Real-person typings (16p) and political matches (12ax) are informed estimates based on public record; say so once, without hedging every line.
-- 12axes results describe; they don't judge. Describe matched figures, ideologies, and countries neutrally and accurately, with no endorsement or condemnation.
+- Figures are public figures or published fictional characters, never private individuals. Real-person typings (16p) and political matches (12ax) are informed estimates from public record; say so once, without hedging every line.
+- 12axes results describe, they don't judge: matched figures, ideologies and countries are described neutrally and accurately, with no endorsement or condemnation.
 - One short disclaimer each, no more: astrology has no scientific support (included for fun); 16Personalities-style typing is a self-report model with limited validity.
-- Never invent astronomical positions (see `references/astrology.md` for what to do without an ephemeris).
-- If the user stops midway, offer to produce results for completed tests only, clearly marked partial.
+- Never invent astronomical positions (see `references/astrology.md`).
+- If the user stops midway, offer results for completed tests only, clearly marked partial.
