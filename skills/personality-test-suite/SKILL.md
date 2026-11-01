@@ -13,14 +13,37 @@ This skill must work for anyone, anywhere, in any language, in any harness (chat
 
 For any model: if the rest of this file is too long to hold at once, follow these and look up details in the sections below.
 
-1. Check which tools you have (questions, visuals, memory, task list, code/web). Use every one that exists.
+1. Find every capability the environment offers (questions, visuals, memory, task list, code, web), including tools that must be searched for or loaded first. Use each one for its job in *Capability map*. Fallbacks are only for capabilities that truly don't exist.
 2. Infer language, country and personal context from the conversation and memory. Don't ask for them or confirm them.
 3. Ask which tests to skip, then which to run in depth (each a multi-select with "None").
 4. Ask the questions, shortest test first, `min(10, tool limit)` per batch, labelled `TEST n/total`, revealing nothing.
 5. Check each question: distinct options, right kind (single or multi), no hidden beliefs, no hints.
 6. At the end, one report with visuals and 6 most similar figures per list (#1 featured), in the user's language. Then save to memory.
 
+## Capability map
+
+The environment's own tools always beat a text imitation of them. Before Step 1, discover them properly:
+
+- Look at the tools you were given **and** any deferred, lazy-loaded or searchable tools (tool search, plugin/connector lists, skill lists). Load the ones in this map before you need them.
+- If a tool needs a setup step (reading its guide, loading a module, enabling it), do that step; it is part of the job.
+- A capability counts as missing only when no tool for it exists or it fails when called. "Plain text is easier" never counts.
+
+| If the environment has… | You must use it for… | Never instead… |
+|---|---|---|
+| A question/form/choice tool | Every question, including setup | Typing questions as text |
+| A visual tool (charts, widgets, canvases, artifacts, HTML) | Run plan, every results chart, cross-test synthesis | Only Unicode bars |
+| A rich-page or document tool (artifact, canvas, doc) | The full results report, in addition to the chat summary | Results only as a long chat message |
+| A memory tool | Reading context and earlier runs at start; saving results at end | Asking the user for facts already stored |
+| A task list / todo / plan tool | Progress per test and overall | Progress only in chat text |
+| Web search / fetch | 12axes national issues; astrology positions if no code | Debates or positions from memory alone |
+| Code execution | Astrology chart via an ephemeris library; scoring tallies if useful | Estimating planet positions |
+| A scratch file / notes area | The private answer tally on long runs | Relying on recall across many batches |
+
+After every batch, re-check: did this message use every capability in the map that applies to it?
+
 ## Environment fallbacks
+
+Only when the matching capability truly doesn't exist:
 
 - No question tool: plain-text questions (see *Question format*).
 - No visual tool: markdown tables and Unicode bars.
@@ -41,7 +64,7 @@ These are requirements, not suggestions. Breaking one is a failed run.
    - **Memory tool**: any persistent memory, profile, notes or past-conversation search.
    - **Task list tool**: any todo/task/plan tool (`TodoWrite`, `TaskCreate`/`TaskUpdate`, `update_plan`, checklists…).
    - **Compute/browse**: code execution or web access (needed for an accurate astrology chart).
-   Then use every capability that exists. Having a tool and not using it where this skill calls for it is a violation.
+   Include deferred or searchable tools: search for and load them. Then use every capability that exists, as listed in *Capability map*. Having a tool and not using it where this skill calls for it, or falling back to text while the tool works, is a violation.
 2. **Questions go through the question tool when one exists**, every time, including Steps 1 and 2. Never ask what can be inferred (see Step 2b). Plain-text questions are allowed only when no question tool exists, or when the tool fails (then say so in one line and fall back).
 3. **Batch size**: with a question tool, `batch = min(10, Q)` questions, sent as **one** tool call, then wait for the answers. Never chain several tool calls to make up 10, never exceed `Q`. Without a tool, exactly **up to 10** questions per message.
 4. **Nothing is revealed before Step 4.** No scores, leanings, hints or result-telegraphing commentary between batches.
@@ -217,6 +240,7 @@ If the visual tool renders rich output (HTML, artifacts, canvases), the whole re
 
 Run before every message. Fix any failure before sending.
 
+- [ ] Every applicable capability in *Capability map* used (question, visual, task list, memory, web, code)?
 - [ ] Using the question tool if one exists (Hard rule 2)?
 - [ ] Batch within `min(10, Q)` (tool) or 10 (text)?
 - [ ] Every question passes *Question quality* (rewrite failures)?
