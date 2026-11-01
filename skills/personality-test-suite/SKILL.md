@@ -20,7 +20,7 @@ These are requirements, not suggestions. Breaking one is a failed run.
    - **Task list tool**: any todo/task/plan tool (`TodoWrite`, `TaskCreate`/`TaskUpdate`, `update_plan`, checklists…).
    - **Compute/browse**: code execution or web access (needed for an accurate astrology chart).
    Then use every capability that exists. Having a tool and not using it where this skill calls for it is a violation.
-2. **Questions go through the question tool when one exists**, every time, including Steps 1, 2 and 2b. Plain-text questions are allowed only when no question tool exists, or when the tool fails (then say so in one line and fall back).
+2. **Questions go through the question tool when one exists**, every time, including Steps 1 and 2. Never ask what can be inferred (see Step 2b). Plain-text questions are allowed only when no question tool exists, or when the tool fails (then say so in one line and fall back).
 3. **Batch size**: with a question tool, `batch = min(10, Q)` questions, sent as **one** tool call, then wait for the answers. Never chain several tool calls to make up 10, never exceed `Q`. Without a tool, exactly **up to 10** questions per message.
 4. **Nothing is revealed before Step 4.** No scores, leanings, hints or result-telegraphing commentary between batches.
 5. **Every question passes *Question quality*** before its batch is sent.
@@ -63,18 +63,19 @@ Greet in one short formatted message (title, a table of the five tests with one-
 
 Ask which remaining tests run **in depth** (more questions, finer results), as a multi-select with an explicit **None** option (= all quick). Then show the **run plan** (a required visual): tests in run order, question count each, total, number of batches given the batch size. Then create the task list (see *Task list*).
 
-### Step 2b: Helpful context (one batch, skippable)
+### Step 2b: Context (infer, don't ask)
 
-Ask only what would sharpen the results for the selected tests, every item optional. Drop anything memory already answered (confirm it instead). Pick from:
+The run is **localized and personalized by default**. Never ask what you can infer, and never ask to confirm an inference:
 
-- Language for questions and report.
-- Country/region (12ax: country-neutral axis wording, the closing block's national issues and a local-context note; astro: birth-place time zone).
-- Familiarity with the Harry Potter / Riordan books (better-known vs. deeper-cut characters as figures).
-- Anything about themselves to take into account (occupation, hobbies, values), used only as tie-break evidence.
+- **Language**: the language the user writes in (or the app/memory language). Never asked.
+- **Country/region**: from memory, profile or conversation. Asked only if nothing indicates it and 12axes or astrology needs it.
+- **Personal context** (occupation, studies, interests, values) from memory or the conversation: always used as tie-break evidence. Never asked.
+- **Book familiarity**: never asked; mix well-known characters with a few deeper cuts.
+- **Astrology birth data** already in memory: used directly, and those astro items are not asked (the run plan counts drop accordingly).
+
+Show the inferred defaults in **one line** with the run plan (e.g. "Em português, com o Brasil como referência; dá pra corrigir a qualquer momento"), then go straight to the questions. If nothing essential is missing, which is the usual case, this step asks nothing.
 
 Never ask for results the user already got elsewhere (it biases the run), and never ask which figure types to include or exclude.
-
-Skip the step if nothing would change the outcome (e.g. only astrology selected).
 
 ### Step 3: Questions (shortest test first)
 
@@ -197,6 +198,7 @@ Run before every message. Fix any failure before sending.
 - [ ] Using the question tool if one exists (Hard rule 2)?
 - [ ] Batch within `min(10, Q)` (tool) or 10 (text)?
 - [ ] Every question passes *Question quality* (rewrite failures)?
+- [ ] Nothing asked or confirmed that could be inferred from the conversation or memory?
 - [ ] Each question's kind is right; multi-selects state and enforce the cap; setup multi-selects have "None"?
 - [ ] Tool questions: plain text, labelled `TEST n/total`, no decoration? Plain-text batches: header, progress bar, per-test numbers?
 - [ ] Nothing reveals or hints at a result (before Step 4)?
@@ -209,7 +211,7 @@ Run before every message. Fix any failure before sending.
 
 When a task list tool exists, using it is required and it is the progress tracker:
 
-- Right after Step 2, create one task per remaining step and per test, e.g. `Context questions`, `🔭 Astrology (0/3)`, `⚡ Riordanverse (0/10)`, `🪄 Harry Potter (0/14)`, `🧠 16P (0/15)`, `🏛️ 12axes (0/29)`, `Tie-breakers`, `Results report`, `Save to memory`. Mark Steps 1 and 2 done.
+- Right after Step 2, create one task per remaining step and per test, e.g. `🔭 Astrology (0/3)`, `⚡ Riordanverse (0/10)`, `🪄 Harry Potter (0/14)`, `🧠 16P (0/15)`, `🏛️ 12axes (0/29)`, `Tie-breakers`, `Results report`, `Save to memory`. Mark Steps 1 and 2 done.
 - After each batch, update the answered count of each test it touched (`🪄 Harry Potter (9/14)`, in the title or notes, whichever the tool allows), and the overall count on a first task `All questions (10/100)`. Mark a test in progress at its first question and done at its last answer.
 - Task names and notes never reveal or hint at results (no "leaning Ravenclaw").
 - Drop `Tie-breakers` if not needed and `Save to memory` if no memory tool exists; finish with every task done.
@@ -219,7 +221,7 @@ When a task list tool exists, using it is required and it is the progress tracke
 
 When a memory tool exists, using it is required:
 
-- **Start** (Step 0): read birth date/time/place, country, language, occupation and interests, and any earlier runs of this skill (results, trait scores, notable answers). Pre-fill: present found facts for one-tap confirmation ("Born 14 March in Lisbon, is that right?") instead of asking from scratch, and drop context questions memory already answers.
+- **Start** (Step 0): read birth date/time/place, country, language, occupation and interests, and any earlier runs of this skill (results, trait scores, notable answers). Use found facts directly, without confirmation questions: they fill context and any astro items, and are listed in the one-line defaults with the run plan so the user can correct them. Ask only for what is genuinely missing.
 - **Earlier runs complement, they don't compare.** Treat stored results and answers as extra evidence alongside this run:
   - Questions: don't repeat items memory already covers well; spend the batch on gaps, borderline traits and areas the earlier run didn't reach (question counts stay as planned).
   - Results: merge earlier evidence with this run's answers into one result per test, as if it were a single longer test.
