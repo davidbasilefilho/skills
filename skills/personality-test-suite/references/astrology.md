@@ -9,7 +9,7 @@ Entertainment only: say so once in the results, briefly, then deliver it properl
 | 1 | Birth date (day / month / year) | same |
 | 2 | Birth time (as exact as known) | same |
 | 3 | Birth city + country | same |
-| 4 |: | How sure are you of the birth time? A) Exact (certificate/app) B) Within ~30 min C) Rough part of day D) Unknown |
+| 4 | - | How sure are you of the birth time? A) Exact (certificate/app) B) Within ~30 min C) Rough part of day D) Unknown |
 
 In quick mode, ask "how sure" inline with question 2 (e.g. options: exact time / roughly / unknown, plus a free-text field for the time).
 
@@ -22,9 +22,9 @@ These are free-text items: with a question tool, use its free-text/"Other" field
 | ☉ Sun sign (+ decan) | ✅ | ✅ | date (cusp dates need time + year) |
 | ☽ Moon sign | ✅ | ✅ | date + approx. time |
 | ↑ Rising (Ascendant) | ✅ | ✅ | exact time + place |
-| ☿ Mercury, ♀ Venus, ♂ Mars |: | ✅ | date (+ time near sign changes) |
-| ♃ Jupiter, ♄ Saturn (generational context) |: | ✅ | date |
-| Houses of the big three, MC (Midheaven), North Node |: | ✅ | exact time + place |
+| ☿ Mercury, ♀ Venus, ♂ Mars | - | ✅ | date (+ time near sign changes) |
+| ♃ Jupiter, ♄ Saturn (generational context) | - | ✅ | date |
+| Houses of the big three, MC (Midheaven), North Node | - | ✅ | exact time + place |
 | Element balance (fire/earth/air/water) & modality (cardinal/fixed/mutable) | ✅ | ✅ | the placements above |
 | Chinese zodiac: animal + element + yin/yang | ✅ | ✅ | date: **use the Lunar New Year boundary, not Jan 1** |
 | Numerology life path number | ✅ | ✅ | date (reduce, keep master numbers 11/22/33) |

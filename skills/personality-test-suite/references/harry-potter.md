@@ -18,7 +18,7 @@
 | Wand | 4 | 8 | temperament under pressure, adaptability (→ flexibility), conviction (→ core), affinities: nature, craft, healing, duelling, intellect (→ wood), presence/size of personality (→ length) |
 | Patronus | 3 | 6 | happiest kind of memory, instinct when cornered, solitary vs. pack, day vs. night, element you're drawn to |
 | Ilvermorny | 1 | 2 | which part of a witch/wizard matters most: mind, body, soul, heart |
-| Extras |: | 2 | fears, comforting smells, ideal job |
+| Extras | - | 2 | fears, comforting smells, ideal job |
 
 4 options per item; each option maps to a house (or wand trait / patronus family / Ilvermorny house). Mix plain preference items with in-world scenarios.
 

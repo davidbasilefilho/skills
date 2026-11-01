@@ -6,8 +6,8 @@
 |---|---|---|
 | **Godly parent & Camp Half-Blood cabin** (main result) | ✅ | ✅ |
 | Roman counterpart + Camp Jupiter cohort (I–V) and likely role (centurion, augur, praetor material…) | ✅ | ✅ |
-| Norse godly parent (Magnus Chase) + where you'd land in Hotel Valhalla vs. other realms |: | ✅ |
-| Egyptian path of a god (Kane Chronicles) |: | ✅ |
+| Norse godly parent (Magnus Chase) + where you'd land in Hotel Valhalla vs. other realms | - | ✅ |
+| Egyptian path of a god (Kane Chronicles) | - | ✅ |
 | Signature power / weapon you'd likely wield | ✅ | ✅ |
 
 ## Candidate Greek parents
