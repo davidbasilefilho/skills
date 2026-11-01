@@ -170,7 +170,8 @@ Questions are generated fresh each run, so check each one before sending. Every 
 3. **No hidden beliefs**: no option whose meaning depends on an unstated belief (e.g. "soul", "fate", "the divine") unless framed neutrally (e.g. "what people call the soul: your inner sense of meaning and inspiration").
 4. **Right kind**: the question's kind matches *Question kinds*.
 5. **Non-revealing**: no option text or description names the trait, house, god or pole it scores. Exception: 12axes axis statements carry a pole tag (see the 12axes reference).
-6. **Fits the user's reality**: no premise that is false or alien in the user's country, culture or situation; 12axes statements are written for the user's own country.
+6. **Measures what it means to measure**: state the underlying value plainly instead of probing it through a narrow mechanism, proxy or edge case that people could accept or reject for unrelated reasons. Before writing, name (privately) the exact trait or pole the item measures, then check that someone holding the opposite view would clearly answer the other way. Bad: "Constitutional amendments should require a plebiscite" to measure direct vs. representative democracy. Good: "Citizens should vote directly on major laws instead of leaving them to elected representatives."
+7. **Fits the user's reality**: no premise that is false or alien in the user's country, culture or situation; 12axes statements are written for the user's own country.
 
 Before sending each batch, check every question against these rules and rewrite any that fail.
 
