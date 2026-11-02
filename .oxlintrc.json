@@ -1,0 +1,79 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["eslint", "typescript", "unicorn", "oxc", "import", "jsdoc", "promise", "node"],
+  "jsPlugins": ["./lint/effect-only.mjs"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "perf": "warn"
+  },
+  "env": {
+    "builtin": true,
+    "es2024": true
+  },
+  "options": {
+    "typeAware": true
+  },
+  "rules": {
+    "eslint/no-magic-numbers": [
+      "warn",
+      {
+        "ignore": [0, 1],
+        "ignoreArrayIndexes": true,
+        "ignoreDefaultValues": true
+      }
+    ],
+    "eslint/eqeqeq": "error",
+    "eslint/prefer-const": "error",
+    "eslint/no-var": "error",
+    "eslint/no-restricted-globals": [
+      "error",
+      {
+        "name": "fetch",
+        "message": "Use HttpClient from effect/http."
+      },
+      {
+        "name": "setTimeout",
+        "message": "Use Effect.sleep, Effect.timeout or Schedule."
+      },
+      {
+        "name": "setInterval",
+        "message": "Use Effect.repeat with a Schedule."
+      }
+    ],
+    "typescript/no-explicit-any": "error",
+    "typescript/consistent-type-imports": "error",
+    "typescript/no-floating-promises": "error",
+    "typescript/no-misused-promises": "error",
+    "typescript/await-thenable": "error",
+    "typescript/switch-exhaustiveness-check": "error",
+    "unicorn/prefer-node-protocol": "error",
+    "import/no-cycle": "error",
+    "jsdoc/check-tag-names": "warn",
+    "promise/avoid-new": "error",
+    "effect-only/no-try-catch": "error",
+    "effect-only/no-throw": "error",
+    "effect-only/no-async-await": "error",
+    "effect-only/no-promise-api": "error",
+    "eslint/no-underscore-dangle": [
+      "warn",
+      {
+        "allow": ["_tag"]
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["src/**/adapters/**", "lint/**"],
+      "rules": {
+        "effect-only/no-try-catch": "off",
+        "effect-only/no-throw": "off",
+        "effect-only/no-async-await": "off",
+        "effect-only/no-promise-api": "off",
+        "promise/avoid-new": "off",
+        "eslint/no-restricted-globals": "off"
+      }
+    }
+  ],
+  "ignorePatterns": ["node_modules/**", "bun.lock", "skills/**/scripts/*.mjs"]
+}
