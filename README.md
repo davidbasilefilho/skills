@@ -25,6 +25,7 @@ npx -y skills add davidbasilefilho/skills
 
 - `clash-royale-strategies` - Builds and reviews Clash Royale decks and upgrade plans from the player's real data (API profile, battlelog, wild cards), with a bundled Node CLI that fetches a profile and battlelog by player tag
 - `personality-test-suite` - Interactive battery of five tests (Harry Potter, Riordanverse, 16Personalities-style type, 12axes political values, astrology) with batched multiple-choice questions and one cross-referenced results report at the end, including the 6 most similar figures per test
+- `weight-space-programming` - Reads, fixes and hand-writes neural networks by reasoning about their weights without training, with a baseline, held-out evaluation, edit log and honest reporting of what a gain really is
 
 ## Usage
 
