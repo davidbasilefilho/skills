@@ -106,7 +106,7 @@ When there are no weights to fix, specify the task, work out the computation by 
 
 ## When to stop and ask
 
-Beyond the stops already in the rules (cost, original weights, high-risk layers, budgets), stop and ask the user, with the question and your recommendation, when:
+Beyond the stops already in the rules (cost, original weights, budgets), and apart from the rule that high-risk layers need a stated reason before editing, stop and ask the user, with the question and your recommendation, when:
 
 - the task or scoring rule is unclear, or no held-out data exists and you cannot build any;
 - the only path forward needs training, a forward pass, or an observation the user ruled out;
