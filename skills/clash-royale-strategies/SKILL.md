@@ -38,7 +38,7 @@ Prefer the richer option whenever it exists. Never claim a capability you don't 
 Ask (only what isn't already known):
 
 1. Play style: e.g. cycle, beatdown, bridge-spam/control, bait.
-2. **Which heroes they own.** Never infer it from third-party sites or icons.
+2. **Which heroes they own.** Never infer it from third-party sites or icons (see `references/data-sources.md`).
 3. Average elixir target.
 4. How to weigh card levels vs. synergy.
 5. Their special slot layout (which slots take evolutions, heroes or either). Never assume it.
@@ -55,7 +55,7 @@ CLASH_ROYALE_API_TOKEN=... node scripts/cr-profile.mjs '#TAG' [--only profile|ba
 
 It prints `{ "profile": ..., "battlelog": ... }`, the same shape the player would paste. The token comes from developer.clashroyale.com and is bound to IP addresses; for a machine with a changing IP, create the key for the RoyaleAPI proxy IP and set `CLASH_ROYALE_API_BASE_URL=https://proxy.royaleapi.dev/v1`. Never ask the player to paste their token into the conversation; ask them to set the environment variable themselves.
 
-Without code execution or a token, ask the player to paste the JSON. When the player only gives a tag and you can fetch web pages, the fallback sites, what they get wrong and how to cite sources are in `references/data-sources.md`.
+Use the web fallback only when the CLI cannot run (no code execution or no token) and the player has not pasted JSON. If you cannot fetch web pages either, ask the player to paste the JSON. The fallback sites, what they get wrong and how to cite sources are in `references/data-sources.md`.
 
 From the official API player JSON:
 

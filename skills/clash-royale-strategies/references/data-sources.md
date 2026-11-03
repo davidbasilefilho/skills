@@ -6,7 +6,7 @@ Order of preference, with what each source can and cannot be trusted for. Say wh
 
 Use the bundled `scripts/cr-profile.mjs` CLI (SKILL.md step 2) or JSON the player pasted. This is the only source for battlelog, exact copy counts and evolution fields.
 
-Read evolution and hero status from the card entries' own fields (for example `evolutionLevel`, `maxEvolutionLevel`). If a field you need is absent, do not infer it from card names or icons: confirm with the player or a screenshot of the in-game deck.
+Read evolution and hero status from the card entries' own fields (for example `evolutionLevel`, `maxEvolutionLevel`). If a field you need is absent, do not infer it from card names or icons: confirm with the player or a screenshot of the in-game deck (see the note below).
 
 ## 2. Third-party fallback when the player only gives a tag
 

@@ -1,6 +1,6 @@
 # Progression reference
 
-Source: Supercell's upgrade tables published 10 Nov 2025 (applied 24 Nov 2025), as compiled by third parties in 2026. Balance and economy change often, so verify with a web search when the environment allows, and tell the player the date of the data you used.
+Source: Supercell's upgrade data (published 10 Nov 2025, applied 24 Nov 2025) plus third-party tables for levels 2 to 9, as compiled in 2026. Balance and economy change often, so verify with a web search when the environment allows, and tell the player the date of the data you used.
 
 ## In-game level offsets
 
