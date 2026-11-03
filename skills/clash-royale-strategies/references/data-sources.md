@@ -4,13 +4,13 @@ Order of preference, with what each source can and cannot be trusted for. Say wh
 
 ## 1. Official API JSON (preferred)
 
-Use the bundled `scripts/cr-profile.mjs` CLI (see SKILL.md step 2) or JSON the player pasted. This is the only source for battlelog, exact copy counts and evolution fields.
+Use the bundled `scripts/cr-profile.mjs` CLI (SKILL.md step 2) or JSON the player pasted. This is the only source for battlelog, exact copy counts and evolution fields.
 
-Read evolution and hero status from the card entries' own fields (for example `evolutionLevel`, `maxEvolutionLevel`). If a field you need is absent, do not infer it from card names or icons: confirm with the player or a screenshot of the in-game deck. Hero unlocks in particular are not reliably exposed, so ask which heroes the player owns.
+Read evolution and hero status from the card entries' own fields (for example `evolutionLevel`, `maxEvolutionLevel`). If a field you need is absent, do not infer it from card names or icons: confirm with the player or a screenshot of the in-game deck.
 
 ## 2. Third-party fallback when the player only gives a tag
 
-Fetch with whatever web fetch capability exists. If none exists, ask for pasted JSON or a screenshot.
+Use only when the CLI cannot run and the player did not paste JSON. Fetch with whatever web fetch capability exists; if none exists, ask for pasted JSON or a screenshot.
 
 | URL | Gives | Notes |
 |---|---|---|
@@ -18,15 +18,18 @@ Fetch with whatever web fetch capability exists. If none exists, ask for pasted 
 | `royaletracker.gg/player/<TAG>/cards` | Card levels, sortable | Worked in practice. Levels are reliable |
 | `royaletracker.gg/player/<TAG>/decks` | Current deck | Often empty ("No battle history"). Ask the player for the current deck instead |
 
-Do not rely on `royaleapi.com` pages: it blocks automated fetches (bot detection). The RoyaleAPI proxy for the official API (`proxy.royaleapi.dev`, used by the CLI) is a different thing and works.
+`royaleapi.com` pages block automated fetches (bot detection), so do not rely on them. The RoyaleAPI proxy for the official API used by the CLI is a different thing and works.
 
-## Evolution and hero status is not reliable on third-party sites
+### Evolution and hero status is not reliable here
 
-Third-party sites report card levels well but not evolution or hero status. Example: royaletracker listed a Hero Knight as "Evolution Knight". Never take evolved or hero status from them. Confirm from the official API fields or a screenshot of the in-game deck, and state the source of each such fact ("evo status: screenshot", "levels: royaletracker").
+Third-party sites report card levels well but not evolution or hero status. Example: royaletracker listed a Hero Knight as "Evolution Knight". Confirm from the official API fields or a screenshot of the in-game deck.
 
-## Sources section in the answer
+## Sources list in the answer
 
-End deck and upgrade answers with a short sources list in two groups:
+End deck and upgrade answers with a short list in two groups: fetched or provided data (which site, API call or screenshot, and what it supplied), and your own game knowledge (rarity, elixir cost, roles, matchup theory), marked as not fetched and possibly outdated.
 
-- Fetched or provided data: which site, API call or screenshot, and what it supplied (levels, deck, gold, battlelog).
-- Own game knowledge: rarity, elixir cost, card roles, matchup theory. Mark it as not fetched, and note when it could be outdated.
+```
+Sources
+- Fetched: card levels, copies and gold from the official API JSON the player pasted; evo/hero slots from the player's deck screenshot; win rate from the royaletracker.gg profile page.
+- Own game knowledge (not fetched): rarity, elixir cost, card roles, matchup theory.
+```

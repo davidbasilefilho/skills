@@ -2,11 +2,11 @@
 
 Source: Supercell's upgrade tables published 10 Nov 2025 (applied 24 Nov 2025), as compiled by third parties in 2026. Balance and economy change often, so verify with a web search when the environment allows, and tell the player the date of the data you used.
 
-## Real level offsets
+## In-game level offsets
 
-Real level = API `level` + (16 − API `maxLevel`).
+In-game level = API `level` + (16 − API `maxLevel`); defined in SKILL.md step 2.
 
-| Rarity | Unlocks at real level | API maxLevel | Offset |
+| Rarity | Unlocks at in-game level | API maxLevel | Offset |
 |---|---|---|---|
 | Common | 1 | 16 | +0 |
 | Rare | 3 | 14 | +2 |
@@ -14,7 +14,7 @@ Real level = API `level` + (16 − API `maxLevel`).
 | Legendary | 9 | 8 | +8 |
 | Champion | 11 | 6 | +10 |
 
-## Copies needed to reach each real level
+## Copies needed to reach each in-game level
 
 Same-rarity wild cards substitute copies 1:1.
 
@@ -38,10 +38,18 @@ Same-rarity wild cards substitute copies 1:1.
 
 ## Gold per upgrade step
 
-Below level 12 gold depends on rarity; from 12 up it is the same for every rarity.
+Gold is the same for every rarity at a given level except two cells: epic level 7 (400) and legendary level 10 (5,000). Values for levels 2 to 9 and the epic and legendary exceptions are cross-checked across three third-party tables (clashdeckster.com, deckroyale.gg, alviran.net, 2026), not read from Supercell's post. Supercell's own gold table leaves epic level 7 empty, so the 400 comes from its previous table; verify in game before relying on it.
 
 | To level | Gold |
 |---|---|
+| 2 | 5 |
+| 3 | 20 |
+| 4 | 50 |
+| 5 | 150 |
+| 6 | 400 |
+| 7 | 1,000 (epic: 400) |
+| 8 | 2,000 |
+| 9 | 4,000 |
 | 10 | 8,000 (legendary: 5,000) |
 | 11 | 15,000 |
 | 12 | 25,000 |
@@ -49,6 +57,18 @@ Below level 12 gold depends on rarity; from 12 up it is the same for every rarit
 | 14 | 60,000 |
 | 15 | 90,000 |
 | 16 | 120,000 |
+
+## Worked example: upgrade order
+
+Hypothetical cards, gold balance 45,000. All three have a full copy count for the next level, yet the gold covers only two upgrades.
+
+| Order | Card | Step | Copies (have/need) | Gold | Running gold |
+|---|---|---|---|---|---|
+| 1 | Common B | 10 to 11 | 1,000/1,000 | 15,000 | 15,000 |
+| 2 | Epic C | 11 to 12 | 50/50 | 25,000 | 40,000 |
+| 3 | Rare A | 12 to 13 | 600/550 | 40,000 | blocked: 5,000 left, 35,000 short |
+
+Answer: upgrade B, then C; hold A's copies as "assigned, waiting for gold" and spend no wild cards on A yet. The cheaper steps on behind-level cards come first.
 
 ## King Tower
 
