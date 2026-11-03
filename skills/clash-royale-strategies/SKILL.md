@@ -31,7 +31,8 @@ Prefer the richer option whenever it exists. Never claim a capability you don't 
 
 ## Question rules (for any ask tool or plain-text question)
 
-- Every question goes through a structured question tool when the environment has one, whatever its name. That includes requests for missing data (gold, wild cards, slot layout, screenshots) at the end of an answer: ask them with the tool, never as a closing sentence of prose.
+- Every question goes through a structured question tool when the environment has one, whatever its name, in every round of the session. That includes follow-ups and requests for missing data (gold, wild cards, slot layout, screenshots), even right after a computed table: ask them with the tool, never as a closing sentence of prose. Using the tool in the first round does not excuse later rounds.
+- When asking for numbers (gold, wild card counts) through a choice tool, offer ranges whose boundaries are the decision thresholds computed from the data (for example the gold cost of the next upgrade, or the copies needed), with each option saying what it unlocks. Invite the exact value as free text.
 - Without such a tool, write the questions in this exact shape: one small heading (`####`) with a relevant title, a light one-line description under it (why these questions matter), then the questions numbered:
 
   ```
@@ -104,12 +105,14 @@ Golden rule: **only spend wild cards where an upgrade becomes possible right now
 2. Same-rarity wild cards substitute copies 1:1. Common wild cards are one shared pool: show which single upgrades the pool can close and in what order.
 3. **A full copy count does not make an upgrade affordable.** Gold is usually the real bottleneck: ask for or read the gold balance, and answer with an upgrade order (first, second, third, with running gold) rather than "upgrade now". Wild cards assigned to a card are not an upgrade; track "assigned, waiting for gold" separately. Worked example in [Progression](references/progression.md).
 4. Respect inventory caps (often shown as `x/5000` etc.). If over the cap, new wild cards may convert into something else. Spend down to below the cap first, choosing upgrades that consume the most wild cards.
-5. Prioritize: cheaper gold steps on behind-level deck cards before expensive steps on already-high cards. Don't upgrade cards that left the deck.
-6. When choosing between rewards (e.g. a pass reward), compare how many deck upgrades each option unlocks.
+5. Prioritize: cheaper gold steps on behind-level deck cards before expensive steps on already-high cards. Upgrades of cards outside the deck are not wasted: every upgrade adds +1 Collection Level, so the cheapest steps are the most gold-efficient Collection Levels. Weigh them against deck upgrades and the distance to the next milestone reward, and ask the player for that distance, since only the game shows it. Details in [Progression](references/progression.md).
+6. When choosing between rewards (e.g. a pass reward), compare how many upgrades each option unlocks, deck cards first.
+7. For "which cards can I upgrade" requests, list every collection card, not only the deck, whose copies (wild cards included) already reach the next level. Show copies have/need, gold cost and whether the current gold covers it, then give the trade-off from step 5.
 
 ### 6. Honesty
 
 - Your own game knowledge (card stats, costs, abilities, upgrade tables, which cards and heroes exist) can be outdated. When it is missing, uncertain or likely to have changed, search for current information with web search or fetch before answering, and prefer recent sources (patch notes, official posts, current wikis). Use memory alone only for stable facts, and say which facts you checked and which you did not.
+- The progression reference may be stale. Before stating how progression or the economy works, or that an action gives no benefit, search for current progression changes when search exists, and say when you did not.
 - If you cannot search and are unsure about a mechanic (a new hero ability, an evo cycle count), say so. Don't invent ability details.
 - The player's hands-on experience with a card (e.g. "I've used both, the hero is better") outweighs theory.
 - When corrected, acknowledge it once, update the answer, and move on. Don't re-litigate settled choices.
@@ -122,6 +125,6 @@ Golden rule: **only spend wild cards where an upgrade becomes possible right now
 
 ## References
 
-- [Data sources](references/data-sources.md): royaletracker pages, screenshots, evolution and hero reliability, the sources list.
+- [Data sources](references/data-sources.md): royaletracker pages, screenshots, unreliable fields (evolution and hero status, deck card order, King Tower level), the sources list.
 - [Deck format](references/deck-format.md): default slot layout, localized card names, deck output format.
-- [Progression](references/progression.md): level offsets, copies and gold per level, upgrade order example, King Tower.
+- [Progression](references/progression.md): level offsets, copies and gold per level, upgrade order example, Collection Level, King Tower, unverified conflicts.

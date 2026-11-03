@@ -18,6 +18,11 @@ Fetch with whatever web fetch capability exists; if none exists, use screenshots
 
 Third-party sites report card levels well but not evolution or hero status. Example: royaletracker listed a Hero Knight as "Evolution Knight". Confirm from a screenshot of the in-game deck or with the player.
 
+### Other unreliable fields
+
+- **Deck card order.** The `decks` page lists cards in an order that does not match the in-game slot order (a player confirmed it was wrong for the special slots). Use it for which cards a deck contains, never to infer slot positions or which card sits in which special slot. Get those from a screenshot or the player.
+- **King Tower level.** The profile page can show a King Tower level inconsistent with the card levels. Treat that field as unreliable and derive the tower level from card levels or ask the player.
+
 ## 2. Screenshots and what the player says
 
 The only reliable source for the current deck order, a non-default slot layout, evolution and hero status, wild cards and gold. Read them carefully and ask when something is unclear.
