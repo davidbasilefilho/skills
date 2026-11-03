@@ -2,7 +2,7 @@
 
 Methods for reading, editing and writing networks by reasoning about weights, with the evidence behind each. Dated 2026-11-03.
 
-Main source for the worked examples: the weight-space-programming post by Takehi, https://rikiyat.github.io/blog/weight-space-programming/ (2026-11-02), with prompts, logs and per-experiment READMEs at https://github.com/RikiyaT/lm_understand-logs (raw files under https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/main/). In those experiments a proprietary frontier model (named gpt-6-astra in the logs) worked with its agent tools switched off or tightly limited. The work is self-published and unreviewed, and no one has replicated it on another model, so treat the numbers as reported, not established.
+Main source for the worked examples: the weight-space-programming post by Takehi, https://rikiyat.github.io/blog/weight-space-programming/ (2026-11-02), with prompts, logs and per-experiment READMEs at https://github.com/RikiyaT/lm_understand-logs (raw files under https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/main/). In those experiments a proprietary frontier model (named gpt-6-astra in the logs) worked with its agent tools switched off or tightly limited. The work is self-published and unreviewed, and no replication on another model was found (an independent rerun of one published Qwen edit exists, see below), so treat the numbers as reported, not established.
 
 Each entry gives what it is, when it fits, how it worked in the source, and the URL. Mechanisms from the background papers are paraphrased from their abstracts or summaries.
 
@@ -57,7 +57,7 @@ Each entry gives what it is, when it fits, how it worked in the source, and the 
   - akhaliq reran MATH-500 on the published edit and got 51.0%, so the reported improvement itself reproduced. Model card: https://huggingface.co/RikiyaT/Qwen3.5-0.8B-weight-space-programming.
   - Hedwig measured the unedited model with thinking off at 43.6% on MATH-500, against 45.2% for the edited model, a gain of about 1.6 points. The unedited model scored 34.3% when its thinking was cut at 8,192 tokens. So most of the headline gain is loop removal under a generous token limit, not better mathematics. https://www.hedwigai.com/blog/weight-edit-math-or-loops.
   - A dev.to write-up reached the same conclusion: the jump was a loop fix, and the edit helps mainly with thinking on and long context. https://dev.to/alanwest/gpt-6-astra-edited-qwen35-08bs-weights-the-math-500-jump-was-a-loop-fix-2g5a.
-- Take-away: this is a real, replicated repair of a failure mode, and it is an unlock of existing ability, not new capability. Always report cut-off share and a capped or thinking-off baseline next to the headline score.
+- Take-away: this is a real repair of a failure mode (the headline score reproduced on the published edit), and it is an unlock of existing ability, not new capability. Always report cut-off share and a capped or thinking-off baseline next to the headline score.
 - Practice and held-out setup in the source: GSM8K and MATH training problems (7,469 and 7,275) and 714 AIME problems with answers only were the practice material; MATH-500, GSM8K test and IFEval evaluations were never visible to the model.
 - URLs: https://rikiyat.github.io/blog/weight-space-programming/ (experiment 8), https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/main/exp8_math/README.md.
 
@@ -66,7 +66,7 @@ Each entry gives what it is, when it fits, how it worked in the source, and the 
 - What: raise the scores of a small model by editing a handful of input-embedding rows for frequent response openers (for example "We", "To", "Step", "Let", "First"). In a model with tied embeddings, an edit to a row also moves that token's output logit direction, which makes the edit act on both the input and the output side.
 - Fits: models with tied input and output embeddings where an output-format or starting-token bias may be the real problem.
 - Status: UNVERIFIED. This comes from a report by @AdamHoltererer on X that the research for this skill could not find. The figures attached to it (scores going from 24 to 46, 25 to 47 at 256 tokens, wrong-equation counts from 26 to 29, and the claim that an LLM chose the five tokens) are not confirmed. Do not cite them as results.
-- What is verified: the SmolLM2-135M-Instruct config sets tied embeddings to true (Llama architecture, hidden size 576, 30 layers, vocabulary 49,152), so the tying mechanism is real. https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct/raw/main/config.json. The SmolLM2 paper lists tied embeddings for the 1.7B size and not the 135M size, so the config is the authority. https://arxiv.org/html/2502.02737v1.
+- What is verified: the SmolLM2-135M-Instruct config sets tied embeddings to true (Llama architecture, hidden size 576, 30 layers, vocabulary 49,152), so the tying mechanism is real. https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct/raw/main/config.json. The SmolLM2 paper lists tied embeddings for the 1.7B size; no 135M-specific statement was found there, so the config is the authority. https://arxiv.org/html/2502.02737v1.
 - Reading of the claim: if it holds, a rise from a few embedding rows fits a start-token or output-format bias, not new math skill, the same unlock-not-capability pattern as Gemma and Qwen. The wrong-equation count rising fits that, as does a short token cap. A homemade 96-question set has wide error bars. Replicate with a held-out set, a strict scorer and a cut-off-share metric before trusting it.
 
 ### Attention head ablation
@@ -121,7 +121,7 @@ These are not weight-space programming as defined in the post, but they inform h
 - **Gemma 3 270M math.** Edits could not add ability. Failures were ordinary arithmetic and algebra mistakes with no single component to switch off. No edit moved MATH-500 by more than about a point (6.8% base, 7.0 to 7.7% edited). Source: the post, https://rikiyat.github.io/blog/weight-space-programming/.
 - **Sycophancy from weights.** 4 of 4 attempts failed; attention patterns were needed (see the entry above).
 - **Qwen gain is mostly loop removal** (Hedwig, dev.to and the model card above). It is a repair of a failure mode, not a gain in capability.
-- **Authors' own caveat.** The post calls the results promising but limited by context length and harness inefficiency.
+- **Authors' own caveat.** The post calls the results exciting but still limited by context length and harness inefficiency.
 - **Scale and fit.** In the no-tool runs, the weights had to fit in the context window. Go needed a sandbox for code. Seaquest reached about 60% of the PPO-500M score. The diffusion reading drew outlines where the model makes filled shapes.
 - **Variance.** The tables show one run per condition for Go and Qwen, so run-to-run variance is unreported (inference from the tables).
 - **Scope of evidence.** One self-published post on a proprietary model. Replication on other models is unconfirmed, apart from the independent MATH-500 rerun and the loop-removal analyses above.
@@ -131,7 +131,7 @@ These are not weight-space programming as defined in the post, but they inform h
 Use these as examples of the discipline the SKILL.md protocol asks for.
 
 - Tool-free runs were audited turn by turn (1,125 turns) to confirm no tool was used. Code ran in a sandbox with no network and a time limit per run.
-- Rules differed by experiment: none for forward passes in experiments 1, 2, 4 and 5; code allowed but no forward pass in experiment 3; counted forward-pass budgets in experiments 6 and 8.
+- Rules differed by experiment: no tools and no forward passes allowed in experiments 1, 2, 4 and 5; code allowed but no forward pass in experiment 3; counted forward-pass budgets in experiments 6 and 8.
 - Practice and held-out sets were separated and the held-out opponents or benchmarks were never visible.
 - Embeddings were frozen in the sycophancy test so input and output statistics could not give the answer away.
 - The logs repository ships an edit applier that verifies a sha256 hash, which is the idea behind the edit-log hash in the protocol. https://github.com/RikiyaT/lm_understand-logs.

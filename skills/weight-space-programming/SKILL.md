@@ -66,7 +66,11 @@ Run the practice set and compare to the baseline. Also check the secondary metri
 
 ### 7. Keep or revert
 
-Keep an edit only if it helps on the practice set and nothing it should not touch got worse. Otherwise restore the previous values from the log and record the failure. Failed edits are information; keep them in the log.
+Keep an edit only if it helps on the practice set and nothing it should not touch got worse. Otherwise restore the previous values from the log and record the failure; failed edits are information. Do not stack speculative edits: each kept edit earns its place with a measured gain.
+
+### Writing a network from scratch
+
+When there are no weights to fix, specify the task, work out the computation by reasoning, set the weights layer by layer, and test against a trivial baseline such as an all-zero or random network. Then run the same practice, keep-or-revert and held-out steps. See the writing entries in `references/techniques.md`.
 
 ## Experiment protocol
 
@@ -78,10 +82,9 @@ Keep an edit only if it helps on the practice set and nothing it should not touc
    - the hypothesis behind it;
    - the result on the practice set, and on the held-out eval only at the end;
    - a hash of the edited file, or a diff against the original, so anyone can reproduce the state after that entry.
-4. **Revert what does not help.** Do not stack speculative edits. Each kept edit earns its place with a measured gain.
-5. **Count the change.** Report how many weights changed and what share of the total that is. Small shares are the usual pattern; a large share is a signal that you are retraining by other means.
-6. **Budget.** Count forward passes and runs as you go and stay within any limit the user set. Spend early passes on the baseline and on the most informative probes.
-7. **Repeat.** Single runs vary with sampling and seeds. Repeat the baseline and the final comparison when the cost allows, and report the spread or say it is unmeasured.
+4. **Count the change.** Report how many weights changed and what share of the total that is. When editing an existing network, small shares are the usual pattern in the reported cases, and a large share suggests you are retraining by other means. This does not apply to a network written from scratch.
+5. **Budget.** Count forward passes and runs as you go and stay within any limit the user set. Spend early passes on the baseline and on the most informative probes.
+6. **Repeat.** Single runs vary with sampling and seeds. Repeat the baseline and the final comparison when the cost allows, and report the spread or say it is unmeasured.
 
 ## Honesty about results
 
@@ -95,20 +98,18 @@ Keep an edit only if it helps on the practice set and nothing it should not touc
 
 ## Expectations and limits
 
-- **Look for a switch before adding ability.** The reliable wins so far removed or damped something that was hiding existing behavior: a repetition direction, a local-minimum trap in a policy, a bias toward bad openers. Adding genuinely new skill to a language model by hand did not work in the reported cases (see the Gemma case in `references/techniques.md`).
+- **Look for a switch before adding ability.** The verified wins so far removed or damped something that was hiding existing behavior: a repetition direction, a local-minimum trap in a policy. A report that nudging opener-token embeddings helps a small model is unverified. Adding genuinely new skill to a language model by hand did not work in the reported cases (see the Gemma case in `references/techniques.md`).
 - **Failure from ordinary mistakes has no switch.** If the model is wrong the way a weak model is wrong in arithmetic or reasoning, with no single component to turn off, expect little or nothing from edits.
 - **Reading from weights alone can fail.** Differences between two checkpoints are easy to find and hard to map to behavior, as the sycophancy case showed. Use allowed observations such as activations, attention patterns or logit probes to narrow where to look.
 - **Small networks are the sweet spot.** Hand-writing or hand-fixing works best on small, structured networks (a game-playing MLP, a policy, a tiny transformer). Scale and context length limit what fits in a reply or a pass.
-- **Evidence is thin.** Most reported results come from self-published work using one proprietary model, with single runs per condition. Treat the numbers as indicative and replicate before relying on them.
+- **Evidence is thin.** The main reported results come from one self-published source using one proprietary model, and appear to use one run per condition. Treat the numbers as indicative and replicate before relying on them.
 
 ## When to stop and ask
 
-Stop and ask the user, with the question and your recommendation, when:
+Beyond the stops already in the rules (cost, original weights, high-risk layers, budgets), stop and ask the user, with the question and your recommendation, when:
 
 - the task or scoring rule is unclear, or no held-out data exists and you cannot build any;
-- the next step costs real compute, large downloads or money;
 - the only path forward needs training, a forward pass, or an observation the user ruled out;
-- an edit would touch the original weights, or a high-risk layer without a clear reason;
 - results contradict the hypothesis twice in a row and you have no new hypothesis;
 - the requested change is a skill the network lacks, and the evidence says edits will not add it. Say so and offer the options (unlock a hidden behavior, accept a limit, or allow training).
 
