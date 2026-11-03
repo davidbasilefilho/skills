@@ -1,11 +1,11 @@
 ---
 name: clash-royale-strategies
-description: Build, review and tune Clash Royale decks and upgrade plans from a player's real data (official API JSON, battlelog, wild card counts). Use for deck building, evo/hero slot choices, matchup and loss analysis, and deciding where to spend wild cards and gold.
+description: Build, review and tune Clash Royale decks and upgrade plans from a player's real data (official API JSON, battlelog, wild card counts). Use for deck building, evo/hero slot choices, matchup and loss analysis, and deciding where to spend wild cards and gold, including upgrade order.
 ---
 
 # Clash Royale Strategies
 
-Help a player win more with the cards they actually have: build decks around their real levels, evolutions and heroes, read their battlelog for patterns, and plan upgrades that are possible right now.
+Help a player win more with the cards they actually have: build decks around their in-game levels, evolutions and heroes, read their battlelog for patterns, and plan upgrades that are possible right now.
 
 This skill is model-, harness- and environment-agnostic. It never assumes a specific tool name. Instead it describes **capabilities** and says what to do when each is or is not available.
 
@@ -38,20 +38,24 @@ Prefer the richer option whenever it exists. Never claim a capability you don't 
 Ask (only what isn't already known):
 
 1. Play style: e.g. cycle, beatdown, bridge-spam/control, bait.
-2. **Which heroes they own.** The API does not reliably show hero unlocks; never infer them.
+2. **Which heroes they own.** Never infer it from third-party sites or icons (see `references/data-sources.md`).
 3. Average elixir target.
 4. How to weigh card levels vs. synergy.
-5. Slot rules for their game version, if they mention them (e.g. slot 1 evo, slot 2 hero, slot 3 wildcard).
+5. Their special slot layout (which slots take evolutions, heroes or either). Never assume it.
+6. Their language or game locale, for card names.
+7. Current deck and gold balance, when not in the data.
 
 ### 2. Get and read the data
 
-If the player hasn't pasted their data and you can run code, fetch it with the bundled CLI (a single file that needs only Node 20+):
+Use the official API JSON first. If the player hasn't pasted it and you can run code, fetch it with the bundled CLI (a single file that needs only Node 20+):
 
 ```bash
 CLASH_ROYALE_API_TOKEN=... node scripts/cr-profile.mjs '#TAG' [--only profile|battlelog] [--out file.json]
 ```
 
-It prints `{ "profile": ..., "battlelog": ... }`, the same shape the player would paste. The token comes from developer.clashroyale.com and is bound to IP addresses; for a machine with a changing IP, create the key for the RoyaleAPI proxy IP and set `CLASH_ROYALE_API_BASE_URL=https://proxy.royaleapi.dev/v1`. Never ask the player to paste their token into the conversation; ask them to set the environment variable themselves. Without code execution or a token, ask the player to paste the JSON.
+It prints `{ "profile": ..., "battlelog": ... }`, the same shape the player would paste. The token comes from developer.clashroyale.com and is bound to IP addresses; for a machine with a changing IP, create the key for the RoyaleAPI proxy IP and set `CLASH_ROYALE_API_BASE_URL=https://proxy.royaleapi.dev/v1`. Never ask the player to paste their token into the conversation; ask them to set the environment variable themselves.
+
+Use the web fallback only when the CLI cannot run (no code execution or no token) and the player has not pasted JSON. If you cannot fetch web pages either, ask the player to paste the JSON. The fallback sites, what they get wrong and how to cite sources are in `references/data-sources.md`.
 
 From the official API player JSON:
 
@@ -59,25 +63,17 @@ From the official API player JSON:
 - `currentDeck[]`, `battlelog[]` (`team`, `opponent`, `crowns`, `trophyChange`, `elixirLeaked`, opponent `cards`).
 - Use `cards[]` for copy counts, not `currentDeck[]` (they can differ).
 
-**Normalize levels before comparing anything.** The API reports level relative to rarity. Real level = API level + offset:
-
-| Rarity | maxLevel in API | Offset |
-|---|---|---|
-| Common | 16 | +0 |
-| Rare | 14 | +2 |
-| Epic | 11 | +5 |
-| Legendary | 8 | +8 |
-| Champion | 6 | +10 |
-
-Always derive the offset from `maxLevel` (16 − maxLevel) rather than trusting this table blindly. Use real levels in every table you show the player.
+**In-game level** is the level the game shows the player, and the only level to show in answers. The API reports level relative to rarity, so in-game level = API `level` + (16 − `maxLevel`). Derive the offset from `maxLevel` rather than from a fixed table; the per-rarity offsets are in `references/progression.md`. Normalize before comparing anything.
 
 ### 3. Build the deck
 
-- **Slots:** a card occupies one slot. The same card can't be both its evo and its hero form in one deck. A wildcard slot (if the game has one) accepts either form, so put a card that has both forms there so the player can choose per deck.
+Slots, localized card names and the output format are in `references/deck-format.md`; read it before presenting a deck.
+
+- **Rules that worked:** a real win condition; built around the player's highest in-game level cards and owned evolutions/heroes; average elixir roughly 3.0 to 3.8; compared with the current deck (what left, what entered, elixir change, gained and lost).
 - **Roles checklist:** win condition, tank or mini-tank, building or ground stopper, anti-air (at least two sources), splash, small spell, medium/big spell, cycle cards.
-- **Levels:** favor high real levels when synergy holds; otherwise balance. Flag which cards are underleveled.
+- **Levels:** favor high levels when synergy holds; otherwise balance. Flag which cards are underleveled.
 - **Meta check:** tally opponent cards across the battlelog. If many opponents run splash (Wizard, Valkyrie, Bomber, Mega Knight, Witch), swarm-based win conditions and cheap support will struggle. Say so.
-- Show the deck as a table: slot, card, elixir, real level, role. Give average elixir.
+- Give 2 or 3 alternatives at most, each with a one-line rationale, and one recommendation when the player asks you to choose.
 - List the deck's real weak matchups. Don't oversell.
 - If the player's previous deck was winning in their bracket, say so; "your old deck, slots optimized" is a legitimate answer.
 
@@ -85,15 +81,15 @@ Always derive the offset from `maxLevel` (16 − maxLevel) rather than trusting 
 
 - Ask for an updated battlelog after a few games rather than guessing.
 - For each loss: opponent deck, which of their cards hard-counter which of yours, level differences.
-- Distinguish **learning curve** (new archetype, 1–2 games) from **structural problems** (the deck loses to what the bracket plays most). Recommend reverting when the data supports it.
+- Distinguish **learning curve** (new archetype, 1 to 2 games) from **structural problems** (the deck loses to what the bracket plays most). Recommend reverting when the data supports it.
 
 ### 5. Plan upgrades and wild cards
 
 Golden rule: **only spend wild cards where an upgrade becomes possible right now.** Otherwise, hold.
 
-1. For each deck card: real level, copies, copies needed for next level, gold needed, shortfall (`references/progression.md`).
+1. For each deck card: in-game level, copies, copies needed for next level, gold needed, shortfall (`references/progression.md`).
 2. Same-rarity wild cards substitute copies 1:1. Common wild cards are one shared pool: show which single upgrades the pool can close and in what order.
-3. **Gold is usually the real bottleneck.** Wild cards assigned to a card are not an upgrade; the upgrade still needs gold. Track "assigned, waiting for gold" separately.
+3. **A full copy count does not make an upgrade affordable.** Gold is usually the real bottleneck: ask for or read the gold balance, and answer with an upgrade order (first, second, third, with running gold) rather than "upgrade now". Wild cards assigned to a card are not an upgrade; track "assigned, waiting for gold" separately. Worked example in `references/progression.md`.
 4. Respect inventory caps (often shown as `x/5000` etc.). If over the cap, new wild cards may convert into something else. Spend down to below the cap first, choosing upgrades that consume the most wild cards.
 5. Prioritize: cheaper gold steps on behind-level deck cards before expensive steps on already-high cards. Don't upgrade cards that left the deck.
 6. When choosing between rewards (e.g. a pass reward), compare how many deck upgrades each option unlocks.
@@ -105,7 +101,14 @@ Golden rule: **only spend wild cards where an upgrade becomes possible right now
 - When corrected, acknowledge it once, update the answer, and move on. Don't re-litigate settled choices.
 - Data from the API can be stale (opened chests after export), so tell the player to double-check counts in game before spending.
 
+### 7. Sources and self-update
+
+- End deck and upgrade answers with a sources list that separates fetched or provided data from your own game knowledge (format and example in `references/data-sources.md`).
+- If the session surfaced corrections or new lessons (wrong card names, slot layout, a broken data source, a wrong assumption), offer the player at the end to update this skill with them. Add only general lessons to the skill, never the player's tag, name or clan.
+
 ## Bundled files
 
-- `references/progression.md`: copies and gold per level, rarity offsets, King Tower rule. Dated; verify with a search when possible.
+- `references/data-sources.md`: source order, royaletracker URLs, royaleapi limits, unreliable evo/hero status, sources list with example.
+- `references/deck-format.md`: special slot rules and layout example, localized names, deck output format and exact in-game order.
+- `references/progression.md`: rarity offsets, copies and gold per level, King Tower rule, upgrade order example. Dated; verify with a search when possible.
 - `scripts/cr-profile.mjs`: fetches profile and battlelog by tag (see step 2). Run `node scripts/cr-profile.mjs --help`. Exit codes: 0 ok, 1 failed, 2 usage error, 3 partial (one section missing).
