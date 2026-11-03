@@ -1,6 +1,6 @@
 ---
 name: clash-royale-strategies
-description: Build, review and tune Clash Royale decks and upgrade plans from a player's real data (official API JSON, battlelog, wild card counts). Use for deck building, evo/hero slot choices, matchup and loss analysis, and deciding where to spend wild cards and gold.
+description: Build, review and tune Clash Royale decks and upgrade plans from a player's real data (official API JSON, battlelog, wild card counts). Use for deck building, evo/hero slot choices, matchup and loss analysis, and deciding where to spend wild cards and gold, including upgrade order.
 ---
 
 # Clash Royale Strategies
@@ -41,7 +41,9 @@ Ask (only what isn't already known):
 2. **Which heroes they own.** The API does not reliably show hero unlocks; never infer them.
 3. Average elixir target.
 4. How to weigh card levels vs. synergy.
-5. Slot rules for their game version, if they mention them (e.g. slot 1 evo, slot 2 hero, slot 3 wildcard).
+5. Their special slot layout (which slots take evolutions, heroes or either). Never assume it; see `references/deck-format.md`.
+6. Their language or game locale, for card names.
+7. Current deck and gold balance, when not in the data.
 
 ### 2. Get and read the data
 
@@ -51,7 +53,9 @@ If the player hasn't pasted their data and you can run code, fetch it with the b
 CLASH_ROYALE_API_TOKEN=... node scripts/cr-profile.mjs '#TAG' [--only profile|battlelog] [--out file.json]
 ```
 
-It prints `{ "profile": ..., "battlelog": ... }`, the same shape the player would paste. The token comes from developer.clashroyale.com and is bound to IP addresses; for a machine with a changing IP, create the key for the RoyaleAPI proxy IP and set `CLASH_ROYALE_API_BASE_URL=https://proxy.royaleapi.dev/v1`. Never ask the player to paste their token into the conversation; ask them to set the environment variable themselves. Without code execution or a token, ask the player to paste the JSON.
+It prints `{ "profile": ..., "battlelog": ... }`, the same shape the player would paste. The token comes from developer.clashroyale.com and is bound to IP addresses; for a machine with a changing IP, create the key for the RoyaleAPI proxy IP and set `CLASH_ROYALE_API_BASE_URL=https://proxy.royaleapi.dev/v1`. Never ask the player to paste their token into the conversation; ask them to set the environment variable themselves.
+
+Source order: official API JSON (CLI or pasted) first. If the player only gives a tag and you cannot run the CLI, fall back to royaletracker.gg pages for profile and card levels; do not rely on royaleapi.com (it blocks automated fetches), and if the decks page is empty, ask for the current deck. Third-party sites get levels right but not evolution or hero status, so confirm that from the API fields or an in-game deck screenshot. Details and URLs: `references/data-sources.md`. Say which source each fact came from.
 
 From the official API player JSON:
 
@@ -73,11 +77,13 @@ Always derive the offset from `maxLevel` (16 − maxLevel) rather than trusting 
 
 ### 3. Build the deck
 
-- **Slots:** a card occupies one slot. The same card can't be both its evo and its hero form in one deck. A wildcard slot (if the game has one) accepts either form, so put a card that has both forms there so the player can choose per deck.
+- **Rules that worked:** a real win condition; built around the player's highest-level cards and owned evolutions/heroes; average elixir roughly 3.0 to 3.8; compared with the current deck (what left, what entered, elixir change, gained and lost).
+- **Special slots:** confirm the player's layout before assigning anything, and put each owned evolution/hero in a slot that activates it. Layout example and rules: `references/deck-format.md`.
+- **Card names:** use the official localized names in the player's language. Never invent a translation; when unsure, add the English name in parentheses or ask (Firecracker is "Pirotécnica" in pt-BR, not "Lançadora"). See `references/deck-format.md`.
 - **Roles checklist:** win condition, tank or mini-tank, building or ground stopper, anti-air (at least two sources), splash, small spell, medium/big spell, cycle cards.
 - **Levels:** favor high real levels when synergy holds; otherwise balance. Flag which cards are underleveled.
 - **Meta check:** tally opponent cards across the battlelog. If many opponents run splash (Wizard, Valkyrie, Bomber, Mega Knight, Witch), swarm-based win conditions and cheap support will struggle. Say so.
-- Show the deck as a table: slot, card, elixir, real level, role. Give average elixir.
+- **Output:** cards numbered 1 to 8 in exact in-game order, special slots first with their slot type, each line with localized name, evo/hero/mix tag, rarity and in-game level, then average elixir. Give 2 or 3 alternatives at most, each with a one-line rationale, and a recommendation when the player asks you to choose. Format: `references/deck-format.md`.
 - List the deck's real weak matchups. Don't oversell.
 - If the player's previous deck was winning in their bracket, say so; "your old deck, slots optimized" is a legitimate answer.
 
@@ -85,7 +91,7 @@ Always derive the offset from `maxLevel` (16 − maxLevel) rather than trusting 
 
 - Ask for an updated battlelog after a few games rather than guessing.
 - For each loss: opponent deck, which of their cards hard-counter which of yours, level differences.
-- Distinguish **learning curve** (new archetype, 1–2 games) from **structural problems** (the deck loses to what the bracket plays most). Recommend reverting when the data supports it.
+- Distinguish **learning curve** (new archetype, 1 to 2 games) from **structural problems** (the deck loses to what the bracket plays most). Recommend reverting when the data supports it.
 
 ### 5. Plan upgrades and wild cards
 
@@ -93,7 +99,7 @@ Golden rule: **only spend wild cards where an upgrade becomes possible right now
 
 1. For each deck card: real level, copies, copies needed for next level, gold needed, shortfall (`references/progression.md`).
 2. Same-rarity wild cards substitute copies 1:1. Common wild cards are one shared pool: show which single upgrades the pool can close and in what order.
-3. **Gold is usually the real bottleneck.** Wild cards assigned to a card are not an upgrade; the upgrade still needs gold. Track "assigned, waiting for gold" separately.
+3. **A full copy count does not make an upgrade affordable.** Gold is usually the real bottleneck: ask for or read the gold balance, and answer with an upgrade order (first, second, third, with running gold) rather than "upgrade now". Wild cards assigned to a card are not an upgrade; track "assigned, waiting for gold" separately.
 4. Respect inventory caps (often shown as `x/5000` etc.). If over the cap, new wild cards may convert into something else. Spend down to below the cap first, choosing upgrades that consume the most wild cards.
 5. Prioritize: cheaper gold steps on behind-level deck cards before expensive steps on already-high cards. Don't upgrade cards that left the deck.
 6. When choosing between rewards (e.g. a pass reward), compare how many deck upgrades each option unlocks.
@@ -105,7 +111,14 @@ Golden rule: **only spend wild cards where an upgrade becomes possible right now
 - When corrected, acknowledge it once, update the answer, and move on. Don't re-litigate settled choices.
 - Data from the API can be stale (opened chests after export), so tell the player to double-check counts in game before spending.
 
+### 7. Sources and self-update
+
+- End deck and upgrade answers with a short sources list that separates fetched or provided data (API, site, screenshot, what each supplied) from your own game knowledge (rarity, cost, roles).
+- If the session surfaced corrections or new lessons (wrong card names, slot layout, a broken data source, a wrong assumption), offer the player at the end to update this skill with them. Add only general lessons to the skill, never the player's tag, name or clan.
+
 ## Bundled files
 
+- `references/data-sources.md`: source order, royaletracker URLs, royaleapi limits, unreliable evo/hero status, sources section.
+- `references/deck-format.md`: special slot layout example, localized names, deck output format, building rules.
 - `references/progression.md`: copies and gold per level, rarity offsets, King Tower rule. Dated; verify with a search when possible.
 - `scripts/cr-profile.mjs`: fetches profile and battlelog by tag (see step 2). Run `node scripts/cr-profile.mjs --help`. Exit codes: 0 ok, 1 failed, 2 usage error, 3 partial (one section missing).
