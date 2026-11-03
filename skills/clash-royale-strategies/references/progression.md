@@ -77,7 +77,6 @@ XP and King's Journey were removed in the 2026 progression update (announced for
 - **Formula:** the sum of all card levels, tower troops included and Merge Tactics rulers excluded, plus 5 per owned Evolution and 5 per owned Hero.
 - **Every upgrade adds +1 Collection Level, whatever the rarity.** The cheapest upgrade steps are therefore the most gold-efficient Collection Levels, including cards outside the deck.
 - **Milestone rewards** start at Collection Level 20, then come every 10 levels up to 1,500, then every 5. The full track totals 14,955 gems, 28,920 common, 7,850 rare and 1,327 epic wild cards.
-- **Using it in a plan:** weigh cheap off-deck upgrades against deck upgrades and the distance to the next milestone. The player sees that distance in game, so ask.
 
 Sources: support.clashroyale.com/hc/en-us/articles/50815299122459, supercell.com/en/games/clashroyale/blog/news/new-collection-levels-and-mastery-changes/, royaletracker.gg/news/clash-royale-june-2026-update, egw.news (May 2026). Re-check them before quoting numbers, since the track can change.
 
