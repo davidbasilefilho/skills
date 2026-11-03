@@ -1,6 +1,6 @@
 ---
 name: personality-test-suite
-description: Run an interactive personality battery (Harry Potter, Riordanverse, 16Personalities, 12axes, astrology) with batched questions and one cross-referenced results report at the end.
+description: Use when a user wants a personality assessment across several systems (Harry Potter, Riordanverse, 16Personalities, 12axes, astrology). Runs an interactive battery with batched questions and one cross-referenced results report at the end.
 ---
 
 # Personality Test Suite
@@ -59,10 +59,10 @@ Only when the matching capability truly doesn't exist:
 These are requirements, not suggestions. Breaking one is a failed run.
 
 1. **Capability check first.** Before the first message, inventory your tools and decide, once, for the whole run:
-   - **Question tool**: any tool that collects structured user input (`AskUserQuestion`, `ask_user`, `request_user_input`, forms, polls, choice cards…). Note its per-call question limit `Q`, per-question option limit `O`, whether it supports multi-select, a selection limit, and a free-text/"Other" field.
+   - **Question tool**: any tool that collects structured user input (structured question tools, forms, polls, choice cards…). Note its per-call question limit `Q`, per-question option limit `O`, whether it supports multi-select, a selection limit, and a free-text/"Other" field.
    - **Visual tool**: any tool that renders charts, diagrams, widgets, canvases, artifacts or HTML inline.
    - **Memory tool**: any persistent memory, profile, notes or past-conversation search.
-   - **Task list tool**: any todo/task/plan tool (`TodoWrite`, `TaskCreate`/`TaskUpdate`, `update_plan`, checklists…).
+   - **Task list tool**: any todo, task or plan tool (task or progress list tools, checklists…).
    - **Compute/browse**: code execution or web access (needed for an accurate astrology chart).
    Include deferred or searchable tools: search for and load them. Then use every capability that exists, as listed in *Capability map*. Having a tool and not using it where this skill calls for it, or falling back to text while the tool works, is a violation.
 2. **Questions go through the question tool when one exists**, every time, including Steps 1 and 2. Never ask what can be inferred (see Step 2b). Plain-text questions are allowed only when no question tool exists, or when the tool fails (then say so in one line and fall back).
@@ -138,6 +138,10 @@ If any result is borderline (two houses/parents within ~10%, a 16p dimension wit
 ### Step 4: Results (only at the very end)
 
 One final report built from **all** answers across **all** tests (see *Cross-test inference*), following `references/results-format.md`, with every required visual. Then write to memory (see *Memory*).
+
+### Step 5: Self-update offer
+
+If the session surfaced corrections or new lessons (a flawed question blueprint, a wrong figure or term, a broken data source, a wrong assumption), offer the user at the end to update this skill with them. Add only general lessons to the skill, never the user's answers, results, birth data, name or country.
 
 ## Question kinds
 

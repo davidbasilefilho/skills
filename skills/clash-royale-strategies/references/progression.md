@@ -1,10 +1,10 @@
-# Progression reference
+# Progression
 
 Source: Supercell's upgrade data (published 10 Nov 2025, applied 24 Nov 2025) plus third-party tables for levels 2 to 9, as compiled in 2026. Balance and economy change often, so verify with a web search when the environment allows, and tell the player the date of the data you used.
 
 ## In-game level offsets
 
-In-game level = API `level` + (16 − API `maxLevel`); defined in SKILL.md step 2.
+Only needed for pasted API JSON: in-game level = `level` + (16 − `maxLevel`); defined in [SKILL.md](../SKILL.md) step 2.
 
 | Rarity | Unlocks at in-game level | API maxLevel | Offset |
 |---|---|---|---|

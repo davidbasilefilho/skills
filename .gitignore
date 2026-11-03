@@ -1,14 +1,8 @@
-# Dependencies
-node_modules/
-
 # Agents
+.holyagent/
 .openclaude-profile.json
 .agents
 
 # OS files
 .DS_Store
 Thumbs.db
-
-# Editor directories
-.vscode/
-.idea/
