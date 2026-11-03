@@ -1,6 +1,6 @@
 # Basile Skills
 
-A collection of agent skills by David Basile Filho.
+A collection of agent skills by David Basile Filho, written as plain Markdown for any agent that supports the Agent Skills format.
 
 ## Install
 
@@ -28,37 +28,11 @@ npx -y skills add davidbasilefilho/skills
 
 ## Usage
 
-Skills follow the open Agent Skills format and work in any harness that supports it. The agent loads `SKILL.md` and reads files under `references/` as needed. Say something like "test my personality" or "run the personality test suite".
-
-## Repository structure
-
-```text
-skills/
-  <skill-name>/
-    SKILL.md
-    references/
-    scripts/
-```
-
-## Development
-
-Tooling runs on Bun (see `mise.toml`).
-
-```bash
-bun install     # also installs the lefthook hooks
-bun run check   # oxlint (type-aware via oxlint-tsgolint), tsc, oxfmt --check
-bun run fmt     # format with oxfmt
-```
-
-Code lives in `src/` and uses [Effect](https://effect.website) for every effect: async work, errors and validation. Promises, `async`/`await`, `try`/`catch` and `throw` are only allowed inside `src/**/adapters/**`; elsewhere wrap them with `Effect.tryPromise` or `Effect.try`. The `effect-only` oxlint plugin in `lint/` enforces this.
-
-The lefthook pre-commit hook runs the checks.
+The agent loads a skill's `SKILL.md` and reads files under its `references/` as needed. Say something like "build me a Clash Royale deck", "plan my card upgrades" or "run the personality test suite".
 
 ## Contributing
 
-- Keep each skill focused on a single job
-- Prefer clear, direct instructions over duplicated guidance
-- Update this README when adding or renaming skills
+Read `AGENTS.md` for the rules on skills, commits and the README structure.
 
 ## License
 

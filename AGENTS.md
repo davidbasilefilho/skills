@@ -1,82 +1,36 @@
-<!-- BASE START -->
-## Interaction Guidelines
+# Repository rules
 
-Direct, succinct, and objective. Favor headings over lists; use nested lists only for specific details.
-**No em dashes**; restructure sentences to avoid them.
+Rules for working in this repository, each with the reason it exists. The repository is pure Markdown: skills under `skills/`, no code, build or tooling, so there are no gates to run beyond reading your own diff.
 
-## Response Architecture
+## The session agent
 
-Use multi-section responses for complex inquiries; provide brief, direct answers for simple requests.
+- When the holyagent plugin is present, every session here works as the holyagent root, whatever agent it started as. The root is the default, user-facing agent, which is you. Run all work through an Intent and Assignments dispatched to specialists, without being reminded; a session that read "the root" as someone else's role edited and committed in the main thread.
 
-## Research and Knowledge
+## Version control
 
-- **Trust User Knowledge**: Research unfamiliar concepts thoroughly for context.
-- **Documentation Retrieval**: Use documentation fetching tools (context7), and web search tools to access current documentation.
-- **Proactive Context**: Verify latest library features, breaking changes, tools before implementation.
+- The root commits only with `holyagent vcs commit`, and uses plain Git and `gh` for branches, pushes, merges and pull requests. It never force-pushes or pushes to a protected branch without the user's approval. After a denial it stops that line of work and reports a blocker, because a workaround through another tool defeats the boundary the user set.
+- A specialist makes no version-control writes and no edits under `.git/` or `.holyagent/`, and reports its changed paths for the root to record. Nothing blocks these writes, so the rule rests on the instruction.
+- Pass `holyagent vcs pr --body-file` an unignored file inside the project. Files outside the project or ignored by Git are rejected, so a scratch file will not work.
 
-## Coding Standards
+## Commits and pull requests
 
-Produce minimal, readable, and performant code.
+- Write commits and pull request text in English and follow Conventional Commits, so history reads the same everywhere and tools can parse it.
+- Write as the author, in first person or neutral voice, about what the change does and why. Leave out agents, Claude, sessions, "the user" and attribution trailers: the text belongs to the author, and `holyagent vcs` refuses process words.
 
-### Architectural Integrity
+## Writing
 
-- **Zero Redundancy**: Do not create redundant logic. Always remove redundancy to ensure code is reusable and organized.
+- Write English with no em dashes; restructure the sentence instead. This keeps one voice across every file.
+- Keep user-specific data (player tags, names, accounts, clans) out of the repository, because a skill is shared by everyone who installs it.
 
-### Documentation and Readability
+## Skill authoring
 
-- **Self-Documenting Logic**: Use descriptive naming; avoid comments unless logic is cryptographic or mathematical.
-- **JSDoc/JavaDoc and equivalents**: Use for public APIs/functions, complex functions, and non-obvious logic.
-- **No Magic Numbers**: Use constants for all numeric or string literals.
+- Make each skill model-agnostic, harness-agnostic and environment-agnostic: describe capabilities such as a structured question tool, visualization, web search or fetch, code execution and memory, and never name a specific tool. A skill that names a tool breaks anywhere that tool is missing.
+- Still tell the agent to use the capabilities its environment or harness offers, with a stated fallback for each when it is absent. Agnostic does not mean minimal: the richer option gives a better answer when it exists.
+- Start the `description` with the situation, then what the skill does, so a model can tell when to load it.
+- Keep `SKILL.md` lean and put detail in `references/`, linked from `SKILL.md`, so the agent loads detail only when it needs it.
+- Have each skill offer, at the end of a session, to update itself with general lessons the session surfaced, and never with the player's or user's own data. This is how corrections reach the next user.
 
-### API Design Patterns
+## The README
 
-- **Dual Getter-Setter Functions**: Use overloaded functions for state: `fn()` to get, `fn(val)` to set.
-- **Interface Quality**: Prioritize high-fidelity UI/UX and seamless DX.
-
-### Error Handling
-- **Graceful Degradation**: Ensure system continues to operate in reduced capacity when errors occur.
-- **Informative Feedback**: Provide clear, actionable error messages to users and developers.
-- **Robust Logging**: Implement comprehensive logging for debugging and monitoring.
-
-### Performance and Scale
-
-- **Efficiency**: Favor built-in language features and efficient algorithms.
-- **Consistency**: Maintain unified style for predictability.
-
-### Safety
-- Do not run the dev server or compile/build, assume the user is already doing that.
-- Do not perform any irreversible actions without explicit user confirmation.
-- Separate large commits into logical chunks with clear messages.
-- Before finishing a task, run the check commands to lint, type check and format.
-<!-- BASE END -->
-
-<!-- CAVEMAN MODE -->
-Respond terse like smart caveman. All technical substance stay. Only fluff die.
-
-Rules:
-- Drop: articles (//), filler (//), pleasantries, hedging
-- Fragments OK. Short synonyms. Technical terms exact. Code unchanged.
-- Pattern: [thing] [action] [reason]. [next step].
-- Not: "Sure! I'd be happy to help you with that."
-- Yes: "Bug in auth middleware. Fix:"
-
-Switch level: /caveman lite|full|ultra|wenyan
-Stop: "stop caveman" or "normal mode"
-
-Auto-Clarity: drop caveman for security warnings, irreversible actions, user confused. Resume after.
-
-Boundaries: code/commits/PRs written normal.
-<!-- CAVEMAN MODE END -->
-
-<!-- PROJECT START -->
-## Project Rules
-
-### Effect
-
-All TypeScript in `src/` uses Effect v4 (`effect`). Model async work, failures and validation with Effect, `Data.TaggedError` and `Schema`.
-
-- Promises, `async`/`await`, `try`/`catch` and `throw` only inside adapters: `Effect.tryPromise` / `Effect.try` thunks, or files under `src/**/adapters/**`.
-- HTTP goes through `effect/http` (`HttpClient`), not `fetch`. Timers go through `Effect.sleep`, `Effect.timeout` or `Schedule`.
-- Validate external input (arguments, env, API responses) with `Schema` before using it.
-- `lint/effect-only.mjs` enforces these rules through oxlint.
-<!-- PROJECT END -->
+- Keep `README.md` to exactly these sections, in this order: `# Basile Skills` (what the repository is), `## Install` (how to add the skills), `## Included skills` (one line per skill), `## Usage` (how to invoke them), `## Contributing` (points to this file) and `## License` (points to `LICENSE`). A reader finds the same things in the same place, and detail stays in each skill, so the README cannot drift from it.
+- Update the README whenever a skill is added, renamed or removed.
