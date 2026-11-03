@@ -1,6 +1,6 @@
 ---
 name: clash-royale-strategies
-description: Build, review and tune Clash Royale decks and upgrade plans from a player's real data (player tag lookup, deck screenshots, battle history, wild card counts). Use for deck building, evo/hero slot choices, matchup and loss analysis, and deciding where to spend wild cards and gold, including upgrade order.
+description: Use when a player wants help with Clash Royale deck building, evo/hero slot choices, matchup and loss analysis, deciding where to spend wild cards and gold, or upgrade order, from their real data (player tag lookup, deck screenshots, battle history, wild card counts). Builds, reviews and tunes decks and upgrade plans from that data.
 ---
 
 # Clash Royale Strategies

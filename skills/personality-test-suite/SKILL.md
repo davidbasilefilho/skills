@@ -1,6 +1,6 @@
 ---
 name: personality-test-suite
-description: Run an interactive personality battery (Harry Potter, Riordanverse, 16Personalities, 12axes, astrology) with batched questions and one cross-referenced results report at the end.
+description: Use when a user wants a personality assessment across several systems (Harry Potter, Riordanverse, 16Personalities, 12axes, astrology). Runs an interactive battery with batched questions and one cross-referenced results report at the end.
 ---
 
 # Personality Test Suite
