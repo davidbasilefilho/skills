@@ -17,7 +17,7 @@ For any model: if the rest of this file is too long to hold at once, follow thes
 2. Infer language, country and personal context from the conversation and memory. Don't ask for them or confirm them.
 3. Ask which tests to skip, then which to run in depth (each a multi-select with "None").
 4. Ask the questions, shortest test first, `min(10, tool limit)` per batch, labelled `TEST n/total`, revealing nothing.
-5. Check each question: distinct options, right kind (single or multi), no hidden beliefs, no hints.
+5. Check each question: distinct options, right kind (single or multi), measures its value directly, fits the user's reality, no hidden beliefs, no hints.
 6. At the end, one report with visuals and 6 most similar figures per list (#1 featured), in the user's language. Then save to memory.
 
 ## Capability map
@@ -35,7 +35,7 @@ The environment's own tools always beat a text imitation of them. Before Step 1,
 | A rich-page or document tool (artifact, canvas, doc) | The full results report, in addition to the chat summary | Results only as a long chat message |
 | A memory tool | Reading context and earlier runs at start; saving results at end | Asking the user for facts already stored |
 | A task list / todo / plan tool | Progress per test and overall | Progress only in chat text |
-| Web search / fetch | 12axes national issues; astrology positions if no code | Debates or positions from memory alone |
+| Web search / fetch | 12axes national issues and local context; astrology positions if no code | Debates or positions from memory alone |
 | Code execution | Astrology chart via an ephemeris library; scoring tallies if useful | Estimating planet positions |
 | A scratch file / notes area | The private answer tally on long runs | Relying on recall across many batches |
 
@@ -184,7 +184,7 @@ Before sending each batch, check every question against these rules and rewrite 
 ### With a question tool
 
 - One call per batch, `min(10, Q)` questions (Hard rule 3).
-- Question and option text are **plain**: no markdown headers, progress bars, `batch x/y` counters, badges or emoji. That decoration belongs to the plain-text fallback only.
+- Question and option text are **plain**: no markdown headers, progress bars, `batch x/y` counters, badges or emoji. That decoration belongs to the plain-text fallback only. (12axes pole tags like `[SECULAR]` are part of the question text, not decoration.)
 - Each question shows its **number within its test**: `HP 17/28`, `16P 3/40`, `12ax 1/70`, `PJ 4/10`, `Astro 2/3`. Put it in the header/label field when one exists; otherwise at the start of the question text (`HP 17/28 · You find…`).
 - Overall progress (answered / total across all tests, e.g. `10/100` after the first batch of 10) lives in the task list, not in question text.
 - If an item needs more options than `O` (e.g. a 5-point agreement scale with `O = 4`), use a forced 4-point scale (Strongly agree / Agree / Disagree / Strongly disagree); the user can type "neutral" in the free-text field, scored as the midpoint.
@@ -257,6 +257,7 @@ Run before every message. Fix any failure before sending.
 - [ ] Nothing reveals or hints at a result (before Step 4)?
 - [ ] Task list updated (if the tool exists), with no result hints?
 - [ ] Every visual required for this message present?
+- [ ] 12axes axis statements: localized to the user's country and pole-tagged?
 - [ ] Results: 6 figures per list with #1 featured; current + historical for 16p and 12ax; ideologies, current countries and historical states for 12ax?
 - [ ] Every visible string localized (questions, options, labels, tasks, visuals)?
 
@@ -297,10 +298,10 @@ The results point out where tests agreed and where they pulled apart.
 
 Everything the user sees is in the user's language (from Step 2b, memory, or the language they write in): greetings, question and option text, scale labels ("Strongly agree" and its equivalent), the "None" option, per-test labels, task names, chat lines, results, charts, visual labels and disclaimers.
 
-- Translate generic labels (`HP 17/28` stays; "batch", "quick", "in depth", "None", dimension and axis names get translated).
+- Translate generic labels (`HP 17/28` stays; "batch", "quick", "in depth", "None", dimension, axis and pole names get translated).
 - Proper names stay in the form used in that language's official editions or common use (e.g. Gryffindor is "Grifinória" in Portuguese and "Gryffondor" in French); keep the original in parentheses the first time when it helps.
 - Test and type codes (`INTJ-A`, `12axes`) stay as they are.
-- National-issue items use the terms people actually use for those debates in that country.
+- 12axes statements and national-issue items use the user's country's real institutions and the terms people actually use there.
 
 ## Ground rules
 
