@@ -1,15 +1,24 @@
-# Deck slots, names and output format
+# Deck format
 
 ## Special slots
 
-Do not assume a slot layout; it differs by account and game version. Observed on one account: slot 1 evolution only, slot 2 hero only, slot 3 mix (evolution or hero). The agent first got this wrong by guessing from icons.
+Default deck layout:
 
-Before assigning slots:
+| Slot | Type |
+|---|---|
+| 1 | Evolution |
+| 2 | Hero |
+| 3 | Wild (evolution or hero) |
+| 4 to 8 | Regular |
 
-1. Confirm the layout with the player or a screenshot of the deck screen.
+Use this layout unless a screenshot or the player shows a different one; then follow theirs. Do not guess slot types from card icons (an earlier mistake).
+
+When assigning slots:
+
+1. Put an owned evolution in slot 1, an owned hero in slot 2, and the next best evolution or hero in slot 3.
 2. Place every evolution or hero the player owns in a slot that activates it. A card in a regular slot plays as its base form, so an owned evolution there is wasted.
-3. A card cannot be both its evolution and its hero form in the same deck. Put a card that has both forms in a mix slot so the player can pick per deck.
-4. Take evolution and hero status from the official API or a screenshot (see `data-sources.md`).
+3. A card cannot be both its evolution and its hero form in the same deck. Put a card that has both forms in the wild slot so the player can pick per deck.
+4. Take evolution and hero status from a screenshot or the player (see [Data sources](data-sources.md)).
 
 ## Card names
 
@@ -19,20 +28,20 @@ Before assigning slots:
 
 ## Deck output
 
-Number the cards 1 to 8 in exact in-game order: special slots first in their slot order, then the remaining cards. Take the order from the API `currentDeck[]` order or from a screenshot of the deck screen; if you have neither, ask the player for it. Do not reorder cards by role or elixir.
+Number the cards 1 to 8 in exact in-game order: special slots first in their slot order, then the remaining cards. Take the order from a screenshot of the deck screen (or `currentDeck[]` in pasted JSON); if you have neither, ask the player for it. Do not reorder cards by role or elixir.
 
 One line per card, the same form for every card:
 
 `<n>. <localized name> | <slot type> | <rarity> | level <in-game level>`
 
-`<slot type>` is `slot <n>: <type>` for a special slot (type as confirmed with the player, for example evolution only, hero only or mix) and `regular` otherwise. For a mix slot append the form used (`evo` or `hero`). In-game level is defined in SKILL.md step 2. After the list give the average elixir of the 8 cards.
+`<slot type>` is `evo` for slot 1, `hero` for slot 2, `wild: evo` or `wild: hero` for slot 3, and `regular` for slots 4 to 8 (adapt if the player's layout differs). In-game level is defined in [SKILL.md](../SKILL.md) step 2. After the list give the average elixir of the 8 cards.
 
-Shape only; the slot types are placeholders for the confirmed layout:
+Shape:
 
 ```
-1. <Name> | slot 1: <type> | <Rarity> | level <L>
-2. <Name> | slot 2: <type> | <Rarity> | level <L>
-3. <Name> | slot 3: <type>, <evo or hero> | <Rarity> | level <L>
+1. <Name> | evo | <Rarity> | level <L>
+2. <Name> | hero | <Rarity> | level <L>
+3. <Name> | wild: <evo or hero> | <Rarity> | level <L>
 4. <Name> | regular | <Rarity> | level <L>
 ...
 8. <Name> | regular | <Rarity> | level <L>

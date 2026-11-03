@@ -1,8 +1,4 @@
 pre-commit:
-  piped: true
   jobs:
     - name: check
       run: bun run check
-    - name: build skill scripts
-      glob: "src/**/*.ts"
-      run: bun run build && git add skills/clash-royale-strategies/scripts/cr-profile.mjs

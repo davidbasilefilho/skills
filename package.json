@@ -3,8 +3,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "bun build src/clash-royale/cr-profile.ts --target node --minify --banner '#!/usr/bin/env node' --outfile skills/clash-royale-strategies/scripts/cr-profile.mjs",
-    "cr:profile": "node skills/clash-royale-strategies/scripts/cr-profile.mjs",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "fmt": "oxfmt",

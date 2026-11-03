@@ -77,10 +77,6 @@ All TypeScript in `src/` uses Effect v4 (`effect`). Model async work, failures a
 
 - Promises, `async`/`await`, `try`/`catch` and `throw` only inside adapters: `Effect.tryPromise` / `Effect.try` thunks, or files under `src/**/adapters/**`.
 - HTTP goes through `effect/http` (`HttpClient`), not `fetch`. Timers go through `Effect.sleep`, `Effect.timeout` or `Schedule`.
-- Validate external input (CLI args, env, API responses) with `Schema` before using it.
+- Validate external input (arguments, env, API responses) with `Schema` before using it.
 - `lint/effect-only.mjs` enforces these rules through oxlint.
-
-### Skill scripts
-
-Sources live in `src/`; `bun run build` bundles them into `skills/<skill>/scripts/*.mjs` (Node 20+). Never edit the bundles by hand. The lefthook pre-commit hook rebuilds and stages them.
 <!-- PROJECT END -->
