@@ -67,6 +67,14 @@ test("hand-rolled replacements of TanStack libraries are absent", () => {
   expect(filesWith(/addEventListener\(\s*["']key(down|up)["']/)).toEqual([]); // use Hotkeys
 });
 
+test("at most one auth provider is installed", () => {
+  const clerk = Object.keys(deps).filter((d) => d.startsWith("@clerk/"));
+  const betterAuth = Object.keys(deps).filter(
+    (d) => d === "better-auth" || d === "@convex-dev/better-auth" || d.startsWith("@better-auth/"),
+  );
+  expect(clerk.length > 0 && betterAuth.length > 0, `choose Clerk or Better Auth: ${[...clerk, ...betterAuth]}`).toBe(false);
+});
+
 test("class merging uses the cn package", () => {
   expect(has("cn")).toBe(true);
   expect(has("tailwind-merge")).toBe(false);

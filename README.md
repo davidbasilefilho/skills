@@ -30,7 +30,7 @@ npx -y skills add davidbasilefilho/skills
 - `general-prefs` - Enforces the owner's repository preferences: squash and merge always, `main` and `dev` as the permanent branches, a version higher than main on every change, release branch pull request stacks, and ZeroVer validated by tests
 - `react-prefs` - Enforces the owner's React preferences: Activity for every visibility toggle, ViewTransition wherever it fits, and React Compiler with its best practices
 - `upgrade-deps` - Upgrades a lockfile within the declared ranges, or bumps the declared dependencies to the latest version in the `bun-prefs` range format and relocks, for any package manager
-- `web-stack` - Applies the owner's web stack: React with the TanStack libraries, TanStack Router or Start, Convex with TanStack DB, Base UI, Tailwind CSS and `cn`
+- `web-stack` - Applies the owner's web stack: React with the TanStack libraries, TanStack Router or Start, Convex with TanStack DB, Clerk (or Better Auth with Convex) for auth, Base UI, Tailwind CSS and `cn`
 
 ## Usage
 

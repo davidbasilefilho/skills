@@ -1,6 +1,6 @@
 ---
 name: web-stack
-description: Use when starting, extending or reviewing a React web application and choosing its libraries, state, data layer, routing, backend, UI components or styling. Applies the owner's web stack: react-prefs, the TanStack libraries everywhere they fit, TanStack Router or Start, Convex with TanStack DB and cached-first loading, Base UI, Tailwind CSS and cn.
+description: Use when starting, extending or reviewing a React web application and choosing its libraries, state, data layer, routing, backend, authentication, UI components or styling. Applies the owner's web stack: react-prefs, the TanStack libraries everywhere they fit, TanStack Router or Start, Convex with TanStack DB and cached-first loading, Clerk or Better Auth for auth, Base UI, Tailwind CSS and cn.
 ---
 
 # Web Stack
@@ -28,11 +28,12 @@ This skill is model-, harness- and environment-agnostic. It names capabilities, 
 5. **Backend**: Convex. If the project uses TanStack Query, Convex queries and mutations must not go through TanStack Query as well. With Convex, TanStack DB is required. See [Convex and TanStack DB](references/convex-and-db.md).
 6. **Cached-first loading**: check whether TanStack DB saves data in the client and loads it on page load, and configure client persistence and initial render from local data wherever the information can be used, so the page shows cached data on load instead of a loading state. By default a Convex page sits in a loading state until synced, which this rule exists to remove. Setup, unverified parts and the check are in [Convex and TanStack DB](references/convex-and-db.md).
 7. **UI and styling**: Base UI plus Tailwind CSS, and shadcn/ui only if the user wants it: ask the user (structured question tool when available, plain question otherwise) and do not add it unasked. Use the `cn` package for class merging. See [UI](references/ui.md).
-8. **Prove it**: add the checks in [Checks](references/checks.md) to the project and run them before reporting work done.
+8. **Auth**: Clerk by default, Better Auth plus Convex as the alternative; install only one. See [Auth](references/auth.md) for when to choose which.
+9. **Prove it**: add the checks in [Checks](references/checks.md) to the project and run them before reporting work done.
 
 ## Workflow
 
-1. For a new project, pick Router or Start (rule 4), then Convex with TanStack DB (rule 5), then the UI stack (rule 7). Ask the shadcn/ui question once.
+1. For a new project, pick Router or Start (rule 4), then Convex with TanStack DB (rule 5), then the UI stack (rule 7), then auth if the project has accounts (rule 8). Ask the shadcn/ui question once.
 2. For each feature, walk the library list in [TanStack libraries](references/tanstack-libraries.md) and use every library that fits.
 3. Before installing anything, verify the package and version against current docs. The research behind these references is dated 2026-11-04; several libraries are beta or release candidates and package names for Hotkeys, Pacer, AI and Charts are unconfirmed.
 4. Add the checks, run them, and report commands with exit codes.
@@ -42,6 +43,7 @@ This skill is model-, harness- and environment-agnostic. It names capabilities, 
 - [TanStack libraries](references/tanstack-libraries.md): package, status and when to use each, plus Store usage.
 - [Router and Start](references/router-and-start.md): Router for client-only apps, Start for full-stack, view transitions that match React's.
 - [Convex and TanStack DB](references/convex-and-db.md): the Convex rule, DB collection setup, cached-first persistence, unverified parts.
+- [Auth](references/auth.md): Clerk and Better Auth with Convex for Start and client-only Router, the feature set, and how auth fits TanStack DB.
 - [UI](references/ui.md): Base UI, Tailwind, `cn`, opt-in shadcn/ui.
 - [Checks](references/checks.md): bun tests and CI steps to add.
 

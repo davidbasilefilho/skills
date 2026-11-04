@@ -37,14 +37,14 @@ Every declared dependency is a caret with zeroed lower parts, from the latest ve
 | `A = 0`, `B >= 1` | `^0.B.0` |
 | `A = 0`, `B = 0` | `^0.0.C` |
 
-This is the `bun-prefs` range format. Ecosystems whose syntax has no caret express the same interval; see [Ecosystems](references/ecosystems.md) for each equivalent, and for the ones that cannot express it, where you tell the user what you wrote instead and why.
+This is the `bun-prefs` range format. One exception: a dependency whose range is narrowed by another package's peer requirement (for example `better-auth` declared `~1.7.16` because `@convex-dev/better-auth` needs `>=1.7.16 <1.8.0`) keeps the peer range, never the zeroed caret. Mode 2 keeps that range, because `latest`-style bumps ignore peer ranges; bump such a dependency only when the constraining package's peer range moves (upgrade the two together, then write the new peer range). Ecosystems whose syntax has no caret express the same interval; see [Ecosystems](references/ecosystems.md) for each equivalent, and for the ones that cannot express it, where you tell the user what you wrote instead and why.
 
 ## Workflow
 
 1. Find every manifest and lockfile, including workspaces and more than one ecosystem in one repository.
 2. For each, read the matching row in [Ecosystems](references/ecosystems.md) and verify the commands it marks unconfirmed against current docs.
 3. Mode 1: run the lockfile command. If the tool also rewrote the manifest, restore the declared ranges to their previous values and relock, because mode 1 never changes declarations.
-4. Mode 2: bump each declared dependency to the latest version, rewrite every range to the format (tools keep or write other operators, so read the manifest diff and fix each one), then relock so the lockfile satisfies the new ranges.
+4. Mode 2: bump each declared dependency to the latest version, rewrite every range to the format, except a dependency kept on its peer range (tools keep or write other operators, so read the manifest diff, fix each one, and restore a peer-range dependency that the tool rewrote, for example `bun update --latest` moving `~1.7.16` to the newest version's tilde), then relock so the lockfile satisfies the new ranges.
 5. Run the project's install from the lockfile, tests, type-check, lint and build. Fix or report failures; report each as command and exit code.
 6. Report what moved (old to new), what stayed behind and why (for example an ecosystem with no latest-version command, or a range that cannot be written in the format), and any command you did not verify.
 
