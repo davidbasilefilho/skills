@@ -37,7 +37,7 @@ Every declared dependency is a caret with zeroed lower parts, from the latest ve
 | `A = 0`, `B >= 1` | `^0.B.0` |
 | `A = 0`, `B = 0` | `^0.0.C` |
 
-This is the `bun-prefs` range format. Ecosystems whose syntax has no caret express the same interval; see [Ecosystems](references/ecosystems.md) for each equivalent, and for the ones that cannot express it, where you tell the user what you wrote instead and why.
+This is the `bun-prefs` range format. One exception: a dependency whose range is narrowed by another package's peer requirement (for example `better-auth` declared `~1.7.16` because `@convex-dev/better-auth` needs `>=1.7.16 <1.8.0`) keeps the peer range, never the zeroed caret. Mode 2 keeps that range, because `latest`-style bumps ignore peer ranges; bump such a dependency only when the constraining package's peer range moves (upgrade the two together, then write the new peer range). Ecosystems whose syntax has no caret express the same interval; see [Ecosystems](references/ecosystems.md) for each equivalent, and for the ones that cannot express it, where you tell the user what you wrote instead and why.
 
 ## Workflow
 
