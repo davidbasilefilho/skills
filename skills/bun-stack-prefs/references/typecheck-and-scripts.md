@@ -45,12 +45,13 @@ Every task is a `package.json` script run with `bun run`. A starting set:
     "start": "bun run src/index.ts",
     "test": "bun test",
     "typecheck": "bun scripts/typecheck.ts",
+    "verify": "bun run --sequential format lint test",
     "version:sync": "bun scripts/sync-version.ts"
   }
 }
 ```
 
-- `build` and `start` are placeholders: use the project's real entry points and build tool. `oxlint --fix` is listed in `oxlint --help` for the installed version. The `check` script was not run as a whole here, so run it in the project.
+- `build` and `start` are placeholders: use the project's real entry points and build tool. `oxlint --fix` is listed in `oxlint --help` for the installed version. The `check` script was not run as a whole here, so run it in the project. `verify` shows `--sequential` for steps that must run in order; it stopped at the first failing step with that step's exit code when tried.
 - `dev` uses Bun's watch mode for hot watching. Bun flags go right after `bun` (`bun --watch run dev`); a flag after the script name is passed to the script. Check current Bun docs for `--watch` versus `--hot` before choosing.
 - `bun run --parallel a b` runs scripts at once, `bun run --sequential a b` one after the other, and both accept globs such as `"build:*"`. They combine with `--filter '*'` and `--workspaces` (add `--if-present` when some workspaces lack the script). Both ran under Bun 1.4.4 with output prefixed `script | `; they were introduced in Bun v1.3.9, so verify the project's Bun version supports them.
 - By default a failure kills the remaining scripts; `--no-exit-on-error` keeps them running. Per the v1.3.9 notes `--filter` respects dependency order while `--parallel` and `--sequential` do not: use `--parallel` for independent or long-lived scripts (checks, several dev servers) and `--sequential` when order matters, and plain `--filter` for dependency-ordered builds. Verify this against current docs.

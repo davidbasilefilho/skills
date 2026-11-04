@@ -56,7 +56,7 @@ Config file: `.oxfmtrc.json` (also `.oxfmtrc.jsonc`, `oxfmt.config.ts`, `oxfmt.c
 }
 ```
 
-- Drop `sortTailwindcss` when the project does not use Tailwind. The user wrote the option as `sortTailwindCss`; the config reference spells it `sortTailwindcss`. Check the schema file for the exact key.
+- Drop `sortTailwindcss` when the project does not use Tailwind. The key's casing varies between sources (`sortTailwindcss` here); check it against the oxfmt schema file (`configuration_schema.json`) before writing it.
 - `jsdoc`, `sortImports` and `sortTailwindcss` default to off, so set them explicitly. `sortPackageJson` defaults to on; set it anyway. Its key order is not compatible with `prettier-plugin-packagejson`.
 - Tailwind sub-options: `config` (Tailwind v3), `stylesheet` (Tailwind v4), `functions`, `attributes`, `preserveDuplicates`, `preserveWhitespace`. Set `stylesheet` or `config` to the project's entry file.
 - Other options (exact casing, defaults): `printWidth` (100), `tabWidth` (2), `useTabs`, `semi`, `singleQuote`, `jsxSingleQuote`, `trailingComma`, `bracketSpacing`, `arrowParens`, `quoteProps`, `objectWrap`, `endOfLine`, `proseWrap`, `singleAttributePerLine`, `ignorePatterns`, `overrides`. `jsdoc` and `sortImports` take sub-options when an object is given instead of `true`.
