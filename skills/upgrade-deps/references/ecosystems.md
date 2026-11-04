@@ -8,7 +8,7 @@ Mode 1 is the lockfile-only upgrade within declared ranges. Mode 2 bumps declare
 
 | Ecosystem | Mode 1: lockfile only | Mode 2: bump declared ranges, then relock |
 |---|---|---|
-| bun | `bun update` also rewrites `package.json` to the newest in-range version and keeps the operator (`^1.1.0` becomes `^1.2.0`). Restore the previous ranges, then run `bun install`. `--no-save` touches neither file. `bun outdated` shows Current, Update (in range) and Latest. | `bun update --latest` |
+| bun | `bun update` also rewrites `package.json` to the newest in-range version and keeps the operator (`^1.1.0` becomes `^1.2.0`). Restore the previous ranges, then run `bun install`: it keeps the updated versions in `bun.lock` and the restored ranges in `package.json` (tested with Bun 1.4.4 on one registry dependency; `bun install --frozen-lockfile` then passes). `--no-save` touches neither file. `bun outdated` shows Current, Update (in range) and Latest. | `bun update --latest` |
 | npm | `npm update` (does not edit `package.json` unless `--save` is added) | `npx npm-check-updates -u` (edits `package.json` only, keeps the operator), then `npm install` |
 | pnpm | `pnpm up --no-save`; plain `pnpm up` also rewrites the in-range specifier. **Verify** that `--no-save` still updates the lockfile. | `pnpm up --latest`. **Verify** `-r` for workspaces. |
 | yarn (berry) | `yarn up -R <pkg>` re-resolves into the lockfile without touching manifests | `yarn up <pkg>` goes to latest project-wide and ignores listed ranges; `-C`, `-E`, `-T` set the modifier |
