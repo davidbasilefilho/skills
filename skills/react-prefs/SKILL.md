@@ -16,7 +16,7 @@ This skill is model-, harness- and environment-agnostic. It names capabilities, 
 | Web search / fetch | Checking current React, bundler and linter docs before relying on any version, flag or option named here | Say the fact is unchecked and keep the references' dates in the answer |
 | Code execution | Running the project's tests, linter and build to prove the rules hold | Show the exact commands for the user to run |
 | Structured question tool | Asking the user when a bundler or platform may not support the Compiler, or when a case seems to need real unmounting instead of Activity | Ask in plain numbered text |
-| Memory / notes | Recording the user's answer when a case seems to need an exception, and why | Record it in the project's agent instructions file |
+| Memory / notes | Recording the user's answer when a case seems to need real unmounting (the skill allows no exception to Activity), and why | Record it in the project's agent instructions file |
 
 React moves fast. These rules rest on research dated 2026-11-04 (React 19.3). Before relying on an API name, version or flag, check the current docs with web search or fetch when available; items the references mark as unverified must be checked.
 
