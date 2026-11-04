@@ -28,7 +28,7 @@ This skill is model-, harness- and environment-agnostic. It names capabilities, 
 5. **Backend**: Convex. If the project uses TanStack Query, Convex queries and mutations must not go through TanStack Query as well. With Convex, TanStack DB is required. See [Convex and TanStack DB](references/convex-and-db.md).
 6. **Cached-first loading**: check whether TanStack DB saves data in the client and loads it on page load, and configure client persistence and initial render from local data wherever the information can be used, so the page shows cached data on load instead of a loading state. By default a Convex page sits in a loading state until synced, which this rule exists to remove. Setup, unverified parts and the check are in [Convex and TanStack DB](references/convex-and-db.md).
 7. **UI and styling**: Base UI plus Tailwind CSS, and shadcn/ui only if the user wants it: ask the user (structured question tool when available, plain question otherwise) and do not add it unasked. Use the `cn` package for class merging. See [UI](references/ui.md).
-8. **Auth**: Clerk by default. Better Auth plus Convex when the project wants its auth data in its own Convex deployment, needs features or pricing Clerk does not fit, or must avoid per-user fees. When the choice is not settled, ask the user (structured question tool when available, plain question otherwise). Install only one of them. See [Auth](references/auth.md).
+8. **Auth**: Clerk by default, Better Auth plus Convex as the alternative; install only one. See [Auth](references/auth.md) for when to choose which.
 9. **Prove it**: add the checks in [Checks](references/checks.md) to the project and run them before reporting work done.
 
 ## Workflow

@@ -2,7 +2,7 @@
 
 Research date: 2026-11-04. Package versions come from npm snapshots that disagree with each other, and Better Auth for Convex is pre-1.0: verify every name, option and range against current docs before use. Items marked **verify** were not confirmed by the research. Items marked **inference** are judgment built on the sourced facts, not documented behavior.
 
-Ranges follow `bun-prefs`: zeroed caret, prerelease suffix allowed. After `bun add`, rewrite the written range (see the exception for `better-auth` below).
+Ranges follow `bun-prefs`: zeroed caret, prerelease suffix allowed, plus its peer-range rule for `better-auth` (see Status and pinning). After `bun add`, rewrite the written range.
 
 ## Choosing
 
@@ -10,11 +10,11 @@ Default to **Clerk** (auth as a service). Use **Better Auth plus Convex** when t
 
 | | Clerk | Better Auth plus Convex |
 |---|---|---|
-| Hosting | Hosted service, prebuilt UI, webhook-based user sync | Open source (Apache-2.0), runs in your Convex deployment, you build the UI |
+| Hosting | Hosted service, prebuilt UI, webhook-based user sync | Open source (the Convex component is Apache-2.0), runs in your Convex deployment, you build the UI |
 | Data | Users and sessions live at Clerk (lock-in, inference) | Auth data lives in your Convex deployment |
 | Cost | Hobby free to 50,000 monthly retained users per app; Pro $25/mo ($20 annual) plus $0.02 per extra retained user; MFA, custom session lifetime and removing branding start at Pro; organizations billed separately (100 free retained orgs). Source: clerk.com/pricing, undated snapshot, verify | No per-user fee from Better Auth; your costs are email sending and Convex usage (inference) |
-| Maturity | Stable | `@convex-dev/better-auth` is in Convex's labs docs, pre-1.0 (about 0.13.0), tied to a pinned `better-auth` minor |
-| Gaps | None found for the stack below | See [Gaps](#gaps) |
+| Maturity | Stable (inference) | `@convex-dev/better-auth` is in Convex's labs docs, pre-1.0 (about 0.13.0), tied to a pinned `better-auth` minor |
+| Gaps | None confirmed for the stack below; see [Unverified](#unverified) | See [Gaps](#gaps) |
 
 ## Clerk with Convex
 
@@ -48,7 +48,7 @@ Sources: docs.convex.dev/client/tanstack/tanstack-start/clerk, template github.c
 
 - Install `@clerk/tanstack-react-start` (`^1.0.0`).
 - A `createServerFn` calls `auth()` from `@clerk/tanstack-react-start/server` and returns `{ userId, token: await getToken() }`.
-- The root route's `beforeLoad` calls it. With a token it calls `ctx.context.convexQueryClient.serverHttpClient?.setAuth(token)` so SSR loaders are authenticated, and returns `{ userId, token }`.
+- The root route's `beforeLoad` calls it. With a token it calls `ctx.context.convexQueryClient.serverHttpClient?.setAuth(token)` so SSR loaders are authenticated, and returns `{ userId, token }`. That identifier belongs to the Query adapter this stack forbids: `convexQueryClient` must not appear in `src`, because the check in [Checks](checks.md) fails on it.
 - The root component renders `<ClerkProvider><ConvexProviderWithClerk client={context.convexClient} useAuth={useAuth}>`.
 - The template wires `ConvexQueryClient` from `@convex-dev/react-query` into the router for SSR. This stack forbids that adapter (see [Convex and TanStack DB](convex-and-db.md)): take the Clerk and token wiring from the template, replace the Query-adapter SSR wiring with the `DbClient` snapshot approach, and **verify** that the server-side Convex client can still be authenticated without the adapter.
 - The Clerk docs page uses a `<Show>` component in its TanStack example; its semantics were not read. **Verify** before using it.
@@ -78,7 +78,7 @@ Sources: labs.convex.dev/better-auth (framework guides, supported-plugins, featu
 
 - `@convex-dev/better-auth` is pre-1.0 (about 0.13.0 at research; 766 stars, 135 open issues). A caret on a 0.x version allows only that minor, so `^0.13.0` is the zeroed-caret form here.
 - Peer ranges: `better-auth >=1.7.16 <1.8.0`, `convex ^1.25.0`, React 18 or 19. The Start guide pins `better-auth@~1.7.16`; the React guide still says `~1.6.15`, which conflicts with the peer range: trust the peer range. Earlier releases were pinned tightly (0.9.x did not work with 1.4.x).
-- `better-auth` therefore cannot satisfy both the peer range and a zeroed caret (`^1.0.0` admits 1.8 and later). Install `better-auth@1.7.16`, keep the lockfile as the pin, and ask the user whether to allow a `~1.7.0` exception for this one package in the `bun-prefs` range test. Do not widen it silently.
+- `better-auth` therefore cannot satisfy both the peer range and a zeroed caret (`^1.0.0` admits 1.8 and later). The `bun-prefs` peer-range rule applies: declare `better-auth` as `~1.7.16`, the peer range, and rewrite what `bun add` writes. The range test accepts it because the installed `@convex-dev/better-auth` requires it. Move it only when the component's peer range moves (`upgrade-deps`).
 - Pre-1.0 means breaking changes between minors: upgrade the component and `better-auth` together, read the release notes first, and re-run the auth checks.
 
 ### Setup, TanStack Start
@@ -96,6 +96,7 @@ Source: labs.convex.dev/better-auth/framework-guides/tanstack-start.
 9. `convex/http.ts`: `authComponent.registerRoutes(http, createAuth)`.
 10. Proxy route `src/routes/api/auth/$.ts` forwards to `handler`.
 11. Root `beforeLoad` calls a server function returning `getToken()`, then `serverHttpClient?.setAuth(token)`; the root renders `<ConvexBetterAuthProvider initialToken={...}>`. As with Clerk, the `serverHttpClient` here comes from the forbidden Query adapter: **verify** the SSR wiring without it.
+12. Production: `bunx convex env --prod set BETTER_AUTH_SECRET <secret>` and `bunx convex env --prod set SITE_URL https://<app-domain>`, then `bunx convex deploy` (the docs show `npx`). Inference from the Clerk flow and step 5: **verify** the variable names and the production steps against the guide.
 
 ### Setup, client-only TanStack Router
 
@@ -106,6 +107,14 @@ Source: labs.convex.dev/better-auth/framework-guides/react. Same pattern as Star
 - `authComponent.registerRoutes(http, createAuth, { cors: true })`.
 - The provider is `<ConvexBetterAuthProvider client={convex} authClient={authClient}>`. `expectAuth: true` on `ConvexReactClient` is optional.
 - No proxy route and no `initialToken`.
+
+### Route guards and UI gating
+
+Inference: the guides show `getToken()` in the root `beforeLoad` and `Authenticated`-style components, but no redirect snippet. **Verify** against the installed version.
+
+- **Start.** Have the root `beforeLoad` also return `isAuthenticated: Boolean(token)` from the token it already fetches. Put private routes under a pathless layout route whose `beforeLoad` throws `redirect({ to: "/sign-in" })` when `context.isAuthenticated` is false, and make the sign-in route redirect away when it is true. Render `Authenticated`, `Unauthenticated` and `AuthLoading` for the UI.
+- **Client-only.** There is no server step, so gate the UI: `Authenticated`, `Unauthenticated`, `AuthLoading` and `useConvexAuth()` from Convex. Show the loading state while `isLoading`; do not redirect before it settles, or a signed-in user is bounced on reload.
+- **Convex functions.** Gating is for experience only. Every query and mutation still checks `ctx.auth.getUserIdentity()` and authorizes from it.
 
 ### Feature coverage
 
@@ -131,7 +140,7 @@ A thorough integration covers every row below. Sign-in, sign-up and sign-out mus
 
 ### Gaps
 
-- SSO, SCIM, OAuth Provider and MCP are incompatible even with Local Install. If the project needs one of them, choose Clerk or another solution and tell the user.
+- SSO, SCIM, OAuth Provider and MCP are incompatible even with Local Install. If the project needs one of them, choose Clerk or another solution and tell the user. **Verify** that Clerk covers the feature first: the research did not check Clerk for SSO, SCIM, OAuth Provider or MCP.
 - Organization, admin and passkey flows were not verified end to end after Local Install. Test each before reporting the feature done.
 - If Local Install is not used, an organization and role model must be built by hand in Convex tables.
 - No prebuilt UI: sign-in, sign-up, verification, reset, two-factor and account screens are built with the project's UI stack (see [UI](ui.md)).
@@ -145,8 +154,8 @@ In Convex functions use the component's helpers or `ctx.auth.getUserIdentity()` 
 
 TanStack DB with Convex is required (see [Convex and TanStack DB](convex-and-db.md)). `@tanstack/convex-db-collection` subscribes to a Convex query and leaves authentication and access control to Convex: reuse the authenticated Convex client from either provider above. The same client must serve the subscription and the mutations.
 
-- **Auth-gated collections.** Create and preload a collection only after `useConvexAuth()` reports `isAuthenticated`. Queries that require an identity throw while unauthenticated. Authorization stays in the Convex functions, never in client-side filters.
-- **Per-user cache scoping.** Put the user ID (Clerk `userId`, or the Better Auth user ID) in every collection `id` and in the persistence database name. This is the existing rule in [Convex and TanStack DB](convex-and-db.md), applied to auth. Cached-first reload needs the user ID before Convex finishes authenticating: **verify** that Clerk's `userId` or the Better Auth session gives it early enough, and fall back to rendering the loading state for a user whose ID is not yet known rather than reading another user's cache.
+- **Auth-gated subscription.** Restoring persisted rows needs only the cached user ID, so create the collection and render its local rows from that ID without waiting for Convex (this keeps cached-first loading, rule 6). Gate only the live Convex subscription on `useConvexAuth()` reporting `isAuthenticated`: inference, queries that require an identity fail while unauthenticated. **Verify** with the installed persistence and `@tanstack/convex-db-collection` versions that a collection can render persisted rows before its subscription starts. Authorization stays in the Convex functions, never in client-side filters.
+- **Per-user cache scoping.** Put the user ID (Clerk `userId`, or the Better Auth user ID) in every collection `id` and in the persistence database name. [Convex and TanStack DB](convex-and-db.md) asks for one or the other; using both here tightens that rule. Cached-first reload needs the user ID before Convex finishes authenticating: **verify** that Clerk's `userId` or the Better Auth session gives it early enough, and fall back to rendering the loading state for a user whose ID is not yet known rather than reading another user's cache.
 - **Sign-out.** Before or as part of signing out: clean up the user's collections (for Query collections `await collection.cleanup({ dependents: true })`, which also stops dependent live queries), delete that user's persisted database, then sign out. Convex collection cleanup does not close the shared Convex client, and a restart soon after cleanup can start from the previous run's rows until the server's next result (documented caveat). Inference: so tear down the Convex client, the collections and their caches together, and build new ones for the next user. A TanStack maintainer suggests keying collections by user or session and cleaning up on error (github.com/TanStack/db discussions 807, an Electric discussion, not official docs). No official clear-on-sign-out recipe for Convex collections was found.
 - **Check.** The browser check in [Checks](checks.md) step 5 (sign out, sign in as another user, assert no rows from the first) covers this. If it fails because of the caveats above, report it as a known gap with the reason.
 
