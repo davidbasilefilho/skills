@@ -20,7 +20,9 @@ Adapt only when the layout differs:
 
 ## Specifiers the range test skips
 
-Not semver ranges, so not checked: `workspace:`, `file:`, `link:`, `git+`, `git:`, `github:` and `http(s):` tarball URLs. `catalog:` references are skipped, and the catalog entries they point to (root `catalog`, `catalogs`, and the same keys under `workspaces`) are checked instead. Override references such as `"react": "$react"` are skipped too, because they reuse the range of a direct dependency, which is checked. `npm:pkg@^1.0.0` aliases are checked on the range after the last `@`; an alias without a range fails. A union range such as the peer `^18.0.0 || ^19.0.0` passes when each side matches the format; one bad side fails the whole range. Checked fields: `dependencies`, `devDependencies`, `optionalDependencies`, `peerDependencies`, `overrides`, `resolutions`. Tags (`latest`), `*`, `~`, `>=` and exact versions fail on purpose.
+Not semver ranges, so not checked: `workspace:`, `file:`, `link:`, `git+`, `git:`, `github:` and `http(s):` tarball URLs. `catalog:` references are skipped, and the catalog entries they point to (root `catalog`, `catalogs`, and the same keys under `workspaces`) are checked instead. Override references such as `"react": "$react"` are skipped too, because they reuse the range of a direct dependency, which is checked. `npm:pkg@^1.0.0` aliases are checked on the range after the last `@`; an alias without a range fails. A union range such as the peer `^18.0.0 || ^19.0.0` passes when each side matches the format; one bad side fails the whole range. Checked fields: `dependencies`, `devDependencies`, `optionalDependencies`, `peerDependencies`, `overrides`, `resolutions`. Tags (`latest`), `*`, `~`, `>=` and exact versions fail on purpose, with one exception.
+
+**Peer-range exception.** A tilde `~X.Y.Z` passes only for a package whose range another declared package narrows through its `peerDependencies`. The test reads `node_modules/<other>/package.json` for every declared package and accepts the tilde when that peer range admits `X.Y.Z` and every `X.Y.x`, rejects `X.(Y+1).0`, and is narrower than the zeroed caret (for `0.x` it must also reject the caret's floor `0.Y.0`). Example: `@convex-dev/better-auth` requires `better-auth >=1.7.16 <1.8.0`, so `better-auth` is declared `~1.7.16`. A tilde nobody's peer range requires, one that differs from the peer range, or one whose constraining package is not installed fails. The check reads installed packages, so run `bun install` before `bun test`.
 
 `^0.0.0` passes, as a degenerate `^0.0.X`. A prerelease suffix is allowed after any shape (`^0.21.0-beta`), because some packages publish only prereleases and a plain `^0.21.0` would not match them. The shapes are one regex in `dep-ranges.test.ts`; change it there if the user wants another variant.
 
@@ -67,7 +69,9 @@ export async function readManifests(): Promise<{ rootPkg: Manifest; workspaces: 
 
 ```ts
 import { expect, test } from "bun:test";
-import { readManifests } from "./workspace-files";
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+import { readManifests, root } from "./workspace-files";
 
 // ^M.0.0 (M >= 1), ^0.m.0 (m >= 1) or ^0.0.p, each with an optional prerelease suffix such as
 // -beta.1, for packages that only publish prereleases. ^0.0.0 is accepted as a degenerate ^0.0.p.
@@ -77,10 +81,32 @@ const FIELDS = ["dependencies", "devDependencies", "optionalDependencies", "peer
 // catalog: references are not checked either; the catalog entries they point to are.
 // $name override references point at a direct dependency, whose own range is checked.
 const SKIP = /^(workspace:|file:|link:|git\+|git:|github:|https?:|catalog:|\$)/;
+const TILDE = /^~(\d+)\.(\d+)\.(\d+)$/;
 
-function check(where: string, name: string, spec: unknown, bad: string[]) {
+// Peer-range exception: ~X.Y.Z passes for a package when another declared and installed package
+// lists it in peerDependencies with a range that admits X.Y.Z and all of X.Y.x, rejects X.(Y+1).0,
+// and is narrower than the zeroed caret (for 0.x that means it also rejects the caret's floor).
+// Reads node_modules, so run `bun install` before `bun test`.
+function peerNarrows(name: string, spec: string, declared: Set<string>): boolean {
+  const m = TILDE.exec(spec);
+  if (!m) return false;
+  const [x, y, z] = m.slice(1).map(Number);
+  const floor = x > 0 ? `${x}.0.0` : y > 0 ? `0.${y}.0` : `0.0.${z}`;
+  for (const other of declared) {
+    const file = join(root, "node_modules", other, "package.json");
+    if (other === name || !existsSync(file)) continue;
+    const peer = JSON.parse(readFileSync(file, "utf8")).peerDependencies?.[name];
+    if (typeof peer !== "string") continue;
+    const ok = (v: string) => Bun.semver.satisfies(v, peer);
+    if (ok(`${x}.${y}.${z}`) && ok(`${x}.${y}.999999`) && !ok(`${x}.${y + 1}.0`) && (x > 0 || !ok(floor))) return true;
+  }
+  return false;
+}
+
+function check(where: string, name: string, spec: unknown, bad: string[], declared: Set<string>) {
   if (typeof spec !== "string") return;
   if (SKIP.test(spec)) return;
+  if (peerNarrows(name, spec, declared)) return;
   let range = spec;
   if (spec.startsWith("npm:")) {
     // npm:pkg@^1.0.0 or npm:@scope/pkg@^1.0.0 is checked on the range after the last "@".
@@ -92,25 +118,31 @@ function check(where: string, name: string, spec: unknown, bad: string[]) {
   if (!range.split("||").every((side) => RANGE.test(side.trim()))) bad.push(`${where}: ${name}@${spec}`);
 }
 
-function checkMap(where: string, map: unknown, bad: string[]) {
+function checkMap(where: string, map: unknown, bad: string[], declared: Set<string>) {
   if (!map || typeof map !== "object") return;
   for (const [name, spec] of Object.entries(map)) {
-    if (spec && typeof spec === "object") checkMap(where, spec, bad); // nested overrides
-    else check(where, name, spec, bad);
+    if (spec && typeof spec === "object") checkMap(where, spec, bad, declared); // nested overrides
+    else check(where, name, spec, bad, declared);
   }
 }
 
 test("every declared dependency range is a zeroed caret", async () => {
   const { rootPkg, workspaces } = await readManifests();
+  const declared = new Set<string>();
+  for (const { json } of [rootPkg, ...workspaces]) {
+    for (const field of ["dependencies", "devDependencies", "optionalDependencies"]) {
+      for (const name of Object.keys(json[field] ?? {})) declared.add(name);
+    }
+  }
   const bad: string[] = [];
   for (const { file, json } of [rootPkg, ...workspaces]) {
-    for (const field of FIELDS) checkMap(`${file}#${field}`, json[field], bad);
-    checkMap(`${file}#overrides`, json.overrides, bad);
-    checkMap(`${file}#resolutions`, json.resolutions, bad);
+    for (const field of FIELDS) checkMap(`${file}#${field}`, json[field], bad, declared);
+    checkMap(`${file}#overrides`, json.overrides, bad, declared);
+    checkMap(`${file}#resolutions`, json.resolutions, bad, declared);
     const ws = json.workspaces && !Array.isArray(json.workspaces) ? json.workspaces : {};
-    checkMap(`${file}#catalog`, json.catalog ?? ws.catalog, bad);
+    checkMap(`${file}#catalog`, json.catalog ?? ws.catalog, bad, declared);
     for (const [name, catalog] of Object.entries<any>(json.catalogs ?? ws.catalogs ?? {})) {
-      checkMap(`${file}#catalogs.${name}`, catalog, bad);
+      checkMap(`${file}#catalogs.${name}`, catalog, bad, declared);
     }
   }
   expect(bad).toEqual([]);
@@ -189,6 +221,10 @@ The files were run with Bun 1.4.4 in a throwaway workspace root with `workspaces
 - Passing fixture: `bun test` exited 0 with 4 tests passing, including a prerelease-only dependency declared as `^0.21.0-ts7.1.0-beta`. The excluded workspace, with a wrong version and a `~` range, was correctly ignored.
 - Failing fixture: `bun test` exited 1 with 3 of 4 failing, reporting a catalog entry `^4.1.0`, an alias `^3.1.0`, `~1.0.0`, `latest`, a peer `^19.2.1`, a prerelease with a nonzero patch `^0.21.1-beta`, a hard-coded sibling `^1.2.3`, a workspace version `1.2.4` against root `1.2.3` and a workspace with no version.
 - Union and override cases: `^18.0.0 || ^19.0.0` and `"react-dom": "$react"` passed; `^18.0.0 || ~19.0.0`, `^18.0.0 ||`, `>=18 || ^19.0.0` and `^18.1.0 || ^19.0.0` failed.
+- Peer-range exception, in a second throwaway workspace with hand-written `node_modules/<pkg>/package.json` files for the constraining packages (`peerDependencies` of `better-auth: ">=1.7.16 <1.8.0"` and `floor-pkg: ">=0.5.3 <0.6.0"`):
+  - Passing: `better-auth` declared `~1.7.16` in the root and in a workspace, and `floor-pkg` declared `~0.5.3`, passed (4 tests, exit 0).
+  - Failing: `better-auth` as `~1.6.15` (differs from the peer range), `~1.2.3` and `~2.0.0` that no peer requires, `~1.0.0` against a plain `^1.0.0` peer (not narrower than the caret), and `~0.5.0` below a `0.x` peer floor all failed with the existing bad cases.
+  - Passing `~1.7.16` failed (exit 1) once the constraining package was removed from `node_modules`.
 - Sync script: `bun scripts/sync-version.ts 2.0.0` rewrote the root and every non-excluded workspace and left the excluded one alone.
 
 Re-run them after any edit, with one passing and one failing fixture.
