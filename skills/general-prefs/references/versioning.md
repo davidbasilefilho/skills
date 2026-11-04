@@ -1,6 +1,6 @@
 # Versioning
 
-Research dated 2026-11-04. The test files below were drafted, not executed in research: run them in the project, and fix them until they pass. **Verify** any Bun API against https://bun.com/docs before relying on it.
+Research dated 2026-11-04. The test below was run under Bun 1.4.4 against four fixtures (see the notes after it). **Verify** any other Bun API against https://bun.com/docs before relying on it.
 
 ## ZeroVer
 
@@ -40,9 +40,8 @@ function isGreater(a: string, b: string): boolean {
 }
 
 test("every package version is ZeroVer", async () => {
-  for await (const p of new Glob("**/package.json").scan({
-    ignore: ["**/node_modules/**"],
-  })) {
+  for await (const p of new Glob("**/package.json").scan({})) {
+    if (p.includes("node_modules")) continue;
     const j = await Bun.file(p).json();
     if (j.version !== undefined) expect(j.version, p).toMatch(ZERO_VER);
   }
@@ -62,8 +61,10 @@ test("version is strictly greater than main", async () => {
 
 Notes:
 
+- `Glob.scan` has no `ignore` option (Bun 1.4.4 scans `node_modules` anyway), so the loop skips those paths itself. Dependency versions such as `1.2.3` would otherwise fail ZeroVer.
+- Fixtures it was run against: main `0.1.0` with the branch at `0.2.0` passes; the branch equal to main fails the greater-than test; a workspace package at `1.0.0` fails the ZeroVer test; a workspace with `apps/`, `packages/` and a `node_modules` dependency at `9.9.9` passes. The skip for pushes to `main` was not exercised.
 - The comparison is numeric on purpose: it is correct for ZeroVer and avoids relying on a semver helper. If the project prefers `Bun.semver.order(cur, main)` (returns `1` when the first argument is greater, **unverified**), confirm that in the Bun docs first.
-- The skip is limited to pushes to `main`. Pull requests into `dev`, pushes to `dev` and the `dev` into `main` pull request all run the check.
+- The skip is limited to pushes to `main`. Pull requests into `dev`, pushes to `dev` and the `dev` into `main` pull request all run the check. Because the check is skipped on `main` pushes, it cannot catch an unchanged version after the fact: the required status check on pull requests into `dev` and `main` is what guarantees a new version per `main` commit.
 - In a monorepo with a single version source (see `bun-prefs`), compare the root version. If workspaces carry versions, add the same comparison per versioned package.
 
 ## CI step
@@ -89,4 +90,4 @@ jobs:
       - run: bun test tests/versioning.test.ts
 ```
 
-Mark this job as a required status check in the ruleset ([Branches and merging](branches-and-merging.md)), so no change merges without a valid, higher version.
+Mark this job as a required status check in the ruleset ([Branches and merging](branches-and-merging.md)), so no change merges without a valid, higher version. The rule must cover pull requests into both `dev` and `main`, since pushes to `main` skip the higher-than-main test.

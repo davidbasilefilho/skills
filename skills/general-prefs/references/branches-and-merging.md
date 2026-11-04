@@ -16,7 +16,7 @@ Configure both layers. A ruleset that requires a method the repository setting d
 2. **Ruleset.** Create it with `POST /repos/{owner}/{repo}/rulesets` (https://docs.github.com/en/rest/repos/rules):
    - target `branch`, `conditions.ref_name.include` set to `refs/heads/main` and `refs/heads/dev`, enforcement `active`;
    - a `pull_request` rule whose `parameters.allowed_merge_methods` is `["squash"]` (the merge-method parameter has been generally available since 2025-03-24);
-   - the `deletion`, `non_fast_forward` and `required_linear_history` rules, and a `required_status_checks` rule listing the version and ZeroVer test job from [Versioning](versioning.md) so an unvalidated change cannot merge. **Verify** these rule names and their parameters.
+   - the `deletion`, `non_fast_forward` and `required_linear_history` rules, and a `required_status_checks` rule listing the version and ZeroVer test job from [Versioning](versioning.md) so an unvalidated change cannot merge. The version test skips pushes to `main`, so this required check on pull requests into `dev` and `main` is what enforces a new version per `main` commit. **Verify** these rule names and their parameters.
    - A pattern such as `refs/heads/release/**` may cover the release family in a separate ruleset. **Verify** the pattern syntax.
 
 The stack merge command takes the method explicitly (`--squash`); see [Pull request stacks](stacks.md).

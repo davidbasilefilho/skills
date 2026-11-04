@@ -41,7 +41,7 @@ Example stack onto `dev`: `release/0.5.0/version`, `release/0.5.0/feat/schema`, 
 ## Workflow
 
 1. Read the project's current version on `main` and on `dev`. Choose a `0.Y.Z` strictly higher than `main`'s, and ask the user when the bump size is unclear.
-2. Create the stack: the `version` branch first, then one branch per change, named as above.
+2. Create the stack: the `version` branch first, then one branch per change, named as above. On the `version` branch set the new version through the project's single version source (the `version:sync` script from `bun-prefs`, or its equivalent), never by editing manifests by hand.
 3. Add or update the checks in [Versioning](references/versioning.md) and the repository settings in [Branches and merging](references/branches-and-merging.md) when missing.
 4. Run the project's tests, including the version and ZeroVer tests, and report the commands with their exit codes.
 5. Merge the stack with squash into `dev`, then merge `dev` into `main` with squash.
