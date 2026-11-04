@@ -29,8 +29,8 @@ A squash merge of `dev` into `main` puts one new commit on `main` that `dev` doe
 
 Choose the merge by comparing trees:
 
-- `main` only ever received changes through `dev`: its tree equals the tree of a commit already in `dev`. Run `git merge -s ours --no-ff origin/main`. It records `main` as an ancestor and changes no content, so `dev` keeps everything it has gained since.
-- `main` received a direct fix: no commit in `dev` has its tree. Run a normal `git merge --no-ff origin/main` so the fix reaches `dev`. When it conflicts, the workflow aborts, opens an issue and fails, so a human resolves it. It never forces a push or resolves a conflict itself.
+- `main` only ever received changes through `dev`: its tree equals the tree of a commit already in `dev`. Run `git merge -s ours --no-ff origin/main`. It records `main` as an ancestor and changes no content, so `dev` keeps everything it has gained since. A direct change on `main` whose tree happens to equal an old `dev` commit (a revert to a previous release, for example) is taken as this case and its content is dropped, so land such a change through `dev` instead.
+- `main` received a direct fix: no commit in `dev` has its tree. Run a normal `git merge --no-ff origin/main` so the fix reaches `dev`. This merge also carries the release squash commit, so it conflicts whenever `dev` has since touched the same files. Expect this path to need a human: the workflow aborts, opens an issue and fails. It never forces a push or resolves a conflict itself.
 
 ```yaml
 name: sync-back
@@ -52,7 +52,7 @@ jobs:
           token: ${{ secrets.SYNC_BACK_TOKEN || github.token }}
       - name: Merge main into dev
         env:
-          GH_TOKEN: ${{ secrets.SYNC_BACK_TOKEN || github.token }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
@@ -65,22 +65,31 @@ jobs:
               echo "dev already contains main"
               exit 0
             fi
-            if git log --format=%T origin/dev | grep -qx "$(git rev-parse 'origin/main^{tree}')"; then
+            # write the trees to a file: grep -q on a pipe can SIGPIPE git log and fail under pipefail
+            git log --format=%T origin/dev > "$RUNNER_TEMP/dev-trees"
+            if grep -qxF "$(git rev-parse 'origin/main^{tree}')" "$RUNNER_TEMP/dev-trees"; then
               echo "path: ours"
               git merge -s ours --no-ff origin/main -m "$msg"
             elif git merge --no-ff origin/main -m "$msg"; then
               echo "path: normal"
             else
-              git merge --abort
+              git merge --abort || true
               echo "path: conflict"
-              gh issue create \
-                --title "Merge main back into dev needs manual resolution" \
-                --body "A direct change on main conflicts with dev. Merge origin/main into dev by hand, resolve the conflicts, and push the merge commit."
+              title="Merge main back into dev needs manual resolution"
+              if [ -z "$(gh issue list --state open --search "\"$title\" in:title" --json number --jq '.[].number')" ]; then
+                gh issue create --title "$title" \
+                  --body "A direct change on main conflicts with dev. Merge origin/main into dev by hand, resolve the conflicts, and push the merge commit. Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+              fi
               exit 1
             fi
-            if git push origin HEAD:dev; then
+            if out=$(git push origin HEAD:dev 2>&1); then
               exit 0
             fi
+            echo "$out"
+            case "$out" in
+              *non-fast-forward*|*"fetch first"*) ;; # dev moved: fetch and retry
+              *) exit 1 ;; # rejected for another reason, such as a missing bypass
+            esac
           done
           echo "dev kept moving; push failed three times"
           exit 1
@@ -90,7 +99,8 @@ Notes:
 
 - `dev` rules from this skill (pull request required, squash only, linear history) reject this push. Let the workflow identity bypass them on `dev` only: a ruleset bypass actor for the workflow identity, or a token in `SYNC_BACK_TOKEN` owned by a bypass actor. **Verify** the exact bypass setup (actor type for the GitHub Actions app or a GitHub App, and whether `required_linear_history` must be exempt too) in https://docs.github.com/en/rules/creating-rulesets and the repository settings. The squash-only repository setting does not block a push.
 - A push made with `github.token` does not start other workflows. Use a token or app credential in `SYNC_BACK_TOKEN` if required checks must run on the merge commit. **Verify** this behavior in the Actions docs.
-- The version test skips this merge commit; see [Versioning](versioning.md).
+- The version test skips this merge commit; see [Versioning](versioning.md). That skip matches only while `origin/main` is still the merge's second parent, so re-running the check after `main` has advanced fails on the equal versions. Re-run the sync-back instead, or merge the newer `main` into `dev` first.
+- On hosts other than GitHub, run the same script as a post-merge job in the host's pipeline.
 
 ## Verify the setup
 
