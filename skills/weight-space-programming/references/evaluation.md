@@ -1,6 +1,6 @@
 # Evaluation, logging and reporting
 
-Detail for steps 6 and 7 of the workflow in `SKILL.md`. Read it before the first edit is tested and again before writing the final report.
+Detail for the baseline, test, keep-or-revert, edit log and final report parts of the workflow in `SKILL.md`. Read it before the first edit and again before writing the final report.
 
 ## Experiment protocol
 

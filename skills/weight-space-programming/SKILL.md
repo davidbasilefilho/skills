@@ -7,7 +7,7 @@ description: Use when a neural network has to be understood, repaired, written o
 
 Treat a trained network as a program you can read and patch. Read weights, form a hypothesis about what a part computes, change a few numbers on purpose, test, and keep the change only if it helps. Writing a small network from scratch works the same way, with the weights as the source code.
 
-Techniques, worked examples and source URLs are in [references/techniques.md](references/techniques.md). Read it when picking a method. Logging, scoring and report requirements are in [references/evaluation.md](references/evaluation.md). Read it before testing the first edit.
+Techniques, worked examples and source URLs are in [references/techniques.md](references/techniques.md). Read it when picking a method. Logging, scoring and report requirements are in [references/evaluation.md](references/evaluation.md). Read it before the first edit, because the baseline comes first.
 
 ## Goal and rules
 
@@ -46,9 +46,10 @@ Large tensors do not fit as text. Without code execution, read only the slices y
    - Note conventions that cause silent errors: whether a linear layer stores weights as (out, in) or (in, out), row versus column meaning, fused projections that pack several matrices into one tensor.
 3. **Form hypotheses.** Before reading deeply, write down what you expect to find and what edit it would imply. Prefer "this behavior is hidden or suppressed by a small component, and removing or damping it exposes it" over "this network lacks a skill, so I will add it". See *Expectations and limits*.
 4. **Read.** Locate structure in the weights: which inputs a unit attends to, which outputs it writes, which directions a layer adds to the residual stream, which heads compose. Use the reading methods in `references/techniques.md`. When forward passes are allowed, collect activations or attention patterns on inputs you wrote yourself. Reading weights alone can fail, and allowed observations are a legitimate way past that.
-5. **Edit.** Make the smallest change that tests the hypothesis, one component at a time, on the copy. Record it in the edit log before testing.
-6. **Test.** Run the practice set and compare to the baseline, with the secondary metrics from `references/evaluation.md`.
-7. **Keep or revert.** Keep an edit only if it helps on the practice set and nothing it should not touch got worse. Otherwise restore the previous values from the log and record the failure; failed edits are information. Do not stack speculative edits: each kept edit earns its place with a measured gain.
+5. **Baseline.** Before any edit, measure the unedited network on the practice set and the held-out set with the settings every later run will use, as set out in `references/evaluation.md`. Without forward passes, record that no baseline exists and that results are unverified.
+6. **Edit.** Make the smallest change that tests the hypothesis, one component at a time, on the copy. Record it in the edit log before testing.
+7. **Test.** Run the practice set and compare to the baseline, with the secondary metrics from `references/evaluation.md`.
+8. **Keep or revert.** Keep an edit only if it helps on the practice set and nothing it should not touch got worse. Otherwise restore the previous values from the log and record the failure; failed edits are information. Do not stack speculative edits: each kept edit earns its place with a measured gain.
 
 ### Writing a network from scratch
 
