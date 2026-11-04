@@ -17,7 +17,7 @@ Always enable the Compiler in a React project. The only exception is a bundler o
 - **Rspack**: follow Rspack's own docs.
 - **TanStack Start**: on Vite use the standard Vite setup above, on Rsbuild use `pluginReact({ reactCompiler: true })` and remove the Babel plugin. No official TanStack page was found; test the build and the dev server. An old compiler version (`rc.2`) caused a 500 error in a reported case, so use a current version.
 - **Expo / Metro**: SDK 54 or newer configures Babel automatically; enable with `"experiments": { "reactCompiler": true }`. Lint rules ship in `eslint-config-expo` from SDK 55.
-- **Bun**: no official React or Bun doc was found. A third-party plugin `bun-plugin-react-compiler` exists, and secondary sources report an experimental built-in `Bun.build({ reactCompiler: true })`. Both are unconfirmed: check Bun's own docs first. If neither works for the project, the bundler exception applies, or use Vite for the browser bundle (see `bun-stack-prefs`).
+- **Bun**: no official React or Bun doc was found. A third-party plugin `bun-plugin-react-compiler` exists, and secondary sources report an experimental built-in `Bun.build({ reactCompiler: true })`. Both are unconfirmed: check Bun's own docs first. If neither works for the project, the bundler exception applies, or use Vite for the browser bundle (see the Vite setup above).
 
 ## Unsupported targets
 
@@ -34,7 +34,7 @@ No official page lists bundlers that cannot use the Compiler. It is Babel based,
 7. **`"use no memo"`** is a temporary escape hatch at function or file level. It must be the first statement, with quotes not backticks, and overrides every mode. Always add a comment saying why and plan its removal.
 8. **Incremental adoption** in an existing codebase: Babel `overrides` by directory, annotation mode, or `gating` feature flags.
 9. **React 17 and 18**: set `target: '17'` or `'18'` and install `react-compiler-runtime` as a runtime dependency, not a dev one. React 19 needs neither.
-10. **Pin an exact compiler version** when the project lacks end-to-end tests, because memoization changes can alter Effect firing.
+10. **Keep the compiler version steady** when the project lacks end-to-end tests, because memoization changes can alter Effect firing. Declare it as a zeroed caret range (for example `^1.0.0`, per `bun-prefs`) and let the lockfile fix the exact version. Move it only in a deliberate upgrade followed by a test run.
 11. **Verify it ran**: the React DevTools "Memo" badge on compiled components. `react-compiler-healthcheck` appears only in the Expo docs.
 
 ## Interaction with other rules

@@ -11,15 +11,11 @@ import { existsSync, readFileSync } from "node:fs";
 
 const files = [...new Glob("src/**/*.{tsx,jsx}").scanSync(".")];
 const read = (f: string) => readFileSync(f, "utf8");
-const allowed = (line: string) => line.includes("react-prefs: allow-conditional");
 
 function scan(patterns: RegExp[]): string[] {
   const hits: string[] = [];
   for (const f of files) {
-    const lines = read(f).split("\n");
-    lines.forEach((line, i) => {
-      const prev = lines[i - 1] ?? "";
-      if (allowed(line) || allowed(prev)) return;
+    read(f).split("\n").forEach((line, i) => {
       if (patterns.some((p) => p.test(line))) hits.push(`${f}:${i + 1}: ${line.trim()}`);
     });
   }
@@ -31,7 +27,7 @@ test("visibility toggling uses Activity, not conditional rendering", () => {
     /\{\s*!?[\w.?]+(\([^)]*\))?\s*&&\s*\(?\s*</, // {cond && <X />}
     /\?\s*\(?\s*<[^>]*>[^:]*:\s*null\s*\)?\s*\}/, // cond ? <X /> : null
     /\?\s*null\s*:\s*\(?\s*</, // cond ? null : <X />
-    /style=\{\{[^}]*display:\s*[^}]*\}\}/, // inline display toggles
+    /style=\{\{[^}]*display:\s*(?:["']none["']|[^,}"']*\?)/, // inline display: none or conditional display
   ]);
   expect(hits).toEqual([]);
 });
@@ -62,7 +58,7 @@ test("reduced motion is honored for view transitions", () => {
 test("React Compiler is configured (or the project records a waiver)", () => {
   const pkg = JSON.parse(readFileSync("package.json", "utf8"));
   if (pkg["x-react-compiler-waiver"]) return; // reason recorded, re-check on upgrades
-  const configs = [...new Glob("{package.json,*.config.*,.babelrc*,app.json}").scanSync(".")]
+  const configs = [...new Glob("{package.json,*.config.*,.babelrc*,app.json}").scanSync({ cwd: ".", dot: true })]
     .filter((f) => existsSync(f))
     .map(read)
     .join("\n");

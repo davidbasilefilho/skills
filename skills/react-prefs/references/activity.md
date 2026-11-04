@@ -43,9 +43,9 @@ Always rewrite these to Activity:
 - Only Suspense-activating reads such as `use(promise)` fetch while hidden. Data fetched inside an Effect does not.
 - Activity boundaries enable selective hydration, including a plain always-visible `<Activity>`. Wrapping tab content lets the tab buttons hydrate first.
 
-## The one exception
+## When a case seems to need real unmounting
 
-Code that must truly unmount (reset state, release a resource, react to Effect mount) may keep conditional rendering. Mark it with the comment `// react-prefs: allow-conditional <reason>` so the check in [Checks](checks.md) passes and a reviewer sees why. Everything else uses Activity.
+Activity is always used. When a case seems to need a true unmount (reset state, release a resource, react to Effect mount), do not fall back to conditional rendering. Ask the user (structured question tool when available, plain question otherwise) and record the answer in the project's agent instructions file. The check in [Checks](checks.md) allows nothing by comment.
 
 ## Unverified
 
