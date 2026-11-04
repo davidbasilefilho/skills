@@ -21,7 +21,7 @@ This skill is model-, harness- and environment-agnostic. It names capabilities, 
 ## Rules
 
 1. **Squash and merge, always.** Every pull request, stacked or not, merges by squash. Configure the repository and the branch rules so no other method is possible. Setup in [Branches and merging](references/branches-and-merging.md).
-2. **Two lifetime-long branches: `main` and `dev`.** Nothing else lives forever. Pull requests go into `dev`, and `dev` goes into `main`.
+2. **Two lifetime-long branches: `main` and `dev`.** Nothing else lives forever. Pull requests go into `dev`, and `dev` goes into `main`. After each squash merge into `main`, a workflow merges `main` back into `dev` with a merge commit, the only exception to squash always, so the next release pull request does not conflict. Workflow and merge choice in [Branches and merging](references/branches-and-merging.md).
 3. **Every `main` commit has a different version.** Each change must therefore carry a version higher than the one on `main`. This must be tested in pull requests and on `dev`: add the version test and CI step in [Versioning](references/versioning.md) to the project and run it.
 4. **Release branch stacks.** The first branch of a release stack must be `release/0.Y.Z/version`, and every other stack branch follows the same prefix. The naming rule is below; the commands are in [Pull request stacks](references/stacks.md).
 5. **Pull request stacks, always.** Every change goes in as a stack of pull requests using the host's native stacked pull request support (`gh` on GitHub). Fall back to manually based branches only when that support is unavailable, as described in [Pull request stacks](references/stacks.md).
@@ -44,11 +44,11 @@ Example stack onto `dev`: `release/0.5.0/version`, `release/0.5.0/feat/schema`, 
 2. Create the stack: the `version` branch first, then one branch per change, named as above. On the `version` branch set the new version through the project's single version source (the `version:sync` script from `bun-prefs`, or its equivalent), never by editing manifests by hand.
 3. Add or update the checks in [Versioning](references/versioning.md) and the repository settings in [Branches and merging](references/branches-and-merging.md) when missing.
 4. Run the project's tests, including the version and ZeroVer tests, and report the commands with their exit codes.
-5. Merge the stack with squash into `dev`, then merge `dev` into `main` with squash.
+5. Merge the stack with squash into `dev`, then merge `dev` into `main` with squash. The sync-back workflow then merges `main` into `dev`.
 
 ## References
 
-- [Branches and merging](references/branches-and-merging.md): main and dev, squash-only repository settings and ruleset, required checks.
+- [Branches and merging](references/branches-and-merging.md): main and dev, squash-only repository settings and ruleset, required checks, sync-back workflow.
 - [Pull request stacks](references/stacks.md): stacked pull request commands, naming in practice, fallback without native support.
 - [Versioning](references/versioning.md): ZeroVer test, version-higher-than-main test, CI workflow.
 
