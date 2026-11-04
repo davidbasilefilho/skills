@@ -1,6 +1,6 @@
 # Convex and TanStack DB
 
-Research date: 2026-11-04. TanStack DB is a release candidate and its Convex collection is new: verify names and options against current docs before use, and pin the RC tag (`@rc`).
+Research date: 2026-11-04. TanStack DB is a release candidate and its Convex collection is new: verify names and options against current docs before use, and install the RC with the tag (`@rc`), then rewrite each written range as a zeroed caret that keeps the prerelease suffix, such as `^1.0.0-rc.1.3` (the form the `bun-prefs` range test accepts). Never leave the tag as the range; the lockfile fixes the exact version.
 
 ## Convex with TanStack Query
 

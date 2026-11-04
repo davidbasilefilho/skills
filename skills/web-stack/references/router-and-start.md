@@ -25,7 +25,7 @@ Findings that shape the rule (one RFC discussion #8188 from 2026-08-28 plus the 
 
 Rule (the "one mechanism per navigation" part is inference from these sources, not a documented rule):
 
-1. At the start of the project, check the current Router docs and release notes with web search or fetch, and test whether a Router navigation triggers a `<ViewTransition>` placed around the outlet.
+1. At the start of the project and on every Router upgrade, check the current Router docs and release notes with web search or fetch, and test on the installed Router version whether a Router navigation triggers a `<ViewTransition>` placed around the outlet.
 2. If it does not (the research finding), enable Router's view transition for route changes (`defaultViewTransition` with direction types, or per-navigation `viewTransition`) and do not wrap the outlet in `<ViewTransition>`. Use React `<ViewTransition>` everywhere else (lists, Suspense reveals, show/hide with Activity, shared elements), as `react-prefs` requires.
 3. If it does, use `<ViewTransition>` for route changes and leave Router's option off, so only one mechanism animates each navigation.
 4. Make the two match: one set of `::view-transition-*` styles and class names shared by both, the same durations and easing, the same transition types for the same direction, and `prefers-reduced-motion` honored (see [ViewTransition](../../react-prefs/references/view-transition.md)).

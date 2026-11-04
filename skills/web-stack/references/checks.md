@@ -12,7 +12,6 @@ import { readFileSync } from "node:fs";
 const pkg = JSON.parse(readFileSync("package.json", "utf8"));
 const deps: Record<string, string> = { ...pkg.dependencies, ...pkg.devDependencies };
 const has = (name: string) => name in deps;
-const allow: string[] = pkg["x-web-stack-allow"] ?? []; // documented exceptions, each with a reason in the project docs
 const files = [...new Glob("src/**/*.{ts,tsx}").scanSync(".")];
 const read = (f: string) => readFileSync(f, "utf8");
 const filesWith = (re: RegExp) => files.filter((f) => re.test(read(f)));
@@ -63,7 +62,7 @@ test("hand-rolled replacements of TanStack libraries are absent", () => {
     "react-router": "@tanstack/react-router",
     "react-router-dom": "@tanstack/react-router",
   };
-  const found = Object.keys(banned).filter((d) => has(d) && !allow.includes(d));
+  const found = Object.keys(banned).filter(has);
   expect(found.map((d) => `${d} -> ${banned[d]}`)).toEqual([]);
   expect(filesWith(/addEventListener\(\s*["']key(down|up)["']/)).toEqual([]); // use Hotkeys
 });
@@ -88,7 +87,7 @@ test("Router view transitions use one mechanism per navigation", () => {
 });
 ```
 
-Exceptions: a dependency in `x-web-stack-allow` in `package.json` needs a written reason in the project docs. Do not use it for convenience. The TanStack Query rule has no exception for Convex.
+The checks allow no exceptions by configuration. When a listed library seems unavoidable, ask the user (structured question tool when available, plain question otherwise) and record the answer in the project's agent instructions file. The TanStack Query rule has no exception for Convex.
 
 If a TanStack library from [TanStack libraries](tanstack-libraries.md) is unconfirmed for the framework and was not adopted, record that in the project docs after checking, and re-check on upgrades.
 

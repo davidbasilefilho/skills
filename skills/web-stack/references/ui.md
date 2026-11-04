@@ -15,9 +15,9 @@ Research date: 2026-11-04. Verify versions against current docs.
 
 ## cn
 
-- Use the `cn` package (`cn` on npm, from the shadcn-ui org): a drop-in replacement for `twMerge(clsx(...))` with zero dependencies, for Tailwind v4 only. Import it as `import { cn } from "cn"` everywhere; do not hand-write a `cn` that wraps `clsx` and `tailwind-merge`.
+- Use the `cn` package (`cn` on npm, from the shadcn-ui org): a drop-in replacement for `twMerge(clsx(...))` with zero dependencies. It is the required helper on every Tailwind version. Import it as `import { cn } from "cn"` everywhere; do not hand-write a `cn` that wraps `clsx` and `tailwind-merge`.
 - Since September 2026 shadcn components import `cn` from `"cn"` and `lib/utils.ts` is `export { cn } from "cn"`. A project that already has the classic helper migrates with `shadcn@latest migrate cn` (via the project's package runner).
-- On Tailwind v3 the package's repo says to stay with tailwind-merge v2. Prefer Tailwind v4 for new projects.
+- Use `cn` on Tailwind v3 too, and never `tailwind-merge`. The package's repo documents Tailwind v4 only, so on v3 check the package's current docs and report any gap to the user instead of switching helpers. Prefer Tailwind v4 for new projects.
 - Interpretation note: the research assumed the user means this `cn` package. If the project already settled on another helper, tell the user before changing it.
 
 ## shadcn/ui (opt-in)
