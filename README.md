@@ -31,6 +31,7 @@ npx -y skills add davidbasilefilho/skills
 - `react-prefs` - Enforces the owner's React preferences: Activity for every visibility toggle, ViewTransition wherever it fits, and React Compiler with its best practices
 - `upgrade-deps` - Upgrades a lockfile within the declared ranges, or bumps the declared dependencies to the latest version in the `bun-prefs` range format and relocks, for any package manager
 - `web-stack` - Applies the owner's web stack: React with the TanStack libraries, TanStack Router or Start, Convex with TanStack DB, Clerk (or Better Auth with Convex) for auth, Base UI, Tailwind CSS and `cn`
+- `weight-space-programming` - Reads, fixes and hand-writes neural networks by reasoning about their weights, without training, with a baseline, held-out evaluation and an edit log
 
 ## Usage
 
