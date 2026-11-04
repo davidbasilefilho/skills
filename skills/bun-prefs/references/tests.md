@@ -20,7 +20,7 @@ Adapt only when the layout differs:
 
 ## Specifiers the range test skips
 
-Not semver ranges, so not checked: `workspace:`, `file:`, `link:`, `git+`, `git:`, `github:` and `http(s):` tarball URLs. `catalog:` references are skipped, and the catalog entries they point to (root `catalog`, `catalogs`, and the same keys under `workspaces`) are checked instead. `npm:pkg@^1.0.0` aliases are checked on the range after the last `@`; an alias without a range fails. Checked fields: `dependencies`, `devDependencies`, `optionalDependencies`, `peerDependencies`, `overrides`, `resolutions`. Tags (`latest`), `*`, `~`, `>=` and exact versions fail on purpose.
+Not semver ranges, so not checked: `workspace:`, `file:`, `link:`, `git+`, `git:`, `github:` and `http(s):` tarball URLs. `catalog:` references are skipped, and the catalog entries they point to (root `catalog`, `catalogs`, and the same keys under `workspaces`) are checked instead. Override references such as `"react": "$react"` are skipped too, because they reuse the range of a direct dependency, which is checked. `npm:pkg@^1.0.0` aliases are checked on the range after the last `@`; an alias without a range fails. A union range such as the peer `^18.0.0 || ^19.0.0` passes when each side matches the format; one bad side fails the whole range. Checked fields: `dependencies`, `devDependencies`, `optionalDependencies`, `peerDependencies`, `overrides`, `resolutions`. Tags (`latest`), `*`, `~`, `>=` and exact versions fail on purpose.
 
 `^0.0.0` passes, as a degenerate `^0.0.X`. A prerelease suffix is allowed after any shape (`^0.21.0-beta`), because some packages publish only prereleases and a plain `^0.21.0` would not match them. The shapes are one regex in `dep-ranges.test.ts`; change it there if the user wants another variant.
 
@@ -75,7 +75,8 @@ const RANGE = /^\^(?:[1-9]\d*\.0\.0|0\.[1-9]\d*\.0|0\.0\.\d+)(?:-[0-9A-Za-z.-]+)
 const FIELDS = ["dependencies", "devDependencies", "optionalDependencies", "peerDependencies"];
 // Not semver ranges, so not checked: workspace:, file:, link:, git and github: URLs, tarball URLs.
 // catalog: references are not checked either; the catalog entries they point to are.
-const SKIP = /^(workspace:|file:|link:|git\+|git:|github:|https?:|catalog:)/;
+// $name override references point at a direct dependency, whose own range is checked.
+const SKIP = /^(workspace:|file:|link:|git\+|git:|github:|https?:|catalog:|\$)/;
 
 function check(where: string, name: string, spec: unknown, bad: string[]) {
   if (typeof spec !== "string") return;
@@ -87,7 +88,8 @@ function check(where: string, name: string, spec: unknown, bad: string[]) {
     const at = rest.lastIndexOf("@");
     range = at > 0 ? rest.slice(at + 1) : "";
   }
-  if (!RANGE.test(range)) bad.push(`${where}: ${name}@${spec}`);
+  // A union such as ^18.0.0 || ^19.0.0 passes when every side matches.
+  if (!range.split("||").every((side) => RANGE.test(side.trim()))) bad.push(`${where}: ${name}@${spec}`);
 }
 
 function checkMap(where: string, map: unknown, bad: string[]) {
@@ -186,6 +188,7 @@ console.log(`Version ${rootPkg.json.version} synced to ${workspaces.length} work
 The files were run with Bun 1.4.4 in a throwaway workspace root with `workspaces: ["apps/*", "packages/*", "!packages/ignored"]`, a root catalog, an `npm:` alias, `file:`, `github:`, `catalog:` and `workspace:` specifiers.
 - Passing fixture: `bun test` exited 0 with 4 tests passing, including a prerelease-only dependency declared as `^0.21.0-ts7.1.0-beta`. The excluded workspace, with a wrong version and a `~` range, was correctly ignored.
 - Failing fixture: `bun test` exited 1 with 3 of 4 failing, reporting a catalog entry `^4.1.0`, an alias `^3.1.0`, `~1.0.0`, `latest`, a peer `^19.2.1`, a prerelease with a nonzero patch `^0.21.1-beta`, a hard-coded sibling `^1.2.3`, a workspace version `1.2.4` against root `1.2.3` and a workspace with no version.
+- Union and override cases: `^18.0.0 || ^19.0.0` and `"react-dom": "$react"` passed; `^18.0.0 || ~19.0.0`, `^18.0.0 ||`, `>=18 || ^19.0.0` and `^18.1.0 || ^19.0.0` failed.
 - Sync script: `bun scripts/sync-version.ts 2.0.0` rewrote the root and every non-excluded workspace and left the excluded one alone.
 
 Re-run them after any edit, with one passing and one failing fixture.
