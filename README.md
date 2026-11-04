@@ -1,6 +1,6 @@
 # Basile Skills
 
-A collection of agent skills by David Basile Filho.
+A collection of agent skills by David Basile Filho, written as plain Markdown for any agent that supports the Agent Skills format.
 
 ## Install
 
@@ -23,49 +23,23 @@ npx -y skills add davidbasilefilho/skills
 
 ## Included skills
 
-- `clash-royale-strategies` - Builds and reviews Clash Royale decks and upgrade plans from the player's real data (API profile, battlelog, wild cards), with a bundled Node CLI that fetches a profile and battlelog by player tag
+- `clash-royale-strategies` - Builds and reviews Clash Royale decks and upgrade plans from the player's real data (player tag lookup, deck screenshots, battle history, wild cards), with no API key needed
 - `personality-test-suite` - Interactive battery of five tests (Harry Potter, Riordanverse, 16Personalities-style type, 12axes political values, astrology) with batched multiple-choice questions and one cross-referenced results report at the end, including the 6 most similar figures per test
-- `weight-space-programming` - Reads, fixes and hand-writes neural networks by reasoning about their weights without training, with a baseline, held-out evaluation, edit log and honest reporting of what a gain really is
+- `bun-prefs` - Enforces the owner's Bun preferences: caret ranges with zeroed lower parts, Bun workspaces, a single version source, and everything tested
+- `bun-stack-prefs` - Applies the owner's Bun-based tooling: Bun APIs versus portable targets, oxlint, oxfmt, tsrs, `bun test` and `bun run` scripts
+- `general-prefs` - Enforces the owner's repository preferences: squash and merge always, `main` and `dev` as the permanent branches, a version higher than main on every change, release branch pull request stacks, and ZeroVer validated by tests
+- `react-prefs` - Enforces the owner's React preferences: Activity for every visibility toggle, ViewTransition wherever it fits, and React Compiler with its best practices
+- `upgrade-deps` - Upgrades a lockfile within the declared ranges, or bumps the declared dependencies to the latest version in the `bun-prefs` range format and relocks, for any package manager
+- `web-stack` - Applies the owner's web stack: React with the TanStack libraries, TanStack Router or Start, Convex with TanStack DB, Clerk (or Better Auth with Convex) for auth, Base UI, Tailwind CSS and `cn`
+- `weight-space-programming` - Reads, fixes and hand-writes neural networks by reasoning about their weights, without training, with a baseline, held-out evaluation and an edit log
 
 ## Usage
 
-Skills follow the open Agent Skills format and work in any harness that supports it. The agent loads `SKILL.md` and reads files under `references/` as needed. Say something like "test my personality" or "run the personality test suite".
-
-## Repository structure
-
-```text
-skills/
-  <skill-name>/
-    SKILL.md
-    references/
-    scripts/
-```
-
-## Development
-
-Tooling runs on Bun (see `mise.toml`).
-
-```bash
-bun install     # also installs the lefthook hooks
-bun run check   # oxlint (type-aware via oxlint-tsgolint), tsc, oxfmt --check
-bun run fmt     # format with oxfmt
-```
-
-Code lives in `src/` and uses [Effect](https://effect.website) for every effect: async work, errors and validation. Promises, `async`/`await`, `try`/`catch` and `throw` are only allowed inside `src/**/adapters/**`; elsewhere wrap them with `Effect.tryPromise` or `Effect.try`. The `effect-only` oxlint plugin in `lint/` enforces this.
-
-Skill scripts are bundled from `src/` into single Node files with `bun run build`. The lefthook pre-commit hook runs the checks and, when `src/` changes, rebuilds and stages the bundles.
-
-Fetch a Clash Royale profile and battlelog (needs a token from developer.clashroyale.com):
-
-```bash
-CLASH_ROYALE_API_TOKEN=... bun run cr:profile '#TAG' --out profile.json
-```
+The agent loads a skill's `SKILL.md` and reads files under its `references/` as needed. Say something like "build me a Clash Royale deck", "plan my card upgrades" or "run the personality test suite".
 
 ## Contributing
 
-- Keep each skill focused on a single job
-- Prefer clear, direct instructions over duplicated guidance
-- Update this README when adding or renaming skills
+Read `AGENTS.md` for the rules on skills, commits and the README structure.
 
 ## License
 

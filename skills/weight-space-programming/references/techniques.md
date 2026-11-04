@@ -89,7 +89,7 @@ Each entry gives what it is, when it fits, how it worked in the source, and the 
 
 - What: write the whole net as a program that builds weights, with layers for stone and liberty marking, propagation along chains, and a last layer that scores moves. Then use limited practice games to find which part is behind each loss and edit that part.
 - Fits: a larger structured network (here 243-512x6-82, 1.48M weights) when the model can use code to generate the weights and the user allows a small number of forward passes.
-- Source: Experiment 6. The net was written as a 336-line Python program. Early layers mark stones and liberties, middle layers propagate along chains to find groups in danger, and the last layer scores capture, saving a group, avoiding atari and not filling own eyes. A forward pass was defined as up to 128 games or 256 positions. Budgets of 0, 10, 25 and 50 passes with up to 120 code runs. Banned: fitting weights to data, tree search or rollouts, and running the net outside counted passes. Edits were kept only if the net won more. Scored against PPO seeds that it never played, while practice opponents were random, REINFORCE and another PPO seed. With 0 passes it already beat two small PPO nets, and with 50 passes it beat a same-size net trained on 20M games.
+- Source: Experiment 6. The net was written as a 336-line program. Early layers mark stones and liberties, middle layers propagate along chains to find groups in danger, and the last layer scores capture, saving a group, avoiding atari and not filling own eyes. A forward pass was defined as up to 128 games or 256 positions. Budgets of 0, 10, 25 and 50 passes with up to 120 code runs. Banned: fitting weights to data, tree search or rollouts, and running the net outside counted passes. Edits were kept only if the net won more. Scored against PPO seeds that it never played, while practice opponents were random, REINFORCE and another PPO seed. With 0 passes it already beat two small PPO nets, and with 50 passes it beat a same-size net trained on 20M games.
 - URLs: https://rikiyat.github.io/blog/weight-space-programming/ (experiment 6), https://raw.githubusercontent.com/RikiyaT/lm_understand-logs/main/exp6_go_from_scratch/README.md.
 
 ### Compiling programs to transformers (Tracr)
@@ -128,7 +128,7 @@ These are not weight-space programming as defined in the post, but they inform h
 
 ## Protocol details from the source
 
-Use these as examples of the discipline the SKILL.md protocol asks for.
+Use these as examples of the discipline `evaluation.md` asks for.
 
 - Tool-free runs were audited turn by turn (1,125 turns) to confirm no tool was used. Code ran in a sandbox with no network and a time limit per run.
 - Rules differed by experiment: no tools and no forward passes allowed in experiments 1, 2, 4 and 5; code allowed but no forward pass in experiment 3; counted forward-pass budgets in experiments 6 and 8.
