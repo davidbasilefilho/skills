@@ -49,9 +49,10 @@ test("every package version is ZeroVer", async () => {
 
 // the sync-back merge of main into dev has origin/main as its second parent
 async function isSyncBack(): Promise<boolean> {
-  const second = await Bun.$`git rev-parse HEAD^2`.nothrow().quiet().text();
+  const res = await Bun.$`git rev-parse --verify --quiet HEAD^2^{commit}`.nothrow().quiet();
+  if (res.exitCode !== 0) return false; // not a merge commit
   const main = await Bun.$`git rev-parse origin/main`.text();
-  return second.trim() === main.trim();
+  return res.text().trim() === main.trim();
 }
 
 test("version is strictly greater than main", async () => {
@@ -72,7 +73,7 @@ test("version is strictly greater than main", async () => {
 Notes:
 
 - `Glob.scan` has no `ignore` option (Bun 1.4.4 scans `node_modules` anyway), so the loop skips those paths itself. Dependency versions such as `1.2.3` would otherwise fail ZeroVer.
-- Fixtures it was run against: main `0.1.0` with the branch at `0.2.0` passes; the branch equal to main fails the greater-than test; a workspace package at `1.0.0` fails the ZeroVer test; a workspace with `apps/`, `packages/` and a `node_modules` dependency at `9.9.9` passes. The sync-back skip was also run: an equal version passes on a merge commit whose second parent is `origin/main` and fails on a later ordinary commit. The skip for pushes to `main` was not exercised.
+- Fixtures it was run against: main `0.1.0` with the branch at `0.2.0` passes; the branch equal to main fails the greater-than test; a workspace package at `1.0.0` fails the ZeroVer test; a workspace with `apps/`, `packages/` and a `node_modules` dependency at `9.9.9` passes. The sync-back skip was also run: an equal version passes on a merge commit whose second parent is `origin/main` and fails on a later ordinary commit, on a non-merge commit with an equal version and on a merge commit whose second parent is not `origin/main`. The skip for pushes to `main` was not exercised.
 - The comparison is numeric on purpose: it is correct for ZeroVer and avoids relying on a semver helper. If the project prefers `Bun.semver.order(cur, main)` (returns `1` when the first argument is greater, **unverified**), confirm that in the Bun docs first.
 - The skip is limited to pushes to `main` and to the sync-back merge commit that returns `main` to `dev` ([Branches and merging](branches-and-merging.md)), whose version equals main's by design. Pull requests into `dev`, other pushes to `dev` and the `dev` into `main` pull request all run the check. Because the check is skipped on `main` pushes, it cannot catch an unchanged version after the fact: the required status check on pull requests into `dev` and `main` is what guarantees a new version per `main` commit.
 - In a monorepo with a single version source (see `bun-prefs`), compare the root version. If workspaces carry versions, add the same comparison per versioned package.
