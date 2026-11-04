@@ -8,7 +8,7 @@ Mode 1 is the lockfile-only upgrade within declared ranges. Mode 2 bumps declare
 
 | Ecosystem | Mode 1: lockfile only | Mode 2: bump declared ranges, then relock |
 |---|---|---|
-| bun | `bun update` also rewrites `package.json` to the newest in-range version and keeps the operator (`^1.1.0` becomes `^1.2.0`). Restore the previous ranges, then run `bun install`: it keeps the updated versions in `bun.lock` and the restored ranges in `package.json` (tested with Bun 1.4.4 on one registry dependency; `bun install --frozen-lockfile` then passes). `--no-save` touches neither file. `bun outdated` shows Current, Update (in range) and Latest. | `bun update --latest` |
+| bun | `bun update` also rewrites `package.json` to the newest in-range version and keeps the operator (`^1.1.0` becomes `^1.2.0`). Restore the previous ranges, then run `bun install`: it keeps the updated versions in `bun.lock` and the restored ranges in `package.json` (tested with Bun 1.4.4 on one registry dependency; `bun install --frozen-lockfile` then passes). `--no-save` touches neither file. `bun outdated` shows Current, Update (in range) and Latest. | `bun update --latest`, which keeps the operator but moves a peer-range dependency such as `~1.7.16` to the newest version (tested with Bun 1.4.4: `~18.0.0` became `~19.3.1`): restore it afterwards, then `bun install` |
 | npm | `npm update` (does not edit `package.json` unless `--save` is added) | `npx npm-check-updates -u` (edits `package.json` only, keeps the operator), then `npm install` |
 | pnpm | `pnpm up --no-save`; plain `pnpm up` also rewrites the in-range specifier. **Verify** that `--no-save` still updates the lockfile. | `pnpm up --latest`. **Verify** `-r` for workspaces. |
 | yarn (berry) | `yarn up -R <pkg>` re-resolves into the lockfile without touching manifests | `yarn up <pkg>` goes to latest project-wide and ignores listed ranges; `-C`, `-E`, `-T` set the modifier |
@@ -34,7 +34,7 @@ The target is the interval of the caret with zeroed lower parts: `^A.0.0` for `A
 
 | Ecosystem | How to write it |
 |---|---|
-| bun, npm, pnpm, yarn | `^A.0.0`, `^0.B.0`, `^0.0.C`. Bun, pnpm and npm-check-updates preserve the operator when they rewrite a range, so fix the zeroed parts afterwards. Never write a bare major for a 0.x dependency: `^0.y` allows only patch updates. |
+| bun, npm, pnpm, yarn | `^A.0.0`, `^0.B.0`, `^0.0.C`. Bun, pnpm and npm-check-updates preserve the operator when they rewrite a range, so fix the zeroed parts afterwards, except a dependency kept on its peer range (for example `~1.7.16`), which you restore if the tool rewrote it. Never write a bare major for a 0.x dependency: `^0.y` allows only patch updates. |
 | cargo | `^` is the default operator, so `"A.0.0"` and `"^A.0.0"` both mean the caret. Only changes to the left-most non-zero component count as breaking. |
 | composer | `^A.0` for `A >= 1` (allows `>=A.0.0 <A+1`). For 0.x versions **verify** how `^0.B` is read, and write all three parts, as in `^0.B.0`. |
 | dart, poetry | Caret syntax: `^A.0.0`, `^0.B.0`, `^0.0.C`. Both follow Cargo-like caret rules (**verify**). |
