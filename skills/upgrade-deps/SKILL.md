@@ -13,7 +13,7 @@ This skill is model-, harness- and environment-agnostic. It names capabilities, 
 
 | Capability | Use it for | Fallback when absent |
 |---|---|---|
-| Web search / fetch | Checking the current command and flag for the ecosystem, latest versions, and every command marked verify in the reference | Say the command is unchecked and ask the user to confirm it before running |
+| Web search / fetch | Checking current commands, versions, and official migration guidance for the versions being upgraded | Use verified upstream docs already available locally; ask for missing guidance before attempting an uncertain migration or running an unchecked command |
 | Code execution | Running the upgrade commands, the lockfile install and the project's tests | Show the exact commands for the user to run |
 | Structured question tool | Asking which mode to use, or whether to take a major bump | Ask in plain numbered text |
 | Memory / notes | Recording which package managers and workspaces a project uses | Record it in the project's agent instructions file |
@@ -45,8 +45,10 @@ This is the `bun-prefs` range format. One exception: a dependency whose range is
 2. For each, read the matching row in [Ecosystems](references/ecosystems.md) and verify the commands it marks unconfirmed against current docs.
 3. Mode 1: run the lockfile command. If the tool also rewrote the manifest, restore the declared ranges to their previous values and relock, because mode 1 never changes declarations.
 4. Mode 2: bump each declared dependency to the latest version, rewrite every range to the format, except a dependency kept on its peer range (tools keep or write other operators, so read the manifest diff, fix each one, and restore a peer-range dependency that the tool rewrote, for example `bun update --latest` moving `~1.7.16` to the newest version's tilde), then relock so the lockfile satisfies the new ranges.
-5. Run the project's install from the lockfile, tests, type-check, lint and build. Fix or report failures; report each as command and exit code.
-6. Report what moved (old to new), what stayed behind and why (for example an ecosystem with no latest-version command, or a range that cannot be written in the format), and any command you did not verify.
+5. In either mode, compare the actual old and new resolved versions. Read the maintainers' official migration guides or release notes for the versions crossed, including minor and patch updates and relevant transitive changes. Check which breaking changes and compatibility requirements affect the project's code, config, build or data. If the official path requires intermediate versions or steps before the upgrade, follow that order rather than skipping straight to the target.
+6. Apply the necessary in-scope migrations, using reviewed official codemods when appropriate. Test schema or data migrations against disposable local data; do not run them on shared or live systems without separate authorization. If a required migration cannot be verified or safely completed, keep or restore the last known compatible version and report the blocker and remaining steps.
+7. Run the project's install from the lockfile, tests, type-check, lint and build, plus focused checks for the migrated behavior. Fix or report failures; report each as command and exit code.
+8. Report what moved (old to new), migrations applied with links to the official guidance, what stayed behind and why (for example an ecosystem with no latest-version command, or a range that cannot be written in the format), and any command you did not verify.
 
 ## References
 
