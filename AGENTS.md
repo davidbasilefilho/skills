@@ -8,10 +8,8 @@ Rules for working in this repository, each with the reason it exists. The reposi
 
 ## Version control
 
-- Only in the Claude Code harness, the root uses `holyagent vcs commit`. This preserves the repository owner's Git authorship in Claude Code Cloud instead of defaulting to Claude as the author. The rule is scoped to the harness, not the model. Other harnesses use their normal authorized commit workflow and configured Git identity.
-- Use Git and `gh` for branches, pushes, merges and pull requests, or another explicitly authorized GitHub workflow. Never force-push or push to a protected branch without the user's approval. After a denial, stop and report the blocker rather than switching tools to get around it.
+- Never force-push or push to a protected branch without the user's approval. After a denial, stop and report the blocker rather than switching tools to get around it.
 - A specialist makes no version-control writes and no edits under `.git/` or `.holyagent/`, and reports its changed paths for the root to record. Nothing blocks these writes, so the rule rests on the instruction.
-- When using `holyagent vcs pr --body-file`, pass an unignored file inside the project. Files outside the project or ignored by Git are rejected, so a scratch file will not work.
 
 ## Commits and pull requests
 
