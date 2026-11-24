@@ -8,14 +8,13 @@ Rules for working in this repository, each with the reason it exists. The reposi
 
 ## Version control
 
-- The root commits only with `holyagent vcs commit`, and uses plain Git and `gh` for branches, pushes, merges and pull requests. It never force-pushes or pushes to a protected branch without the user's approval. After a denial it stops that line of work and reports a blocker, because a workaround through another tool defeats the boundary the user set.
+- Never force-push or push to a protected branch without the user's approval. After a denial, stop and report the blocker rather than switching tools to get around it.
 - A specialist makes no version-control writes and no edits under `.git/` or `.holyagent/`, and reports its changed paths for the root to record. Nothing blocks these writes, so the rule rests on the instruction.
-- Pass `holyagent vcs pr --body-file` an unignored file inside the project. Files outside the project or ignored by Git are rejected, so a scratch file will not work.
 
 ## Commits and pull requests
 
 - Write commits and pull request text in English and follow Conventional Commits, so history reads the same everywhere and tools can parse it.
-- Write as the author, in first person or neutral voice, about what the change does and why. Leave out agents, Claude, sessions, "the user" and attribution trailers: the text belongs to the author, and `holyagent vcs` refuses process words.
+- Write as the author, in first person or neutral voice, about what the change does and why. Leave out agents, Claude, sessions, "the user" and attribution trailers. The text belongs to the author.
 
 ## Writing
 
